@@ -8,7 +8,9 @@ import seedu.addressbook.logic.Logic;
 import seedu.addressbook.ui.Gui;
 import seedu.addressbook.ui.Stoppable;
 
-
+/**
+ * Main entry point to the application.
+ */
 public class Main extends Application implements Stoppable{
 
     /** Version info of the program. */
@@ -18,8 +20,7 @@ public class Main extends Application implements Stoppable{
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Logic logic = new Logic();
-        gui = new Gui(logic, VERSION);
+        gui = new Gui(new Logic(), VERSION);
         gui.start(primaryStage, this);
     }
 

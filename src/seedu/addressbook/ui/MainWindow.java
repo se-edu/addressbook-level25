@@ -15,6 +15,9 @@ import java.util.Optional;
 
 import static seedu.addressbook.common.Messages.*;
 
+/**
+ * Main Window of the GUI.
+ */
 public class MainWindow {
 
     private Logic logic;
@@ -47,10 +50,10 @@ public class MainWindow {
                 exitApp();
                 return;
             }
-            showResultToUser(result);
+            displayResult(result);
             clearCommandInput();
         } catch (Exception e) {
-            showToUser(e.getMessage());
+            display(e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -59,48 +62,49 @@ public class MainWindow {
         mainApp.stop();
     }
 
+    /** Returns true of the result given is the result of an exit command */
     private boolean isExitCommand(CommandResult result) {
         return result.feedbackToUser.equals(ExitCommand.MESSAGE_EXIT_ACKNOWEDGEMENT);
     }
 
+    /** Clears the command input box */
     private void clearCommandInput() {
         commandInput.setText("");
     }
 
-    /**
-     * Shows the result of a command execution to the user. Includes additional formatting to demarcate different
-     * command execution segments.
-     */
-    public void showResultToUser(CommandResult result) {
-        clearOutputConsole();
-        final Optional<List<? extends ReadOnlyPerson>> resultPersons = result.getRelevantPersons();
-        if(resultPersons.isPresent()) {
-            showToUser(resultPersons.get());
-        }
-        showToUser(result.feedbackToUser);
-    }
-
-    public void showWelcomeMessage(String version, String storageFilePath) {
-        String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
-        showToUser(MESSAGE_WELCOME, version, MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE, storageFileInfo);
-    }
-
-    /**
-     * Shows a list of persons to the user, formatted as an indexed list.
-     * Private contact details are hidden.
-     */
-    private void showToUser(List<? extends ReadOnlyPerson> persons) {
-        showToUser(new Formatter().format(persons));
-    }
-
-    /**
-     * Show the given messages to user, after formatting appropriately.
-     */
-    private void showToUser(String... messages) {
-        outputConsole.setText(outputConsole.getText() + new Formatter().format(messages));
-    }
-
+    /** Clears the output display area */
     public void clearOutputConsole(){
         outputConsole.clear();
     }
+
+    /** Displays the result of a command execution to the user. */
+    public void displayResult(CommandResult result) {
+        clearOutputConsole();
+        final Optional<List<? extends ReadOnlyPerson>> resultPersons = result.getRelevantPersons();
+        if(resultPersons.isPresent()) {
+            display(resultPersons.get());
+        }
+        display(result.feedbackToUser);
+    }
+
+    public void displayWelcomeMessage(String version, String storageFilePath) {
+        String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
+        display(MESSAGE_WELCOME, version, MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE, storageFileInfo);
+    }
+
+    /**
+     * Displays the list of persons in the output display area, formatted as an indexed list.
+     * Private contact details are hidden.
+     */
+    private void display(List<? extends ReadOnlyPerson> persons) {
+        display(new Formatter().format(persons));
+    }
+
+    /**
+     * Displays the given messages on the output display area, after formatting appropriately.
+     */
+    private void display(String... messages) {
+        outputConsole.setText(outputConsole.getText() + new Formatter().format(messages));
+    }
+
 }
