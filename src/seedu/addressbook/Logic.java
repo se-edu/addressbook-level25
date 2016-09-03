@@ -37,10 +37,14 @@ public class Logic {
         return new StorageFile();
     }
 
-    public String getPath() {
+    public String getStorageFilePath() {
         return storage.getPath();
     }
 
+    /**
+     * Parses the user command, executes it, and returns the result.
+     * @throws Exception if there was any problem during command execution.
+     */
     public CommandResult executeCommand(String userCommandText) throws Exception {
         Command command = new Parser().parseCommand(userCommandText);
         CommandResult result = executeCommand(command);
@@ -49,10 +53,11 @@ public class Logic {
     }
 
     /**
-     * Executes the command and returns the result.
+     * Executes the command, updates storage, and returns the result.
      *
      * @param command user command
      * @return result of the command
+     * @throws Exception if there was any problem during command execution.
      */
     private CommandResult executeCommand(Command command) throws Exception {
         command.setData(addressBook, lastShownList);

@@ -23,7 +23,7 @@ public class Gui {
 
     public void start(Stage stage) throws IOException {
         mainWindow = createMainWindow(stage);
-        mainWindow.showWelcomeMessage(logic.VERSION, logic.getPath());
+        mainWindow.showWelcomeMessage(logic.VERSION, logic.getStorageFilePath());
     }
 
     private MainWindow createMainWindow(Stage stage) throws IOException{
