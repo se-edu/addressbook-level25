@@ -14,3 +14,5 @@ addressbook.txt
 *.iml
 out/
 test/data/
+/bin/
+data/
