@@ -4,17 +4,17 @@ import javafx.application.Application;
 import javafx.application.Platform;
 
 import javafx.stage.Stage;
-import seedu.addressbook.ui.GuiUi;
+import seedu.addressbook.ui.Gui;
 
 
 public class Main extends Application {
 
-    private GuiUi gui;
+    private Gui gui;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         Logic logic = new Logic();
-        gui = new GuiUi(logic);
+        gui = new Gui(logic);
         gui.start(primaryStage);
     }
 

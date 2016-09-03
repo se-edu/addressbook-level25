@@ -11,13 +11,13 @@ import java.io.IOException;
 /**
  * The GUI of the App
  */
-public class GuiUi {
+public class Gui {
 
     private final Logic logic;
 
     private MainWindow mainWindow;
 
-    public GuiUi(Logic logic) {
+    public Gui(Logic logic) {
         this.logic = logic;
     }
 
