@@ -22,20 +22,22 @@ public class Gui {
     private final Logic logic;
 
     private MainWindow mainWindow;
+    private String version;
 
-    public Gui(Logic logic) {
+    public Gui(Logic logic, String version) {
         this.logic = logic;
+        this.version = version;
     }
 
     public void start(Stage stage, Stoppable mainApp) throws IOException {
         mainWindow = createMainWindow(stage, mainApp);
-        mainWindow.showWelcomeMessage(logic.VERSION, logic.getStorageFilePath());
+        mainWindow.showWelcomeMessage(version, logic.getStorageFilePath());
     }
 
     private MainWindow createMainWindow(Stage stage, Stoppable mainApp) throws IOException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("ui" + File.separator + "mainwindow.fxml"));
-        stage.setTitle("AddressBook");
+        stage.setTitle(version);
         stage.setScene(new Scene(loader.load(), INITIAL_WINDOW_WIDTH, INITIAL_WINDOW_HEIGHT));
         stage.show();
         MainWindow mainWindow = loader.getController();

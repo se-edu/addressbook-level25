@@ -15,8 +15,7 @@ import java.util.Optional;
  * Represents the main Logic of the AddressBook.
  */
 public class Logic {
-    /** Version info of the program. */
-    public static final String VERSION = "AddessBook Level 3 - Version 1.0";
+
 
     private StorageFile storage;
     private AddressBook addressBook;

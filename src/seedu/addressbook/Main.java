@@ -11,12 +11,15 @@ import seedu.addressbook.ui.Stoppable;
 
 public class Main extends Application implements Stoppable{
 
+    /** Version info of the program. */
+    public static final String VERSION = "AddessBook Level 3 - Version 1.0";
+
     private Gui gui;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         Logic logic = new Logic();
-        gui = new Gui(logic);
+        gui = new Gui(logic, VERSION);
         gui.start(primaryStage, this);
     }
 
