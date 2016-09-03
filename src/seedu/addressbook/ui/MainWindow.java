@@ -10,7 +10,6 @@ import seedu.addressbook.logic.Logic;
 import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,19 +17,8 @@ import static seedu.addressbook.common.Messages.*;
 
 public class MainWindow {
 
-
-    /** Format of indexed list item */
-    private static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
-
-
-    /** Offset required to convert between 1-indexing and 0-indexing.  */
-    public static final int DISPLAYED_INDEX_OFFSET = 1;
-
-
-
     private Logic logic;
     private Stoppable mainApp;
-    private Formatter formatter = new Formatter();
 
     public MainWindow(){
     }
@@ -91,56 +79,29 @@ public class MainWindow {
         clearOutputConsole();
         final Optional<List<? extends ReadOnlyPerson>> resultPersons = result.getRelevantPersons();
         if(resultPersons.isPresent()) {
-            showPersonListView(resultPersons.get());
+            showToUser(resultPersons.get());
         }
-        showToUser(formatter.format(result.feedbackToUser));
+        showToUser(result.feedbackToUser);
+    }
+
+    public void showWelcomeMessage(String version, String storageFilePath) {
+        String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
+        showToUser(MESSAGE_WELCOME, version, MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE, storageFileInfo);
     }
 
     /**
      * Shows a list of persons to the user, formatted as an indexed list.
      * Private contact details are hidden.
      */
-    private void showPersonListView(List<? extends ReadOnlyPerson> persons) {
-        final List<String> formattedPersons = new ArrayList<>();
-        for (ReadOnlyPerson person : persons) {
-            formattedPersons.add(person.getAsTextHidePrivate());
-        }
-        showToUserAsIndexedList(formattedPersons);
-    }
-
-    /** Shows a list of strings to the user, formatted as an indexed list. */
-    private void showToUserAsIndexedList(List<String> list) {
-        showToUser(getIndexedListForViewing(list));
-    }
-
-    /** Formats a list of strings as a viewable indexed list. */
-    private static String getIndexedListForViewing(List<String> listItems) {
-        final StringBuilder formatted = new StringBuilder();
-        int displayIndex = 0 + DISPLAYED_INDEX_OFFSET;
-        for (String listItem : listItems) {
-            formatted.append(getIndexedListItem(displayIndex, listItem)).append("\n");
-            displayIndex++;
-        }
-        return formatted.toString();
+    private void showToUser(List<? extends ReadOnlyPerson> persons) {
+        showToUser(new Formatter().format(persons));
     }
 
     /**
-     * Formats a string as a viewable indexed list item.
-     *
-     * @param visibleIndex visible index for this listing
+     * Show the given messages to user, after formatting appropriately.
      */
-    private static String getIndexedListItem(int visibleIndex, String listItem) {
-        return String.format(MESSAGE_INDEXED_LIST_ITEM, visibleIndex, listItem);
-    }
-
-    public void showWelcomeMessage(String version, String storageFilePath) {
-        String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
-        showToUser(formatter.format(MESSAGE_WELCOME, version, MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE, storageFileInfo));
-    }
-
-
-    public void showToUser(String... messages) {
-        outputConsole.setText(outputConsole.getText() + formatter.format(messages));
+    private void showToUser(String... messages) {
+        outputConsole.setText(outputConsole.getText() + new Formatter().format(messages));
     }
 
     public void clearOutputConsole(){
