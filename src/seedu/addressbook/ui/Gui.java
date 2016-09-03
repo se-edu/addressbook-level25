@@ -46,8 +46,4 @@ public class Gui {
         return mainWindow;
     }
 
-    public void stop(){
-        mainWindow.showGoodbyeMessage();
-    }
-
 }
