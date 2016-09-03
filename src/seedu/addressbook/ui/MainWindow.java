@@ -1,20 +1,15 @@
-package seedu.addressbook;
+package seedu.addressbook.ui;
 
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import seedu.addressbook.commands.Command;
+import seedu.addressbook.Logic;
 import seedu.addressbook.commands.CommandResult;
-import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
-import seedu.addressbook.parser.Parser;
-import seedu.addressbook.storage.StorageFile;
-import seedu.addressbook.ui.GuiUi;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,19 +32,14 @@ public class MainWindow {
     /** Format of a comment input line. Comment lines are silently consumed when reading user input. */
     private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
 
-    /** The list of person shown to the user most recently.  */
-    private List<? extends ReadOnlyPerson> lastShownList = Collections.emptyList();
 
-    private AddressBook addressBook;
-    private StorageFile storage;
+    private Logic logic;
 
-    public MainWindow() {
-
+    public MainWindow(){
     }
 
-    public void setConnections(AddressBook addressBook, StorageFile storageFile) {
-        this.addressBook = addressBook;
-        this.storage = storageFile;
+    public void setLogic(Logic logic){
+        this.logic = logic;
     }
 
     @FXML
@@ -61,12 +51,14 @@ public class MainWindow {
     @FXML
     void onCommand(ActionEvent event) {
         String userCommandText = commandInput.getText();
-        Command command = new Parser().parseCommand(userCommandText);
-        CommandResult result = executeCommand(command);
-        recordResult(result);
-        showResultToUser(result);
-
-        clearCommandInput();
+        try {
+            CommandResult result = logic.executeCommand(userCommandText);
+            showResultToUser(result);
+            clearCommandInput();
+        } catch (Exception e) {
+            showToUser(e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 
     private void clearCommandInput() {
@@ -76,32 +68,6 @@ public class MainWindow {
     @FXML
     public void initialize() {
 
-    }
-
-    /**
-     * Executes the command and returns the result.
-     *
-     * @param command user command
-     * @return result of the command
-     */
-    private CommandResult executeCommand(Command command)  {
-        try {
-            command.setData(addressBook, lastShownList);
-            CommandResult result = command.execute();
-            storage.save(addressBook);
-            return result;
-        } catch (Exception e) {
-            showToUser(e.getMessage());
-            throw new RuntimeException(e);
-        }
-    }
-
-    /** Updates the {@link #lastShownList} if the result contains a list of Persons. */
-    private void recordResult(CommandResult result) {
-        final Optional<List<? extends ReadOnlyPerson>> personList = result.getRelevantPersons();
-        if (personList.isPresent()) {
-            lastShownList = personList.get();
-        }
     }
 
     /**
