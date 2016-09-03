@@ -18,14 +18,6 @@ import static seedu.addressbook.common.Messages.*;
 
 public class MainWindow {
 
-    public static final String DIVIDER = "===================================================";
-
-    /** A decorative prefix added to the beginning of lines printed by AddressBook */
-    private static final String LINE_PREFIX = " ";
-
-    /** A platform independent line separator. */
-    private static final String LS = System.lineSeparator();
-
 
     /** Format of indexed list item */
     private static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
@@ -34,12 +26,11 @@ public class MainWindow {
     /** Offset required to convert between 1-indexing and 0-indexing.  */
     public static final int DISPLAYED_INDEX_OFFSET = 1;
 
-    /** Format of a comment input line. Comment lines are silently consumed when reading user input. */
-    private static final String COMMENT_LINE_FORMAT_REGEX = "#.*";
 
 
     private Logic logic;
     private Stoppable mainApp;
+    private Formatter formatter = new Formatter();
 
     public MainWindow(){
     }
@@ -102,7 +93,7 @@ public class MainWindow {
         if(resultPersons.isPresent()) {
             showPersonListView(resultPersons.get());
         }
-        showToUser(result.feedbackToUser, DIVIDER);
+        showToUser(formatter.format(result.feedbackToUser));
     }
 
     /**
@@ -144,26 +135,12 @@ public class MainWindow {
 
     public void showWelcomeMessage(String version, String storageFilePath) {
         String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
-        showToUser(
-                DIVIDER,
-                DIVIDER,
-                MESSAGE_WELCOME,
-                version,
-                MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE,
-                storageFileInfo,
-                DIVIDER);
+        showToUser(formatter.format(MESSAGE_WELCOME, version, MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE, storageFileInfo));
     }
 
-    public void showGoodbyeMessage() {
-        showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
-    }
 
     public void showToUser(String... messages) {
-        StringBuilder sb = new StringBuilder();
-        for (String m : messages) {
-            sb.append(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX) + LS);
-        }
-        outputConsole.setText(outputConsole.getText() + sb.toString());
+        outputConsole.setText(outputConsole.getText() + formatter.format(messages));
     }
 
     public void clearOutputConsole(){
