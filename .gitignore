@@ -13,3 +13,4 @@ addressbook.txt
 .idea/
 *.iml
 out/
+test/data/

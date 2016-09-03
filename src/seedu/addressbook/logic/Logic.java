@@ -24,8 +24,21 @@ public class Logic {
     private List<? extends ReadOnlyPerson> lastShownList = Collections.emptyList();
 
     public Logic() throws Exception{
-        this.storage = initializeStorage();
-        this.addressBook = storage.load();
+        setStorage(initializeStorage());
+        setAddressBook(storage.load());
+    }
+
+    Logic(StorageFile storageFile, AddressBook addressBook){
+        setStorage(storageFile);
+        setAddressBook(addressBook);
+    }
+
+    void setStorage(StorageFile storage){
+        this.storage = storage;
+    }
+
+    void setAddressBook(AddressBook addressBook){
+        this.addressBook = addressBook;
     }
 
     /**
