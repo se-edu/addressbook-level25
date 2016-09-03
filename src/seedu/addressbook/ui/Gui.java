@@ -6,6 +6,7 @@ import javafx.stage.Stage;
 import seedu.addressbook.logic.Logic;
 import seedu.addressbook.Main;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -30,7 +31,7 @@ public class Gui {
 
     private MainWindow createMainWindow(Stage stage, Stoppable mainApp) throws IOException{
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(Main.class.getResource("mainwindow.fxml"));
+        loader.setLocation(Main.class.getResource("ui" + File.separator + "mainwindow.fxml"));
         stage.setTitle("AddressBook");
         stage.setScene(new Scene(loader.load(), INITIAL_WINDOW_WIDTH, INITIAL_WINDOW_HEIGHT));
         stage.show();
