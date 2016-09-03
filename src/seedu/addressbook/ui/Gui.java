@@ -13,6 +13,8 @@ import java.io.IOException;
  */
 public class Gui {
 
+    public static final int INITIAL_WINDOW_WIDTH = 800;
+    public static final int INITIAL_WINDOW_HEIGHT = 600;
     private final Logic logic;
 
     private MainWindow mainWindow;
@@ -30,7 +32,7 @@ public class Gui {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("mainwindow.fxml"));
         stage.setTitle("AddressBook");
-        stage.setScene(new Scene(loader.load(), 500, 275));
+        stage.setScene(new Scene(loader.load(), INITIAL_WINDOW_WIDTH, INITIAL_WINDOW_HEIGHT));
         stage.show();
         MainWindow mainWindow = loader.getController();
         mainWindow.setLogic(logic);
