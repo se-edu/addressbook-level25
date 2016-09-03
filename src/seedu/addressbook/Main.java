@@ -4,47 +4,36 @@ import javafx.application.Application;
 import javafx.application.Platform;
 
 import javafx.stage.Stage;
-import seedu.addressbook.data.AddressBook;
-import seedu.addressbook.storage.StorageFile;
-import seedu.addressbook.ui.GuiUi;
+import seedu.addressbook.logic.Logic;
+import seedu.addressbook.ui.Gui;
+import seedu.addressbook.ui.Stoppable;
 
-
-public class Main extends Application {
+/**
+ * Main entry point to the application.
+ */
+public class Main extends Application implements Stoppable{
 
     /** Version info of the program. */
-    public static final String VERSION = "AddessBook Level 2 - Version 1.0";
+    public static final String VERSION = "AddessBook Level 3 - Version 1.0";
 
-    private GuiUi ui;
-    private StorageFile storage;
-    private AddressBook addressBook;
+    private Gui gui;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        this.storage = initializeStorage();
-        this.addressBook = storage.load();
-        
-        ui = new GuiUi();
-        ui.start(primaryStage, addressBook, storage);
-        ui.showWelcomeMessage(VERSION, storage.getPath());
-    }
-
-    /**
-     * Creates the StorageFile object based on the user specified path (if any) or the default storage path.
-     * @throws StorageFile.InvalidStorageFilePathException if the target file path is incorrect.
-     */
-    private StorageFile initializeStorage() throws StorageFile.InvalidStorageFilePathException {
-        return new StorageFile();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
+        gui = new Gui(new Logic(), VERSION);
+        gui.start(primaryStage, this);
     }
 
     @Override
     public void stop() throws Exception {
         super.stop();
-        ui.showGoodbyeMessage();
         Platform.exit();
         System.exit(0);
     }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
+
+
