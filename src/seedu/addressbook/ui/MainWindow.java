@@ -37,6 +37,7 @@ public class MainWindow {
     @FXML
     private TextField commandInput;
 
+
     @FXML
     void onCommand(ActionEvent event) {
         try {
@@ -64,11 +65,6 @@ public class MainWindow {
 
     private void clearCommandInput() {
         commandInput.setText("");
-    }
-
-    @FXML
-    public void initialize() {
-
     }
 
     /**
