@@ -45,7 +45,7 @@ public class MainWindow {
     void onCommand(ActionEvent event) {
         try {
             String userCommandText = commandInput.getText();
-            CommandResult result = logic.executeCommand(userCommandText);
+            CommandResult result = logic.execute(userCommandText);
             if(isExitCommand(result)){
                 exitApp();
                 return;

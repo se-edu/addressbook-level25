@@ -29,7 +29,7 @@ public class LogicTest {
     @Test
     public void execute_exitCommand() throws Exception {
         Logic l = createLogic();
-        CommandResult r = l.executeCommand("exit");
+        CommandResult r = l.execute("exit");
         assertEquals(ExitCommand.MESSAGE_EXIT_ACKNOWEDGEMENT, r.feedbackToUser);
     }
 

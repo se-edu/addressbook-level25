@@ -57,9 +57,9 @@ public class Logic {
      * Parses the user command, executes it, and returns the result.
      * @throws Exception if there was any problem during command execution.
      */
-    public CommandResult executeCommand(String userCommandText) throws Exception {
+    public CommandResult execute(String userCommandText) throws Exception {
         Command command = new Parser().parseCommand(userCommandText);
-        CommandResult result = executeCommand(command);
+        CommandResult result = execute(command);
         recordResult(result);
         return result;
     }
@@ -71,7 +71,7 @@ public class Logic {
      * @return result of the command
      * @throws Exception if there was any problem during command execution.
      */
-    private CommandResult executeCommand(Command command) throws Exception {
+    private CommandResult execute(Command command) throws Exception {
         command.setData(addressBook, lastShownList);
         CommandResult result = command.execute();
         storage.save(addressBook);
