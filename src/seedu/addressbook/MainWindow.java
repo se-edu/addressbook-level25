@@ -158,6 +158,6 @@ public class MainWindow {
         for (String m : messages) {
             sb.append(LINE_PREFIX + m + LINE_PREFIX + LS);
         }
-        outputConsole.setText(outputConsole.getText() + sb.toString() + "\n");
+        outputConsole.setText(sb.toString());
     }
 }
