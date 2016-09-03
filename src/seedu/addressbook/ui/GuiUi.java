@@ -5,19 +5,14 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import seedu.addressbook.Logic;
 import seedu.addressbook.Main;
-import seedu.addressbook.data.AddressBook;
-import seedu.addressbook.storage.StorageFile;
 
 import java.io.IOException;
-
-import static seedu.addressbook.common.Messages.*;
 
 /**
  * The GUI of the App
  */
 public class GuiUi {
 
-    public static final String DIVIDER = "===================================================";
     private final Logic logic;
 
     private MainWindow mainWindow;
@@ -28,7 +23,7 @@ public class GuiUi {
 
     public void start(Stage stage) throws IOException {
         mainWindow = createMainWindow(stage);
-        showWelcomeMessage(logic.VERSION, logic.getPath());
+        mainWindow.showWelcomeMessage(logic.VERSION, logic.getPath());
     }
 
     private MainWindow createMainWindow(Stage stage) throws IOException{
@@ -42,21 +37,8 @@ public class GuiUi {
         return mainWindow;
     }
 
-    public void showWelcomeMessage(String version, String storageFilePath) {
-        String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
-        mainWindow.showToUser(
-                DIVIDER,
-                DIVIDER,
-                MESSAGE_WELCOME,
-                version,
-                MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE,
-                storageFileInfo,
-                DIVIDER);
+    public void stop(){
+        mainWindow.showGoodbyeMessage();
     }
-
-    public void showGoodbyeMessage() {
-        mainWindow.showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
-    }
-
 
 }

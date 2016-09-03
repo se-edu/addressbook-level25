@@ -13,7 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static seedu.addressbook.common.Messages.*;
+
 public class MainWindow {
+
+    public static final String DIVIDER = "===================================================";
 
     /** A decorative prefix added to the beginning of lines printed by AddressBook */
     private static final String LINE_PREFIX = "|| ";
@@ -50,8 +54,8 @@ public class MainWindow {
 
     @FXML
     void onCommand(ActionEvent event) {
-        String userCommandText = commandInput.getText();
         try {
+            String userCommandText = commandInput.getText();
             CommandResult result = logic.executeCommand(userCommandText);
             showResultToUser(result);
             clearCommandInput();
@@ -80,7 +84,7 @@ public class MainWindow {
         if(resultPersons.isPresent()) {
             showPersonListView(resultPersons.get());
         }
-        showToUser(result.feedbackToUser, GuiUi.DIVIDER);
+        showToUser(result.feedbackToUser, DIVIDER);
     }
 
     /**
@@ -118,6 +122,22 @@ public class MainWindow {
      */
     private static String getIndexedListItem(int visibleIndex, String listItem) {
         return String.format(MESSAGE_INDEXED_LIST_ITEM, visibleIndex, listItem);
+    }
+
+    public void showWelcomeMessage(String version, String storageFilePath) {
+        String storageFileInfo = String.format(MESSAGE_USING_STORAGE_FILE, storageFilePath);
+        showToUser(
+                DIVIDER,
+                DIVIDER,
+                MESSAGE_WELCOME,
+                version,
+                MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE,
+                storageFileInfo,
+                DIVIDER);
+    }
+
+    public void showGoodbyeMessage() {
+        showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
     }
 
     public void showToUser(String... messages) {
