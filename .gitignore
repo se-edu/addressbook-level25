@@ -12,3 +12,4 @@ addressbook.txt
 # Idea files
 .idea/
 *.iml
+out/
