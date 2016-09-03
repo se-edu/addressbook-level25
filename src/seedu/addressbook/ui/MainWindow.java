@@ -21,7 +21,7 @@ public class MainWindow {
     public static final String DIVIDER = "===================================================";
 
     /** A decorative prefix added to the beginning of lines printed by AddressBook */
-    private static final String LINE_PREFIX = "|| ";
+    private static final String LINE_PREFIX = " ";
 
     /** A platform independent line separator. */
     private static final String LS = System.lineSeparator();
@@ -161,7 +161,7 @@ public class MainWindow {
     public void showToUser(String... messages) {
         StringBuilder sb = new StringBuilder();
         for (String m : messages) {
-            sb.append(LINE_PREFIX + m + LINE_PREFIX + LS);
+            sb.append(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX) + LS);
         }
         outputConsole.setText(outputConsole.getText() + sb.toString());
     }
