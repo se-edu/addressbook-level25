@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import seedu.addressbook.commands.ExitCommand;
 import seedu.addressbook.logic.Logic;
 import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.data.person.ReadOnlyPerson;
@@ -38,12 +39,17 @@ public class MainWindow {
 
 
     private Logic logic;
+    private Stoppable mainApp;
 
     public MainWindow(){
     }
 
     public void setLogic(Logic logic){
         this.logic = logic;
+    }
+
+    public void setMainApp(Stoppable mainApp){
+        this.mainApp = mainApp;
     }
 
     @FXML
@@ -57,12 +63,24 @@ public class MainWindow {
         try {
             String userCommandText = commandInput.getText();
             CommandResult result = logic.executeCommand(userCommandText);
+            if(isExitCommand(result)){
+                exitApp();
+                return;
+            }
             showResultToUser(result);
             clearCommandInput();
         } catch (Exception e) {
             showToUser(e.getMessage());
             throw new RuntimeException(e);
         }
+    }
+
+    private void exitApp() throws Exception {
+        mainApp.stop();
+    }
+
+    private boolean isExitCommand(CommandResult result) {
+        return result.feedbackToUser.equals(ExitCommand.MESSAGE_EXIT_ACKNOWEDGEMENT);
     }
 
     private void clearCommandInput() {

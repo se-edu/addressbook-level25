@@ -23,12 +23,12 @@ public class Gui {
         this.logic = logic;
     }
 
-    public void start(Stage stage) throws IOException {
-        mainWindow = createMainWindow(stage);
+    public void start(Stage stage, Stoppable mainApp) throws IOException {
+        mainWindow = createMainWindow(stage, mainApp);
         mainWindow.showWelcomeMessage(logic.VERSION, logic.getStorageFilePath());
     }
 
-    private MainWindow createMainWindow(Stage stage) throws IOException{
+    private MainWindow createMainWindow(Stage stage, Stoppable mainApp) throws IOException{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("mainwindow.fxml"));
         stage.setTitle("AddressBook");
@@ -36,6 +36,7 @@ public class Gui {
         stage.show();
         MainWindow mainWindow = loader.getController();
         mainWindow.setLogic(logic);
+        mainWindow.setMainApp(mainApp);
         return mainWindow;
     }
 

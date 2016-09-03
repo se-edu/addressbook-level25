@@ -16,7 +16,4 @@ public class ExitCommand extends Command {
         return new CommandResult(MESSAGE_EXIT_ACKNOWEDGEMENT);
     }
 
-    public static boolean isExit(Command command) {
-        return command instanceof ExitCommand; // instanceof returns false if it is null
-    }
 }
