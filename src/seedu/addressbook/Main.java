@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 
 import javafx.stage.Stage;
+import seedu.addressbook.logic.Logic;
 import seedu.addressbook.ui.Gui;
 
 

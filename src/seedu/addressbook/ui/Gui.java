@@ -3,7 +3,7 @@ package seedu.addressbook.ui;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import seedu.addressbook.Logic;
+import seedu.addressbook.logic.Logic;
 import seedu.addressbook.Main;
 
 import java.io.IOException;
