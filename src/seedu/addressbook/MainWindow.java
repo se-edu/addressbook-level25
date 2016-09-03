@@ -109,6 +109,7 @@ public class MainWindow {
      * command execution segments.
      */
     public void showResultToUser(CommandResult result) {
+        clearOutputConsole();
         final Optional<List<? extends ReadOnlyPerson>> resultPersons = result.getRelevantPersons();
         if(resultPersons.isPresent()) {
             showPersonListView(resultPersons.get());
@@ -158,6 +159,10 @@ public class MainWindow {
         for (String m : messages) {
             sb.append(LINE_PREFIX + m + LINE_PREFIX + LS);
         }
-        outputConsole.setText(sb.toString());
+        outputConsole.setText(outputConsole.getText() + sb.toString());
+    }
+
+    public void clearOutputConsole(){
+        outputConsole.clear();
     }
 }
