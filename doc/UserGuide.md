@@ -9,7 +9,7 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 
 1. Find the project in the `Project Explorer` or `Package Explorer` (usually located at the left side)
 2. Right click on the project
-3. Click `Run As` > `Java Application`
+3. Click `Run As` > `Java Application` and choose the `Main` class.
 4. The GUI should appear in a few seconds.
 
 ### Viewing help : `help`
