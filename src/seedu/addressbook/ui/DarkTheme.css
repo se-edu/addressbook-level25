@@ -27,7 +27,7 @@
     -fx-font-size: 12pt;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
-    -fx-control-inner-background: dimgray;
+    -fx-control-inner-background: derive(#1d1d1d,20%);
 }
 
 .text-area {
