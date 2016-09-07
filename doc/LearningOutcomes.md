@@ -1,6 +1,15 @@
 # Learning Outcomes [to be updated]
 After studying this code and completing the corresponding exercises, you should be able to,
 
+1. [Utilize User Stories `[LO-UserStories]`](#utilize-user-stories-lo-userstories)
+1. [Utilize use cases `[LO-UseCases]`](#utilize-use-cases-lo-usecases)
+1. [Use Non Functional Requirements `[LO-NFR]`](#use-non-functional-requirements-lo-nfr)
+1. [Use Polymorphism `[LO-Polymorphism]`](#use-polymorphism-lo-polymorphism)
+1. [Use abstract classes/methods `[LO-Abstract]`](#use-abstract-classesmethods-lo-abstract)
+1. [Follow Liskov Substitution Principle `[LO-LSP]`](#follow-liskov-substitution-principle-lo-lsp)
+1. [Use Java-FX for GUI programming `[LO-JavaFx]`](#use-java-fx-for-gui-programming-lo-javafx)
+
+
 
 ------------------------------------------------------------------------------------------------------
 
