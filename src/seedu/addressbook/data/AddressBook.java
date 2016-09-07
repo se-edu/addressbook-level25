@@ -20,6 +20,10 @@ public class AddressBook {
     private final UniquePersonList allPersons;
     private final UniqueTagList allTags; // can contain tags not attached to any person
 
+    public static AddressBook empty() {
+        return new AddressBook();
+    }
+
     /**
      * Creates an empty address book.
      */

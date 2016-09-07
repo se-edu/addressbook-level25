@@ -54,6 +54,17 @@ public class Logic {
     }
 
     /**
+     * Unmodifiable view of the current last shown list.
+     */
+    public List<ReadOnlyPerson> getLastShownList() {
+        return Collections.unmodifiableList(lastShownList);
+    }
+
+    protected void setLastShownList(List<? extends ReadOnlyPerson> newList) {
+        lastShownList = newList;
+    }
+
+    /**
      * Parses the user command, executes it, and returns the result.
      * @throws Exception if there was any problem during command execution.
      */
