@@ -3,7 +3,7 @@
 This product is not meant for end-users and therefore there is no user-friendly installer. 
 Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn how to set up the project.
 
-### Starting the program
+## Starting the program
 
 1. Find the project in the `Project Explorer` or `Package Explorer` (usually located at the left side)
 2. Right click on the project
@@ -12,12 +12,12 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 
 <img src="images/Ui.png">
 
-### Viewing help : `help`
+## Viewing help : `help`
 Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
  
-### Adding a person: `add`
+## Adding a person: `add`
 Adds a person to the address book<br>
 Format: `add NAME [p]p/PHONE_NUMBER [p]e/EMAIL [p]a/ADDRESS [t/TAG]...` 
  
@@ -33,11 +33,11 @@ Examples:
 * `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
 * `add Betsy Crowe pp/1234567 e/betsycrowe@gmail.com pa/Newgate Prison t/criminal t/friend`
 
-### Listing all persons : `list`
+## Listing all persons : `list`
 Shows a list of all persons in the address book.<br>
 Format: `list`
 
-### Finding all persons containing any keyword in their name: `find`
+## Finding all persons containing any keyword in their name: `find`
 Finds persons whose names contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
@@ -50,7 +50,7 @@ Examples:
 * `find Betsy Tim John`<br>
   Returns Any person having names `Betsy`, `Tim`, or `John`
 
-### Deleting a person : `delete`
+## Deleting a person : `delete`
 Deletes the specified person from the address book. Irreversible.<br>
 Format: `delete INDEX`
 
@@ -65,7 +65,7 @@ Examples:
   `delete 1`<br>
   Deletes the 1st person in the results of the `find` command.
 
-### View non-private details of a person : `view`
+## View non-private details of a person : `view`
 Displays the non-private details of the specified person.<br>
 Format: `view INDEX`
 
@@ -80,7 +80,7 @@ Examples:
   `view 1`<br>
   Views the 1st person in the results of the `find` command.
 
-### View all details of a person : `viewall`
+## View all details of a person : `viewall`
 Displays all details (including private details) of the specified person.<br>
 Format: `viewall INDEX`
 
@@ -95,19 +95,19 @@ Examples:
   `viewall 1`<br>
   Views all details of the 1st person in the results of the `find` command.
 
-### Clearing all entries : `clear`
+## Clearing all entries : `clear`
 Clears all entries from the address book.<br>
 Format: `clear`  
 
-### Exiting the program : `exit`
+## Exiting the program : `exit`
 Exits the program.<br>
 Format: `exit`  
 
-### Saving the data 
+## Saving the data 
 Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-### Changing the save location
+## Changing the save location
 Address book data are saved in a file called `addressbook.txt` in the project root folder.
 You can change the location by specifying the file path as a program argument.<br>
 

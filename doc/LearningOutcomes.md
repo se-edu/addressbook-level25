@@ -16,18 +16,18 @@ After studying this code and completing the corresponding exercises, you should 
 
 ------------------------------------------------------------------------------------------------------
 
-### Apply Encapsulation `[LO-Encapsulation]`
+## Apply Encapsulation `[LO-Encapsulation]`
   
-##### Exercise: Encapsulate `CommandResult` class members 
+#### Exercise: Encapsulate `CommandResult` class members 
 
 * A member of the `CommandResult` class is not encapsulated. i.e. it is visible outside the object.
   Hide it so that it can only be accessed using methods provided.
 
 ------------------------------------------------------------------------------------------------------
 
-### Implement a class `[LO-ImplementClass]`
+## Implement a class `[LO-ImplementClass]`
 
-##### Exercise: Split `Address` into more classes 
+#### Exercise: Split `Address` into more classes 
 * Assume the address is entered in the following format `a/BLOCK, STREET, UNIT, POSTAL_CODE` <br>
   e.g. `a/123, Clementi Ave 3, #12-34, 231534`
 * Split the `Address` class as follows.<br>
@@ -36,12 +36,12 @@ After studying this code and completing the corresponding exercises, you should 
 
 ------------------------------------------------------------------------------------------------------
 
-### Follow the Single Responsibility Principle `[LO-SRP]`
+## Follow the Single Responsibility Principle `[LO-SRP]`
 
 The *Single Responsibility Principle (SRP)* states that a class should have only one reason to change. 
 The code given follows SRP to a reasonable extent, but there are places where it can be applied further.
   
-##### Exercise: Split `TextUi` class 
+#### Exercise: Split `TextUi` class 
 
 The exercise in the `LO-ImplementClass` section is somewhat related to SRP as well. 
 Here's a slightly more difficult exercise.
@@ -50,7 +50,7 @@ Here's a slightly more difficult exercise.
   Try to extract out the responsibility of Formatting text for display (e.g. adding decorations) in to a 
   separate class named `Formatter`.
 
-##### Resources
+#### Resources
 * [An explanation of the SRP](http://www.oodesign.com/single-responsibility-principle.html) from www.oodesign.com
 * [Another explanation (more detailed)](http://code.tutsplus.com/tutorials/solid-part-1-the-single-responsibility-principle--net-36074) 
   by Patkos Csaba
@@ -58,33 +58,33 @@ Here's a slightly more difficult exercise.
 
 ------------------------------------------------------------------------------------------------------
 
-### Handle Exceptions `[LO-Exceptions]`
+## Handle Exceptions `[LO-Exceptions]`
 
 **Resources**:
 * [Best Practices for Exception Handling](http://www.onjava.com/pub/a/onjava/2003/11/19/exceptions.html)
   by Gunjan Doshi 
 
-##### Exercise: Handle 'file deleted' situation 
+#### Exercise: Handle 'file deleted' situation 
 
 * The current code does not handle the situation where the user deletes the storage file while the
   AddressBook program is running. Use exceptions to handle that situation.
 
 ------------------------------------------------------------------------------------------------------
 
-### Use Inheritance to achieve code reuse `[LO-Inheritance]`
+## Use Inheritance to achieve code reuse `[LO-Inheritance]`
 
 Note how the `Command` class contains some code that is reused by some of its child classes. 
 By defining `*Command` classes as child classes of `Command`, we have avoided having to duplicate those methods
 in multiple `*Command` classes.
 
-##### Exercise: Extract a `Contact` class 
+#### Exercise: Extract a `Contact` class 
 
 * Extract commonalities from `Phone`, `Email` and `Address` classes into a parent class called `Contact`.<br>
 <img src="images/ContactClassHierarchy.png" width='250' />
 
 ------------------------------------------------------------------------------------------------------
 
-### Follow Interface Segregation Principle `[LO-ISP]`
+## Follow Interface Segregation Principle `[LO-ISP]`
 
 The *Interface-Segregation Principle (ISP)* states that no client should be forced to depend on methods it does not use.
 
@@ -92,7 +92,7 @@ Note how the `Person` class implements the `ReadOnlyPerson` interface so that cl
 `Person` objects can access `Person` objects through the `ReadOnlyPerson` interface instead.
 <img src="images/ReadOnlyPersonUsage.png" width='600' />
 
-##### Exercise: Add a `Printable` interface 
+#### Exercise: Add a `Printable` interface 
 
 * Add a `Printable` interface as follows.<br>
   <img src="images/PrintableInterface.png" width='400' />
@@ -119,13 +119,13 @@ Note how the `Person` class implements the `ReadOnlyPerson` interface so that cl
 
 ------------------------------------------------------------------------------------------------------
 
-### Use class-level members `[LO-ClassLevel]`
+## Use class-level members `[LO-ClassLevel]`
 
 Note how some of the variables and methods are declared `static`. That means they are *class-level* members
 rather than *instance-level* members.<br>
 e.g.<br> `Main.VERSION`, `Name.EXAMPLE`, `Utils.isAnyNull(...)`
 
-##### Exercise: Add class-level members
+#### Exercise: Add class-level members
 
 * Convert the `parse(...)` method of the `Parser` class to a class-level method. Note how this method
   can be either class-level or instance-level.
@@ -140,7 +140,7 @@ e.g.<br> `Main.VERSION`, `Name.EXAMPLE`, `Utils.isAnyNull(...)`
 
 ------------------------------------------------------------------------------------------------------
 
-### Use Composition `[LO-Composition]`
+## Use Composition `[LO-Composition]`
 
 Note the following examples of *composition* (filled diamond):
 
@@ -158,11 +158,11 @@ Container           | Contained
 
 ------------------------------------------------------------------------------------------------------
 
-### Use Association Classes `[LO-AssociationClass]`
+## Use Association Classes `[LO-AssociationClass]`
 
 The current design does not have any association classes.
 
-##### Exercise: Add an Association Class `Tagging`
+#### Exercise: Add an Association Class `Tagging`
 
 * Assume the following:
   1. There are commands to add and remove tags to a person in the address book.
@@ -181,7 +181,7 @@ The current design does not have any association classes.
 
 ------------------------------------------------------------------------------------------------------
 
-### Use JUnit to implement unit tests `[LO-JUnit]`
+## Use JUnit to implement unit tests `[LO-JUnit]`
 
 Note the `test/seedu/addressbook/parser/ParserTest.java` class that users Junit to implement automated unit tests.
 
@@ -203,7 +203,7 @@ Note the `test/seedu/addressbook/parser/ParserTest.java` class that users Junit 
 * [Learning from Apple’s #gotofail Security Bug](http://avandeursen.com/2014/02/22/gotofail-security/) - 
   How unit testing (and other good coding practices) could have prevented a major security bug.
 
-##### Exercise: Write unit tests for the `Utils` class 
+#### Exercise: Write unit tests for the `Utils` class 
 
 * First, make sure you know how to run JUnit tests by running the `ParserTest.java`. 
   Instructions are in the [Developer Guide](DeveloperGuide.md#junit-tests).
@@ -211,7 +211,7 @@ Note the `test/seedu/addressbook/parser/ParserTest.java` class that users Junit 
 
 ------------------------------------------------------------------------------------------------------
 
-### Use TDD `[LO-TDD]`
+## Use TDD `[LO-TDD]`
 
 It's recommended you do `[LO-JUnit]` before attempting TDD.
 
@@ -230,7 +230,7 @@ It's recommended you do `[LO-JUnit]` before attempting TDD.
 * [Dev opinion][Programmers Without TDD Will be Unemployable by 2022](http://css.dzone.com/articles/programmers-without-tdd-will)
 
 
-##### Exercise: Add a method in TDD fashion
+#### Exercise: Add a method in TDD fashion
 
 * Add the following method to the `Name` class. Use the TDD technique to add the method. Commit after each step.
 
@@ -249,9 +249,9 @@ It's recommended you do `[LO-JUnit]` before attempting TDD.
 
 ------------------------------------------------------------------------------------------------------
 
-### Work in a 2KLoC code base `[LO-2KLoC]`
+## Work in a 2KLoC code base `[LO-2KLoC]`
 
-##### Exercise: Enhance AddressBook
+#### Exercise: Enhance AddressBook
 
 Add a feature to AddressBook. Here are some suggestions.
 * An Edit command
