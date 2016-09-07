@@ -45,7 +45,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a new person | 
 `* * *` | user | delete a person | can remove entries that I no longer need
 `* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* *` | user | hide private contact details by default | to minimize chance of someone else seeing them by accident
+`* *` | user | hide [private contact details](#private-contact-detail) by default | to minimize chance of someone else seeing them by accident
 `*` | user with many persons in the address book | sort persons by name | locate a person easily
 
 
@@ -83,5 +83,10 @@ Use case ends.
 ## Appendix D : Glossary
 
 ##### Mainstream OS
-Windows, Linux, Unix, OS-X
+
+> Windows, Linux, Unix, OS-X
+
+##### Private contact detail
+
+> A contact detail that is not meant to be shared with others
 
