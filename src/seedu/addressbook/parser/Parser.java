@@ -154,10 +154,8 @@ public class Parser {
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new DeleteCommand(targetIndex);
-        } catch (ParseException pe) {
+        } catch (ParseException | NumberFormatException e) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
-        } catch (NumberFormatException nfe) {
-            return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
 
@@ -172,11 +170,9 @@ public class Parser {
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new ViewCommand(targetIndex);
-        } catch (ParseException pe) {
+        } catch (ParseException | NumberFormatException e) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ViewCommand.MESSAGE_USAGE));
-        } catch (NumberFormatException nfe) {
-            return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
 
@@ -191,11 +187,9 @@ public class Parser {
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new ViewAllCommand(targetIndex);
-        } catch (ParseException pe) {
+        } catch (ParseException | NumberFormatException e) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ViewAllCommand.MESSAGE_USAGE));
-        } catch (NumberFormatException nfe) {
-            return new IncorrectCommand(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
 
