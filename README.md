@@ -1,4 +1,7 @@
 # AddressBook (Level 3)
+
+<img src="doc/images/Ui.png">
+
 * This is a CLI (Command Line Interface) Address Book application **written in OOP fashion**. It has a very basic GUI.
 * It is a Java sample application intended for students learning Software Engineering while using Java as 
   the main programming language. 
