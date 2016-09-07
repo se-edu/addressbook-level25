@@ -1,260 +1,82 @@
 # Learning Outcomes [to be updated]
 After studying this code and completing the corresponding exercises, you should be able to,
 
-1. [Apply Encapsulation `[LO-Encapsulation]`](#apply-encapsulation-lo-encapsulation)
-1. [Implement a class `[LO-ImplementClass]`](https://github.com/se-edu/addressbook-level2/blob/master/doc/LearningOutcomes.md#implement-a-class-lo-implementclass)
-1. [Follow the Single Responsibility Principle `[LO-SRP]`](https://github.com/se-edu/addressbook-level2/blob/master/doc/LearningOutcomes.md#follow-the-single-responsibility-principle-lo-srp)
-1. [Handle Exceptions `[LO-Exceptions]`](#handle-exceptions-lo-exceptions)
-1. [Use Inheritance to achieve code reuse `[LO-Inheritance]`](#use-inheritance-to-achieve-code-reuse-lo-inheritance)
-1. [Follow Interface Segregation Principle `[LO-ISP]`](#follow-interface-segregation-principle-lo-isp)
-1. [Use class-level members `[LO-ClassLevel]`](#use-class-level-members-lo-classlevel)
-1. [Use Composition `[LO-Composition]`](#use-composition-lo-composition)
-1. [Use Association Classes `[LO-AssociationClass]`](#use-association-classes-lo-associationclass)
-1. [Use JUnit to implement unit tests `[LO-JUnit]`](#use-junit-to-implement-unit-tests-lo-junit)
-1. [Use TDD `[LO-TDD]`](#use-tdd-lo-tdd)
-1. [Work in a 2KLoC code base `[LO-2KLoC]`](#work-in-a-2kloc-code-base-lo-2kloc)
 
 ------------------------------------------------------------------------------------------------------
 
-## Apply Encapsulation `[LO-Encapsulation]`
+## Utilize User Stories `[LO-UserStories]`
   
-#### Exercise: Encapsulate `CommandResult` class members 
+#### Exercise: Add more user stories 
 
-* A member of the `CommandResult` class is not encapsulated. i.e. it is visible outside the object.
-  Hide it so that it can only be accessed using methods provided.
-
-------------------------------------------------------------------------------------------------------
-
-## Implement a class `[LO-ImplementClass]`
-
-#### Exercise: Split `Address` into more classes 
-* Assume the address is entered in the following format `a/BLOCK, STREET, UNIT, POSTAL_CODE` <br>
-  e.g. `a/123, Clementi Ave 3, #12-34, 231534`
-* Split the `Address` class as follows.<br>
-  <img src="images/AddressClasses.png" width='250'/>
-* Update the user guide and tests to match.
+* Assume you are planing to expand the functionality of the address book (but keep it as a CLI application).
+  What other user stories do you think AddressBook support. Add those user stories to the `DeveloperGuide.md`. 
 
 ------------------------------------------------------------------------------------------------------
 
-## Follow the Single Responsibility Principle `[LO-SRP]`
+## Utilize use cases `[LO-UseCases]`
 
-The *Single Responsibility Principle (SRP)* states that a class should have only one reason to change. 
-The code given follows SRP to a reasonable extent, but there are places where it can be applied further.
+#### Exercise: Add an 'Edit tag' use case 
+* Add a use case to the `DeveloperGuide.md` to cover the use case of editing an exiting tag.<br> 
+  e.g. change tag `friends` to `buddies` <br>
+  Assume that AddressBook confirms the change with the user before carrying out the operation. 
+
+------------------------------------------------------------------------------------------------------
+
+## Use Non Functional Requirements `[LO-NFR]`
+
+#### Exercise: Add more NFRs 
+
+* Add some more NFRs to the `DeveloperGuide.md`
+
+------------------------------------------------------------------------------------------------------
+
+## Use Polymorphism `[LO-Polymorphism]`
+
+Note how the `Command::execute()` method shows polymorphic behavior. 
+
+#### Exercise: Add a polymorphic `isMutating` method 
+
+* Add an `abstract` method `boolean isMutatating()` to the `Command` class. This method will return `true` for
+  command types that mutate the data. e.g. `AddCommand`
+* Currently, AddressBook data are saved to the file after every command. 
+  Take advantage of the the new method you added to limit file saving to only for command types that mutate data.<br>
+  i.e. `add` command should always save the data while `list` command should never save data to the file.
+
+Note: There may be better ways to limit file saving to commands that mutate data. The above approach, while not
+ optimal, will give you chance to implement a polymorphic behavior.  
+
+------------------------------------------------------------------------------------------------------
+
+## Use abstract classes/methods `[LO-Abstract]`
+
+Covered by `[LO-Polymorphism]`
+
+------------------------------------------------------------------------------------------------------
+
+## Follow Liskov Substitution Principle `[LO-LSP]`
+
+#### Exercise: Add an exception to an overridden method
+
+* Add a `throws Exception` clause to the `AddCommand::execute` method. Notice how Java compiler will not allow it,
+  unless you add the same clause to the `throws` clause to the parent class. This is because if a child class throws
+  an exception that is not specified by the Parent's contract, the child class is no longer substitutable in place of 
+  the parent class.
+* Also note that while in the above example the compiler enforces LSP, there are other situations where it is up to
+  the programmer to enforce it. For example, if the method in the parent class works for `null` input, the overridden
+  method in the child class should not reject `null` inputs. This will not be enforced by the compiler.
   
-#### Exercise: Split `TextUi` class 
-
-The exercise in the `LO-ImplementClass` section is somewhat related to SRP as well. 
-Here's a slightly more difficult exercise.
-
-* `TextUi` class has more than one responsibility. 
-  Try to extract out the responsibility of Formatting text for display (e.g. adding decorations) in to a 
-  separate class named `Formatter`.
-
-#### Resources
-* [An explanation of the SRP](http://www.oodesign.com/single-responsibility-principle.html) from www.oodesign.com
-* [Another explanation (more detailed)](http://code.tutsplus.com/tutorials/solid-part-1-the-single-responsibility-principle--net-36074) 
-  by Patkos Csaba
-* [A book chapter on SRP](https://drive.google.com/file/d/0ByOwmqah_nuGNHEtcU5OekdDMkk/view) by Robert C. Martin
-
 ------------------------------------------------------------------------------------------------------
 
-## Handle Exceptions `[LO-Exceptions]`
+## Use Java-FX for GUI programming `[LO-JavaFx]`
 
-**Resources**:
-* [Best Practices for Exception Handling](http://www.onjava.com/pub/a/onjava/2003/11/19/exceptions.html)
-  by Gunjan Doshi 
+**Resources**
 
-#### Exercise: Handle 'file deleted' situation 
-
-* The current code does not handle the situation where the user deletes the storage file while the
-  AddressBook program is running. Use exceptions to handle that situation.
-
-------------------------------------------------------------------------------------------------------
-
-## Use Inheritance to achieve code reuse `[LO-Inheritance]`
-
-Note how the `Command` class contains some code that is reused by some of its child classes. 
-By defining `*Command` classes as child classes of `Command`, we have avoided having to duplicate those methods
-in multiple `*Command` classes.
-
-#### Exercise: Extract a `Contact` class 
-
-* Extract commonalities from `Phone`, `Email` and `Address` classes into a parent class called `Contact`.<br>
-<img src="images/ContactClassHierarchy.png" width='250' />
-
-------------------------------------------------------------------------------------------------------
-
-## Follow Interface Segregation Principle `[LO-ISP]`
-
-The *Interface-Segregation Principle (ISP)* states that no client should be forced to depend on methods it does not use.
-
-Note how the `Person` class implements the `ReadOnlyPerson` interface so that clients who don't need write access to
-`Person` objects can access `Person` objects through the `ReadOnlyPerson` interface instead.
-<img src="images/ReadOnlyPersonUsage.png" width='600' />
-
-#### Exercise: Add a `Printable` interface 
-
-* Add a `Printable` interface as follows.<br>
-  <img src="images/PrintableInterface.png" width='400' />
-* `Override` the `getPrintableString` in classes `Name`, `Phone`, `Email`, and `Address` so that each produces a printable
-  string representation of the object. e.g. `Name: John Smith`, `Phone: 12349862`
-* Add the following method in a suitable place of some other class. 
-  Note how the method depends on the Interface.
-  
-  
-  ```java
-  /**
-    * Returns a concatenated version of the printable strings of each object.
-    */
-  String getPrintableString(Printable... printables){
-  ```
-  
-  The above method can be used to get a printable string representing a bunch of person details. 
-  For example, you should be able to call that method like this:
-  
-  ```java
-  //p is a Person object
-  return getPrintableString(p.getPhone(), p.getEmail(), p.getAddress()); 
-  ```
-
-------------------------------------------------------------------------------------------------------
-
-## Use class-level members `[LO-ClassLevel]`
-
-Note how some of the variables and methods are declared `static`. That means they are *class-level* members
-rather than *instance-level* members.<br>
-e.g.<br> `Main.VERSION`, `Name.EXAMPLE`, `Utils.isAnyNull(...)`
+* [JavaFX 8 Tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by Marco Jakob
 
 #### Exercise: Add class-level members
 
-* Convert the `parse(...)` method of the `Parser` class to a class-level method. Note how this method
-  can be either class-level or instance-level.
-* Note how the `setTags` method of the `Person` class cannot be converted to a class-level method.
-* Add an instance-level member `int sequenceNumber` and a class-level variable `int nextSequenceNumber`
-  to the `Person` class. Using these two variables, ensure that each `Person` object has a unique sequence number
-  that indicates the order in which `Person` objects were created. e.g.
-  * `Adam` is the first `Person` object to be created. It is assigned sequence number 1.
-  * `Ben` and `Charlie` are created next, and assigned 2 and 3 respectively.
-  * `Ben` is deleted.
-  * `Daisy` is added next and is given sequence number 4.
+* If you are new to JavaFX, follow Marco's tutorial given above.
+* Do some enhancements to the AddressBook GUI. e.g. add an application icon, change size/style 
 
 ------------------------------------------------------------------------------------------------------
 
-## Use Composition `[LO-Composition]`
-
-Note the following examples of *composition* (filled diamond):
-
-Whole         | Parts
-:------------ | :----------------------------------
-`AddressBook` | `UniquePersonList` `UniqueTagList`
-`Person`      | `Name` `Phone` `Email` `Address`
-
-Contrast with these examples of *aggregration* (empty diamond):
-
-Container           | Contained
-:------------------ | :-------------------
-`UniquePersonList`  | `Person`
-`UuniqueTagList`    | `Tag`
-
-------------------------------------------------------------------------------------------------------
-
-## Use Association Classes `[LO-AssociationClass]`
-
-The current design does not have any association classes.
-
-#### Exercise: Add an Association Class `Tagging`
-
-* Assume the following:
-  1. There are commands to add and remove tags to a person in the address book.
-  2. When the AddressBook program exits, it should print out a list of all the tags added/deleted during that session.
-    e.g.
-
-    ```sh
-    + Jake Woo [friend]
-    - Jake Woo [colleague]
-    + Jean Wong [client]
-    ```
-* To support (ii) above, implement an Association Class called `Tagging` as given in the diagram below. <br>
-  Each `Tagging` object will represent an adding or deleting of a tag for a specific person that happened
-  during that session.<br>
-  <img src="images/TaggingClass.png" width='400' />
-
-------------------------------------------------------------------------------------------------------
-
-## Use JUnit to implement unit tests `[LO-JUnit]`
-
-Note the `test/seedu/addressbook/parser/ParserTest.java` class that users Junit to implement automated unit tests.
-
-**Resources**:
-* [JUnit cookbook](http://junit.sourceforge.net/doc/cookbook/cookbook.htm) - a short tutorial from JUnit creators
-* [JUnit tutorial](http://www.vogella.com/articles/JUnit/article.html) - a more detailed tutorial from a developer Lars Vogel
-* [How do I run all JUnit tests at once?](http://stackoverflow.com/questions/5759602/how-to-simultaneously-run-all-junit-tests-for-a-eclipse-java-project-without-mav)
-* How to test private methods in Java? 
-  [ [short answer](http://stackoverflow.com/questions/34571/whats-the-proper-way-to-test-a-class-with-private-methods-using-junit) ] 
-  [ [long answer](http://www.artima.com/suiterunner/private.html) ]
-                                
-**Side readings**:
-* [Quora post] [What is the best way to avoid bugs](href="http://www.quora.com/What-are-good-ways-to-avoid-bugs-while-programming/answer/Mattias-Petter-Johansson)
-* [Web article] [The Big Cost of Software Bugs](http://www.bloomberg.com/slideshow/2012-08-03/the-big-cost-of-software-bugs.html) - 
-  An interesting post on 10 bugs that cost millions.
-* [Web article] [The three pillars of unit testing](http://blog.goyello.com/2011/10/06/three-pillars-of-unit-tests) - 
-  A short article about what makes a good unit test.
-* [Quora post] [Is automated testing relevant to startups?](http://www.quora.com/What-kind-of-automated-testing-should-a-startup-have-from-the-beginning-through-the-first-six-months-of-live-operation/answer/Zach-Brock)
-* [Learning from Apple’s #gotofail Security Bug](http://avandeursen.com/2014/02/22/gotofail-security/) - 
-  How unit testing (and other good coding practices) could have prevented a major security bug.
-
-#### Exercise: Write unit tests for the `Utils` class 
-
-* First, make sure you know how to run JUnit tests by running the `ParserTest.java`. 
-  Instructions are in the [Developer Guide](DeveloperGuide.md#junit-tests).
-* Add a `test/seedu/addressbook/common/UtilsTest.java` containing JUnit tests for the `Utils` class.
-
-------------------------------------------------------------------------------------------------------
-
-## Use TDD `[LO-TDD]`
-
-It's recommended you do `[LO-JUnit]` before attempting TDD.
-
-**Resources**:
-
-* [Uncle Bob’s three rules of TDD](http://butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd) - 
-  (Uncle Bob = Robert C. Martin, the author of Clean Code)
-* Let’s play TDD screencasts by James Shore:
-  [ [episode 1](http://jamesshore.com/Blog/Lets-Play/Lets-Play-Test-Driven-Development.html) ]
-  [ [episode 2](http://jamesshore.com/Blog/Lets-Play/Episode-2.html) ]
-  [ [the rest](http://jamesshore.com/index.index) ]
-* [TDD: Is There Really Any Debate Any Longer?](http://www.drdobbs.com/testing/tdd-is-there-really-any-debate-any-longe/240007457)
-
-
-**Side readings**:
-* [Dev opinion][Programmers Without TDD Will be Unemployable by 2022](http://css.dzone.com/articles/programmers-without-tdd-will)
-
-
-#### Exercise: Add a method in TDD fashion
-
-* Add the following method to the `Name` class. Use the TDD technique to add the method. Commit after each step.
-
-    ```java
-    /**
-      * Returns true of the other name is very similar to this name.
-      * Two names are considered similar if ...
-      */
-      public boolean isSimilar(Name other) { ... }
-    ```
-
-* You may define 'similar' as you see fit.
-  Make sure the definition covers scenarios where other name is `null`, in a different case, in a different order,
-  is a subset/superset, etc. <br>
-  e.g. `John K Smith` `John K SMITh` `John Smith` `Smith, John K`
-
-------------------------------------------------------------------------------------------------------
-
-## Work in a 2KLoC code base `[LO-2KLoC]`
-
-#### Exercise: Enhance AddressBook
-
-Add a feature to AddressBook. Here are some suggestions.
-* An Edit command
-* A Sort command
-* List all persons automatically after an add or delete command
-* Any other enhancement that you might see fit
