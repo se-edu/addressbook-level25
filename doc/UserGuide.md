@@ -99,15 +99,15 @@ Examples:
 Clears all entries from the address book.<br>
 Format: `clear`  
 
-#### Exiting the program : `exit`
+### Exiting the program : `exit`
 Exits the program.<br>
 Format: `exit`  
 
-#### Saving the data 
+### Saving the data 
 Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
-#### Changing the save location
+### Changing the save location
 Address book data are saved in a file called `addressbook.txt` in the project root folder.
 You can change the location by specifying the file path as a program argument.<br>
 
