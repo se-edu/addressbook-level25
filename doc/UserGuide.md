@@ -3,14 +3,14 @@
 This product is not meant for end-users and therefore there is no user-friendly installer. 
 Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn how to set up the project.
 
-#### Starting the program
-
-**Using Eclipse**
+### Starting the program
 
 1. Find the project in the `Project Explorer` or `Package Explorer` (usually located at the left side)
 2. Right click on the project
 3. Click `Run As` > `Java Application` and choose the `Main` class.
 4. The GUI should appear in a few seconds.
+
+<img src="images/Ui.png">
 
 ### Viewing help : `help`
 Format: `help`
