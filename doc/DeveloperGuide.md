@@ -56,10 +56,11 @@ Priority | As a ... | I want to ... | So that I can...
 #### Use case: Delete person
 
 **MSS**
+
 1. User requests to list persons
 2. AddressBook shows a list of persons
 3. User requests to delete a specific person in the list
-4. AddressBook deletes the person
+4. AddressBook deletes the person <br>
 Use case ends.
 
 **Extensions**
