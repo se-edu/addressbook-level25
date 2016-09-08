@@ -18,6 +18,7 @@ import java.util.*;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.addressbook.common.Messages.*;
 
 
@@ -49,8 +50,8 @@ public class LogicTest {
      */
     private void assertLogicObjectStateEquals(AddressBook expectedAddressBook, List<? extends ReadOnlyPerson> expectedLastList)
             throws StorageFile.StorageOperationException {
-        assertEquals(addressBook, expectedAddressBook);
-        assertEquals(logic.getLastShownList(), expectedLastList);
+        assertEquals(expectedAddressBook, addressBook);
+        assertEquals( expectedLastList, logic.getLastShownList());
         assertEquals(addressBook, saveFile.load());
     }
 
@@ -60,7 +61,7 @@ public class LogicTest {
      */
     private void assertNonMutatingCommandBehavior(String inputCommand, String expectedMessage) throws Exception {
         CommandResult r = logic.execute(inputCommand);
-        assertEquals(r.feedbackToUser, expectedMessage);
+        assertEquals(expectedMessage, r.feedbackToUser);
         assertFalse(r.getRelevantPersons().isPresent());
         // no side effects to logic object
         assertLogicObjectStateEquals(AddressBook.empty(), Collections.emptyList());
@@ -75,7 +76,7 @@ public class LogicTest {
                                                AddressBook expectedAddressBook,
                                                List<? extends ReadOnlyPerson> expectedLastList) throws Exception {
         CommandResult r = logic.execute(inputCommand);
-        assertEquals(r.feedbackToUser, expectedMessage);
+        assertEquals(expectedMessage, r.feedbackToUser);
         assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(expectedAddressBook, expectedLastList);
     }
@@ -85,7 +86,7 @@ public class LogicTest {
         //Constructor is called in the setup() method which executes before every test, no need to call it here again.
 
         //Confirm the last shown list is empty
-        assertEquals(logic.getLastShownList(), Collections.emptyList());
+        assertEquals(Collections.emptyList(), logic.getLastShownList());
     }
 
     @Test
@@ -202,17 +203,17 @@ public class LogicTest {
         CommandResult r;
 
         r = logic.execute(commandWord + " -1");
-        assertEquals(r.feedbackToUser, expectedMessage);
+        assertEquals(expectedMessage, r.feedbackToUser);
         assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(AddressBook.empty(), lastShownList);
 
         r = logic.execute(commandWord + " 0");
-        assertEquals(r.feedbackToUser, expectedMessage);
+        assertEquals(expectedMessage, r.feedbackToUser);
         assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(AddressBook.empty(), lastShownList);
 
         r = logic.execute(commandWord + " 3");
-        assertEquals(r.feedbackToUser, expectedMessage);
+        assertEquals(expectedMessage, r.feedbackToUser);
         assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(AddressBook.empty(), lastShownList);
     }
@@ -232,9 +233,9 @@ public class LogicTest {
         CommandResult r = logic.execute("list");
 
         // return verification
-        assertEquals(r.feedbackToUser, Command.getMessageForPersonListShownSummary(expectedList));
-        assertEquals(r.getRelevantPersons().isPresent(), true);
-        assertEquals(r.getRelevantPersons().get(), expectedList);
+        assertEquals(Command.getMessageForPersonListShownSummary(expectedList), r.feedbackToUser);
+        assertTrue(r.getRelevantPersons().isPresent());
+        assertEquals(expectedList, r.getRelevantPersons().get());
 
         // SUT state verification
         assertLogicObjectStateEquals(expectedAB, expectedList);
@@ -270,12 +271,12 @@ public class LogicTest {
         CommandResult r;
 
         r = logic.execute("view 1");
-        assertEquals(r.feedbackToUser, String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p1.getAsTextHidePrivate()));
+        assertEquals(String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p1.getAsTextHidePrivate()), r.feedbackToUser);
         assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(expectedAB, lastShownList);
 
         r = logic.execute("view 2");
-        assertEquals(r.feedbackToUser, String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p2.getAsTextHidePrivate()));
+        assertEquals(String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p2.getAsTextHidePrivate()), r.feedbackToUser);
         assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(expectedAB, lastShownList);
     }
@@ -296,7 +297,7 @@ public class LogicTest {
         logic.setLastShownList(lastShownList);
         CommandResult r = logic.execute("view 1");
 
-        assertEquals(r.feedbackToUser, Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
+        assertEquals(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK, r.feedbackToUser);
         assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(expectedAB, lastShownList);
     }
@@ -331,12 +332,12 @@ public class LogicTest {
         CommandResult r;
 
         r = logic.execute("view 1");
-        assertEquals(r.feedbackToUser, String.format(ViewAllCommand.MESSAGE_VIEW_PERSON_DETAILS, p1.getAsTextShowAll()));
+        assertEquals(String.format(ViewAllCommand.MESSAGE_VIEW_PERSON_DETAILS, p1.getAsTextShowAll()), r.feedbackToUser);
         assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(expectedAB, lastShownList);
 
         r = logic.execute("view 2");
-        assertEquals(r.feedbackToUser, String.format(ViewAllCommand.MESSAGE_VIEW_PERSON_DETAILS, p2.getAsTextShowAll()));
+        assertEquals(String.format(ViewAllCommand.MESSAGE_VIEW_PERSON_DETAILS, p2.getAsTextShowAll()), r.feedbackToUser);
         assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(expectedAB, lastShownList);
     }
@@ -357,7 +358,7 @@ public class LogicTest {
         logic.setLastShownList(lastShownList);
         CommandResult r = logic.execute("viewall 2");
 
-        assertEquals(r.feedbackToUser, Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
+        assertEquals(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK, r.feedbackToUser);
         assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(expectedAB, lastShownList);
     }
@@ -398,7 +399,7 @@ public class LogicTest {
         logic.setLastShownList(lastShownList);
         CommandResult r = logic.execute("delete 2");
 
-        assertEquals(r.feedbackToUser, String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, p2));
+        assertEquals(String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, p2), r.feedbackToUser);
         assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(expectedAB, lastShownList);
     }
@@ -430,7 +431,7 @@ public class LogicTest {
 
         System.out.println(expectedAB.equals(addressBook));
 
-        assertEquals(r.feedbackToUser, Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
+        assertEquals(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK, r.feedbackToUser);
         assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(expectedAB, lastShownList);
     }
@@ -476,9 +477,9 @@ public class LogicTest {
         addressBook.addPerson(pTarget2);
         CommandResult r = logic.execute("find KEY");
         
-        assertEquals(r.feedbackToUser, Command.getMessageForPersonListShownSummary(expectedList));
-        assertEquals(r.getRelevantPersons().isPresent(), true);
-        assertEquals(r.getRelevantPersons().get(), expectedList);
+        assertEquals(Command.getMessageForPersonListShownSummary(expectedList), r.feedbackToUser);
+        assertTrue(r.getRelevantPersons().isPresent());
+        assertEquals(expectedList, r.getRelevantPersons().get());
         assertLogicObjectStateEquals(expectedAB, expectedList);
     }
 
@@ -504,9 +505,9 @@ public class LogicTest {
         addressBook.addPerson(pTarget2);
         CommandResult r = logic.execute("find KEY");
 
-        assertEquals(r.feedbackToUser, Command.getMessageForPersonListShownSummary(expectedList));
-        assertEquals(r.getRelevantPersons().isPresent(), true);
-        assertEquals(r.getRelevantPersons().get(), expectedList);
+        assertEquals(Command.getMessageForPersonListShownSummary(expectedList), r.feedbackToUser);
+        assertTrue(r.getRelevantPersons().isPresent());
+        assertEquals(expectedList, r.getRelevantPersons().get());
         assertLogicObjectStateEquals(expectedAB, expectedList);
     }
 
@@ -532,9 +533,9 @@ public class LogicTest {
         addressBook.addPerson(pTarget2);
         CommandResult r = logic.execute("find KEY rAnDoM");
 
-        assertEquals(r.feedbackToUser, Command.getMessageForPersonListShownSummary(expectedList));
-        assertEquals(r.getRelevantPersons().isPresent(), true);
-        assertEquals(r.getRelevantPersons().get(), expectedList);
+        assertEquals(Command.getMessageForPersonListShownSummary(expectedList), r.feedbackToUser);
+        assertTrue(r.getRelevantPersons().isPresent());
+        assertEquals(expectedList, r.getRelevantPersons().get());
         assertLogicObjectStateEquals(expectedAB, expectedList);
     }
 
