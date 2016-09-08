@@ -378,27 +378,22 @@ public class LogicTest {
         Person p2 = helper.generatePerson(2, true);
         Person p3 = helper.generatePerson(3, true);
 
-        AddressBook expectedAB = new AddressBook();
-        expectedAB.addPerson(p1);
-        expectedAB.addPerson(p2);
-        expectedAB.addPerson(p3);
+        List<Person> threePresons = helper.generatePersonList(p1, p2, p3);
+
+        AddressBook expectedAB = helper.generateAddressBook(threePresons);
         expectedAB.removePerson(p2);
 
-        List<Person> lastShownList = new ArrayList<>();
-        lastShownList.add(p1);
-        lastShownList.add(p2);
-        lastShownList.add(p3);
 
-        addressBook.addPerson(p1);
-        addressBook.addPerson(p2);
-        addressBook.addPerson(p3);
-        logic.setLastShownList(lastShownList);
-        CommandResult r = logic.execute("delete 2");
+        helper.addToAddressBook(addressBook, threePresons);
+        logic.setLastShownList(threePresons);
 
-        assertEquals(String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, p2), r.feedbackToUser);
-        assertFalse(r.getRelevantPersons().isPresent());
-        assertLogicObjectStateEquals(expectedAB, lastShownList);
+        assertNonMutatingCommandBehavior("delete 2",
+                String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, p2),
+                expectedAB,
+                false,
+                threePresons);
     }
+
 
     @Test
     public void execute_delete_missingInAddressBook() throws Exception {
