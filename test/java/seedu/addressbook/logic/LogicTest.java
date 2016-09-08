@@ -66,6 +66,10 @@ public class LogicTest {
     /**
      * Executes the command and confirms that the result message is correct and both in-memory and persistent data
      * were not affected.
+     * Confirms that the following three parts of the Logic object's state is as expected:<br>
+     *      - the internal addressbook is same as {@code expectedAddressBook} <br>
+     *      - the internal last shown list is the same as {@code expectedLastList} <br>
+     *      - the storage file content matches data in {@code expectedAddressBook} <br>
      */
     private void assertCommandBehavior(String inputCommand,
                                       String expectedMessage,
@@ -73,28 +77,22 @@ public class LogicTest {
                                       boolean isRelevantPersonsExpected,
                                       List<? extends ReadOnlyPerson> lastShownList) throws Exception {
 
+        //Execute the command
         CommandResult r = logic.execute(inputCommand);
+
+        //Confirm the result contain the right data
         assertEquals(expectedMessage, r.feedbackToUser);
         assertEquals(r.getRelevantPersons().isPresent(), isRelevantPersonsExpected);
         if(isRelevantPersonsExpected){
             assertEquals(lastShownList, r.getRelevantPersons().get());
         }
-        // no side effects to logic object
-        assertLogicObjectStateEquals(expectedAddressBook, lastShownList);
-    }
 
-    /**
-     * Confirms that the following three parts of the Logic object's state is as expected:<br>
-     *      - the internal addressbook is same as {@code expectedAddressBook} <br>
-     *      - the internal last shown list is the same as {@code expectedLastList} <br>
-     *      - the storage file content matches data in {@code expectedAddressBook} <br>
-     */
-    private void assertLogicObjectStateEquals(AddressBook expectedAddressBook, List<? extends ReadOnlyPerson> expectedLastList)
-            throws StorageFile.StorageOperationException {
+        //Confirm the state of data is as expected
         assertEquals(expectedAddressBook, addressBook);
-        assertEquals(expectedLastList, logic.getLastShownList());
+        assertEquals(lastShownList, logic.getLastShownList());
         assertEquals(addressBook, saveFile.load());
     }
+
 
     @Test
     public void execute_unknownCommandWord() throws Exception {
