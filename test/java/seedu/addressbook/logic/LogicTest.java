@@ -62,19 +62,31 @@ public class LogicTest {
      * were not affected.
      */
     private void assertNonMutatingCommandBehavior(String inputCommand, String expectedMessage) throws Exception {
-        assertNonMutatingCommandBehavior(inputCommand, expectedMessage, Collections.emptyList());
+        assertNonMutatingCommandBehavior(inputCommand, expectedMessage, AddressBook.empty(),false, Collections.emptyList());
     }
 
     /**
      * Executes the command and confirms that the result message is correct and both in-memory and persistent data
      * were not affected.
      */
-    private void assertNonMutatingCommandBehavior(String inputCommand, String expectedMessage, List<Person> lastShownList) throws Exception {
+    private void assertNonMutatingCommandBehavior(String inputCommand, String expectedMessage, List<? extends ReadOnlyPerson> lastShownList) throws Exception {
+        assertNonMutatingCommandBehavior(inputCommand, expectedMessage, AddressBook.empty(), false, lastShownList);
+    }
+
+    /**
+     * Executes the command and confirms that the result message is correct and both in-memory and persistent data
+     * were not affected.
+     */
+    private void assertNonMutatingCommandBehavior(String inputCommand,
+                                                  String expectedMessage,
+                                                  AddressBook expectedAddressBook,
+                                                  boolean isRelevantPersonsExpected,
+                                                  List<? extends ReadOnlyPerson> lastShownList) throws Exception {
         CommandResult r = logic.execute(inputCommand);
         assertEquals(expectedMessage, r.feedbackToUser);
-        assertFalse(r.getRelevantPersons().isPresent());
+        assertEquals(r.getRelevantPersons().isPresent(), isRelevantPersonsExpected);
         // no side effects to logic object
-        assertLogicObjectStateEquals(AddressBook.empty(), lastShownList);
+        assertLogicObjectStateEquals(expectedAddressBook, lastShownList);
     }
 
     /**
@@ -86,7 +98,7 @@ public class LogicTest {
     private void assertLogicObjectStateEquals(AddressBook expectedAddressBook, List<? extends ReadOnlyPerson> expectedLastList)
             throws StorageFile.StorageOperationException {
         assertEquals(expectedAddressBook, addressBook);
-        assertEquals( expectedLastList, logic.getLastShownList());
+        assertEquals(expectedLastList, logic.getLastShownList());
         assertEquals(addressBook, saveFile.load());
     }
 
@@ -193,25 +205,19 @@ public class LogicTest {
 
     @Test
     public void execute_list_showsAllPersons() throws Exception {
-        // expectations
-        AddressBook expectedAB = new AddressBook();
+        // prepare expectations
         TestDataHelper helper = new TestDataHelper();
-        expectedAB.addPerson(helper.generatePerson(1, false));
-        expectedAB.addPerson(helper.generatePerson(2, true));
+        AddressBook expectedAB = helper.generateAddressBook(false, true);
         List<? extends ReadOnlyPerson> expectedList = expectedAB.getAllPersons().immutableListView();
 
-        // prep test
-        addressBook.addPerson(helper.generatePerson(1, false));
-        addressBook.addPerson(helper.generatePerson(2, true));
-        CommandResult r = logic.execute("list");
+        // prepare address book state
+        helper.addToAddressBook(addressBook, false, true);
 
-        // return verification
-        assertEquals(Command.getMessageForPersonListShownSummary(expectedList), r.feedbackToUser);
-        assertTrue(r.getRelevantPersons().isPresent());
-        assertEquals(expectedList, r.getRelevantPersons().get());
-
-        // SUT state verification
-        assertLogicObjectStateEquals(expectedAB, expectedList);
+        assertNonMutatingCommandBehavior("list",
+                                        Command.getMessageForPersonListShownSummary(expectedList),
+                                        expectedAB,
+                                        true,
+                                        expectedList);
     }
 
     @Test
@@ -582,6 +588,19 @@ public class LogicTest {
             }
 
             return cmd.toString();
+        }
+
+        AddressBook generateAddressBook(Boolean... isPrivateStatuses) throws Exception{
+            AddressBook addressBook = new AddressBook();
+            addToAddressBook(addressBook, isPrivateStatuses);
+            return addressBook;
+        }
+
+        void addToAddressBook(AddressBook addressBook, Boolean... isPrivateStatuses) throws Exception{
+            int i = 1;
+            for(Boolean p: isPrivateStatuses){
+                addressBook.addPerson(generatePerson(i++, p));
+            }
         }
     }
 
