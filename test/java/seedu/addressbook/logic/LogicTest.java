@@ -9,7 +9,6 @@ import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.commands.*;
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
-import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.*;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
@@ -19,15 +18,10 @@ import java.util.*;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.addressbook.common.Messages.*;
 
-/**
- * The {@link Logic} object has 3 main pieces of state to verify when testing:
- *      - the internal addressbook
- *      - the internal last shown list
- *      - the storage file
- * Tests also verify verify the return value of the method you are testing.
- */
+
 public class LogicTest {
 
     /**
@@ -73,6 +67,20 @@ public class LogicTest {
         assertLogicObjectStateEquals(AddressBook.empty(), Collections.emptyList());
     }
 
+    /**
+     * Executes the command and confirms that the result message is correct and both in-memory and persistent data
+     * have been updated as specified.
+     */
+    private void assertMutatingCommandBehavior(String inputCommand,
+                                               String expectedMessage,
+                                               AddressBook expectedAddressBook,
+                                               List<? extends ReadOnlyPerson> expectedLastList) throws Exception {
+        CommandResult r = logic.execute(inputCommand);
+        assertEquals(r.feedbackToUser, expectedMessage);
+        assertFalse(r.getRelevantPersons().isPresent());
+        assertLogicObjectStateEquals(expectedAddressBook, expectedLastList);
+    }
+
     @Test
     public void constructor() {
         //Constructor is called in the setup() method which executes before every test, no need to call it here again.
@@ -110,11 +118,9 @@ public class LogicTest {
         addressBook.addPerson(helper.generatePerson(1, true));
         addressBook.addPerson(helper.generatePerson(2, true));
         addressBook.addPerson(helper.generatePerson(3, true));
-        CommandResult r = logic.execute("clear");
 
-        assertEquals(r.feedbackToUser, ClearCommand.MESSAGE_SUCCESS);
-        assertFalse(r.getRelevantPersons().isPresent());
-        assertLogicObjectStateEquals(AddressBook.empty(), Collections.emptyList());
+        assertMutatingCommandBehavior("clear", ClearCommand.MESSAGE_SUCCESS, AddressBook.empty(), Collections.emptyList());
+        CommandResult r = logic.execute("clear");
     }
 
     @Test
