@@ -45,7 +45,7 @@ public class LogicTest {
     public void setup() throws Exception {
         saveFile = new StorageFile(saveFolder.newFile("testSaveFile.txt").getPath());
         addressBook = new AddressBook();
-        saveFile.save(addressBook); // initial state of save file
+        saveFile.save(addressBook);
         logic = new Logic(saveFile, addressBook);
     }
 
@@ -75,7 +75,10 @@ public class LogicTest {
     }
 
     @Test
-    public void initialised_withEmptyLastShownList() {
+    public void constructor() {
+        //Constructor is called in the setup() method which executes before every test, no need to call it here again.
+
+        //Confirm the last shown list is empty
         assertEquals(logic.getLastShownList(), Collections.emptyList());
     }
 
