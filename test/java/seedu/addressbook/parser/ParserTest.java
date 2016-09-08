@@ -80,7 +80,7 @@ public class ParserTest {
     @Test
     public void deleteCommand_argsIsNotSingleNumber() {
         final String[] inputs = { "delete notAnumber ", "delete 8*wh12", "delete 1 2 3 4 5" };
-        final String resultMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
     }
     
@@ -102,7 +102,7 @@ public class ParserTest {
     @Test
     public void viewCommand_argsIsNotSingleNumber() {
         final String[] inputs = { "view notAnumber ", "view 8*wh12", "view 1 2 3 4 5" };
-        final String resultMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE);
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
     }
     
@@ -125,7 +125,7 @@ public class ParserTest {
     @Test
     public void viewAllCommand_argsIsNotSingleNumber() {
         final String[] inputs = { "viewall notAnumber ", "viewall 8*wh12", "viewall 1 2 3 4 5" };
-        final String resultMessage = MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewAllCommand.MESSAGE_USAGE);
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
     }
 
