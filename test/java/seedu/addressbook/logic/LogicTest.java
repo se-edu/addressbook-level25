@@ -311,6 +311,7 @@ public class LogicTest {
 
     @Test
     public void execute_view_alsoShowsPrivate() throws Exception {
+        //TODO: what's the purpose of this test?
         List<Person> lastShownList = new ArrayList<>();
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
@@ -338,24 +339,24 @@ public class LogicTest {
     }
 
     @Test
-    public void execute_viewAll_missingInAddressBook() throws Exception {
-        List<Person> lastShownList = new ArrayList<>();
+    public void execute_tryToViewAllPersonMissingInAddressBook_errorMessage() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         Person p2 = helper.generatePerson(2, false);
-        lastShownList.add(p1);
-        lastShownList.add(p2);
+        List<Person> lastShownList = helper.generatePersonList(p1, p2);
 
         AddressBook expectedAB = new AddressBook();
         expectedAB.addPerson(p1);
 
         addressBook.addPerson(p1);
         logic.setLastShownList(lastShownList);
-        CommandResult r = logic.execute("viewall 2");
 
-        assertEquals(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK, r.feedbackToUser);
-        assertFalse(r.getRelevantPersons().isPresent());
-        assertLogicObjectStateEquals(expectedAB, lastShownList);
+        assertNonMutatingCommandBehavior("viewall 2",
+                Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK,
+                expectedAB,
+                false,
+                lastShownList);
+
     }
 
     @Test
