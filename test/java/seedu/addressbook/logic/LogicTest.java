@@ -36,11 +36,12 @@ public class LogicTest {
      */
     @Rule
     public TemporaryFolder saveFolder = new TemporaryFolder();
-
-    private StorageFile saveFile;
-    private AddressBook addressBook;
+    
+    // direct access to the storage file used by the Logic object. Useful for verifying save file state.
+    private StorageFile saveFile; 
+    // direct access to the addressbook used by the Logic object. Useful for verifying internal addressbook state.
+    private AddressBook addressBook; 
     private Logic logic;
-    private Person testPerson;
 
     @Before
     public void setup() throws Exception {
@@ -50,6 +51,9 @@ public class LogicTest {
         logic = new Logic(saveFile, addressBook);
     }
 
+    /**
+     * Verifies that the save file contents and the internal address book are synchronised.
+     */
     private void assertSaveFileUpToDate() throws StorageFile.StorageOperationException {
         assertEquals(addressBook, saveFile.load());
     }
