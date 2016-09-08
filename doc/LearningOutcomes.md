@@ -1,4 +1,4 @@
-# Learning Outcomes [to be updated]
+# Learning Outcomes
 After studying this code and completing the corresponding exercises, you should be able to,
 
 1. [Utilize User Stories `[LO-UserStories]`](#utilize-user-stories-lo-userstories)
