@@ -62,11 +62,19 @@ public class LogicTest {
      * were not affected.
      */
     private void assertNonMutatingCommandBehavior(String inputCommand, String expectedMessage) throws Exception {
+        assertNonMutatingCommandBehavior(inputCommand, expectedMessage, Collections.emptyList());
+    }
+
+    /**
+     * Executes the command and confirms that the result message is correct and both in-memory and persistent data
+     * were not affected.
+     */
+    private void assertNonMutatingCommandBehavior(String inputCommand, String expectedMessage, List<Person> lastShownList) throws Exception {
         CommandResult r = logic.execute(inputCommand);
         assertEquals(expectedMessage, r.feedbackToUser);
         assertFalse(r.getRelevantPersons().isPresent());
         // no side effects to logic object
-        assertLogicObjectStateEquals(AddressBook.empty(), Collections.emptyList());
+        assertLogicObjectStateEquals(AddressBook.empty(), lastShownList);
     }
 
     /**
@@ -81,7 +89,7 @@ public class LogicTest {
         assertEquals( expectedLastList, logic.getLastShownList());
         assertEquals(addressBook, saveFile.load());
     }
-    
+
     /**
      * Executes the command and confirms that the result message is correct and both in-memory and persistent data
      * have been updated as specified.
@@ -164,8 +172,6 @@ public class LogicTest {
 
     }
 
-
-
     @Test
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
@@ -185,14 +191,12 @@ public class LogicTest {
 
     }
 
-
-
     /**
-     * Utility method for testing invalid argument index number behaviour for commands
+     * Confirms the 'invalid argument index number behaviour' for the given command
      * targeting a single person in the last shown list, using visible index.
      * @param commandWord to test assuming it targets a single person in the last shown list based on visible index.
      */
-    private void execute_lastShownListIndexCommand_invalidIndex(String commandWord) throws Exception {
+    private void assertInvalidIndexBehaviorForCommand(String commandWord) throws Exception {
         String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
         List<Person> lastShownList = new ArrayList<>();
         TestDataHelper helper = new TestDataHelper();
@@ -200,22 +204,11 @@ public class LogicTest {
         lastShownList.add(helper.generatePerson(2, true));
 
         logic.setLastShownList(lastShownList);
-        CommandResult r;
 
-        r = logic.execute(commandWord + " -1");
-        assertEquals(expectedMessage, r.feedbackToUser);
-        assertFalse(r.getRelevantPersons().isPresent());
-        assertLogicObjectStateEquals(AddressBook.empty(), lastShownList);
+        assertNonMutatingCommandBehavior(commandWord + " -1", expectedMessage, lastShownList);
+        assertNonMutatingCommandBehavior(commandWord + " 0", expectedMessage, lastShownList);
+        assertNonMutatingCommandBehavior(commandWord + " 3", expectedMessage, lastShownList);
 
-        r = logic.execute(commandWord + " 0");
-        assertEquals(expectedMessage, r.feedbackToUser);
-        assertFalse(r.getRelevantPersons().isPresent());
-        assertLogicObjectStateEquals(AddressBook.empty(), lastShownList);
-
-        r = logic.execute(commandWord + " 3");
-        assertEquals(expectedMessage, r.feedbackToUser);
-        assertFalse(r.getRelevantPersons().isPresent());
-        assertLogicObjectStateEquals(AddressBook.empty(), lastShownList);
     }
 
     @Test
@@ -250,7 +243,7 @@ public class LogicTest {
 
     @Test
     public void execute_view_invalidIndex() throws Exception {
-        execute_lastShownListIndexCommand_invalidIndex("view");
+        assertInvalidIndexBehaviorForCommand("view");
     }
 
     @Test
@@ -311,7 +304,7 @@ public class LogicTest {
 
     @Test
     public void execute_viewAll_invalidIndex() throws Exception {
-        execute_lastShownListIndexCommand_invalidIndex("viewall");
+        assertInvalidIndexBehaviorForCommand("viewall");
     }
 
     @Test
@@ -372,7 +365,7 @@ public class LogicTest {
 
     @Test
     public void execute_delete_invalidIndex() throws Exception {
-        execute_lastShownListIndexCommand_invalidIndex("delete");
+        assertInvalidIndexBehaviorForCommand("delete");
     }
 
     @Test
