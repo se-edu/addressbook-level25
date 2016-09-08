@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
 import static seedu.addressbook.common.Messages.*;
 
 /**
@@ -63,13 +64,13 @@ public class LogicTest {
     }
 
     /**
-     * See class header comment; side effects involve changes to those 3 parts of internal state.
+     * Executes the command and confirms that the result message is correct and both in-memory and persistent data
+     * were not affected.
      */
-    private void executeAndAssertOnlyMessageNoSideEffects(String inputCommand, String expectedMessage) throws Exception {
+    private void assertNonMutatingCommandBehavior(String inputCommand, String expectedMessage) throws Exception {
         CommandResult r = logic.execute(inputCommand);
-        // check returned object state
         assertEquals(r.feedbackToUser, expectedMessage);
-        assertEquals(r.getRelevantPersons().isPresent(), false);
+        assertFalse(r.getRelevantPersons().isPresent());
         // no side effects to logic object
         assertLogicObjectStateEquals(AddressBook.empty(), Collections.emptyList());
     }
@@ -84,23 +85,25 @@ public class LogicTest {
 
     @Test
     public void execute_invalid() throws Exception {
-        executeAndAssertOnlyMessageNoSideEffects("       ",
+        String invalidCommand = "       ";
+        assertNonMutatingCommandBehavior(invalidCommand,
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void execute_unknownCommandWord() throws Exception {
-        executeAndAssertOnlyMessageNoSideEffects("uicfhmowqewca", HelpCommand.MESSAGE_ALL_USAGES);
+        String unknownCommand = "uicfhmowqewca";
+        assertNonMutatingCommandBehavior(unknownCommand, HelpCommand.MESSAGE_ALL_USAGES);
     }
 
     @Test
     public void execute_help() throws Exception {
-        executeAndAssertOnlyMessageNoSideEffects("help", HelpCommand.MESSAGE_ALL_USAGES);
+        assertNonMutatingCommandBehavior("help", HelpCommand.MESSAGE_ALL_USAGES);
     }
 
     @Test
     public void execute_exit() throws Exception {
-        executeAndAssertOnlyMessageNoSideEffects("exit", ExitCommand.MESSAGE_EXIT_ACKNOWEDGEMENT);
+        assertNonMutatingCommandBehavior("exit", ExitCommand.MESSAGE_EXIT_ACKNOWEDGEMENT);
     }
 
     @Test
@@ -111,32 +114,32 @@ public class LogicTest {
         CommandResult r = logic.execute("clear");
 
         assertEquals(r.feedbackToUser, ClearCommand.MESSAGE_SUCCESS);
-        assertEquals(r.getRelevantPersons().isPresent(), false);
+        assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(AddressBook.empty(), Collections.emptyList());
     }
 
     @Test
     public void execute_add_invalidArgsFormat() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-        executeAndAssertOnlyMessageNoSideEffects(
+        assertNonMutatingCommandBehavior(
                 "add wrong args wrong args", expectedMessage);
-        executeAndAssertOnlyMessageNoSideEffects(
+        assertNonMutatingCommandBehavior(
                 "add Valid Name 12345 e/valid@email.butNoPhonePrefix a/valid, address", expectedMessage);
-        executeAndAssertOnlyMessageNoSideEffects(
+        assertNonMutatingCommandBehavior(
                 "add Valid Name p/12345 valid@email.butNoPrefix a/valid, address", expectedMessage);
-        executeAndAssertOnlyMessageNoSideEffects(
+        assertNonMutatingCommandBehavior(
                 "add Valid Name p/12345 e/valid@email.butNoAddressPrefix valid, address", expectedMessage);
     }
 
     @Test
     public void execute_add_invalidPersonData() throws Exception {
-        executeAndAssertOnlyMessageNoSideEffects(
+        assertNonMutatingCommandBehavior(
                 "add []\\[;] p/12345 e/valid@e.mail a/valid, address", Name.MESSAGE_NAME_CONSTRAINTS);
-        executeAndAssertOnlyMessageNoSideEffects(
+        assertNonMutatingCommandBehavior(
                 "add Valid Name p/not_numbers e/valid@e.mail a/valid, address", Phone.MESSAGE_PHONE_CONSTRAINTS);
-        executeAndAssertOnlyMessageNoSideEffects(
+        assertNonMutatingCommandBehavior(
                 "add Valid Name p/12345 e/notAnEmail a/valid, address", Email.MESSAGE_EMAIL_CONSTRAINTS);
-        executeAndAssertOnlyMessageNoSideEffects(
+        assertNonMutatingCommandBehavior(
                 "add Valid Name p/12345 e/valid@e.mail a/valid, address t/invalid_-[.tag", Tag.MESSAGE_TAG_CONSTRAINTS);
 
     }
@@ -162,7 +165,7 @@ public class LogicTest {
 
         // result object verification
         assertEquals(r.feedbackToUser, String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded));
-        assertEquals(r.getRelevantPersons().isPresent(), false);
+        assertFalse(r.getRelevantPersons().isPresent());
         // logic object verification
         assertLogicObjectStateEquals(expectedAB, Collections.emptyList());
     }
@@ -189,7 +192,7 @@ public class LogicTest {
 
         // result object verification
         assertEquals(r.feedbackToUser, AddCommand.MESSAGE_DUPLICATE_PERSON);
-        assertEquals(r.getRelevantPersons().isPresent(), false);
+        assertFalse(r.getRelevantPersons().isPresent());
         // logic object verification
         assertLogicObjectStateEquals(expectedAB, Collections.emptyList());
     }
@@ -227,17 +230,17 @@ public class LogicTest {
 
         r = logic.execute(commandWord + " -1");
         assertEquals(r.feedbackToUser, expectedMessage);
-        assertEquals(r.getRelevantPersons().isPresent(), false);
+        assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(AddressBook.empty(), lastShownList);
 
         r = logic.execute(commandWord + " 0");
         assertEquals(r.feedbackToUser, expectedMessage);
-        assertEquals(r.getRelevantPersons().isPresent(), false);
+        assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(AddressBook.empty(), lastShownList);
 
         r = logic.execute(commandWord + " 3");
         assertEquals(r.feedbackToUser, expectedMessage);
-        assertEquals(r.getRelevantPersons().isPresent(), false);
+        assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(AddressBook.empty(), lastShownList);
     }
 
@@ -266,8 +269,8 @@ public class LogicTest {
     @Test
     public void execute_view_invalidArgsFormat() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE);
-        executeAndAssertOnlyMessageNoSideEffects("view ", expectedMessage);
-        executeAndAssertOnlyMessageNoSideEffects("view arg not number", expectedMessage);
+        assertNonMutatingCommandBehavior("view ", expectedMessage);
+        assertNonMutatingCommandBehavior("view arg not number", expectedMessage);
     }
 
     @Test
@@ -293,12 +296,12 @@ public class LogicTest {
 
         r = logic.execute("view 1");
         assertEquals(r.feedbackToUser, String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p1.getAsTextHidePrivate()));
-        assertEquals(r.getRelevantPersons().isPresent(), false);
+        assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(expectedAB, lastShownList);
 
         r = logic.execute("view 2");
         assertEquals(r.feedbackToUser, String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p2.getAsTextHidePrivate()));
-        assertEquals(r.getRelevantPersons().isPresent(), false);
+        assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(expectedAB, lastShownList);
     }
 
@@ -318,15 +321,15 @@ public class LogicTest {
         CommandResult r = logic.execute("view 1");
 
         assertEquals(r.feedbackToUser, Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
-        assertEquals(r.getRelevantPersons().isPresent(), false);
+        assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(expectedAB, lastShownList);
     }
 
     @Test
     public void execute_viewAll_invalidArgsFormat() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewAllCommand.MESSAGE_USAGE);
-        executeAndAssertOnlyMessageNoSideEffects("viewall ", expectedMessage);
-        executeAndAssertOnlyMessageNoSideEffects("viewall arg not number", expectedMessage);
+        assertNonMutatingCommandBehavior("viewall ", expectedMessage);
+        assertNonMutatingCommandBehavior("viewall arg not number", expectedMessage);
     }
 
     @Test
@@ -352,12 +355,12 @@ public class LogicTest {
 
         r = logic.execute("view 1");
         assertEquals(r.feedbackToUser, String.format(ViewAllCommand.MESSAGE_VIEW_PERSON_DETAILS, p1.getAsTextShowAll()));
-        assertEquals(r.getRelevantPersons().isPresent(), false);
+        assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(expectedAB, lastShownList);
 
         r = logic.execute("view 2");
         assertEquals(r.feedbackToUser, String.format(ViewAllCommand.MESSAGE_VIEW_PERSON_DETAILS, p2.getAsTextShowAll()));
-        assertEquals(r.getRelevantPersons().isPresent(), false);
+        assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(expectedAB, lastShownList);
     }
 
@@ -377,15 +380,15 @@ public class LogicTest {
         CommandResult r = logic.execute("viewall 2");
 
         assertEquals(r.feedbackToUser, Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
-        assertEquals(r.getRelevantPersons().isPresent(), false);
+        assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(expectedAB, lastShownList);
     }
 
     @Test
     public void execute_delete_invalidArgsFormat() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
-        executeAndAssertOnlyMessageNoSideEffects("delete ", expectedMessage);
-        executeAndAssertOnlyMessageNoSideEffects("delete arg not number", expectedMessage);
+        assertNonMutatingCommandBehavior("delete ", expectedMessage);
+        assertNonMutatingCommandBehavior("delete arg not number", expectedMessage);
     }
 
     @Test
@@ -417,7 +420,7 @@ public class LogicTest {
         CommandResult r = logic.execute("delete 2");
 
         assertEquals(r.feedbackToUser, String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, p2));
-        assertEquals(r.getRelevantPersons().isPresent(), false);
+        assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(expectedAB, lastShownList);
     }
 
@@ -448,7 +451,7 @@ public class LogicTest {
         System.out.println(expectedAB.equals(addressBook));
 
         assertEquals(r.feedbackToUser, Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
-        assertEquals(r.getRelevantPersons().isPresent(), false);
+        assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(expectedAB, lastShownList);
     }
 
@@ -468,7 +471,7 @@ public class LogicTest {
     @Test
     public void execute_find_invalidArgsFormat() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
-        executeAndAssertOnlyMessageNoSideEffects("find ", expectedMessage);
+        assertNonMutatingCommandBehavior("find ", expectedMessage);
     }
 
     @Test
