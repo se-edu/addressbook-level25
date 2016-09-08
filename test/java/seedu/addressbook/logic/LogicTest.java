@@ -259,7 +259,7 @@ public class LogicTest {
     public void execute_view_onlyShowsNonPrivate() throws Exception {
 
         TestDataHelper helper = new TestDataHelper();
-        Person p1 = helper.generatePerson(1, false);
+        Person p1 = helper.generatePerson(1, true);
         Person p2 = helper.generatePerson(2, false);
         List<Person> lastShownList = helper.generatePersonList(p1, p2);
         AddressBook expectedAB = helper.generateAddressBook(lastShownList);
@@ -313,32 +313,27 @@ public class LogicTest {
     }
 
     @Test
-    public void execute_view_alsoShowsPrivate() throws Exception {
-        //TODO: what's the purpose of this test?
-        List<Person> lastShownList = new ArrayList<>();
+    public void execute_viewAll_alsoShowsPrivate() throws Exception {
         TestDataHelper helper = new TestDataHelper();
-        Person p1 = helper.generatePerson(1, false);
+        Person p1 = helper.generatePerson(1, true);
         Person p2 = helper.generatePerson(2, false);
-        lastShownList.add(p1);
-        lastShownList.add(p2);
-        AddressBook expectedAB = new AddressBook();
-        expectedAB.addPerson(p1);
-        expectedAB.addPerson(p2);
+        List<Person> lastShownList = helper.generatePersonList(p1, p2);
+        AddressBook expectedAB = helper.generateAddressBook(lastShownList);
+        helper.addToAddressBook(addressBook, lastShownList);
 
-        addressBook.addPerson(p1);
-        addressBook.addPerson(p2);
         logic.setLastShownList(lastShownList);
-        CommandResult r;
 
-        r = logic.execute("view 1");
-        assertEquals(String.format(ViewAllCommand.MESSAGE_VIEW_PERSON_DETAILS, p1.getAsTextShowAll()), r.feedbackToUser);
-        assertFalse(r.getRelevantPersons().isPresent());
-        assertLogicObjectStateEquals(expectedAB, lastShownList);
+        assertNonMutatingCommandBehavior("viewall 1",
+                String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p1.getAsTextShowAll()),
+                expectedAB,
+                false,
+                lastShownList);
 
-        r = logic.execute("view 2");
-        assertEquals(String.format(ViewAllCommand.MESSAGE_VIEW_PERSON_DETAILS, p2.getAsTextShowAll()), r.feedbackToUser);
-        assertFalse(r.getRelevantPersons().isPresent());
-        assertLogicObjectStateEquals(expectedAB, lastShownList);
+        assertNonMutatingCommandBehavior("viewall 2",
+                String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p2.getAsTextShowAll()),
+                expectedAB,
+                false,
+                lastShownList);
     }
 
     @Test
@@ -359,7 +354,6 @@ public class LogicTest {
                 expectedAB,
                 false,
                 lastShownList);
-
     }
 
     @Test
@@ -421,8 +415,6 @@ public class LogicTest {
                 threePersons);
     }
 
-
-    
     @Test
     public void execute_find_invalidArgsFormat() throws Exception {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE);
