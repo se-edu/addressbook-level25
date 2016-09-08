@@ -42,17 +42,19 @@ public class LogicTest {
         logic = new Logic(saveFile, addressBook);
     }
 
-    /**
-     * Confirms that the following three parts of the Logic object's state is as expected:<br>
-     *      - the internal addressbook is same as {@code expectedAddressBook} <br>
-     *      - the internal last shown list is the same as {@code expectedLastList} <br>
-     *      - the storage file content matches data in {@code expectedAddressBook} <br>
-     */
-    private void assertLogicObjectStateEquals(AddressBook expectedAddressBook, List<? extends ReadOnlyPerson> expectedLastList)
-            throws StorageFile.StorageOperationException {
-        assertEquals(expectedAddressBook, addressBook);
-        assertEquals( expectedLastList, logic.getLastShownList());
-        assertEquals(addressBook, saveFile.load());
+    @Test
+    public void constructor() {
+        //Constructor is called in the setup() method which executes before every test, no need to call it here again.
+
+        //Confirm the last shown list is empty
+        assertEquals(Collections.emptyList(), logic.getLastShownList());
+    }
+
+    @Test
+    public void execute_invalid() throws Exception {
+        String invalidCommand = "       ";
+        assertNonMutatingCommandBehavior(invalidCommand,
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
     }
 
     /**
@@ -68,6 +70,19 @@ public class LogicTest {
     }
 
     /**
+     * Confirms that the following three parts of the Logic object's state is as expected:<br>
+     *      - the internal addressbook is same as {@code expectedAddressBook} <br>
+     *      - the internal last shown list is the same as {@code expectedLastList} <br>
+     *      - the storage file content matches data in {@code expectedAddressBook} <br>
+     */
+    private void assertLogicObjectStateEquals(AddressBook expectedAddressBook, List<? extends ReadOnlyPerson> expectedLastList)
+            throws StorageFile.StorageOperationException {
+        assertEquals(expectedAddressBook, addressBook);
+        assertEquals( expectedLastList, logic.getLastShownList());
+        assertEquals(addressBook, saveFile.load());
+    }
+    
+    /**
      * Executes the command and confirms that the result message is correct and both in-memory and persistent data
      * have been updated as specified.
      */
@@ -79,21 +94,6 @@ public class LogicTest {
         assertEquals(expectedMessage, r.feedbackToUser);
         assertFalse(r.getRelevantPersons().isPresent());
         assertLogicObjectStateEquals(expectedAddressBook, expectedLastList);
-    }
-
-    @Test
-    public void constructor() {
-        //Constructor is called in the setup() method which executes before every test, no need to call it here again.
-
-        //Confirm the last shown list is empty
-        assertEquals(Collections.emptyList(), logic.getLastShownList());
-    }
-
-    @Test
-    public void execute_invalid() throws Exception {
-        String invalidCommand = "       ";
-        assertNonMutatingCommandBehavior(invalidCommand,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
     }
 
     @Test
