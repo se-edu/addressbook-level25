@@ -254,30 +254,27 @@ public class LogicTest {
 
     @Test
     public void execute_view_onlyShowsNonPrivate() throws Exception {
+
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         Person p2 = helper.generatePerson(2, false);
-        List<Person> lastShownList = new ArrayList<>();
-        lastShownList.add(p1);
-        lastShownList.add(p2);
-        AddressBook expectedAB = new AddressBook();
-        expectedAB.addPerson(p1);
-        expectedAB.addPerson(p2);
+        List<Person> lastShownList = helper.generatePersonList(p1, p2);
+        AddressBook expectedAB = helper.generateAddressBook(lastShownList);
+        helper.addToAddressBook(addressBook, lastShownList);
 
-        addressBook.addPerson(p1);
-        addressBook.addPerson(p2);
         logic.setLastShownList(lastShownList);
-        CommandResult r;
 
-        r = logic.execute("view 1");
-        assertEquals(String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p1.getAsTextHidePrivate()), r.feedbackToUser);
-        assertFalse(r.getRelevantPersons().isPresent());
-        assertLogicObjectStateEquals(expectedAB, lastShownList);
+        assertNonMutatingCommandBehavior("view 1",
+                                    String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p1.getAsTextHidePrivate()),
+                                    expectedAB,
+                                    false,
+                                    lastShownList);
 
-        r = logic.execute("view 2");
-        assertEquals(String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p2.getAsTextHidePrivate()), r.feedbackToUser);
-        assertFalse(r.getRelevantPersons().isPresent());
-        assertLogicObjectStateEquals(expectedAB, lastShownList);
+        assertNonMutatingCommandBehavior("view 2",
+                                    String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p2.getAsTextHidePrivate()),
+                                    expectedAB,
+                                    false,
+                                    lastShownList);
     }
 
     @Test
@@ -596,11 +593,37 @@ public class LogicTest {
             return addressBook;
         }
 
+        AddressBook generateAddressBook(List<Person> persons) throws Exception{
+            AddressBook addressBook = new AddressBook();
+            addToAddressBook(addressBook, persons);
+            return addressBook;
+        }
+
         void addToAddressBook(AddressBook addressBook, Boolean... isPrivateStatuses) throws Exception{
+            addToAddressBook(addressBook, generatePersonList(isPrivateStatuses));
+        }
+
+        void addToAddressBook(AddressBook addressBook, List<Person> personsToAdd) throws Exception{
+            for(Person p: personsToAdd){
+                addressBook.addPerson(p);
+            }
+        }
+
+        List<Person> generatePersonList(Person... persons) throws Exception{
+            List<Person> personList = new ArrayList<>();
+            for(Person p: persons){
+                personList.add(p);
+            }
+            return personList;
+        }
+
+        List<Person> generatePersonList(Boolean... isPrivateStatuses) throws Exception{
+            List<Person> persons = new ArrayList<>();
             int i = 1;
             for(Boolean p: isPrivateStatuses){
-                addressBook.addPerson(generatePerson(i++, p));
+                persons.add(generatePerson(i++, p));
             }
+            return persons;
         }
     }
 
