@@ -278,24 +278,23 @@ public class LogicTest {
     }
 
     @Test
-    public void execute_view_missingInAddressBook() throws Exception {
+    public void execute_tryToViewMissingPerson_errorMessage() throws Exception {
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         Person p2 = helper.generatePerson(2, false);
-        List<Person> lastShownList = new ArrayList<>();
-        lastShownList.add(p1);
-        lastShownList.add(p2);
+        List<Person> lastShownList = helper.generatePersonList(p1, p2);
 
         AddressBook expectedAB = new AddressBook();
         expectedAB.addPerson(p2);
 
         addressBook.addPerson(p2);
         logic.setLastShownList(lastShownList);
-        CommandResult r = logic.execute("view 1");
 
-        assertEquals(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK, r.feedbackToUser);
-        assertFalse(r.getRelevantPersons().isPresent());
-        assertLogicObjectStateEquals(expectedAB, lastShownList);
+        assertNonMutatingCommandBehavior("view 1",
+                                        Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK,
+                                        expectedAB,
+                                        false,
+                                        lastShownList);
     }
 
     @Test
