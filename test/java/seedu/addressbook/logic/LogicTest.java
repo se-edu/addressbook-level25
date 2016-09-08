@@ -106,9 +106,10 @@ public class LogicTest {
 
     @Test
     public void execute_clear() throws Exception {
-        addressBook.addPerson(generatePersonUsingSeed(1, true));
-        addressBook.addPerson(generatePersonUsingSeed(2, true));
-        addressBook.addPerson(generatePersonUsingSeed(3, true));
+        TestDataHelper helper = new TestDataHelper();
+        addressBook.addPerson(helper.generatePerson(1, true));
+        addressBook.addPerson(helper.generatePerson(2, true));
+        addressBook.addPerson(helper.generatePerson(3, true));
         CommandResult r = logic.execute("clear");
 
         assertEquals(r.feedbackToUser, ClearCommand.MESSAGE_SUCCESS);
@@ -152,10 +153,9 @@ public class LogicTest {
         // execute command
         CommandResult r = logic.execute(generateAddCommand(toBeAdded));
 
-        // result object verification
+        // verify result
         assertEquals(r.feedbackToUser, String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded));
         assertFalse(r.getRelevantPersons().isPresent());
-        // logic object verification
         assertLogicObjectStateEquals(expectedAB, Collections.emptyList());
     }
 
@@ -195,22 +195,7 @@ public class LogicTest {
         assertLogicObjectStateEquals(expectedAB, Collections.emptyList());
     }
 
-    /**
-     * Generates a valid person.
-     * Running this function with the same parameter values guarantees the returned person will have the same state.
-     *
-     * @param seed used to generate the person data field values
-     * @param isAllFieldsPrivate determines if private-able fields (phone, email, address) will be private
-     */
-    private Person generatePersonUsingSeed(int seed, boolean isAllFieldsPrivate) throws Exception {
-        return new Person(
-                new Name("Person " + seed),
-                new Phone("" + Math.abs(seed), isAllFieldsPrivate),
-                new Email(seed + "@email", isAllFieldsPrivate),
-                new Address("House of " + seed, isAllFieldsPrivate),
-                new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
-        );
-    }
+
 
     /**
      * Utility method for testing invalid argument index number behaviour for commands
@@ -220,8 +205,9 @@ public class LogicTest {
     private void execute_lastShownListIndexCommand_invalidIndex(String commandWord) throws Exception {
         String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
         List<Person> lastShownList = new ArrayList<>();
-        lastShownList.add(generatePersonUsingSeed(1, false));
-        lastShownList.add(generatePersonUsingSeed(2, true));
+        TestDataHelper helper = new TestDataHelper();
+        lastShownList.add(helper.generatePerson(1, false));
+        lastShownList.add(helper.generatePerson(2, true));
 
         logic.setLastShownList(lastShownList);
         CommandResult r;
@@ -246,13 +232,14 @@ public class LogicTest {
     public void execute_list_showsAllPersons() throws Exception {
         // expectations
         AddressBook expectedAB = new AddressBook();
-        expectedAB.addPerson(generatePersonUsingSeed(1, false));
-        expectedAB.addPerson(generatePersonUsingSeed(2, true));
+        TestDataHelper helper = new TestDataHelper();
+        expectedAB.addPerson(helper.generatePerson(1, false));
+        expectedAB.addPerson(helper.generatePerson(2, true));
         List<? extends ReadOnlyPerson> expectedList = expectedAB.getAllPersons().immutableListView();
 
         // prep test
-        addressBook.addPerson(generatePersonUsingSeed(1, false));
-        addressBook.addPerson(generatePersonUsingSeed(2, true));
+        addressBook.addPerson(helper.generatePerson(1, false));
+        addressBook.addPerson(helper.generatePerson(2, true));
         CommandResult r = logic.execute("list");
 
         // return verification
@@ -278,8 +265,9 @@ public class LogicTest {
 
     @Test
     public void execute_view_onlyShowsNonPrivate() throws Exception {
-        Person p1 = generatePersonUsingSeed(1, false);
-        Person p2 = generatePersonUsingSeed(2, false);
+        TestDataHelper helper = new TestDataHelper();
+        Person p1 = helper.generatePerson(1, false);
+        Person p2 = helper.generatePerson(2, false);
         List<Person> lastShownList = new ArrayList<>();
         lastShownList.add(p1);
         lastShownList.add(p2);
@@ -305,8 +293,9 @@ public class LogicTest {
 
     @Test
     public void execute_view_missingInAddressBook() throws Exception {
-        Person p1 = generatePersonUsingSeed(1, false);
-        Person p2 = generatePersonUsingSeed(2, false);
+        TestDataHelper helper = new TestDataHelper();
+        Person p1 = helper.generatePerson(1, false);
+        Person p2 = helper.generatePerson(2, false);
         List<Person> lastShownList = new ArrayList<>();
         lastShownList.add(p1);
         lastShownList.add(p2);
@@ -338,8 +327,9 @@ public class LogicTest {
     @Test
     public void execute_view_alsoShowsPrivate() throws Exception {
         List<Person> lastShownList = new ArrayList<>();
-        Person p1 = generatePersonUsingSeed(1, false);
-        Person p2 = generatePersonUsingSeed(2, false);
+        TestDataHelper helper = new TestDataHelper();
+        Person p1 = helper.generatePerson(1, false);
+        Person p2 = helper.generatePerson(2, false);
         lastShownList.add(p1);
         lastShownList.add(p2);
         AddressBook expectedAB = new AddressBook();
@@ -365,8 +355,9 @@ public class LogicTest {
     @Test
     public void execute_viewAll_missingInAddressBook() throws Exception {
         List<Person> lastShownList = new ArrayList<>();
-        Person p1 = generatePersonUsingSeed(1, false);
-        Person p2 = generatePersonUsingSeed(2, false);
+        TestDataHelper helper = new TestDataHelper();
+        Person p1 = helper.generatePerson(1, false);
+        Person p2 = helper.generatePerson(2, false);
         lastShownList.add(p1);
         lastShownList.add(p2);
 
@@ -396,9 +387,10 @@ public class LogicTest {
 
     @Test
     public void execute_delete_removesCorrectPerson() throws Exception {
-        Person p1 = generatePersonUsingSeed(1, false);
-        Person p2 = generatePersonUsingSeed(2, true);
-        Person p3 = generatePersonUsingSeed(3, true);
+        TestDataHelper helper = new TestDataHelper();
+        Person p1 = helper.generatePerson(1, false);
+        Person p2 = helper.generatePerson(2, true);
+        Person p3 = helper.generatePerson(3, true);
 
         AddressBook expectedAB = new AddressBook();
         expectedAB.addPerson(p1);
@@ -424,9 +416,10 @@ public class LogicTest {
 
     @Test
     public void execute_delete_missingInAddressBook() throws Exception {
-        Person p1 = generatePersonUsingSeed(1, false);
-        Person p2 = generatePersonUsingSeed(2, true);
-        Person p3 = generatePersonUsingSeed(3, true);
+        TestDataHelper helper = new TestDataHelper();
+        Person p1 = helper.generatePerson(1, false);
+        Person p2 = helper.generatePerson(2, true);
+        Person p3 = helper.generatePerson(3, true);
 
         AddressBook expectedAB = new AddressBook();
         expectedAB.addPerson(p1);
@@ -570,6 +563,23 @@ public class LogicTest {
             Tag tag2 = new Tag("tag2");
             UniqueTagList tags = new UniqueTagList(tag1, tag2);
             return new Person(name, privatePhone, email, privateAddress, tags);
+        }
+
+        /**
+         * Generates a valid person using the given seed.
+         * Running this function with the same parameter values guarantees the returned person will have the same state.
+         *
+         * @param seed used to generate the person data field values
+         * @param isAllFieldsPrivate determines if private-able fields (phone, email, address) will be private
+         */
+        Person generatePerson(int seed, boolean isAllFieldsPrivate) throws Exception {
+            return new Person(
+                    new Name("Person " + seed),
+                    new Phone("" + Math.abs(seed), isAllFieldsPrivate),
+                    new Email(seed + "@email", isAllFieldsPrivate),
+                    new Address("House of " + seed, isAllFieldsPrivate),
+                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
+            );
         }
     }
 
