@@ -378,53 +378,45 @@ public class LogicTest {
         Person p2 = helper.generatePerson(2, true);
         Person p3 = helper.generatePerson(3, true);
 
-        List<Person> threePresons = helper.generatePersonList(p1, p2, p3);
+        List<Person> threePersons = helper.generatePersonList(p1, p2, p3);
 
-        AddressBook expectedAB = helper.generateAddressBook(threePresons);
+        AddressBook expectedAB = helper.generateAddressBook(threePersons);
         expectedAB.removePerson(p2);
 
 
-        helper.addToAddressBook(addressBook, threePresons);
-        logic.setLastShownList(threePresons);
+        helper.addToAddressBook(addressBook, threePersons);
+        logic.setLastShownList(threePersons);
 
         assertNonMutatingCommandBehavior("delete 2",
                 String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, p2),
                 expectedAB,
                 false,
-                threePresons);
+                threePersons);
     }
 
 
     @Test
     public void execute_delete_missingInAddressBook() throws Exception {
+
         TestDataHelper helper = new TestDataHelper();
         Person p1 = helper.generatePerson(1, false);
         Person p2 = helper.generatePerson(2, true);
         Person p3 = helper.generatePerson(3, true);
 
-        AddressBook expectedAB = new AddressBook();
-        expectedAB.addPerson(p1);
-        expectedAB.addPerson(p2);
-        expectedAB.addPerson(p3);
+        List<Person> threePersons = helper.generatePersonList(p1, p2, p3);
+
+        AddressBook expectedAB = helper.generateAddressBook(threePersons);
         expectedAB.removePerson(p2);
 
-        List<Person> lastShownList = new ArrayList<>();
-        lastShownList.add(p1);
-        lastShownList.add(p2);
-        lastShownList.add(p3);
-
-        addressBook.addPerson(p1);
-        addressBook.addPerson(p2);
-        addressBook.addPerson(p3);
+        helper.addToAddressBook(addressBook, threePersons);
         addressBook.removePerson(p2);
-        logic.setLastShownList(lastShownList);
-        CommandResult r = logic.execute("delete 2");
+        logic.setLastShownList(threePersons);
 
-        System.out.println(expectedAB.equals(addressBook));
-
-        assertEquals(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK, r.feedbackToUser);
-        assertFalse(r.getRelevantPersons().isPresent());
-        assertLogicObjectStateEquals(expectedAB, lastShownList);
+        assertNonMutatingCommandBehavior("delete 2",
+                Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK,
+                expectedAB,
+                false,
+                threePersons);
     }
 
     /**
