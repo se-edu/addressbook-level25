@@ -57,7 +57,8 @@ public class LogicTest {
 
     /**
      * Executes the command and confirms that the result message is correct.
-     * Both the address book and the last shown list is expected to be empty.
+     * Both the 'address book' and the 'last shown list' are expected to be empty.
+     * @see #assertCommandBehavior(String, String, AddressBook, boolean, List)
      */
     private void assertCommandBehavior(String inputCommand, String expectedMessage) throws Exception {
         assertCommandBehavior(inputCommand, expectedMessage, AddressBook.empty(),false, Collections.emptyList());
@@ -65,9 +66,9 @@ public class LogicTest {
 
     /**
      * Executes the command and confirms that the result message is correct and
-     * confirms that the following three parts of the Logic object's state is as expected:<br>
-     *      - the internal addressbook is same as {@code expectedAddressBook} <br>
-     *      - the internal last shown list is the same as {@code expectedLastList} <br>
+     * also confirms that the following three parts of the Logic object's state are as expected:<br>
+     *      - the internal address book data are same as those in the {@code expectedAddressBook} <br>
+     *      - the internal 'last shown list' matches the {@code expectedLastList} <br>
      *      - the storage file content matches data in {@code expectedAddressBook} <br>
      */
     private void assertCommandBehavior(String inputCommand,
@@ -79,7 +80,7 @@ public class LogicTest {
         //Execute the command
         CommandResult r = logic.execute(inputCommand);
 
-        //Confirm the result contain the right data
+        //Confirm the result contains the right data
         assertEquals(expectedMessage, r.feedbackToUser);
         assertEquals(r.getRelevantPersons().isPresent(), isRelevantPersonsExpected);
         if(isRelevantPersonsExpected){
