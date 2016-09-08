@@ -18,7 +18,6 @@ import java.util.*;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static seedu.addressbook.common.Messages.*;
 
 
@@ -120,7 +119,6 @@ public class LogicTest {
         addressBook.addPerson(helper.generatePerson(3, true));
 
         assertMutatingCommandBehavior("clear", ClearCommand.MESSAGE_SUCCESS, AddressBook.empty(), Collections.emptyList());
-        CommandResult r = logic.execute("clear");
     }
 
     @Test
@@ -152,53 +150,38 @@ public class LogicTest {
     @Test
     public void execute_add_successful() throws Exception {
         // setup expectations
-        Person toBeAdded = new TestDataHelper().adam();
+        TestDataHelper helper = new TestDataHelper();
+        Person toBeAdded = helper.adam();
         AddressBook expectedAB = new AddressBook();
         expectedAB.addPerson(toBeAdded);
 
-        // execute command
-        CommandResult r = logic.execute(generateAddCommand(toBeAdded));
+        // execute command and verify result
+        assertMutatingCommandBehavior(helper.generateAddCommand(toBeAdded),
+                                      String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                                      expectedAB,
+                                      Collections.emptyList());
 
-        // verify result
-        assertEquals(r.feedbackToUser, String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded));
-        assertFalse(r.getRelevantPersons().isPresent());
-        assertLogicObjectStateEquals(expectedAB, Collections.emptyList());
     }
 
-    /** Generates the correct add command based on the person given */
-    private String generateAddCommand(Person p) {
-        StringJoiner cmd = new StringJoiner(" ");
 
-        cmd.add("add");
-
-        cmd.add(p.getName().toString());
-        cmd.add((p.getPhone().isPrivate() ? "pp/" : "p/") + p.getPhone());
-        cmd.add((p.getEmail().isPrivate() ? "pe/" : "e/") + p.getEmail());
-        cmd.add((p.getAddress().isPrivate() ? "pa/" : "a/") + p.getAddress());
-
-        UniqueTagList tags = p.getTags();
-        for(Tag t: tags){
-            cmd.add("t/" + t.tagName);
-        }
-
-        return cmd.toString();
-    }
 
     @Test
     public void execute_addDuplicate_notAllowed() throws Exception {
         // setup expectations
-        Person toBeAdded = new TestDataHelper().adam();
+        TestDataHelper helper = new TestDataHelper();
+        Person toBeAdded = helper.adam();
         AddressBook expectedAB = new AddressBook();
         expectedAB.addPerson(toBeAdded);
 
-        // setup starting state and execute command
+        // setup starting state
         addressBook.addPerson(toBeAdded); // person already in internal address book
-        CommandResult r = logic.execute(generateAddCommand(toBeAdded));
 
-        // verify result
-        assertEquals(r.feedbackToUser, AddCommand.MESSAGE_DUPLICATE_PERSON);
-        assertFalse(r.getRelevantPersons().isPresent());
-        assertLogicObjectStateEquals(expectedAB, Collections.emptyList());
+        // execute command and verify result
+        assertMutatingCommandBehavior(helper.generateAddCommand(toBeAdded),
+                AddCommand.MESSAGE_DUPLICATE_PERSON,
+                expectedAB,
+                Collections.emptyList());
+
     }
 
 
@@ -586,6 +569,25 @@ public class LogicTest {
                     new Address("House of " + seed, isAllFieldsPrivate),
                     new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
             );
+        }
+
+        /** Generates the correct add command based on the person given */
+        String generateAddCommand(Person p) {
+            StringJoiner cmd = new StringJoiner(" ");
+
+            cmd.add("add");
+
+            cmd.add(p.getName().toString());
+            cmd.add((p.getPhone().isPrivate() ? "pp/" : "p/") + p.getPhone());
+            cmd.add((p.getEmail().isPrivate() ? "pe/" : "e/") + p.getEmail());
+            cmd.add((p.getAddress().isPrivate() ? "pa/" : "a/") + p.getAddress());
+
+            UniqueTagList tags = p.getTags();
+            for(Tag t: tags){
+                cmd.add("t/" + t.tagName);
+            }
+
+            return cmd.toString();
         }
     }
 
