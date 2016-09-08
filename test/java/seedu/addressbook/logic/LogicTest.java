@@ -394,7 +394,6 @@ public class LogicTest {
                 threePersons);
     }
 
-
     @Test
     public void execute_delete_missingInAddressBook() throws Exception {
 
@@ -419,18 +418,7 @@ public class LogicTest {
                 threePersons);
     }
 
-    /**
-     * Generates a Person object with given name. Other fields will have some dummy values.
-     */
-    private Person generatePersonWithName(String name) throws Exception {
-        return new Person(
-                new Name(name),
-                new Phone("1", false),
-                new Email("1@email", false),
-                new Address("House of 1", false),
-                new UniqueTagList(new Tag("tag"))
-        );
-    }
+
     
     @Test
     public void execute_find_invalidArgsFormat() throws Exception {
@@ -440,10 +428,11 @@ public class LogicTest {
 
     @Test
     public void execute_find_onlyMatchesFullWordsInNames() throws Exception {
-        Person pTarget1 = generatePersonWithName("bla bla KEY bla");
-        Person pTarget2 = generatePersonWithName("bla KEY bla bceofeia");
-        Person p1 = generatePersonWithName("KE Y");
-        Person p2 = generatePersonWithName("KEYKEYKEY sduauo");
+        TestDataHelper helper = new TestDataHelper();
+        Person pTarget1 = helper.generatePersonWithName("bla bla KEY bla");
+        Person pTarget2 = helper.generatePersonWithName("bla KEY bla bceofeia");
+        Person p1 = helper.generatePersonWithName("KE Y");
+        Person p2 = helper.generatePersonWithName("KEYKEYKEY sduauo");
         
         AddressBook expectedAB = new AddressBook();
         expectedAB.addPerson(p1);
@@ -468,10 +457,11 @@ public class LogicTest {
 
     @Test
     public void execute_find_isCaseSensitive() throws Exception {
-        Person pTarget1 = generatePersonWithName("bla bla KEY bla");
-        Person pTarget2 = generatePersonWithName("bla KEY bla bceofeia");
-        Person p1 = generatePersonWithName("key key");
-        Person p2 = generatePersonWithName("KEy sduauo");
+        TestDataHelper helper = new TestDataHelper();
+        Person pTarget1 = helper.generatePersonWithName("bla bla KEY bla");
+        Person pTarget2 = helper.generatePersonWithName("bla KEY bla bceofeia");
+        Person p1 = helper.generatePersonWithName("key key");
+        Person p2 = helper.generatePersonWithName("KEy sduauo");
 
         AddressBook expectedAB = new AddressBook();
         expectedAB.addPerson(p1);
@@ -496,10 +486,11 @@ public class LogicTest {
 
     @Test
     public void execute_find_matchesIfAnyKeywordPresent() throws Exception {
-        Person pTarget1 = generatePersonWithName("bla bla KEY bla");
-        Person pTarget2 = generatePersonWithName("bla rAnDoM bla bceofeia");
-        Person p1 = generatePersonWithName("key key");
-        Person p2 = generatePersonWithName("KEy sduauo");
+        TestDataHelper helper = new TestDataHelper();
+        Person pTarget1 = helper.generatePersonWithName("bla bla KEY bla");
+        Person pTarget2 = helper.generatePersonWithName("bla rAnDoM bla bceofeia");
+        Person p1 = helper.generatePersonWithName("key key");
+        Person p2 = helper.generatePersonWithName("KEy sduauo");
 
         AddressBook expectedAB = new AddressBook();
         expectedAB.addPerson(p1);
@@ -611,6 +602,19 @@ public class LogicTest {
                 persons.add(generatePerson(i++, p));
             }
             return persons;
+        }
+
+        /**
+         * Generates a Person object with given name. Other fields will have some dummy values.
+         */
+         Person generatePersonWithName(String name) throws Exception {
+            return new Person(
+                    new Name(name),
+                    new Phone("1", false),
+                    new Email("1@email", false),
+                    new Address("House of 1", false),
+                    new UniqueTagList(new Tag("tag"))
+            );
         }
     }
 
