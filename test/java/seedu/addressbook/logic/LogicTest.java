@@ -56,17 +56,16 @@ public class LogicTest {
     }
 
     /**
-     * Executes the command and confirms that the result message is correct and both in-memory and persistent data
-     * were not affected.
+     * Executes the command and confirms that the result message is correct.
+     * Both the address book and the last shown list is expected to be empty.
      */
     private void assertCommandBehavior(String inputCommand, String expectedMessage) throws Exception {
         assertCommandBehavior(inputCommand, expectedMessage, AddressBook.empty(),false, Collections.emptyList());
     }
 
     /**
-     * Executes the command and confirms that the result message is correct and both in-memory and persistent data
-     * were not affected.
-     * Confirms that the following three parts of the Logic object's state is as expected:<br>
+     * Executes the command and confirms that the result message is correct and
+     * confirms that the following three parts of the Logic object's state is as expected:<br>
      *      - the internal addressbook is same as {@code expectedAddressBook} <br>
      *      - the internal last shown list is the same as {@code expectedLastList} <br>
      *      - the storage file content matches data in {@code expectedAddressBook} <br>
