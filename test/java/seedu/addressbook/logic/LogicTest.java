@@ -457,25 +457,16 @@ public class LogicTest {
         Person p1 = helper.generatePersonWithName("key key");
         Person p2 = helper.generatePersonWithName("KEy sduauo");
 
-        AddressBook expectedAB = new AddressBook();
-        expectedAB.addPerson(p1);
-        expectedAB.addPerson(pTarget1);
-        expectedAB.addPerson(p2);
-        expectedAB.addPerson(pTarget2);
+        List<Person> fourPersons = helper.generatePersonList(p1, pTarget1, p2, pTarget2);
+        AddressBook expectedAB = helper.generateAddressBook(fourPersons);
+        List<Person> expectedList = helper.generatePersonList(pTarget1, pTarget2);
+        helper.addToAddressBook(addressBook, fourPersons);
 
-        List<Person> expectedList = new ArrayList<>();
-        expectedList.addAll(Arrays.asList(pTarget1, pTarget2));
-
-        addressBook.addPerson(p1);
-        addressBook.addPerson(pTarget1);
-        addressBook.addPerson(p2);
-        addressBook.addPerson(pTarget2);
-        CommandResult r = logic.execute("find KEY");
-
-        assertEquals(Command.getMessageForPersonListShownSummary(expectedList), r.feedbackToUser);
-        assertTrue(r.getRelevantPersons().isPresent());
-        assertEquals(expectedList, r.getRelevantPersons().get());
-        assertLogicObjectStateEquals(expectedAB, expectedList);
+        assertNonMutatingCommandBehavior("find KEY",
+                Command.getMessageForPersonListShownSummary(expectedList),
+                expectedAB,
+                true,
+                expectedList);
     }
 
     @Test
