@@ -85,6 +85,9 @@ public class LogicTest {
         CommandResult r = logic.execute(inputCommand);
         assertEquals(expectedMessage, r.feedbackToUser);
         assertEquals(r.getRelevantPersons().isPresent(), isRelevantPersonsExpected);
+        if(isRelevantPersonsExpected){
+            assertEquals(lastShownList, r.getRelevantPersons().get());
+        }
         // no side effects to logic object
         assertLogicObjectStateEquals(expectedAddressBook, lastShownList);
     }
@@ -433,26 +436,17 @@ public class LogicTest {
         Person pTarget2 = helper.generatePersonWithName("bla KEY bla bceofeia");
         Person p1 = helper.generatePersonWithName("KE Y");
         Person p2 = helper.generatePersonWithName("KEYKEYKEY sduauo");
-        
-        AddressBook expectedAB = new AddressBook();
-        expectedAB.addPerson(p1);
-        expectedAB.addPerson(pTarget1);
-        expectedAB.addPerson(p2);
-        expectedAB.addPerson(pTarget2);
-        
-        List<Person> expectedList = new ArrayList<>();
-        expectedList.addAll(Arrays.asList(pTarget1, pTarget2));
 
-        addressBook.addPerson(p1);
-        addressBook.addPerson(pTarget1);
-        addressBook.addPerson(p2);
-        addressBook.addPerson(pTarget2);
-        CommandResult r = logic.execute("find KEY");
-        
-        assertEquals(Command.getMessageForPersonListShownSummary(expectedList), r.feedbackToUser);
-        assertTrue(r.getRelevantPersons().isPresent());
-        assertEquals(expectedList, r.getRelevantPersons().get());
-        assertLogicObjectStateEquals(expectedAB, expectedList);
+        List<Person> fourPersons = helper.generatePersonList(p1, pTarget1, p2, pTarget2);
+        AddressBook expectedAB = helper.generateAddressBook(fourPersons);
+        List<Person> expectedList = helper.generatePersonList(pTarget1, pTarget2);
+        helper.addToAddressBook(addressBook, fourPersons);
+
+        assertNonMutatingCommandBehavior("find KEY",
+                Command.getMessageForPersonListShownSummary(expectedList),
+                expectedAB,
+                true,
+                expectedList);
     }
 
     @Test
