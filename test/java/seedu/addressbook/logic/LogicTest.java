@@ -191,26 +191,6 @@ public class LogicTest {
 
     }
 
-    /**
-     * Confirms the 'invalid argument index number behaviour' for the given command
-     * targeting a single person in the last shown list, using visible index.
-     * @param commandWord to test assuming it targets a single person in the last shown list based on visible index.
-     */
-    private void assertInvalidIndexBehaviorForCommand(String commandWord) throws Exception {
-        String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-        List<Person> lastShownList = new ArrayList<>();
-        TestDataHelper helper = new TestDataHelper();
-        lastShownList.add(helper.generatePerson(1, false));
-        lastShownList.add(helper.generatePerson(2, true));
-
-        logic.setLastShownList(lastShownList);
-
-        assertNonMutatingCommandBehavior(commandWord + " -1", expectedMessage, lastShownList);
-        assertNonMutatingCommandBehavior(commandWord + " 0", expectedMessage, lastShownList);
-        assertNonMutatingCommandBehavior(commandWord + " 3", expectedMessage, lastShownList);
-
-    }
-
     @Test
     public void execute_list_showsAllPersons() throws Exception {
         // expectations
@@ -244,6 +224,26 @@ public class LogicTest {
     @Test
     public void execute_view_invalidIndex() throws Exception {
         assertInvalidIndexBehaviorForCommand("view");
+    }
+
+    /**
+     * Confirms the 'invalid argument index number behaviour' for the given command
+     * targeting a single person in the last shown list, using visible index.
+     * @param commandWord to test assuming it targets a single person in the last shown list based on visible index.
+     */
+    private void assertInvalidIndexBehaviorForCommand(String commandWord) throws Exception {
+        String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        List<Person> lastShownList = new ArrayList<>();
+        TestDataHelper helper = new TestDataHelper();
+        lastShownList.add(helper.generatePerson(1, false));
+        lastShownList.add(helper.generatePerson(2, true));
+
+        logic.setLastShownList(lastShownList);
+
+        assertNonMutatingCommandBehavior(commandWord + " -1", expectedMessage, lastShownList);
+        assertNonMutatingCommandBehavior(commandWord + " 0", expectedMessage, lastShownList);
+        assertNonMutatingCommandBehavior(commandWord + " 3", expectedMessage, lastShownList);
+
     }
 
     @Test
