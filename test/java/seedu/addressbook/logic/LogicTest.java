@@ -480,6 +480,7 @@ public class LogicTest {
         /**
          * Generates a valid person using the given seed.
          * Running this function with the same parameter values guarantees the returned person will have the same state.
+         * Each unique seed will generate a unique Person object.
          *
          * @param seed used to generate the person data field values
          * @param isAllFieldsPrivate determines if private-able fields (phone, email, address) will be private
@@ -513,28 +514,48 @@ public class LogicTest {
             return cmd.toString();
         }
 
+        /**
+         * Generates an AddressBook with auto-generated persons.
+         * @param isPrivateStatuses flags to indicate if all contact details of respective persons should be set to
+         *                          private.
+         */
         AddressBook generateAddressBook(Boolean... isPrivateStatuses) throws Exception{
             AddressBook addressBook = new AddressBook();
             addToAddressBook(addressBook, isPrivateStatuses);
             return addressBook;
         }
 
+        /**
+         * Generates an AddressBook based on the list of Persons given.
+         */
         AddressBook generateAddressBook(List<Person> persons) throws Exception{
             AddressBook addressBook = new AddressBook();
             addToAddressBook(addressBook, persons);
             return addressBook;
         }
 
+        /**
+         * Adds auto-generated Person objects to the given AddressBook
+         * @param addressBook The AddressBook to which the Persons will be added
+         * @param isPrivateStatuses flags to indicate if all contact details of generated persons should be set to
+         *                          private.
+         */
         void addToAddressBook(AddressBook addressBook, Boolean... isPrivateStatuses) throws Exception{
             addToAddressBook(addressBook, generatePersonList(isPrivateStatuses));
         }
 
+        /**
+         * Adds the given list of Persons to the given AddressBook
+         */
         void addToAddressBook(AddressBook addressBook, List<Person> personsToAdd) throws Exception{
             for(Person p: personsToAdd){
                 addressBook.addPerson(p);
             }
         }
 
+        /**
+         * Creates a list of Persons based on the give Person objects.
+         */
         List<Person> generatePersonList(Person... persons) throws Exception{
             List<Person> personList = new ArrayList<>();
             for(Person p: persons){
@@ -543,6 +564,11 @@ public class LogicTest {
             return personList;
         }
 
+        /**
+         * Generates a list of Persons based on the flags.
+         * @param isPrivateStatuses flags to indicate if all contact details of respective persons should be set to
+         *                          private.
+         */
         List<Person> generatePersonList(Boolean... isPrivateStatuses) throws Exception{
             List<Person> persons = new ArrayList<>();
             int i = 1;
