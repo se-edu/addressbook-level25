@@ -27,7 +27,7 @@ import static seedu.addressbook.common.Messages.*;
  *      - the internal addressbook
  *      - the internal last shown list
  *      - the storage file
- * Don't forget to verify the return value of the method you are testing.
+ * Tests also verify verify the return value of the method you are testing.
  */
 public class LogicTest {
 
@@ -40,7 +40,6 @@ public class LogicTest {
     private StorageFile saveFile;
     private AddressBook addressBook;
     private Logic logic;
-    private Person testPerson;
 
     @Before
     public void setup() throws Exception {
@@ -50,18 +49,17 @@ public class LogicTest {
         logic = new Logic(saveFile, addressBook);
     }
 
-    private void assertSaveFileUpToDate() throws StorageFile.StorageOperationException {
-        assertEquals(addressBook, saveFile.load());
-    }
-
     /**
-     * See class header comment for the 3 parts of internal state.
+     * Confirms that the following three parts of the Logic object's state is as expected:<br>
+     *      - the internal addressbook is same as {@code expectedAddressBook} <br>
+     *      - the internal last shown list is the same as {@code expectedLastList} <br>
+     *      - the storage file content matches data in {@code expectedAddressBook} <br>
      */
-    private void assertLogicObjectStateEquals(AddressBook expectedAB, List<? extends ReadOnlyPerson> expectedLastList)
+    private void assertLogicObjectStateEquals(AddressBook expectedAddressBook, List<? extends ReadOnlyPerson> expectedLastList)
             throws StorageFile.StorageOperationException {
-        assertEquals(addressBook, expectedAB);
+        assertEquals(addressBook, expectedAddressBook);
         assertEquals(logic.getLastShownList(), expectedLastList);
-        assertSaveFileUpToDate();
+        assertEquals(addressBook, saveFile.load());
     }
 
     /**
@@ -452,7 +450,7 @@ public class LogicTest {
     }
 
     /**
-     * Every other field except name will be the same.
+     * Generates a Person object with given name. Other fields will have some dummy values.
      */
     private Person generatePersonWithName(String name) throws Exception {
         return new Person(
