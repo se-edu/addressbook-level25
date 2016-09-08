@@ -9,15 +9,13 @@ import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.commands.*;
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
+import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.*;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.storage.StorageFile;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
@@ -146,22 +144,13 @@ public class LogicTest {
 
     @Test
     public void execute_add_successful() throws Exception {
-        Name name = new Name("Adam Brown");
-        Phone privatePhone = new Phone("111111", true);
-        Email email = new Email("adam@gmail.com", false);
-        Address privateAddress = new Address("111, alpha street", true);
-        Tag tag1 = new Tag("tag1");
-        Tag tag2 = new Tag("tag2");
-        UniqueTagList tags = new UniqueTagList(tag1, tag2);
-
         // setup expectations
-        Person toBeAdded = new Person(name, privatePhone, email, privateAddress, tags);
+        Person toBeAdded = new TestDataHelper().adam();
         AddressBook expectedAB = new AddressBook();
         expectedAB.addPerson(toBeAdded);
 
-        // run test
-        CommandResult r = logic.execute(String.format("add %1$s pp/%2$s e/%3$s pa/%4$s t/%5$s t/%6$s",
-                name, privatePhone, email, privateAddress, tag1.tagName, tag2.tagName));
+        // execute command
+        CommandResult r = logic.execute(generateAddCommand(toBeAdded));
 
         // result object verification
         assertEquals(r.feedbackToUser, String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded));
@@ -170,30 +159,39 @@ public class LogicTest {
         assertLogicObjectStateEquals(expectedAB, Collections.emptyList());
     }
 
+    /** Generates the correct add command based on the person given */
+    private String generateAddCommand(Person p) {
+        StringJoiner cmd = new StringJoiner(" ");
+
+        cmd.add("add");
+
+        cmd.add(p.getName().toString());
+        cmd.add((p.getPhone().isPrivate() ? "pp/" : "p/") + p.getPhone());
+        cmd.add((p.getEmail().isPrivate() ? "pe/" : "e/") + p.getEmail());
+        cmd.add((p.getAddress().isPrivate() ? "pa/" : "a/") + p.getAddress());
+
+        UniqueTagList tags = p.getTags();
+        for(Tag t: tags){
+            cmd.add("t/" + t.tagName);
+        }
+
+        return cmd.toString();
+    }
+
     @Test
     public void execute_addDuplicate_notAllowed() throws Exception {
-        Name name = new Name("Adam Brown");
-        Phone privatePhone = new Phone("111111", true);
-        Email email = new Email("adam@gmail.com", false);
-        Address privateAddress = new Address("111, alpha street", true);
-        Tag tag1 = new Tag("tag1");
-        Tag tag2 = new Tag("tag2");
-        UniqueTagList tags = new UniqueTagList(tag1, tag2);
-
         // setup expectations
-        Person toBeAdded = new Person(name, privatePhone, email, privateAddress, tags);
+        Person toBeAdded = new TestDataHelper().adam();
         AddressBook expectedAB = new AddressBook();
         expectedAB.addPerson(toBeAdded);
 
-        // setup starting state and run test
+        // setup starting state and execute command
         addressBook.addPerson(toBeAdded); // person already in internal address book
-        CommandResult r = logic.execute(String.format("add %1$s pp/%2$s e/%3$s pa/%4$s t/%5$s t/%6$s",
-                name, privatePhone, email, privateAddress, tag1.tagName, tag2.tagName));
+        CommandResult r = logic.execute(generateAddCommand(toBeAdded));
 
-        // result object verification
+        // verify result
         assertEquals(r.feedbackToUser, AddCommand.MESSAGE_DUPLICATE_PERSON);
         assertFalse(r.getRelevantPersons().isPresent());
-        // logic object verification
         assertLogicObjectStateEquals(expectedAB, Collections.emptyList());
     }
 
@@ -557,4 +555,22 @@ public class LogicTest {
         assertEquals(r.getRelevantPersons().get(), expectedList);
         assertLogicObjectStateEquals(expectedAB, expectedList);
     }
+
+    /**
+     * A utility class to generate test data.
+     */
+    class TestDataHelper{
+
+        Person adam() throws Exception {
+            Name name = new Name("Adam Brown");
+            Phone privatePhone = new Phone("111111", true);
+            Email email = new Email("adam@gmail.com", false);
+            Address privateAddress = new Address("111, alpha street", true);
+            Tag tag1 = new Tag("tag1");
+            Tag tag2 = new Tag("tag2");
+            UniqueTagList tags = new UniqueTagList(tag1, tag2);
+            return new Person(name, privatePhone, email, privateAddress, tags);
+        }
+    }
+
 }
