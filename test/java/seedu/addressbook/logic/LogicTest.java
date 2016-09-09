@@ -220,10 +220,8 @@ public class LogicTest {
      */
     private void assertInvalidIndexBehaviorForCommand(String commandWord) throws Exception {
         String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
-        List<Person> lastShownList = new ArrayList<>();
         TestDataHelper helper = new TestDataHelper();
-        lastShownList.add(helper.generatePerson(1, false));
-        lastShownList.add(helper.generatePerson(2, true));
+        List<Person> lastShownList = helper.generatePersonList(false, true);
 
         logic.setLastShownList(lastShownList);
 
