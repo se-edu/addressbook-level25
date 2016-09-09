@@ -17,15 +17,15 @@ After studying this code and completing the corresponding exercises, you should 
   
 #### Exercise: Add more user stories 
 
-* Assume you are planing to expand the functionality of the address book (but keep it as a CLI application).
-  What other user stories do you think AddressBook support. Add those user stories to the `DeveloperGuide.md`. 
+* Assume you are planing to expand the functionality of the AddressBook (but keep it as a CLI application).
+  What other user stories do you think AddressBook support? Add those user stories to the `DeveloperGuide.md`. 
 
 ------------------------------------------------------------------------------------------------------
 
 ## Utilize use cases `[LO-UseCases]`
 
 #### Exercise: Add an 'Edit tag' use case 
-* Add a use case to the `DeveloperGuide.md` to cover the use case of editing an exiting tag.<br> 
+* Add a use case to the `DeveloperGuide.md` to cover the case of editing an exiting tag.<br> 
   e.g. change tag `friends` to `buddies` <br>
   Assume that AddressBook confirms the change with the user before carrying out the operation. 
 
@@ -67,7 +67,7 @@ Covered by `[LO-Polymorphism]`
 #### Exercise: Add an exception to an overridden method
 
 * Add a `throws Exception` clause to the `AddCommand::execute` method. Notice how Java compiler will not allow it,
-  unless you add the same clause to the `throws` clause to the parent class. This is because if a child class throws
+  unless you add the same `throws` clause to the parent class method. This is because if a child class throws
   an exception that is not specified by the Parent's contract, the child class is no longer substitutable in place of 
   the parent class.
 * Also note that while in the above example the compiler enforces LSP, there are other situations where it is up to
