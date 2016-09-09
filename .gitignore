@@ -16,3 +16,4 @@ out/
 test/data/
 /bin/
 data/
+publish.sh
