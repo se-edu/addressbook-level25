@@ -12,9 +12,9 @@
 
 #### Prerequisites
 
-1. **JDK 8** or later 
+1. **JDK 8** or later
 2. **Eclipse** IDE
-3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in 
+3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
    [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
 
 
@@ -42,8 +42,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have)  - `* *`,  Low (un
 Priority | As a ... | I want to ... | So that I can...
 -------- | :-------- | :--------- | :-----------
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
-`* * *` | user | add a new person | 
-`* * *` | user | delete a person | can remove entries that I no longer need
+`* * *` | user | add a new person |
+`* * *` | user | delete a person | remove entries that I no longer need
 `* * *` | user | find a person by name | locate details of persons without having to go through the entire list
 `* *` | user | hide [private contact details](#private-contact-detail) by default | to minimize chance of someone else seeing them by accident
 `*` | user with many persons in the address book | sort persons by name | locate a person easily
@@ -90,4 +90,3 @@ Use case ends.
 ##### Private contact detail
 
 > A contact detail that is not meant to be shared with others
-
