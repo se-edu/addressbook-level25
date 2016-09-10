@@ -18,14 +18,14 @@ After studying this code and completing the corresponding exercises, you should 
 #### Exercise: Add more user stories 
 
 * Assume you are planing to expand the functionality of the AddressBook (but keep it as a CLI application).
-  What other user stories do you think AddressBook support? Add those user stories to the `DeveloperGuide.md`. 
+  What other user stories do you think AddressBook should support? Add those user stories to the `DeveloperGuide.md`. 
 
 ------------------------------------------------------------------------------------------------------
 
 ## Utilize use cases `[LO-UseCases]`
 
 #### Exercise: Add an 'Edit tag' use case 
-* Add a use case to the `DeveloperGuide.md` to cover the case of editing an exiting tag.<br> 
+* Add a use case to the `DeveloperGuide.md` to cover the case of editing an existing tag.<br> 
   e.g. change tag `friends` to `buddies` <br>
   Assume that AddressBook confirms the change with the user before carrying out the operation. 
 
@@ -45,7 +45,7 @@ Note how the `Command::execute()` method shows polymorphic behavior.
 
 #### Exercise: Add a polymorphic `isMutating` method 
 
-* Add an `abstract` method `boolean isMutatating()` to the `Command` class. This method will return `true` for
+* Add an `abstract` method `boolean isMutating()` to the `Command` class. This method will return `true` for
   command types that mutate the data. e.g. `AddCommand`
 * Currently, AddressBook data are saved to the file after every command. 
   Take advantage of the the new method you added to limit file saving to only for command types that mutate data.<br>
