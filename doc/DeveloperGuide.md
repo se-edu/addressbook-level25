@@ -46,7 +46,9 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | delete a person | remove entries that I no longer need
 `* * *` | user | find a person by name | locate details of persons without having to go through the entire list
 `* *` | user | hide [private contact details](#private-contact-detail) by default | to minimize chance of someone else seeing them by accident
+`* *` | user | list people with the same tag | find a group of people when sending sending broadcasts
 `*` | user with many persons in the address book | sort persons by name | locate a person easily
+`*` | user who is forgetful | save a short description of the person | have a stronger impression of the person
 
 
 ## Appendix B : Use Cases
@@ -73,13 +75,54 @@ Use case ends.
 
 > 3a1. AddressBook shows an error message <br>
   Use case resumes at step 2
+  
+#### Use case: Edit Tag
 
+**MSS**
+
+1. User requests to list persons
+2. AddressBook shows a list of persons
+3. User selects the person
+4. AddressBook shows the details of person
+5. User requests to change tag of a specific person in the list and specifies to add/delete tags
+6. AddressBook confirms changes with User
+7. User confirms
+8. AddressBook adds/delete tags as requested. 
+9. AddressBook prints out updated person's details
+
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The given index is invalid
+
+> 3a1. AddressBook shows an error message <br>
+  Use case resumes at step 2
+
+5a. The given tag to be deleted does not exist
+
+> 5a1. AddressBook shows error message <br>
+  Use case resumes at step 5
+ 
+7a. User rejects changes to edits
+
+> 7a1. AddressBook requests for user to input corrected edits or exit
+  Use case resumes at step 5
+   
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java 8 or higher installed.
 2. Should be able to hold up to 1000 persons.
 3. Should come with automated unit tests and open source code.
 4. Should favor DOS style commands over Unix-style commands.
+5. Should have a back up memory? - reliability
+6. Should not have timeouts
+7. Should be able to handle 100 edits in tags in 1 session
+8. Should not be case sensitive
 
 ## Appendix D : Glossary
 
