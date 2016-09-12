@@ -8,6 +8,13 @@
 * It provides a **reasonably well-written** code example that is **significantly bigger** than what students 
   usually write in data structure modules. 
   
+**What's different from level 2**
+
+* A simple GUI added to replace the Text UI.
+* A `Logic` class added together with a `LogicTest` class.
+* Appendices added to [Developer Guide](doc/DeveloperGuide.md).
+
+  
 **Useful Links**
 * [User Guide](doc/UserGuide.md) 
 * [Developer Guide](doc/DeveloperGuide.md) 
