@@ -8,6 +8,7 @@ After studying this code and completing the corresponding exercises, you should 
 1. [Use abstract classes/methods `[LO-Abstract]`](#use-abstract-classesmethods-lo-abstract)
 1. [Follow Liskov Substitution Principle `[LO-LSP]`](#follow-liskov-substitution-principle-lo-lsp)
 1. [Use Java-FX for GUI programming `[LO-JavaFx]`](#use-java-fx-for-gui-programming-lo-javafx)
+1. [Use Dependency Injection `[LO-DI]`](#use-dependency-injection)
 
 
 
@@ -86,6 +87,22 @@ Covered by `[LO-Polymorphism]`
 
 * If you are new to JavaFX, follow Marco's tutorial given above.
 * Do some enhancements to the AddressBook GUI. e.g. add an application icon, change size/style 
+
+------------------------------------------------------------------------------------------------------
+
+
+## Use Dependency Injection `[LO-DI]`
+
+#### Exercise: Facilitate injecting a StorageStub
+
+* Note how `Logic` class depends on the `StorageFile` class. This means when testing the `Logic` class,
+  our test cases executes the `StorageFile` class as well. What if we want to test the `Logic` class without
+  getting the `StorageFile` class involved?
+* Now, change the implementation as follows so that we can inject a `StorageStub` when testing the `Logic`
+  class. <br>
+  <img src="images/DependencyInjection.png">
+* Implement the `StorageStub` to ignore calls to the `save` method. 
+  Update the `LogicTest` to work with the `StorageStub` instead of the actual `StorageFile` object.
 
 ------------------------------------------------------------------------------------------------------
 
