@@ -10,8 +10,7 @@ After studying this code and completing the corresponding exercises, you should 
 1. [Use Java-FX for GUI programming `[LO-JavaFx]`](#use-java-fx-for-gui-programming-lo-javafx)
 1. [Apply Dependency Inversion Principle `[LO-DIP]`](#apply-dependency-inversion-principle)
 1. [Use Dependency Injection `[LO-DI]`](#use-dependency-injection)
-
-
+1. [Apply Open-Closed Principle `[LO-OCP]`](#apply-open-closed-principle)
 
 ------------------------------------------------------------------------------------------------------
 
@@ -122,5 +121,18 @@ Covered by `[LO-Polymorphism]`
 * Implement the `StorageStub` to ignore calls to the `save` method. 
   Update the `LogicTest` to work with the `StorageStub` instead of the actual `StorageFile` object.
 
+------------------------------------------------------------------------------------------------------
+
+## Apply Open-Closed Principle `[LO-OCP]`
+
+#### Exercise: Add a new command
+
+* Add a new command to the Address Book. e.g. an `edit` command
+* Notice how little you need to change in the `Logic` class that is responsible for executing the commands.
+  That is because classes `Logic` and `*Command` follow the OCP i.e. `Logic` is *open to be extended* with more
+  commands but *closed for modifications*.
+* Think about how to make the `Person` class similarly open to be extended with more contact details 
+  (e.g. `SkypeId`) without needing modifications to its code during those extensions.
+  
 ------------------------------------------------------------------------------------------------------
 
