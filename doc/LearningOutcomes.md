@@ -8,6 +8,7 @@ After studying this code and completing the corresponding exercises, you should 
 1. [Use abstract classes/methods `[LO-Abstract]`](#use-abstract-classesmethods-lo-abstract)
 1. [Follow Liskov Substitution Principle `[LO-LSP]`](#follow-liskov-substitution-principle-lo-lsp)
 1. [Use Java-FX for GUI programming `[LO-JavaFx]`](#use-java-fx-for-gui-programming-lo-javafx)
+1. [Apply Dependency Inversion Principle `[LO-DIP]`](#apply-dependency-inversion-principle)
 1. [Use Dependency Injection `[LO-DI]`](#use-dependency-injection)
 
 
@@ -90,6 +91,16 @@ Covered by `[LO-Polymorphism]`
 
 ------------------------------------------------------------------------------------------------------
 
+## Apply Dependency Inversion Principle `[LO-DIP]`
+
+#### Exercise: Invert dependency from Logic to Storage
+
+* Note how `Logic` class depends on the `StorageFile` class. This is a violation of DIP.
+* Modify the implementation as follows so that both `Logic` and `StorageFile` now depend on the abstraction
+  `Storage`.<br>
+  <img src="images/LogicStroageFileDIP.png">
+
+------------------------------------------------------------------------------------------------------
 
 ## Use Dependency Injection `[LO-DI]`
 
@@ -98,9 +109,16 @@ Covered by `[LO-Polymorphism]`
 * Note how `Logic` class depends on the `StorageFile` class. This means when testing the `Logic` class,
   our test cases executes the `StorageFile` class as well. What if we want to test the `Logic` class without
   getting the `StorageFile` class involved?
+    
 * Now, change the implementation as follows so that we can inject a `StorageStub` when testing the `Logic`
   class. <br>
   <img src="images/DependencyInjection.png">
+  
+  > If you did the exercise in [`LO-DIP`](#apply-dependency-inversion-principle)
+    already but those changes are in a different branch, you may be able to reuse some of those commits 
+    by cherry picking them from that branch to the branch you created for this exercise. <br>
+    Note: *cherry picking* is simply copy-pasting a commit from one branch to another. In SourceTree, you can 
+    right-click on the commit your want to copy to the current branch, and choose 'Cherry pick'
 * Implement the `StorageStub` to ignore calls to the `save` method. 
   Update the `LogicTest` to work with the `StorageStub` instead of the actual `StorageFile` object.
 
