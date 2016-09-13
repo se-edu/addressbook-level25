@@ -66,5 +66,10 @@ public class AddCommand extends Command {
             return new CommandResult(MESSAGE_DUPLICATE_PERSON);
         }
     }
+    
+    @Override
+    public boolean isMutating() {
+    	return true;
+    }
 
 }
