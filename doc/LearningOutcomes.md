@@ -25,9 +25,10 @@ After studying this code and completing the corresponding exercises, you should 
 
 ## Utilize use cases `[LO-UseCases]`
 
-#### Exercise: Add an 'Edit tag' use case 
-* Add a use case to the `DeveloperGuide.md` to cover the case of editing an existing tag.<br> 
-  e.g. change tag `friends` to `buddies` <br>
+#### Exercise: Add a 'Rename tag' use case 
+* Add a use case to the `DeveloperGuide.md` to cover the case of *renaming of an existing tag*.<br> 
+  e.g. rename the tag `friends` to `buddies` (i.e. all persons who had the `friends` tag will now have 
+  a `buddies` tag instead)<br>
   Assume that AddressBook confirms the change with the user before carrying out the operation. 
 
 ------------------------------------------------------------------------------------------------------
