@@ -58,7 +58,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws Exception{
         try {
             addressBook.addPerson(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
