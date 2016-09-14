@@ -59,8 +59,8 @@ public class Parser {
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-            case AddCommand.COMMAND_WORD:
-                return prepareAdd(arguments);
+            case (AddCommand.COMMAND_WORD):
+                return prepareAdd(arguments);//returns AddCommand (but return type is Command)
 
             case DeleteCommand.COMMAND_WORD:
                 return prepareDelete(arguments);
