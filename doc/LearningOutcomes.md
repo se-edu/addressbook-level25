@@ -11,6 +11,8 @@ After studying this code and completing the corresponding exercises, you should 
 1. [Apply Dependency Inversion Principle `[LO-DIP]`](#apply-dependency-inversion-principle)
 1. [Use Dependency Injection `[LO-DI]`](#use-dependency-injection)
 1. [Apply Open-Closed Principle `[LO-OCP]`](#apply-open-closed-principle)
+1. [Analyze Coupling and Cohesion of designs `[LO-CouplingCohesion]`](#analyze-coupling-and-cohesion-of-designs)
+1. [Work in a 2KLoC code base `[LO-2KLoC]`](#work-in-a-2kloc-code-base)
 
 ------------------------------------------------------------------------------------------------------
 
@@ -97,43 +99,73 @@ Covered by `[LO-Polymorphism]`
 
 * Note how `Logic` class depends on the `StorageFile` class. This is a violation of DIP.
 * Modify the implementation as follows so that both `Logic` and `StorageFile` now depend on the abstraction
-  `Storage`.<br>
-  <img src="images/LogicStroageFileDIP.png">
+  `Storage`. (Note: The term *abstraction* here is referring to the conception of abstracting, not to the fact that `Storage` class is `abastract`)<br>
+  <img src="images/LogicStroageFileDIP.png" width="400">
+* Where else in the code do you notice the application of DIP?
 
 ------------------------------------------------------------------------------------------------------
 
 ## Use Dependency Injection `[LO-DI]`
 
+Note how `Logic` class depends on the `StorageFile` class. This means when testing the `Logic` class,
+our test cases execute the `StorageFile` class as well. What if we want to test the `Logic` class without
+getting the `StorageFile` class involved? That is a situation where we can use *Dependency Injection*.
+
 #### Exercise: Facilitate injecting a StorageStub
 
-* Note how `Logic` class depends on the `StorageFile` class. This means when testing the `Logic` class,
-  our test cases executes the `StorageFile` class as well. What if we want to test the `Logic` class without
-  getting the `StorageFile` class involved?
-    
-* Now, change the implementation as follows so that we can inject a `StorageStub` when testing the `Logic`
+* Change the implementation as follows so that we can inject a `StorageStub` when testing the `Logic`
   class. <br>
-  <img src="images/DependencyInjection.png">
+  <img src="images/DependencyInjection.png" width="800">
   
   > If you did the exercise in [`LO-DIP`](#apply-dependency-inversion-principle)
     already but those changes are in a different branch, you may be able to reuse some of those commits 
     by cherry picking them from that branch to the branch you created for this exercise. <br>
     Note: *cherry picking* is simply copy-pasting a commit from one branch to another. In SourceTree, you can 
     right-click on the commit your want to copy to the current branch, and choose 'Cherry pick'
-* Implement the `StorageStub` to ignore calls to the `save` method. 
-  Update the `LogicTest` to work with the `StorageStub` instead of the actual `StorageFile` object.
+* Implement the `StorageStub` such that calls to the `save` method do nothing (i.e. empty method body).   
+* Update the `LogicTest` to work with the `StorageStub` instead of the actual `StorageFile` object. <br>
+  i.e. `Logic` injects a `StorageStub` object to replace the dependency of `Logic` on `Storage` before 
+   testing `Logic`.
 
 ------------------------------------------------------------------------------------------------------
 
 ## Apply Open-Closed Principle `[LO-OCP]`
 
-#### Exercise: Add a new command
+#### Exercise: Analyze OCP-compliance of the `Logic` class
 
-* Add a new command to the Address Book. e.g. an `edit` command
-* Notice how little you need to change in the `Logic` class that is responsible for executing the commands.
-  That is because classes `Logic` and `*Command` follow the OCP i.e. `Logic` is *open to be extended* with more
+* Consider adding a new command to the Address Book. e.g. an `edit` command.
+* Notice how little you need to change in the `Logic` class to extend its behavior so that it can execute 
+  the new command.
+  That is because `Logic` follows the OCP i.e. `Logic` is *open to be extended* with more
   commands but *closed for modifications*.
-* Think about how to make the `Person` class similarly open to be extended with more contact details 
-  (e.g. `SkypeId`) without needing modifications to its code during those extensions.
+* Is it possible to make the `Parser` class more OCP-compliant in terms of extending it to handle more 
+  command types?
+* In terms of how it saves data, does `Logic` become more OCP-compliant
+  after applying DIP as given in [`LO-DIP`](#apply-dependency-inversion-principle)? 
+  How can you improve `Logic`'s OCP-compliance further so that it can not only work with different types
+  of storages, but different number of storages (e.g. save to both a text file and a database).
+
   
+------------------------------------------------------------------------------------------------------
+
+## Analyze Coupling and Cohesion of designs `[LO-CouplingCohesion]`
+
+* As you saw above, DIP helps us to avoid *coupling* from higher-level classes to lower-level classes.
+  
+* Notice how having a separate `Formattter` class (an application of SIP) improves the *cohesion* of 
+  the `MainWindow` class as well as the `Formatter` class.
+
+#### Exercise: Identify places to reduce coupling and increase cohesion
+
+* Where else in the design coupling can be reduced further, or cohesion can be increased further?
+
+------------------------------------------------------------------------------------------------------
+
+## Work in a 2KLoC code base `[LO-2KLoC]`
+
+#### Exercise: Enhance AddressBook
+
+* Enhance AddressBook in some way. e.g. add a new command
+
 ------------------------------------------------------------------------------------------------------
 
