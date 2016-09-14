@@ -44,7 +44,13 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | new user | see usage instructions | refer to instructions when I forget how to use the App
 `* * *` | user | add a new person |
 `* * *` | user | delete a person | remove entries that I no longer need
+`* * *` | user | create a group | able to group people together by job scope etc for easier access to contacts related to that task
+`* * *` | user | add contacts to the group | 
+`* * *` | user | remove contacts from the group | remove entries from the group that I no longer need
+`* * *` | user | delete a group | remove groups I no longer need
 `* * *` | user | find a person by name | locate details of persons without having to go through the entire list
+`* * *` | user | change contact details | update a person's contact if he/she just change a part of the contact such address instead of deleting and creating a new contact
+`* * *` | user | send a message to group | group contacts together so you can send one messages to multiple people at once instead of one by one 
 `* *` | user | hide [private contact details](#private-contact-detail) by default | to minimize chance of someone else seeing them by accident
 `*` | user with many persons in the address book | sort persons by name | locate a person easily
 
