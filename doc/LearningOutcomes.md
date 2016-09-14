@@ -100,7 +100,7 @@ Covered by `[LO-Polymorphism]`
 * Note how `Logic` class depends on the `StorageFile` class. This is a violation of DIP.
 * Modify the implementation as follows so that both `Logic` and `StorageFile` now depend on the abstraction
   `Storage`. (Note: The term *abstraction* here is referring to the conception of abstracting, not to the fact that `Storage` class is `abastract`)<br>
-  <img src="images/LogicStroageFileDIP.png" width="400">
+  <img src="images/LogicStroageFileDIP.png" width="300">
 * Where else in the code do you notice the application of DIP?
 
 ------------------------------------------------------------------------------------------------------
@@ -115,7 +115,7 @@ getting the `StorageFile` class involved? That is a situation where we can use *
 
 * Change the implementation as follows so that we can inject a `StorageStub` when testing the `Logic`
   class. <br>
-  <img src="images/DependencyInjection.png" width="800">
+  <img src="images/DependencyInjection.png" width="600">
   
   > If you did the exercise in [`LO-DIP`](#apply-dependency-inversion-principle)
     already but those changes are in a different branch, you may be able to reuse some of those commits 
