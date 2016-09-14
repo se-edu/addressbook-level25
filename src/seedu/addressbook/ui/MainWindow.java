@@ -57,6 +57,40 @@ public class MainWindow {
             throw new RuntimeException(e);
         }
     }
+    
+    @FXML
+    void onHelpButtonClick() {
+        try {
+        	CommandResult result = logic.execute("help");
+        	displayResult(result);
+        } catch (Exception e) {
+            display(e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+    
+    @FXML
+    void onListButtonClick() {
+        try {
+        	CommandResult result = logic.execute("list");
+        	displayResult(result);
+        } catch (Exception e) {
+            display(e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+    
+    @FXML
+    void onExitButtonClick() {
+        try {
+        	CommandResult result = logic.execute("exit");
+        	displayResult(result);
+        	exitApp();
+        } catch (Exception e) {
+            display(e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
 
     private void exitApp() throws Exception {
         mainApp.stop();
