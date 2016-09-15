@@ -47,7 +47,10 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | find a person by name | locate details of persons without having to go through the entire list
 `* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
 `*` | user with many persons in the address book | sort persons by name | locate a person easily
-
+`* * *` | user | add name, email, phone number, address for new contact
+`* * *` | user | edit name, email, phone number, address for existing contact | update existing contact
+`* * *` | user | categorise contacts to different groups | classify contacts based on social circles and uses
+`* * ` | user | import new contacts from external devices (such as a SIM card) | transfer contacts from memory
 
 ## Appendix B : Use Cases
 
