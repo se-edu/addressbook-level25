@@ -76,6 +76,22 @@ Use case ends.
 
 > 3a1. AddressBook shows an error message <br>
   Use case resumes at step 2
+  
+#### Use case: Edit tag
+
+**System** 
+Address Book
+
+**Actor**
+User
+
+**MSS**
+
+1. User requests to list tags
+2. AddressBook shows a list of tags
+3. User requests to edit a specific tag in the list
+4. AddressBook changes the value of that tag to the value specified by the user
+>Use case ends.
 
 ## Appendix C : Non Functional Requirements
 
