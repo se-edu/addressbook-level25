@@ -3,10 +3,10 @@
 * [Setting Up](#setting-up)
 * [Design](#design)
 * [Testing](#testing)
-* [Appendix A: User Stories](#appendix-a--user-stories)
-* [Appendix B: Use Cases](#appendix-b--use-cases)
-* [Appendix C: Non Functional Requirements](#appendix-c--non-functional-requirements)
-* [Appendix D: Gloassary](#appendix-d--glossary)
+* [Appendix A: User Stories] (#appendix-a--user-stories)
+* [Appendix B: Use Cases] (#appendix-b--use-cases)
+* [Appendix C: Non Functional Requirements] (#appendix-c--non-functional-requirements)
+* [Appendix D: Gloassary] (#appendix-d--glossary)
 
 ## Setting up
 
@@ -58,6 +58,31 @@ Priority | As a ... | I want to ... | So that I can...
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+
+#### Use case: Rename existing Tag
+**MSS**
+
+1. User wants rename an existing tag
+2. User keys in the tag that he wants to be renamed
+3. User keys in the details of renaming, such as person, new tag name
+4. User confirms to rename existing tag 
+5. AddressBook renames existing tag
+ 
+Use case ends.
+
+**Extensions**
+2a. AddressBook detects an error in the data
+	
+> 2a1. AddressBook shows an error message <no such tag>
+  Step 2a1 is repeated until data entered is correct.
+  Use case resumes at step 3.
+  
+3a. AddressBook detects an error in the data
+	
+> 3a1. AddressBook shows an error message <no such contact>
+  Step 3a1 is repeated until data entered is correct.
+  Use case resumes at step 4
+
 
 #### Use case: Delete person
 
