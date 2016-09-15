@@ -77,7 +77,7 @@ Use case ends.
 > 3a1. AddressBook shows an error message <br>
   Use case resumes at step 2
   
-#### Use case: Edit tag
+#### Use case: Rename tag
 
 **System** 
 Address Book
@@ -99,6 +99,10 @@ User
 2. Should be able to hold up to 1000 persons.
 3. Should come with automated unit tests and open source code.
 4. Should favor DOS style commands over Unix-style commands.
+5. Should be efficient
+6. Should have optional security feature to protect confidential data
+7. Should be able to backup important data
+
 
 ## Appendix D : Glossary
 
