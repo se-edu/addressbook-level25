@@ -24,6 +24,11 @@ public class HelpCommand extends Command {
     public HelpCommand() {}
 
     @Override
+    public boolean isMutating(){
+    	return false;
+    }
+    
+    @Override
     public CommandResult execute() {
         return new CommandResult(MESSAGE_ALL_USAGES);
     }

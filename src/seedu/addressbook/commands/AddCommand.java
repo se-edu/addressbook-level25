@@ -51,8 +51,14 @@ public class AddCommand extends Command {
 
     public AddCommand(Person toAdd) {
         this.toAdd = toAdd;
+        System.out.println(this.isMutating());
     }
-
+    
+    @Override
+    public boolean isMutating(){
+    	return true;
+    }
+    
     public ReadOnlyPerson getPerson() {
         return toAdd;
     }
