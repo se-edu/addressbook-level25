@@ -117,7 +117,7 @@ getting the `StorageFile` class involved? That is a situation where we can use *
   class. <br>
   <img src="images/DependencyInjection.png" width="600">
   
-  > If you did the exercise in [`LO-DIP`](#apply-dependency-inversion-principle)
+  > If you did the exercise in [`LO-DIP`](#apply-dependency-inversion-principle-lo-dip)
     already but those changes are in a different branch, you may be able to reuse some of those commits 
     by cherry picking them from that branch to the branch you created for this exercise. <br>
     Note: *cherry picking* is simply copy-pasting a commit from one branch to another. In SourceTree, you can 
@@ -141,7 +141,7 @@ getting the `StorageFile` class involved? That is a situation where we can use *
 * Is it possible to make the `Parser` class more OCP-compliant in terms of extending it to handle more 
   command types?
 * In terms of how it saves data, does `Logic` become more OCP-compliant
-  after applying DIP as given in [`LO-DIP`](#apply-dependency-inversion-principle)? 
+  after applying DIP as given in [`LO-DIP`](#apply-dependency-inversion-principle-lo-dip)? 
   How can you improve `Logic`'s OCP-compliance further so that it can not only work with different types
   of storages, but different number of storages (e.g. save to both a text file and a database).
 
