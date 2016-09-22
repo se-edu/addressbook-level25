@@ -18,6 +18,10 @@ import static seedu.addressbook.common.Messages.*;
 /**
  * Main Window of the GUI.
  */
+
+/**
+ * Personal Comments: MainWindow of App should contain code to update visual display only, based on input from GUI that decides what to show.
+ */
 public class MainWindow {
 
     private Logic logic;
