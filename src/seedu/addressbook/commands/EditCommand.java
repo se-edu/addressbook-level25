@@ -2,7 +2,9 @@ package seedu.addressbook.commands;
 
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import seedu.addressbook.common.Messages;
@@ -10,8 +12,10 @@ import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Address;
 import seedu.addressbook.data.person.Email;
 import seedu.addressbook.data.person.Name;
+import seedu.addressbook.data.person.Person;
 import seedu.addressbook.data.person.Phone;
 import seedu.addressbook.data.person.ReadOnlyPerson;
+import seedu.addressbook.data.person.UniquePersonList;
 import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
@@ -29,8 +33,9 @@ public class EditCommand extends Command {
             + "Parameters: INDEX NAME, Parameters: INDEX [p]p/PHONE, Parameters: INDEX [p]e/EMAIL, Parameters: INDEX [p]a/ADDRESS, Parameters: INDEX [t/TAG]...\n\t"
             + "Example: " + COMMAND_WORD + " 1 Jonh Doe pp/88887777";
 
-    public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Edit Person to: %1$s";
-
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Update Person\n\tBefore: %1$s\n\tAfter: %2$s\n\t";
+    public static final String MESSAGE_DUPLICATE_PERSON = "Person with updated information already exists in the address book";
+    
     private Name toUpdateName = null;
     private Phone toUpdatePhone = null;
     private Email toUpdateEmail = null;
@@ -75,11 +80,41 @@ public class EditCommand extends Command {
     public CommandResult execute() {
         try {
             final ReadOnlyPerson target = getTargetPerson();
-            
-            return null;
+            final List<ReadOnlyPerson> updatedLastSeenList = new ArrayList<ReadOnlyPerson>();
+            updatedLastSeenList.addAll(relevantPersons);
+            Person newPerson = generateUpdatedPerson(target);
+            if (addressBook.containsPerson(newPerson) && !isOnlyUpdateTags()) {
+                return new CommandResult(MESSAGE_DUPLICATE_PERSON);
+            } else {
+                // only remove after confirmation of no duplication 
+                addressBook.removePerson(target);
+                addressBook.addPerson(newPerson);
+                updatedLastSeenList.remove(target);
+                updatedLastSeenList.add(newPerson);
+            }
+            return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, target, newPerson), updatedLastSeenList);
         } catch (IndexOutOfBoundsException ie) {
             return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        } catch (PersonNotFoundException pnfe) {
+            return new CommandResult(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
+        } catch (UniquePersonList.DuplicatePersonException dpe) {
+            return new CommandResult(MESSAGE_DUPLICATE_PERSON);
         }
+    }
+    
+    private boolean isOnlyUpdateTags() {
+        return (toUpdateTags != null) && (toUpdateName == null) && (toUpdatePhone == null) && (toUpdateEmail == null)
+                && (toUpdateAddress == null);
+    }
+    
+    private Person generateUpdatedPerson(ReadOnlyPerson orignal) {
+        return new Person(
+                toUpdateName != null ? toUpdateName : orignal.getName(),
+                toUpdatePhone != null ? toUpdatePhone : orignal.getPhone(),
+                toUpdateEmail != null ? toUpdateEmail : orignal.getEmail(),
+                toUpdateAddress != null ? toUpdateAddress : orignal.getAddress(),
+                toUpdateTags != null ? toUpdateTags : orignal.getTags()
+        );
     }
 
 

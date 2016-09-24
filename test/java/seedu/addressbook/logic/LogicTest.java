@@ -217,6 +217,27 @@ public class LogicTest {
         assertCommandBehavior("edit 0 " + Name.EXAMPLE, expectedMessage, AddressBook.empty(), false, lastShownList);
         assertCommandBehavior("edit 3 " + Name.EXAMPLE, expectedMessage, AddressBook.empty(), false, lastShownList);
     }
+    
+    @Test
+    public void execute_edit_editPersonInformationCorrectly() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Person expectedPerson = helper.generatePerson(1, false);
+        List<Person> expectedList = helper.generatePersonList(expectedPerson);
+        AddressBook expectedAB = helper.generateAddressBook(expectedList);
+
+        Person p1 = helper.generatePerson(2, false);
+        List<Person> onePerson = helper.generatePersonList(p1);
+        helper.addToAddressBook(addressBook, onePerson);
+        logic.setLastShownList(onePerson);
+        
+        logic.execute("edit 1 Person 1");
+        logic.execute("edit 1 p/1");
+        logic.execute("edit 1 e/1@email");
+        logic.execute("edit 1 a/House of 1");
+        logic.execute("edit 1 t/tag1 t/tag2");
+
+        assertEquals(addressBook.getAllPersons(), expectedAB.getAllPersons());
+    }
 
 
     @Test
