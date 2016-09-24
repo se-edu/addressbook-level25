@@ -92,6 +92,13 @@ public class ParserTest {
     }
 
     @Test
+    public void editCommand_noArgs() {
+        final String[] inputs = { "edit", "edit " };
+        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        parseAndAssertIncorrectWithMessage(resultMessage, inputs);
+    }
+    
+    @Test
     public void viewCommand_noArgs() {
         final String[] inputs = { "view", "view " };
         final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, ViewCommand.MESSAGE_USAGE);

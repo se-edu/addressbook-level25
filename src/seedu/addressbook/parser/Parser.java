@@ -64,6 +64,9 @@ public class Parser {
 
             case DeleteCommand.COMMAND_WORD:
                 return prepareDelete(arguments);
+                
+            case EditCommand.COMMAND_WORD:
+                return prepareEdit(arguments);
 
             case ClearCommand.COMMAND_WORD:
                 return new ClearCommand();
@@ -140,6 +143,39 @@ public class Parser {
         // replace first delimiter prefix, then split
         final Collection<String> tagStrings = Arrays.asList(tagArguments.replaceFirst(" t/", "").split(" t/"));
         return new HashSet<>(tagStrings);
+    }
+    
+    /**
+     * Parses arguments in the context of the edit person command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareEdit(String args) {
+        final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
+        try {
+            final int targetIndex = parseArgsAsDisplayedIndex(args);
+            return new EditCommand(
+                    targetIndex,
+                    
+                    matcher.group("name"),
+
+                    matcher.group("phone"),
+                    isPrivatePrefixPresent(matcher.group("isPhonePrivate")),
+
+                    matcher.group("email"),
+                    isPrivatePrefixPresent(matcher.group("isEmailPrivate")),
+
+                    matcher.group("address"),
+                    isPrivatePrefixPresent(matcher.group("isAddressPrivate")),
+
+                    getTagsFromArgs(matcher.group("tagArguments"))
+            );
+        } catch (ParseException | NumberFormatException e) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        }
     }
 
 
