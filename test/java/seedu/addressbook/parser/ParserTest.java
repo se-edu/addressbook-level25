@@ -281,7 +281,7 @@ public class ParserTest {
     
     @Test
     public void editCommand_argsIsNotSingleNumber() {
-        final String[] inputs = { "edit notAnumber ", "edit 8*wh12", "edit 1 2 3 4 5" };
+        final String[] inputs = { "edit notAnumber ", "edit 8*wh12"};
         final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
     }
@@ -291,6 +291,13 @@ public class ParserTest {
         final String[] inputs = { "edit 1", "edit 1 ", "edit 1   ", "edit 1      " };
         final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
+    }
+    
+    @Test
+    public void editCommand_validName_parseCorrectly() {
+        String input = String.format("edit 1 %1$s", Name.EXAMPLE);
+        final EditCommand result = parseAndAssertCommandType(input, EditCommand.class);
+        assertEquals(result.getToUpdateName().toString(), Name.EXAMPLE);
     }
 
     /**
