@@ -203,8 +203,19 @@ public class LogicTest {
         assertCommandBehavior("edit 1 [.%$]", Name.MESSAGE_NAME_CONSTRAINTS);
         assertCommandBehavior("edit 1 p/notnumber", Phone.MESSAGE_PHONE_CONSTRAINTS);
         assertCommandBehavior("edit 1 e/notemail", Email.MESSAGE_EMAIL_CONSTRAINTS);
-        //assertCommandBehavior("edit 1 a/", Address.MESSAGE_ADDRESS_CONSTRAINTS);
-        
+    }
+    
+    @Test
+    public void execute_edit_invalidIndex() throws Exception {
+        String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        TestDataHelper helper = new TestDataHelper();
+        List<Person> lastShownList = helper.generatePersonList(false, true);
+
+        logic.setLastShownList(lastShownList);
+
+        assertCommandBehavior("edit -1 " + Name.EXAMPLE, expectedMessage, AddressBook.empty(), false, lastShownList);
+        assertCommandBehavior("edit 0 " + Name.EXAMPLE, expectedMessage, AddressBook.empty(), false, lastShownList);
+        assertCommandBehavior("edit 3 " + Name.EXAMPLE, expectedMessage, AddressBook.empty(), false, lastShownList);
     }
 
 
