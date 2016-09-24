@@ -262,6 +262,27 @@ public class LogicTest {
                                 false,
                                 threePersons);
     }
+    
+    @Test
+    public void execute_edit_resultInDuplicate_notAllowed() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Person p1 = helper.generatePersonWithName("ABC");
+        Person p2 = helper.generatePersonWithName("BCD");
+        List<Person> expectedList = helper.generatePersonList(p1, p2);
+        AddressBook expectedAB = helper.generateAddressBook(expectedList);
+
+        helper.addToAddressBook(addressBook, expectedList);
+        logic.setLastShownList(expectedList);
+
+        // execute command and verify result
+        assertCommandBehavior(
+                "edit 2 ABC",
+                EditCommand.MESSAGE_DUPLICATE_PERSON,
+                expectedAB,
+                false,
+                expectedList);
+
+    }
 
 
     @Test
