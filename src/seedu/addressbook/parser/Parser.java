@@ -25,6 +25,13 @@ public class Parser {
                     + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
+    
+    public static final Pattern PERSON_DATA_ARGS_NAME_FORMAT = Pattern.compile("(?<name>[^/]+)\\s+");
+    public static final Pattern PERSON_DATA_ARGS_PHONE_FORMAT = Pattern.compile("(?<isPhonePrivate>p?)p/(?<phone>[^/]+)");
+    public static final Pattern PERSON_DATA_ARGS_EMAIL_FORMAT = Pattern.compile("(?<isAddressPrivate>p?)a/(?<address>[^/]+)");
+    public static final Pattern PERSON_DATA_ARGS_ADDRESS_FORMAT = Pattern.compile("(?<isAddressPrivate>p?)a/(?<address>[^/]+)");
+    public static final Pattern PERSON_DATA_ARGS_TAGS_FORMAT = Pattern.compile("(?<tagArguments>(?: t/[^/]+)*)");
+    
 
 
     /**
@@ -152,24 +159,28 @@ public class Parser {
      * @return the prepared command
      */
     private Command prepareEdit(String args) {
-        final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
+        final Matcher nameMatcher = PERSON_DATA_ARGS_NAME_FORMAT.matcher(args.trim());
+        final Matcher phoneMatcher = PERSON_DATA_ARGS_PHONE_FORMAT.matcher(args.trim());
+        final Matcher emailMatcher = PERSON_DATA_ARGS_EMAIL_FORMAT.matcher(args.trim());
+        final Matcher addressMatcher = PERSON_DATA_ARGS_ADDRESS_FORMAT.matcher(args.trim());
+        final Matcher tagsMatcher = PERSON_DATA_ARGS_TAGS_FORMAT.matcher(args.trim());
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args);
             return new EditCommand(
                     targetIndex,
                     
-                    matcher.group("name"),
+                    nameMatcher.matches() ? nameMatcher.group("name") : "",
 
-                    matcher.group("phone"),
-                    isPrivatePrefixPresent(matcher.group("isPhonePrivate")),
+                    phoneMatcher.matches() ? phoneMatcher.group("phone") : "",
+                    isPrivatePrefixPresent(phoneMatcher.matches() ? phoneMatcher.group("isPhonePrivate") : ""),
 
-                    matcher.group("email"),
-                    isPrivatePrefixPresent(matcher.group("isEmailPrivate")),
+                    emailMatcher.matches() ? emailMatcher.group("email") : "",
+                    isPrivatePrefixPresent(emailMatcher.matches() ? emailMatcher.group("isEmailPrivate") : ""),
 
-                    matcher.group("address"),
-                    isPrivatePrefixPresent(matcher.group("isAddressPrivate")),
+                    addressMatcher.matches() ? addressMatcher.group("address") : "",
+                    isPrivatePrefixPresent(addressMatcher.matches() ? addressMatcher.group("isAddressPrivate") : ""),
 
-                    getTagsFromArgs(matcher.group("tagArguments"))
+                    getTagsFromArgs(tagsMatcher.matches() ? tagsMatcher.group("tagArguments") : "")
             );
         } catch (ParseException | NumberFormatException e) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));

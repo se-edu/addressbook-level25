@@ -90,20 +90,6 @@ public class ParserTest {
         final DeleteCommand result = parseAndAssertCommandType(input, DeleteCommand.class);
         assertEquals(result.getTargetIndex(), testIndex);
     }
-
-    @Test
-    public void editCommand_noArgs() {
-        final String[] inputs = { "edit", "edit " };
-        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
-        parseAndAssertIncorrectWithMessage(resultMessage, inputs);
-    }
-    
-    @Test
-    public void editCommand_argsIsNotSingleNumber() {
-        final String[] inputs = { "edit notAnumber ", "edit 8*wh12", "edit 1 2 3 4 5" };
-        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
-        parseAndAssertIncorrectWithMessage(resultMessage, inputs);
-    }
     
     @Test
     public void viewCommand_noArgs() {
@@ -284,6 +270,27 @@ public class ParserTest {
             addCommand += " t/" + tag.tagName;
         }
         return addCommand;
+    }
+    
+    @Test
+    public void editCommand_noArgs() {
+        final String[] inputs = { "edit", "edit " };
+        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        parseAndAssertIncorrectWithMessage(resultMessage, inputs);
+    }
+    
+    @Test
+    public void editCommand_argsIsNotSingleNumber() {
+        final String[] inputs = { "edit notAnumber ", "edit 8*wh12", "edit 1 2 3 4 5" };
+        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        parseAndAssertIncorrectWithMessage(resultMessage, inputs);
+    }
+    
+    @Test
+    public void editCommand_noUpdateInformation() {
+        final String[] inputs = { "edit 1", "edit 1 ", "edit 1   ", "edit 1      " };
+        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        parseAndAssertIncorrectWithMessage(resultMessage, inputs);
     }
 
     /**
