@@ -294,6 +294,15 @@ public class ParserTest {
     }
     
     @Test
+    public void editCommand_invalidArgs() {
+        final String[] inputs = { "edit 1 %$notName^&", "edit 1 p/notPhone", "edit 1 e/noteamil" };
+        final String[] expects = {Name.MESSAGE_NAME_CONSTRAINTS, Phone.MESSAGE_PHONE_CONSTRAINTS, Email.MESSAGE_EMAIL_CONSTRAINTS};
+        for(int i = 0; i < inputs.length; i++) {
+            parseAndAssertIncorrectWithMessage(expects[i], inputs[i]);
+        }
+    }
+    
+    @Test
     public void editCommand_validName_parseCorrectly() {
         String input = String.format("edit 1 %1$s", Name.EXAMPLE);
         final EditCommand result = parseAndAssertCommandType(input, EditCommand.class);
@@ -345,7 +354,6 @@ public class ParserTest {
         assertEquals(result2.getTargetIndex(), 1);
         assertFalse(result2.getToUpdateAddress().isPrivate());
     }
-    
     
     
 
