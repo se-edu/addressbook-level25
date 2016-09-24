@@ -44,7 +44,7 @@ public class EditCommand extends Command {
                         String address, boolean isAddressPrivate,
                         Set<String> tags) throws IllegalValueException {
         super(targetVisibleIndex);
-        if (name.trim().length() == 0 && phone.trim().length() == 0 &&
+        if (name.trim().length() == 0 && phone.trim().length() == 0 && email.trim().length() == 0 &&
                 address.trim().length() == 0 && tags.isEmpty()) {
             throw new IllegalValueException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }

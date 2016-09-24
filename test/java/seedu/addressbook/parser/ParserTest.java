@@ -316,6 +316,21 @@ public class ParserTest {
         assertFalse(result2.getToUpdatePhone().isPrivate());
     }
     
+    @Test
+    public void editCommand_validEmail_parseCorrectly() {
+        String input1 = String.format("edit 1 pe/%1$s", Email.EXAMPLE);
+        final EditCommand result1 = parseAndAssertCommandType(input1, EditCommand.class);
+        assertEquals(result1.getToUpdateEmail().toString(), Email.EXAMPLE);
+        assertEquals(result1.getTargetIndex(), 1);
+        assertTrue(result1.getToUpdateEmail().isPrivate());
+        
+        String input2 = String.format("edit 1 e/%1$s", Email.EXAMPLE);
+        final EditCommand result2 = parseAndAssertCommandType(input2, EditCommand.class);
+        assertEquals(result2.getToUpdateEmail().toString(), Email.EXAMPLE);
+        assertEquals(result2.getTargetIndex(), 1);
+        assertFalse(result2.getToUpdateEmail().isPrivate());
+    }
+    
     
     
 
