@@ -171,18 +171,18 @@ public class Parser {
             return new EditCommand(
                     targetIndex,
                     
-                    nameMatcher.find() ? nameMatcher.group("name") : "",
+                    nameMatcher.matches() ? nameMatcher.group("name") : "",
 
-                    phoneMatcher.find() ? phoneMatcher.group("phone") : "",
-                    isPrivatePrefixPresent(phoneMatcher.find() ? phoneMatcher.group("isPhonePrivate") : ""),
+                    phoneMatcher.matches() ? phoneMatcher.group("phone") : "",
+                    isPrivatePrefixPresent(phoneMatcher.matches() ? phoneMatcher.group("isPhonePrivate") : ""),
 
-                    emailMatcher.find() ? emailMatcher.group("email") : "",
-                    isPrivatePrefixPresent(emailMatcher.find() ? emailMatcher.group("isEmailPrivate") : ""),
+                    emailMatcher.matches() ? emailMatcher.group("email") : "",
+                    isPrivatePrefixPresent(emailMatcher.matches() ? emailMatcher.group("isEmailPrivate") : ""),
 
-                    addressMatcher.find() ? addressMatcher.group("address") : "",
-                    isPrivatePrefixPresent(addressMatcher.find() ? addressMatcher.group("isAddressPrivate") : ""),
+                    addressMatcher.matches() ? addressMatcher.group("address") : "",
+                    isPrivatePrefixPresent(addressMatcher.matches() ? addressMatcher.group("isAddressPrivate") : ""),
 
-                    getTagsFromArgs(tagsMatcher.find() ? tagsMatcher.group("tagArguments") : "")
+                    getTagsFromArgs(tagsMatcher.matches() ? tagsMatcher.group("tagArguments") : "")
             );
         } catch (ParseException | NumberFormatException e) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));

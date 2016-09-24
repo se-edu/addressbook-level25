@@ -297,8 +297,27 @@ public class ParserTest {
     public void editCommand_validName_parseCorrectly() {
         String input = String.format("edit 1 %1$s", Name.EXAMPLE);
         final EditCommand result = parseAndAssertCommandType(input, EditCommand.class);
+        assertEquals(result.getTargetIndex(), 1);
         assertEquals(result.getToUpdateName().toString(), Name.EXAMPLE);
     }
+    
+    @Test
+    public void editCommand_validPhone_parseCorrectly() {
+        String input1 = String.format("edit 1 pp/%1$s", Phone.EXAMPLE);
+        final EditCommand result1 = parseAndAssertCommandType(input1, EditCommand.class);
+        assertEquals(result1.getToUpdatePhone().toString(), Phone.EXAMPLE);
+        assertEquals(result1.getTargetIndex(), 1);
+        assertTrue(result1.getToUpdatePhone().isPrivate());
+        
+        String input2 = String.format("edit 1 p/%1$s", Phone.EXAMPLE);
+        final EditCommand result2 = parseAndAssertCommandType(input2, EditCommand.class);
+        assertEquals(result2.getToUpdatePhone().toString(), Phone.EXAMPLE);
+        assertEquals(result2.getTargetIndex(), 1);
+        assertFalse(result2.getToUpdatePhone().isPrivate());
+    }
+    
+    
+    
 
     /**
      * Utility methods
