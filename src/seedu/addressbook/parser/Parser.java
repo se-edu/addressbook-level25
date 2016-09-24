@@ -31,7 +31,7 @@ public class Parser {
     public static final Pattern PERSON_DATA_ARGS_PHONE_FORMAT = Pattern.compile("(?<isPhonePrivate>p?)p/(?<phone>[^/]+)");
     public static final Pattern PERSON_DATA_ARGS_EMAIL_FORMAT = Pattern.compile("(?<isEmailPrivate>p?)e/(?<email>[^/]+)");
     public static final Pattern PERSON_DATA_ARGS_ADDRESS_FORMAT = Pattern.compile("(?<isAddressPrivate>p?)a/(?<address>[^/]+)");
-    public static final Pattern PERSON_DATA_ARGS_TAGS_FORMAT = Pattern.compile("(?<tagArguments>(?:t/[^/]+)*)");
+    public static final Pattern PERSON_DATA_ARGS_TAGS_FORMAT = Pattern.compile("(?<tagArguments>(?: t/[^/]+)*)");
     
 
 
@@ -167,7 +167,7 @@ public class Parser {
             final Matcher phoneMatcher = PERSON_DATA_ARGS_PHONE_FORMAT.matcher(removeArgsIndex.trim());
             final Matcher emailMatcher = PERSON_DATA_ARGS_EMAIL_FORMAT.matcher(removeArgsIndex.trim());
             final Matcher addressMatcher = PERSON_DATA_ARGS_ADDRESS_FORMAT.matcher(removeArgsIndex.trim());
-            final Matcher tagsMatcher = PERSON_DATA_ARGS_TAGS_FORMAT.matcher(removeArgsIndex.trim());
+            final Matcher tagsMatcher = PERSON_DATA_ARGS_TAGS_FORMAT.matcher(" " + removeArgsIndex.trim());
             return new EditCommand(
                     targetIndex,
                     

@@ -360,6 +360,30 @@ public class ParserTest {
         assertFalse(result2.getToUpdateAddress().isPrivate());
     }
     
+    @Test
+    public void editCommand_validTags_parseCorrectly() {
+        String input1 = "edit 1 t/tag1";
+        try {
+            UniqueTagList expect1 = new UniqueTagList(new Tag("tag1"));
+            final EditCommand result1 = parseAndAssertCommandType(input1, EditCommand.class);
+            assertEquals(result1.getToUpdateTags(), expect1);
+            assertEquals(result1.getTargetIndex(), 1);
+        } catch (IllegalValueException e) {
+            fail();
+        }
+        
+        String input2 = "edit 1 t/tag1 t/tag2";
+        try {
+            UniqueTagList expect2 = new UniqueTagList(new Tag("tag1"), new Tag("tag2"));
+            final EditCommand result2 = parseAndAssertCommandType(input2, EditCommand.class);
+            assertEquals(result2.getToUpdateTags(), expect2);
+            assertEquals(result2.getTargetIndex(), 1);
+        } catch (IllegalValueException e) {
+            fail();
+        }
+    }
+    
+    
     
 
     /**
