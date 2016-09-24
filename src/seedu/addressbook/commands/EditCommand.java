@@ -22,7 +22,7 @@ import seedu.addressbook.data.tag.UniqueTagList;
 
 
 /**
- * Deletes a person identified using it's last displayed index from the address book.
+ * Edit a person identified using it's last displayed index from the address book.
  */
 public class EditCommand extends Command {
 
@@ -89,6 +89,7 @@ public class EditCommand extends Command {
                 // only remove after confirmation of no duplication 
                 addressBook.removePerson(target);
                 addressBook.addPerson(newPerson);
+                // update last seen list
                 updatedLastSeenList.remove(target);
                 updatedLastSeenList.add(newPerson);
             }
@@ -102,42 +103,49 @@ public class EditCommand extends Command {
         }
     }
     
+    /**
+     * Determine whether the update operation is only updating tags or not
+     * 
+     * @return boolean
+     */
     private boolean isOnlyUpdateTags() {
         return (toUpdateTags != null) && (toUpdateName == null) && (toUpdatePhone == null) && (toUpdateEmail == null)
                 && (toUpdateAddress == null);
     }
     
-    private Person generateUpdatedPerson(ReadOnlyPerson orignal) {
+    /**
+     * Generate new person based on updated information
+     * 
+     * @param original original Person (Person before update)
+     * @return Person with updated information
+     */
+    private Person generateUpdatedPerson(ReadOnlyPerson original) {
         return new Person(
-                toUpdateName != null ? toUpdateName : orignal.getName(),
-                toUpdatePhone != null ? toUpdatePhone : orignal.getPhone(),
-                toUpdateEmail != null ? toUpdateEmail : orignal.getEmail(),
-                toUpdateAddress != null ? toUpdateAddress : orignal.getAddress(),
-                toUpdateTags != null ? toUpdateTags : orignal.getTags()
+                toUpdateName != null ? toUpdateName : original.getName(),
+                toUpdatePhone != null ? toUpdatePhone : original.getPhone(),
+                toUpdateEmail != null ? toUpdateEmail : original.getEmail(),
+                toUpdateAddress != null ? toUpdateAddress : original.getAddress(),
+                toUpdateTags != null ? toUpdateTags : original.getTags()
         );
     }
 
-
+    /**
+     * Getter
+     * 
+     * @return
+     */
     public Name getToUpdateName() {
         return toUpdateName;
     }
-
-
     public Phone getToUpdatePhone() {
         return toUpdatePhone;
     }
-
-
     public Email getToUpdateEmail() {
         return toUpdateEmail;
     }
-
-
     public Address getToUpdateAddress() {
         return toUpdateAddress;
     }
-
-
     public UniqueTagList getToUpdateTags() {
         return toUpdateTags;
     }
