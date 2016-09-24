@@ -238,6 +238,30 @@ public class LogicTest {
 
         assertEquals(addressBook.getAllPersons(), expectedAB.getAllPersons());
     }
+    
+    @Test
+    public void execute_edit_missingInAddressBook() throws Exception {
+
+        TestDataHelper helper = new TestDataHelper();
+        Person p1 = helper.generatePerson(1, false);
+        Person p2 = helper.generatePerson(2, true);
+        Person p3 = helper.generatePerson(3, true);
+
+        List<Person> threePersons = helper.generatePersonList(p1, p2, p3);
+
+        AddressBook expectedAB = helper.generateAddressBook(threePersons);
+        expectedAB.removePerson(p2);
+
+        helper.addToAddressBook(addressBook, threePersons);
+        addressBook.removePerson(p2);
+        logic.setLastShownList(threePersons);
+
+        assertCommandBehavior("edit 2 " + Name.EXAMPLE,
+                                Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK,
+                                expectedAB,
+                                false,
+                                threePersons);
+    }
 
 
     @Test
