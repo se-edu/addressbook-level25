@@ -183,6 +183,30 @@ public class LogicTest {
                 Collections.emptyList());
 
     }
+    
+    @Test
+    public void execute_edit_invalidArgsFormat() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        assertCommandBehavior("edit ", expectedMessage);
+        assertCommandBehavior("edit not Number", expectedMessage);
+    }
+    
+    @Test
+    public void execute_edit_noUpdateInformation() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        assertCommandBehavior("edit 1", expectedMessage);
+        assertCommandBehavior("edit 1 ", expectedMessage);
+    }
+    
+    @Test
+    public void execute_edit_InformationInvalid() throws Exception {
+        assertCommandBehavior("edit 1 [.%$]", Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandBehavior("edit 1 p/notnumber", Phone.MESSAGE_PHONE_CONSTRAINTS);
+        assertCommandBehavior("edit 1 e/notemail", Email.MESSAGE_EMAIL_CONSTRAINTS);
+        //assertCommandBehavior("edit 1 a/", Address.MESSAGE_ADDRESS_CONSTRAINTS);
+        
+    }
+
 
     @Test
     public void execute_list_showsAllPersons() throws Exception {

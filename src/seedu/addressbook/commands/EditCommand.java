@@ -73,7 +73,16 @@ public class EditCommand extends Command {
 
     @Override
     public CommandResult execute() {
-        return null;
+        try {
+            final ReadOnlyPerson target = getTargetPerson();
+            addressBook.removePerson(target);
+            return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, target));
+
+        } catch (IndexOutOfBoundsException ie) {
+            return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        } catch (PersonNotFoundException pnfe) {
+            return new CommandResult(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
+        }
     }
 
 
