@@ -83,7 +83,7 @@ public class EditCommand extends Command {
             final List<ReadOnlyPerson> updatedLastSeenList = new ArrayList<ReadOnlyPerson>();
             updatedLastSeenList.addAll(relevantPersons);
             Person newPerson = generateUpdatedPerson(target);
-            if (addressBook.containsPerson(newPerson) && !isOnlyUpdateTags()) {
+            if (addressBook.containsPerson(newPerson) && !isOnlyUpdateTags() && !isOnlyUpdateVisibility(target)) {
                 return new CommandResult(MESSAGE_DUPLICATE_PERSON);
             } else {
                 // only remove after confirmation of no duplication 
@@ -111,6 +111,28 @@ public class EditCommand extends Command {
     private boolean isOnlyUpdateTags() {
         return (toUpdateTags != null) && (toUpdateName == null) && (toUpdatePhone == null) && (toUpdateEmail == null)
                 && (toUpdateAddress == null);
+    }
+    
+    /**
+     * Determine whether the update operation is only updating visibility or not
+     * 
+     * @param before Person before updated
+     * @return
+     */
+    private boolean isOnlyUpdateVisibility(ReadOnlyPerson before) {
+        if (toUpdateName != null || toUpdateTags != null) {
+            return false;
+        }
+        if (toUpdatePhone != null && !toUpdatePhone.value.equals(before.getPhone().value)) {
+            return false;
+        }
+        if (toUpdateEmail != null && !toUpdateEmail.value.equals(before.getEmail().value)) {
+            return false;
+        }
+        if (toUpdateAddress != null && !toUpdateAddress.value.equals(before.getAddress().value)) {
+            return false;
+        }
+        return true;
     }
     
     /**

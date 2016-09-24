@@ -240,6 +240,34 @@ public class LogicTest {
     }
     
     @Test
+    public void execute_edit_editPersonInformationVisibilityCorrectly() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Person expectedPerson = helper.generatePerson(1, true);
+        List<Person> expectedList = helper.generatePersonList(expectedPerson);
+        AddressBook expectedAB = helper.generateAddressBook(expectedList);
+
+        Person p1 = helper.generatePerson(1, false);
+        List<Person> onePerson = helper.generatePersonList(p1);
+        helper.addToAddressBook(addressBook, onePerson);
+        logic.setLastShownList(onePerson);
+        
+        logic.execute("edit 1 pp/1");
+        logic.execute("edit 1 pe/1@email");
+        logic.execute("edit 1 pa/House of 1");
+        
+        for(Person p : addressBook.getAllPersons()) {
+            assertEquals(p.toString(), expectedPerson.toString());
+        }
+        
+        logic.execute("edit 1 p/1");
+        logic.execute("edit 1 e/1@email");
+        logic.execute("edit 1 a/House of 1");
+        for(Person p : addressBook.getAllPersons()) {
+            assertEquals(p.toString(), p1.toString());
+        }
+    }
+    
+    @Test
     public void execute_edit_missingInAddressBook() throws Exception {
 
         TestDataHelper helper = new TestDataHelper();
