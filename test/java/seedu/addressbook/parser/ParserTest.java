@@ -272,6 +272,10 @@ public class ParserTest {
         return addCommand;
     }
     
+    /**
+     * Test edit person command
+     */
+    
     @Test
     public void editCommand_noArgs() {
         final String[] inputs = { "edit", "edit " };
@@ -295,8 +299,9 @@ public class ParserTest {
     
     @Test
     public void editCommand_invalidArgs() {
-        final String[] inputs = { "edit 1 %$notName^&", "edit 1 p/notPhone", "edit 1 e/noteamil" };
-        final String[] expects = {Name.MESSAGE_NAME_CONSTRAINTS, Phone.MESSAGE_PHONE_CONSTRAINTS, Email.MESSAGE_EMAIL_CONSTRAINTS};
+        final String[] inputs = { "edit 1 %$notName^&", "edit 1 p/notPhone", "edit 1 e/noteamil", "edit 1 t/invalid_-[.tag" };
+        final String[] expects = {Name.MESSAGE_NAME_CONSTRAINTS, Phone.MESSAGE_PHONE_CONSTRAINTS, 
+                Email.MESSAGE_EMAIL_CONSTRAINTS, Tag.MESSAGE_TAG_CONSTRAINTS};
         for(int i = 0; i < inputs.length; i++) {
             parseAndAssertIncorrectWithMessage(expects[i], inputs[i]);
         }
