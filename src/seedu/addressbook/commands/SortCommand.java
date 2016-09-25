@@ -11,7 +11,7 @@ public class SortCommand extends Command {
             + "Sort all persons in the address book in alphabetical order.\n\t"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_SUCCESS = "The addressBook has been sorted";
+    public static final String MESSAGE_SUCCESS = "The addressBook has been sorted, try the 'list' command to see";
 
     @Override
     public CommandResult execute() {
