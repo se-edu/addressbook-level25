@@ -1,10 +1,5 @@
 package seedu.addressbook.commands;
 
-import java.util.List;
-
-import seedu.addressbook.data.AddressBook;
-import seedu.addressbook.data.person.ReadOnlyPerson;
-
 /**
  * Sort the list of persons in alphabetical order.
  */
