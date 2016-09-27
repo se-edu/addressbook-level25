@@ -24,6 +24,7 @@ public class MainWindow {
     private Stoppable mainApp;
 
     public MainWindow(){
+        prev = "";
     }
 
     public void setLogic(Logic logic){
@@ -39,24 +40,32 @@ public class MainWindow {
 
     @FXML
     private TextField commandInput;
+    
+    private String prev;
 
 
     @FXML
     void onCommand(ActionEvent event) {
         try {
             String userCommandText = commandInput.getText();
-            CommandResult result = logic.execute(userCommandText);
-            if(isExitCommand(result)){
-                exitApp();
-                return;
+            if (userCommandText.equals("p"))
+                setPreviousCommand();
+            else {
+                CommandResult result = logic.execute(userCommandText);
+                if(isExitCommand(result)){
+                    exitApp();
+                    return;
+                }
+                prev = userCommandText;
+                displayResult(result);
+                clearCommandInput();
             }
-            displayResult(result);
-            clearCommandInput();
         } catch (Exception e) {
             display(e.getMessage());
             throw new RuntimeException(e);
         }
     }
+    
 
     private void exitApp() throws Exception {
         mainApp.stop();
@@ -71,6 +80,16 @@ public class MainWindow {
     private void clearCommandInput() {
         commandInput.setText("");
     }
+    
+    private void setPreviousCommand() {
+        commandInput.setText(prev);
+    }
+    
+//    private void setNextCommand() {
+//        String displayedInput = next.pop();
+//        commandInput.setText(displayedInput);
+//        prev.push(displayedInput);
+//    }
 
     /** Clears the output display area */
     public void clearOutputConsole(){
