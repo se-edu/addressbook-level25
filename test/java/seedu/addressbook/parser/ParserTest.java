@@ -14,7 +14,6 @@ import java.util.Set;
 
 import static org.junit.Assert.*;
 import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.addressbook.common.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 
 public class ParserTest {
 
