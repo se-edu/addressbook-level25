@@ -6,7 +6,7 @@ import java.util.*;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the key letters.
- * Keyword matching is case sensitive.
+ * Key letters matching is case sensitive.
  */
 public class FindSubSetCommand extends Command {
 
@@ -24,7 +24,7 @@ public class FindSubSetCommand extends Command {
     }
 
     /**
-     * Returns copy of keywords in this command.
+     * Returns copy of key letters in this command.
      */
     public Set<String> getKeywords() {
         return new HashSet<>(characters);
