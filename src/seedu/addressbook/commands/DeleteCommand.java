@@ -18,6 +18,7 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person: %1$s";
+    
 
 
     public DeleteCommand(int targetVisibleIndex) {
@@ -37,6 +38,20 @@ public class DeleteCommand extends Command {
         } catch (PersonNotFoundException pnfe) {
             return new CommandResult(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
         }
+    }
+
+
+    @Override
+    public boolean isMutable() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+
+    @Override
+    public String getExecutedAction() {
+        // TODO Auto-generated method stub
+        return String.format(MESSAGE_DELETE_PERSON_SUCCESS, getTargetPerson());
     }
 
 }

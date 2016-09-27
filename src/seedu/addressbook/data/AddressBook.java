@@ -129,6 +129,7 @@ public class AddressBook {
     public void clear() {
         allPersons.clear();
         allTags.clear();
+        
     }
 
     /**

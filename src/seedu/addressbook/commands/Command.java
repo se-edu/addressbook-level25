@@ -65,4 +65,8 @@ public abstract class Command {
     public void setTargetIndex(int targetIndex) {
         this.targetIndex = targetIndex;
     }
+    
+    public abstract boolean isMutable();
+    
+    public abstract String getExecutedAction();
 }
