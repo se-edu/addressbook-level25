@@ -33,6 +33,32 @@ Examples:
 * `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
 * `add Betsy Crowe pp/1234567 e/betsycrowe@gmail.com pa/Newgate Prison t/criminal t/friend`
 
+## Editing a person: `edit`
+Edit information of the specified person.<br>
+Format: 
+
+- `edit INDEX NEW_NAME`
+- `edit INDEX [p]p/PHONE_NUMBER`
+- `edit INDEX [p]e/EMAIL`
+- `edit INDEX [p]a/ADDRESS`
+- `edit INDEX [t/TAG]...`
+
+> Edit the person at the specified `INDEX`. 
+> The index refers to the index number shown in the most recent listing.
+>
+> Words in `UPPER_CASE` are the parameters (required), items in `SQUARE_BRACKETS` are optional,
+> items with `...` after them can have multiple instances.
+> 
+> Put a `p` before the phone / email / address prefixes to change it to `private`.
+
+Examples: 
+
+* `edit 1 John`<br>
+  Edit the name of the first person in recent listing to 'John'
+* `edit 1 pp/12345678`<br> 
+  `edit 1 p/12345678`<br>
+  Edit the Phone of the first person in recent listing to 'John' (Set it to private for the first command)
+
 ## Listing all persons : `list`
 Shows a list of all persons in the address book.<br>
 Format: `list`

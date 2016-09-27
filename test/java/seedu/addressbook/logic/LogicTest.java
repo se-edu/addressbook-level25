@@ -183,6 +183,135 @@ public class LogicTest {
                 Collections.emptyList());
 
     }
+    
+    @Test
+    public void execute_edit_invalidArgsFormat() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        assertCommandBehavior("edit ", expectedMessage);
+        assertCommandBehavior("edit not Number", expectedMessage);
+    }
+    
+    @Test
+    public void execute_edit_noUpdateInformation() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        assertCommandBehavior("edit 1", expectedMessage);
+        assertCommandBehavior("edit 1 ", expectedMessage);
+    }
+    
+    @Test
+    public void execute_edit_InformationInvalid() throws Exception {
+        assertCommandBehavior("edit 1 [.%$]", Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandBehavior("edit 1 p/notnumber", Phone.MESSAGE_PHONE_CONSTRAINTS);
+        assertCommandBehavior("edit 1 e/notemail", Email.MESSAGE_EMAIL_CONSTRAINTS);
+    }
+    
+    @Test
+    public void execute_edit_invalidIndex() throws Exception {
+        String expectedMessage = Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+        TestDataHelper helper = new TestDataHelper();
+        List<Person> lastShownList = helper.generatePersonList(false, true);
+
+        logic.setLastShownList(lastShownList);
+
+        assertCommandBehavior("edit -1 " + Name.EXAMPLE, expectedMessage, AddressBook.empty(), false, lastShownList);
+        assertCommandBehavior("edit 0 " + Name.EXAMPLE, expectedMessage, AddressBook.empty(), false, lastShownList);
+        assertCommandBehavior("edit 3 " + Name.EXAMPLE, expectedMessage, AddressBook.empty(), false, lastShownList);
+    }
+    
+    @Test
+    public void execute_edit_editPersonInformationCorrectly() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Person expectedPerson = helper.generatePerson(1, false);
+        List<Person> expectedList = helper.generatePersonList(expectedPerson);
+        AddressBook expectedAB = helper.generateAddressBook(expectedList);
+
+        Person p1 = helper.generatePerson(2, false);
+        List<Person> onePerson = helper.generatePersonList(p1);
+        helper.addToAddressBook(addressBook, onePerson);
+        logic.setLastShownList(onePerson);
+        
+        logic.execute("edit 1 Person 1");
+        logic.execute("edit 1 p/1");
+        logic.execute("edit 1 e/1@email");
+        logic.execute("edit 1 a/House of 1");
+        logic.execute("edit 1 t/tag1 t/tag2");
+
+        assertEquals(addressBook.getAllPersons(), expectedAB.getAllPersons());
+    }
+    
+    @Test
+    public void execute_edit_editPersonInformationVisibilityCorrectly() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Person expectedPerson = helper.generatePerson(1, true);
+        List<Person> expectedList = helper.generatePersonList(expectedPerson);
+        AddressBook expectedAB = helper.generateAddressBook(expectedList);
+
+        Person p1 = helper.generatePerson(1, false);
+        List<Person> onePerson = helper.generatePersonList(p1);
+        helper.addToAddressBook(addressBook, onePerson);
+        logic.setLastShownList(onePerson);
+        
+        logic.execute("edit 1 pp/1");
+        logic.execute("edit 1 pe/1@email");
+        logic.execute("edit 1 pa/House of 1");
+        
+        for(Person p : addressBook.getAllPersons()) {
+            assertEquals(p.toString(), expectedPerson.toString());
+        }
+        
+        logic.execute("edit 1 p/1");
+        logic.execute("edit 1 e/1@email");
+        logic.execute("edit 1 a/House of 1");
+        for(Person p : addressBook.getAllPersons()) {
+            assertEquals(p.toString(), p1.toString());
+        }
+    }
+    
+    @Test
+    public void execute_edit_missingInAddressBook() throws Exception {
+
+        TestDataHelper helper = new TestDataHelper();
+        Person p1 = helper.generatePerson(1, false);
+        Person p2 = helper.generatePerson(2, true);
+        Person p3 = helper.generatePerson(3, true);
+
+        List<Person> threePersons = helper.generatePersonList(p1, p2, p3);
+
+        AddressBook expectedAB = helper.generateAddressBook(threePersons);
+        expectedAB.removePerson(p2);
+
+        helper.addToAddressBook(addressBook, threePersons);
+        addressBook.removePerson(p2);
+        logic.setLastShownList(threePersons);
+
+        assertCommandBehavior("edit 2 " + Name.EXAMPLE,
+                                Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK,
+                                expectedAB,
+                                false,
+                                threePersons);
+    }
+    
+    @Test
+    public void execute_edit_resultInDuplicate_notAllowed() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Person p1 = helper.generatePersonWithName("ABC");
+        Person p2 = helper.generatePersonWithName("BCD");
+        List<Person> expectedList = helper.generatePersonList(p1, p2);
+        AddressBook expectedAB = helper.generateAddressBook(expectedList);
+
+        helper.addToAddressBook(addressBook, expectedList);
+        logic.setLastShownList(expectedList);
+
+        // execute command and verify result
+        assertCommandBehavior(
+                "edit 2 ABC",
+                EditCommand.MESSAGE_DUPLICATE_PERSON,
+                expectedAB,
+                false,
+                expectedList);
+
+    }
+
 
     @Test
     public void execute_list_showsAllPersons() throws Exception {
