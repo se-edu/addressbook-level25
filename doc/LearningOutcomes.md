@@ -99,8 +99,8 @@ Covered by `[LO-Polymorphism]`
 
 * Note how `Logic` class depends on the `StorageFile` class. This is a violation of DIP.
 * Modify the implementation as follows so that both `Logic` and `StorageFile` now depend on the abstraction
-  `Storage`. (Note: The term *abstraction* here is referring to the conception of abstracting, not to the fact that `Storage` class is `abastract`)<br>
-  <img src="images/LogicStroageFileDIP.png" width="300">
+  `Storage`. (Note: The term *abstraction* here is referring to the concept of abstracting, not to the fact 
+  that `Storage` class is `abastract`)<br> <img src="images/LogicStroageFileDIP.png" width="300">
 * Where else in the code do you notice the application of DIP?
 
 ------------------------------------------------------------------------------------------------------
