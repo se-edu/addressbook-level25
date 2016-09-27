@@ -5,7 +5,7 @@ import seedu.addressbook.data.person.ReadOnlyPerson;
 import java.util.*;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the key letters.
+ * Finds and lists all persons in address book whose start of the name contains any of the key letters.
  * Key letters matching is case sensitive.
  */
 public class FindSubSetCommand extends Command {
@@ -37,7 +37,7 @@ public class FindSubSetCommand extends Command {
     }
 
     /**
-     * Retrieve all persons in the address book whose names contain some of the specified characters
+     * Retrieve all persons in the address book whose start of names contain some of the specified characters
      *
      * @param characters for searching
      * @return list of persons found
@@ -46,8 +46,14 @@ public class FindSubSetCommand extends Command {
         final List<ReadOnlyPerson> matchedPersons = new ArrayList<>();
         for (ReadOnlyPerson person : addressBook.getAllPersons()) {
             final Set<String> wordsInName = new HashSet<>(person.getName().getWordsInName());
-            if (wordsInName.contains(characters)) {
-                matchedPersons.add(person);
+            String[] wordsName = wordsInName.toArray(new String [wordsInName.size()]);
+            String[] stringCharacters = characters.toArray(new String [characters.size()]);
+            for (int i = 0; i < wordsName.length; i++){
+                for (int j = 0; j < stringCharacters.length; j++){
+                    if(wordsName[i].startsWith(stringCharacters[j])){
+                        matchedPersons.add(person);
+                    }
+                }
             }
         }
         return matchedPersons;

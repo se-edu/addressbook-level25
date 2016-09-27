@@ -50,7 +50,7 @@ Examples:
   Returns Any person having names `Betsy`, `Tim`, or `John`
   
 ## Finding all persons containing any letters in their name: `findSubSet`
-Finds persons whose names contain any of the given letters.<br>
+Finds persons whose start of the names contain any of the given letters.<br>
 Format: `find LETTERS`
 
 > The search is case sensitive, there is no limit in the amount of characters you can specify, the order of the letters matters, and persons containing the given letters will be returned.
@@ -58,8 +58,8 @@ Format: `find LETTERS`
 Examples: 
 * `find John`<br>
   Returns `John Doe` but not `john`
-* `find T`<br>
-  Returns Any person having names `Betsy` or `Tim`
+* `find B`<br>
+  Returns Any person having names `Betty` or `Brandy`
 
 ## Deleting a person : `delete`
 Deletes the specified person from the address book. Irreversible.<br>
