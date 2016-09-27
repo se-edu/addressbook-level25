@@ -126,6 +126,10 @@ getting the `StorageFile` class involved? That is a situation where we can use *
 * Update the `LogicTest` to work with the `StorageStub` instead of the actual `StorageFile` object. <br>
   i.e. `Logic` injects a `StorageStub` object to replace the dependency of `Logic` on `Storage` before 
    testing `Logic`.
+* The example above uses [DIP](#apply-dependency-inversion-principle-lo-dip) as a means to achieve DI.
+  Note that there is another way to inject a `StorageStub` object, as shown below.
+  In this case we do not apply the DIP but we still achieve DI.<br>
+  <img src="images/DependencyInjectionWithoutDIP.png" width="300">
 
 ------------------------------------------------------------------------------------------------------
 
