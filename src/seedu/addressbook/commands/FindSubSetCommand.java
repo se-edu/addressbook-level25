@@ -50,8 +50,10 @@ public class FindSubSetCommand extends Command {
             String[] stringCharacters = characters.toArray(new String [characters.size()]);
             for (int i = 0; i < wordsName.length; i++){
                 for (int j = 0; j < stringCharacters.length; j++){
-                    if(wordsName[i].startsWith(stringCharacters[j])){
-                        matchedPersons.add(person);
+                    if(wordsName[i].startsWith(stringCharacters[0])){
+                        if(matchedPersons != null && !matchedPersons.contains(person)){
+                            matchedPersons.add(person);
+                        }
                     }
                 }
             }
