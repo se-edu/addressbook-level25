@@ -37,4 +37,18 @@ public class ViewAllCommand extends Command {
             return new CommandResult(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
     }
+
+
+    @Override
+    public boolean isMutable() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+
+    @Override
+    public String getExecutedAction() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

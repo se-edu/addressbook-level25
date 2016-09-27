@@ -22,6 +22,7 @@ public class AddCommand extends Command {
             + " John Doe p/98765432 e/johnd@gmail.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney";
 
     public static final String MESSAGE_SUCCESS = "New person added: %1$s";
+    public static final String MESSAGE_ACTION = "Added new person: %1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
 
     private final Person toAdd;
@@ -65,6 +66,19 @@ public class AddCommand extends Command {
         } catch (UniquePersonList.DuplicatePersonException dpe) {
             return new CommandResult(MESSAGE_DUPLICATE_PERSON);
         }
+    }
+
+    @Override
+    public boolean isMutable() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public String getExecutedAction() {
+        
+        // TODO Auto-generated method stub
+        return String.format(MESSAGE_ACTION, toAdd);
     }
 
 }

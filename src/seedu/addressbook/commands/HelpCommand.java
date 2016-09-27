@@ -27,4 +27,16 @@ public class HelpCommand extends Command {
     public CommandResult execute() {
         return new CommandResult(MESSAGE_ALL_USAGES);
     }
+
+    @Override
+    public boolean isMutable() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public String getExecutedAction() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

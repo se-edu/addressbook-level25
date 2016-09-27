@@ -16,4 +16,16 @@ public class ExitCommand extends Command {
         return new CommandResult(MESSAGE_EXIT_ACKNOWEDGEMENT);
     }
 
+    @Override
+    public boolean isMutable() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public String getExecutedAction() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }

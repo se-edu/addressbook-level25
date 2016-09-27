@@ -17,4 +17,16 @@ public class IncorrectCommand extends Command{
         return new CommandResult(feedbackToUser);
     }
 
+    @Override
+    public boolean isMutable() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public String getExecutedAction() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
 }
