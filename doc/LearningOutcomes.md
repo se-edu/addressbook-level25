@@ -90,6 +90,21 @@ Covered by `[LO-Polymorphism]`
 
 * If you are new to JavaFX, follow Marco's tutorial given above.
 * Do some enhancements to the AddressBook GUI. e.g. add an application icon, change size/style 
+  
+------------------------------------------------------------------------------------------------------
+
+## Analyze Coupling and Cohesion of designs `[LO-CouplingCohesion]`
+
+* Ensure you know the answers to these questions:
+  * What is the _Coupling_?
+  * What is _Cohesion_?
+* As you saw above, DIP helps us to avoid *coupling* from higher-level classes to lower-level classes.
+* Notice how having a separate `Formattter` class (an application of SIP) improves the *cohesion* of 
+  the `MainWindow` class as well as the `Formatter` class.
+
+#### Exercise: Identify places to reduce coupling and increase cohesion
+
+* Where else in the design coupling can be reduced further, or cohesion can be increased further?
 
 ------------------------------------------------------------------------------------------------------
 
@@ -97,6 +112,9 @@ Covered by `[LO-Polymorphism]`
 
 #### Exercise: Invert dependency from Logic to Storage
 
+* Ensure you know the answers to these questions:
+  * What is the _Dependency Inversion Principle_?
+  * How does DIP help?
 * Note how `Logic` class depends on the `StorageFile` class. This is a violation of DIP.
 * Modify the implementation as follows so that both `Logic` and `StorageFile` now depend on the
   `abstract` class `Storage`. <br>
@@ -113,6 +131,9 @@ getting the `StorageFile` class involved? That is a situation where we can use *
 
 #### Exercise: Facilitate injecting a StorageStub
 
+* Ensure you know the answers to these questions:
+  * What is the _Dependency Injection_?
+  * How does DI help?
 * Change the implementation as follows so that we can inject a `StorageStub` when testing the `Logic`
   class. <br>
   <img src="images/DependencyInjection.png" width="600">
@@ -124,7 +145,7 @@ getting the `StorageFile` class involved? That is a situation where we can use *
     right-click on the commit your want to copy to the current branch, and choose 'Cherry pick'
 * Implement the `StorageStub` such that calls to the `save` method do nothing (i.e. empty method body).   
 * Update the `LogicTest` to work with the `StorageStub` instead of the actual `StorageFile` object. <br>
-  i.e. `Logic` injects a `StorageStub` object to replace the dependency of `Logic` on `Storage` before 
+  i.e. `Logic` injects a `StorageStub` object to replace the dependency of `Logic` on `StorageFile` before 
    testing `Logic`.
 * The example above uses [DIP](#apply-dependency-inversion-principle-lo-dip) as a means to achieve DI.
   Note that there is another way to inject a `StorageStub` object, as shown below.
@@ -137,6 +158,9 @@ getting the `StorageFile` class involved? That is a situation where we can use *
 
 #### Exercise: Analyze OCP-compliance of the `Logic` class
 
+* Ensure you know the answers to these questions:
+  * What is the _Open Closed Principle_?
+  * How does OCP help?
 * Consider adding a new command to the Address Book. e.g. an `edit` command.
 * Notice how little you need to change in the `Logic` class to extend its behavior so that it can execute 
   the new command.
@@ -148,20 +172,6 @@ getting the `StorageFile` class involved? That is a situation where we can use *
   after applying DIP as given in [`LO-DIP`](#apply-dependency-inversion-principle-lo-dip)? 
   How can you improve `Logic`'s OCP-compliance further so that it can not only work with different types
   of storages, but different number of storages (e.g. save to both a text file and a database).
-
-  
-------------------------------------------------------------------------------------------------------
-
-## Analyze Coupling and Cohesion of designs `[LO-CouplingCohesion]`
-
-* As you saw above, DIP helps us to avoid *coupling* from higher-level classes to lower-level classes.
-  
-* Notice how having a separate `Formattter` class (an application of SIP) improves the *cohesion* of 
-  the `MainWindow` class as well as the `Formatter` class.
-
-#### Exercise: Identify places to reduce coupling and increase cohesion
-
-* Where else in the design coupling can be reduced further, or cohesion can be increased further?
 
 ------------------------------------------------------------------------------------------------------
 
