@@ -33,15 +33,7 @@ public class StorageFile {
         }
     }
 
-    /**
-     * Signals that some error has occured while trying to convert and read/write data between the application
-     * and the storage file.
-     */
-    public static class StorageOperationException extends Exception {
-        public StorageOperationException(String message) {
-            super(message);
-        }
-    }
+  
 
     private final JAXBContext jaxbContext;
 
@@ -70,6 +62,7 @@ public class StorageFile {
         }
     }
 
+    
     /**
      * Returns true if the given path is acceptable as a storage file.
      * The file path is considered acceptable if it ends with '.txt'
@@ -83,6 +76,7 @@ public class StorageFile {
      *
      * @throws StorageOperationException if there were errors converting and/or storing data to file.
      */
+    
     public void save(AddressBook addressBook) throws StorageOperationException {
 
         /* Note: Note the 'try with resource' statement below.
@@ -108,6 +102,7 @@ public class StorageFile {
      *
      * @throws StorageOperationException if there were errors reading and/or converting data from file.
      */
+    
     public AddressBook load() throws StorageOperationException {
         try (final Reader fileReader =
                      new BufferedReader(new FileReader(path.toFile()))) {
@@ -142,7 +137,12 @@ public class StorageFile {
     }
 
     public String getPath() {
-        return path.toString();
+        return getPath();
+    }
+
+    public Storage initialize() throws InvalidStorageFilePathException {
+        Storage storage = new StorageFile();
+        return storage;
     }
 
 }
