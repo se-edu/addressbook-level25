@@ -8,10 +8,10 @@ After studying this code and completing the corresponding exercises, you should 
 1. [Use abstract classes/methods `[LO-Abstract]`](#use-abstract-classesmethods-lo-abstract)
 1. [Follow Liskov Substitution Principle `[LO-LSP]`](#follow-liskov-substitution-principle-lo-lsp)
 1. [Use Java-FX for GUI programming `[LO-JavaFx]`](#use-java-fx-for-gui-programming-lo-javafx)
+1. [Analyze Coupling and Cohesion of designs `[LO-CouplingCohesion]`](#analyze-coupling-and-cohesion-of-designs-lo-couplingcohesion)
 1. [Apply Dependency Inversion Principle `[LO-DIP]`](#apply-dependency-inversion-principle-lo-dip)
 1. [Use Dependency Injection `[LO-DI]`](#use-dependency-injection-lo-di)
 1. [Apply Open-Closed Principle `[LO-OCP]`](#apply-open-closed-principle-lo-ocp)
-1. [Analyze Coupling and Cohesion of designs `[LO-CouplingCohesion]`](#analyze-coupling-and-cohesion-of-designs-lo-couplingcohesion)
 1. [Work in a 2KLoC code base `[LO-2KLoC]`](#work-in-a-2kloc-code-base-lo-2kloc)
 
 ------------------------------------------------------------------------------------------------------
