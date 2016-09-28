@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 
 /**
- * Personal Comments: GUI of App should contain code to update contents in MainWindow. It should contain commands like displayResult(CommandResult result), displayWelcomeMessage(String version, String storageFilePath)
+ * Personal Comments: GUI of App should contain code to update contents in MainWindow, whenever an event occurs. It should contain commands like displayResult(CommandResult result), displayWelcomeMessage(String version, String storageFilePath)
  * Content on MainWindow should be editted through GUI.java.
  */
 

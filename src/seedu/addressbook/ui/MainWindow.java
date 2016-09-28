@@ -20,7 +20,8 @@ import static seedu.addressbook.common.Messages.*;
  */
 
 /**
- * Personal Comments: MainWindow of App should contain code to update visual display only, based on input from GUI that decides what to show.
+ * Personal Comments: MainWindow of App should contain code to print out and reflect necessary to windows only. The GUI should decide what to show.
+ * Commands to be removed and placed in GUI: setLogic, setMainApp, onCommand, exitApp, onExitCommand etc. (Basically everything except private void display(String... messages))
  */
 public class MainWindow {
 
