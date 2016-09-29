@@ -27,6 +27,8 @@ public class UniquePersonList implements Iterable<Person> {
      * there is no such matching person in the list.
      */
     public static class PersonNotFoundException extends Exception {}
+	
+    private static Comparator<Person> nameComparator = (Person p1, Person p2) -> p1.getName().toString().compareTo(p2.getName().toString());
 
     private final List<Person> internalList = new ArrayList<>();
 
@@ -112,12 +114,17 @@ public class UniquePersonList implements Iterable<Person> {
     public void clear() {
         internalList.clear();
     }
-
+    /**
+    * Sorts the list of contact names in alphabetical order.
+    */
+    public void sort() {
+    	Collections.sort(internalList, nameComparator);
+    }
+    
     @Override
     public Iterator<Person> iterator() {
         return internalList.iterator();
     }
-
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
