@@ -17,7 +17,7 @@ import java.util.Optional;
 public class Logic {
 
 
-    private StorageFile storage;
+    private Storage storage;
     private AddressBook addressBook;
 
     /** The list of person shown to the user most recently.  */
