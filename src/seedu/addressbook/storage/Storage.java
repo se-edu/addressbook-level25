@@ -1,4 +1,4 @@
-package seedu.addressbook.logic;
+package seedu.addressbook.storage;
 
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
