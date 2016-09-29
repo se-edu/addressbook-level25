@@ -11,13 +11,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.addressbook.storage.Storage;
 /**
  * Represents the main Logic of the AddressBook.
  */
 public class Logic {
 
 
-    private StorageFile storage;
+    private Storage storage;
     private AddressBook addressBook;
 
     /** The list of person shown to the user most recently.  */
@@ -28,12 +29,17 @@ public class Logic {
         setAddressBook(storage.load());
     }
 
-    Logic(StorageFile storageFile, AddressBook addressBook){
+    private Storage initializeStorage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	Logic(Storage storageFile, AddressBook addressBook){
         setStorage(storageFile);
         setAddressBook(addressBook);
     }
 
-    void setStorage(StorageFile storage){
+    void setStorage(Storage storage){
         this.storage = storage;
     }
 
@@ -41,13 +47,6 @@ public class Logic {
         this.addressBook = addressBook;
     }
 
-    /**
-     * Creates the StorageFile object based on the user specified path (if any) or the default storage path.
-     * @throws StorageFile.InvalidStorageFilePathException if the target file path is incorrect.
-     */
-    private StorageFile initializeStorage() throws StorageFile.InvalidStorageFilePathException {
-        return new StorageFile();
-    }
 
     public String getStorageFilePath() {
         return storage.getPath();
