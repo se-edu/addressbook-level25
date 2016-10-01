@@ -15,5 +15,5 @@ addressbook.txt
 out/
 test/data/
 /bin/
-data/
+/data/
 publish.sh
