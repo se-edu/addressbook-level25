@@ -35,8 +35,10 @@ public class AddCommand extends Command {
                       String phone, boolean isPhonePrivate,
                       String email, boolean isEmailPrivate,
                       String address, boolean isAddressPrivate,
-                      Set<String> tags) throws IllegalValueException {
-        final Set<Tag> tagSet = new HashSet<>();
+                      Set<String> tags) throws IllegalValueException 
+      
+    {
+    	final Set<Tag> tagSet = new HashSet<>();
         for (String tagName : tags) {
             tagSet.add(new Tag(tagName));
         }
@@ -57,8 +59,15 @@ public class AddCommand extends Command {
         return toAdd;
     }
 
+    public boolean isMutating(){
+    	return true;
+    }
+    
     @Override
-    public CommandResult execute() {
+    public CommandResult execute() throws Exception{
+    	if(toAdd == null){
+    		throw new NullPointerException("No value has been added");
+    	}
         try {
             addressBook.addPerson(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));

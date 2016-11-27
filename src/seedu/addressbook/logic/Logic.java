@@ -1,6 +1,6 @@
 package seedu.addressbook.logic;
 
-import seedu.addressbook.commands.Command;
+import seedu.addressbook.commands.*;
 import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
@@ -83,9 +83,14 @@ public class Logic {
      * @throws Exception if there was any problem during command execution.
      */
     private CommandResult execute(Command command) throws Exception {
-        command.setData(addressBook, lastShownList);
-        CommandResult result = command.execute();
-        storage.save(addressBook);
+    	command.setData(addressBook, lastShownList);
+    	CommandResult result=null;
+        try{result= command.execute();//returns type of either addCommand/ClearCommand... (all subtypes that implement command as given in the parser class). These subtypes have an execute method the in turn returns result of CommandResult type. 
+        }catch(NullPointerException noValue){
+        	System.out.println(noValue.getMessage());
+        }
+        if(command.isMutating()) //this command will be one of the subtypes as given by the CommandResult method above. Therefore, we can easily check if it is mutating or not by calling the isMutating() method. 
+        storage.save(addressBook);//only if it's mutating will the file be stores.
         return result;
     }
 
