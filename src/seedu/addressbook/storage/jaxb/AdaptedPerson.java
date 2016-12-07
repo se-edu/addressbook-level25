@@ -37,12 +37,6 @@ public class AdaptedPerson {
     private List<AdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * No-arg constructor for JAXB use.
-     */
-    public AdaptedPerson() {}
-
-
-    /**
      * Converts a given Person into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created AdaptedPerson
