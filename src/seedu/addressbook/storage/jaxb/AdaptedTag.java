@@ -15,6 +15,11 @@ public class AdaptedTag {
     public String tagName;
 
     /**
+     * No-arg constructor for JAXB use.
+     */
+    public AdaptedTag() {}
+
+    /**
      * Converts a given Tag into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created AdaptedTag

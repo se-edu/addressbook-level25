@@ -25,6 +25,11 @@ public class AdaptedAddressBook {
     private List<AdaptedTag> tags = new ArrayList<>();
 
     /**
+     * No-arg constructor for JAXB use.
+     */
+    public AdaptedAddressBook() {}
+
+    /**
      * Converts a given AddressBook into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created AdaptedAddressBook
