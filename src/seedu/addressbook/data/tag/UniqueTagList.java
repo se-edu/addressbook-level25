@@ -13,21 +13,6 @@ import java.util.*;
  */
 public class UniqueTagList implements Iterable<Tag> {
 
-    /**
-     * Signals that an operation would have violated the 'no duplicates' property of the list.
-     */
-    public static class DuplicateTagException extends DuplicateDataException {
-        protected DuplicateTagException() {
-            super("Operation would result in duplicate tags");
-        }
-    }
-
-    /**
-     * Signals that an operation targeting a specified Tag in the list would fail because
-     * there is no such matching Tag in the list.
-     */
-    public static class TagNotFoundException extends Exception {}
-
     private final List<Tag> internalList = new ArrayList<>();
 
     /**
@@ -164,4 +149,19 @@ public class UniqueTagList implements Iterable<Tag> {
     public int hashCode() {
         return internalList.hashCode();
     }
+
+    /**
+     * Signals that an operation would have violated the 'no duplicates' property of the list.
+     */
+    public static class DuplicateTagException extends DuplicateDataException {
+        protected DuplicateTagException() {
+            super("Operation would result in duplicate tags");
+        }
+    }
+
+    /**
+     * Signals that an operation targeting a specified Tag in the list would fail because
+     * there is no such matching Tag in the list.
+     */
+    public static class TagNotFoundException extends Exception {}
 }

@@ -13,21 +13,6 @@ import java.util.*;
  */
 public class UniquePersonList implements Iterable<Person> {
 
-    /**
-     * Signals that an operation would have violated the 'no duplicates' property of the list.
-     */
-    public static class DuplicatePersonException extends DuplicateDataException {
-        protected DuplicatePersonException() {
-            super("Operation would result in duplicate persons");
-        }
-    }
-
-    /**
-     * Signals that an operation targeting a specified person in the list would fail because
-     * there is no such matching person in the list.
-     */
-    public static class PersonNotFoundException extends Exception {}
-
     private final List<Person> internalList = new ArrayList<>();
 
     /**
@@ -130,5 +115,20 @@ public class UniquePersonList implements Iterable<Person> {
     public int hashCode() {
         return internalList.hashCode();
     }
+
+    /**
+     * Signals that an operation would have violated the 'no duplicates' property of the list.
+     */
+    public static class DuplicatePersonException extends DuplicateDataException {
+        protected DuplicatePersonException() {
+            super("Operation would result in duplicate persons");
+        }
+    }
+
+    /**
+     * Signals that an operation targeting a specified person in the list would fail because
+     * there is no such matching person in the list.
+     */
+    public static class PersonNotFoundException extends Exception {}
 
 }
