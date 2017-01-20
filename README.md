@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/se-edu/addressbook-level3.svg?branch=master)](https://travis-ci.org/se-edu/addressbook-level3)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d4a0954383444a8db8cb26e5f5b7302c)](https://www.codacy.com/app/se-edu/addressbook-level3?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=se-edu/addressbook-level3&amp;utm_campaign=Badge_Grade)
 
 # AddressBook (Level 3)
