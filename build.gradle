@@ -22,13 +22,9 @@ dependencies {
 }
 
 test {
-    /**
-     * Logs the name of each test case before running it in the a CI environment (like travis)
-     * This assures everyone reading through the Travis CI job log that all tests have been
-     * executed and the lack of output is the tests passing.
-     *
-     * Without this, the job log of each build will look very empty (no news is good news concept)
-     * and one might suspect the integrity of the new build even if the build passed
+    /*
+     * Prints the currently running test's name in the CI's build log, 
+     * so that we can check if tests are being silently skipped or stalling the build.
      */
     if (System.env.'CI') {
        beforeTest { descriptor ->
