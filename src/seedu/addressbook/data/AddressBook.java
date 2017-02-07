@@ -83,26 +83,10 @@ public class AddressBook {
     }
 
     /**
-     * Adds a tag to the list of tags present in the address book.
-     *
-     * @throws DuplicateTagException if an equivalent tag already exists.
-     */
-    public void addTag(Tag toAdd) throws DuplicateTagException {
-        allTags.add(toAdd);
-    }
-
-    /**
      * Checks if an equivalent person exists in the address book.
      */
     public boolean containsPerson(ReadOnlyPerson key) {
         return allPersons.contains(key);
-    }
-
-    /**
-     * Checks if an equivalent person exists in the address book.
-     */
-    public boolean containsTag(Tag key) {
-        return allTags.contains(key);
     }
 
     /**
@@ -112,15 +96,6 @@ public class AddressBook {
      */
     public void removePerson(ReadOnlyPerson toRemove) throws PersonNotFoundException {
         allPersons.remove(toRemove);
-    }
-
-    /**
-     * Removes the equivalent Tag from the address book.
-     *
-     * @throws TagNotFoundException if no such Tag could be found.
-     */
-    public void removeTag(Tag toRemove) throws TagNotFoundException {
-        allTags.remove(toRemove);
     }
 
     /**
