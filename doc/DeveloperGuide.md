@@ -47,7 +47,7 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | find a person by name | locate details of persons without having to go through the entire list
 `* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
 `*` | user with many persons in the address book | sort persons by name | locate a person easily
-
+`*` | user | sort persons with priority | easily find the people i contact frequently
 
 ## Appendix B : Use Cases
 
@@ -73,6 +73,22 @@ Use case ends.
 
 > 3a1. AddressBook shows an error message <br>
   Use case resumes at step 2
+  
+#### Use case: Rename tag
+
+**MSS**
+
+1. User requests to rename the tag friends to buddies
+2. AddressBook confirms the change with the User
+3. User confirms the change
+4. AddressBook turns the tag friends into buddies
+Use case ends
+
+**Extensions**
+
+3a. User denies the change
+
+> Use case ends
 
 ## Appendix C : Non Functional Requirements
 
@@ -80,6 +96,7 @@ Use case ends.
 2. Should be able to hold up to 1000 persons.
 3. Should come with automated unit tests and open source code.
 4. Should favor DOS style commands over Unix-style commands.
+5. Should backup the addressbook data to avoid wrongly operation
 
 ## Appendix D : Glossary
 
