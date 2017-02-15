@@ -112,6 +112,8 @@ Use case ends.
 2. Should be able to hold up to 1000 persons.
 3. Should come with automated unit tests and open source code.
 4. Should favor DOS style commands over Unix-style commands.
+5.should be able to hold at least 100 tags for each person
+6.should respond to a user request in 0.5 second 
 
 ## Appendix D : Glossary
 
