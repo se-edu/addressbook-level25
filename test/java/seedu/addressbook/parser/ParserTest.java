@@ -90,7 +90,7 @@ public class ParserTest {
         final DeleteCommand result = parseAndAssertCommandType(input, DeleteCommand.class);
         assertEquals(result.getTargetIndex(), testIndex);
     }
-
+    
     @Test
     public void viewCommand_noArgs() {
         final String[] inputs = { "view", "view " };
@@ -271,6 +271,120 @@ public class ParserTest {
         }
         return addCommand;
     }
+    
+    /**
+     * Test edit person command
+     */
+    
+    @Test
+    public void editCommand_noArgs() {
+        final String[] inputs = { "edit", "edit " };
+        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        parseAndAssertIncorrectWithMessage(resultMessage, inputs);
+    }
+    
+    @Test
+    public void editCommand_argsIsNotSingleNumber() {
+        final String[] inputs = { "edit notAnumber ", "edit 8*wh12"};
+        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        parseAndAssertIncorrectWithMessage(resultMessage, inputs);
+    }
+    
+    @Test
+    public void editCommand_noUpdateInformation() {
+        final String[] inputs = { "edit 1", "edit 1 ", "edit 1   ", "edit 1      " };
+        final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+        parseAndAssertIncorrectWithMessage(resultMessage, inputs);
+    }
+    
+    @Test
+    public void editCommand_invalidArgs() {
+        final String[] inputs = { "edit 1 %$notName^&", "edit 1 p/notPhone", "edit 1 e/noteamil", "edit 1 t/invalid_-[.tag" };
+        final String[] expects = {Name.MESSAGE_NAME_CONSTRAINTS, Phone.MESSAGE_PHONE_CONSTRAINTS, 
+                Email.MESSAGE_EMAIL_CONSTRAINTS, Tag.MESSAGE_TAG_CONSTRAINTS};
+        for(int i = 0; i < inputs.length; i++) {
+            parseAndAssertIncorrectWithMessage(expects[i], inputs[i]);
+        }
+    }
+    
+    @Test
+    public void editCommand_validName_parseCorrectly() {
+        String input = String.format("edit 1 %1$s", Name.EXAMPLE);
+        final EditCommand result = parseAndAssertCommandType(input, EditCommand.class);
+        assertEquals(result.getTargetIndex(), 1);
+        assertEquals(result.getToUpdateName().toString(), Name.EXAMPLE);
+    }
+    
+    @Test
+    public void editCommand_validPhone_parseCorrectly() {
+        String input1 = String.format("edit 1 pp/%1$s", Phone.EXAMPLE);
+        final EditCommand result1 = parseAndAssertCommandType(input1, EditCommand.class);
+        assertEquals(result1.getToUpdatePhone().toString(), Phone.EXAMPLE);
+        assertEquals(result1.getTargetIndex(), 1);
+        assertTrue(result1.getToUpdatePhone().isPrivate());
+        
+        String input2 = String.format("edit 1 p/%1$s", Phone.EXAMPLE);
+        final EditCommand result2 = parseAndAssertCommandType(input2, EditCommand.class);
+        assertEquals(result2.getToUpdatePhone().toString(), Phone.EXAMPLE);
+        assertEquals(result2.getTargetIndex(), 1);
+        assertFalse(result2.getToUpdatePhone().isPrivate());
+    }
+    
+    @Test
+    public void editCommand_validEmail_parseCorrectly() {
+        String input1 = String.format("edit 1 pe/%1$s", Email.EXAMPLE);
+        final EditCommand result1 = parseAndAssertCommandType(input1, EditCommand.class);
+        assertEquals(result1.getToUpdateEmail().toString(), Email.EXAMPLE);
+        assertEquals(result1.getTargetIndex(), 1);
+        assertTrue(result1.getToUpdateEmail().isPrivate());
+        
+        String input2 = String.format("edit 1 e/%1$s", Email.EXAMPLE);
+        final EditCommand result2 = parseAndAssertCommandType(input2, EditCommand.class);
+        assertEquals(result2.getToUpdateEmail().toString(), Email.EXAMPLE);
+        assertEquals(result2.getTargetIndex(), 1);
+        assertFalse(result2.getToUpdateEmail().isPrivate());
+    }
+    
+    @Test
+    public void editCommand_validAddress_parseCorrectly() {
+        String input1 = String.format("edit 1 pa/%1$s", Address.EXAMPLE);
+        final EditCommand result1 = parseAndAssertCommandType(input1, EditCommand.class);
+        assertEquals(result1.getToUpdateAddress().toString(), Address.EXAMPLE);
+        assertEquals(result1.getTargetIndex(), 1);
+        assertTrue(result1.getToUpdateAddress().isPrivate());
+        
+        String input2 = String.format("edit 1 a/%1$s", Address.EXAMPLE);
+        final EditCommand result2 = parseAndAssertCommandType(input2, EditCommand.class);
+        assertEquals(result2.getToUpdateAddress().toString(), Address.EXAMPLE);
+        assertEquals(result2.getTargetIndex(), 1);
+        assertFalse(result2.getToUpdateAddress().isPrivate());
+    }
+    
+    @Test
+    public void editCommand_validTags_parseCorrectly() {
+        String input1 = "edit 1 t/tag1";
+        try {
+            UniqueTagList expect1 = new UniqueTagList(new Tag("tag1"));
+            final EditCommand result1 = parseAndAssertCommandType(input1, EditCommand.class);
+            assertEquals(result1.getToUpdateTags(), expect1);
+            assertEquals(result1.getTargetIndex(), 1);
+        } catch (IllegalValueException e) {
+            fail();
+        }
+        
+        String input2 = "edit 1 t/tag1 t/tag2";
+        try {
+            UniqueTagList expect2 = new UniqueTagList(new Tag("tag1"), new Tag("tag2"));
+            final EditCommand result2 = parseAndAssertCommandType(input2, EditCommand.class);
+            assertEquals(result2.getToUpdateTags(), expect2);
+            assertEquals(result2.getTargetIndex(), 1);
+        } catch (IllegalValueException e) {
+            fail();
+        }
+    }
+    
+    
+    
 
     /**
      * Utility methods

@@ -1,6 +1,6 @@
 # User Guide
 
-This product is not meant for end-users and therefore there is no user-friendly installer. 
+This product is not meant for end-users and therefore there is no user-friendly installer.
 Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn how to set up the project.
 
 ## Starting the program
@@ -16,22 +16,48 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 Format: `help`
 
 > Help is also shown if you enter an incorrect command e.g. `abcd`
- 
+
 ## Adding a person: `add`
 Adds a person to the address book<br>
-Format: `add NAME [p]p/PHONE_NUMBER [p]e/EMAIL [p]a/ADDRESS [t/TAG]...` 
- 
-> Words in `UPPER_CASE` are the parameters, items in `SQUARE_BRACKETS` are optional, 
-> items with `...` after them can have multiple instances. Order of parameters are fixed. 
-> 
+Format: `add NAME [p]p/PHONE_NUMBER [p]e/EMAIL [p]a/ADDRESS [t/TAG]...`
+
+> Words in `UPPER_CASE` are the parameters, items in `SQUARE_BRACKETS` are optional,
+> items with `...` after them can have multiple instances. Order of parameters are fixed.
+>
 > Put a `p` before the phone / email / address prefixes to mark it as `private`. `private` details can only
 > be seen using the `viewall` command.
-> 
+>
 > Persons can have any number of tags (including 0)
 
-Examples: 
+Examples:
 * `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
 * `add Betsy Crowe pp/1234567 e/betsycrowe@gmail.com pa/Newgate Prison t/criminal t/friend`
+
+## Editing a person: `edit`
+Edit information of the specified person.<br>
+Format: 
+
+- `edit INDEX NEW_NAME`
+- `edit INDEX [p]p/PHONE_NUMBER`
+- `edit INDEX [p]e/EMAIL`
+- `edit INDEX [p]a/ADDRESS`
+- `edit INDEX [t/TAG]...`
+
+> Edit the person at the specified `INDEX`. 
+> The index refers to the index number shown in the most recent listing.
+>
+> Words in `UPPER_CASE` are the parameters (required), items in `SQUARE_BRACKETS` are optional,
+> items with `...` after them can have multiple instances.
+> 
+> Put a `p` before the phone / email / address prefixes to change it to `private`.
+
+Examples: 
+
+* `edit 1 John`<br>
+  Edit the name of the first person in recent listing to 'John'
+* `edit 1 pp/12345678`<br> 
+  `edit 1 p/12345678`<br>
+  Edit the Phone of the first person in recent listing to 'John' (Set it to private for the first command)
 
 ## Listing all persons : `list`
 Shows a list of all persons in the address book.<br>
@@ -41,10 +67,22 @@ Format: `list`
 Finds persons whose names contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
-> The search is case sensitive, the order of the keywords does not matter, only the name is searched, 
+> The search is case sensitive, the order of the keywords does not matter, only the name is searched,
 and persons matching at least one keyword will be returned (i.e. `OR` search).
 
+## Finding all persons containing any letters in their name: `findSubSet`
+Finds persons whose start of the names contain any of the given letters.<br>
+Format: `find LETTERS`
+
+> The search is case sensitive, there is no limit in the amount of characters you can specify, the order of the letters matters, and persons containing the given letters will be returned.
+
 Examples: 
+* `find John`<br>
+  Returns `John Doe` but not `john`
+* `find B`<br>
+  Returns Any person having names `Betty` or `Brandy`
+
+Examples:
 * `find John`<br>
   Returns `John Doe` but not `john`
 * `find Betsy Tim John`<br>
@@ -54,14 +92,14 @@ Examples:
 Deletes the specified person from the address book. Irreversible.<br>
 Format: `delete INDEX`
 
-> Deletes the person at the specified `INDEX`. 
+> Deletes the person at the specified `INDEX`.
   The index refers to the index number shown in the most recent listing.
 
-Examples: 
+Examples:
 * `list`<br>
   `delete 2`<br>
   Deletes the 2nd person in the address book.
-* `find Betsy`<br> 
+* `find Betsy`<br>
   `delete 1`<br>
   Deletes the 1st person in the results of the `find` command.
 
@@ -69,14 +107,14 @@ Examples:
 Displays the non-private details of the specified person.<br>
 Format: `view INDEX`
 
-> Views the person at the specified `INDEX`. 
+> Views the person at the specified `INDEX`.
   The index refers to the index number shown in the most recent listing.
 
-Examples: 
+Examples:
 * `list`<br>
   `view 2`<br>
   Views the 2nd person in the address book.
-* `find Betsy` <br> 
+* `find Betsy` <br>
   `view 1`<br>
   Views the 1st person in the results of the `find` command.
 
@@ -84,26 +122,30 @@ Examples:
 Displays all details (including private details) of the specified person.<br>
 Format: `viewall INDEX`
 
-> Views all details of the person at the specified `INDEX`. 
+> Views all details of the person at the specified `INDEX`.
   The index refers to the index number shown in the most recent listing.
 
-Examples: 
+Examples:
 * `list`<br>
   `viewall 2`<br>
   Views all details of the 2nd person in the address book.
-* `find Betsy`<br> 
+* `find Betsy`<br>
   `viewall 1`<br>
   Views all details of the 1st person in the results of the `find` command.
 
+## Sort all entries: `sort`
+Sort all entries from the address book.<br>
+Format `sort`
+
 ## Clearing all entries : `clear`
 Clears all entries from the address book.<br>
-Format: `clear`  
+Format: `clear`
 
 ## Exiting the program : `exit`
 Exits the program.<br>
-Format: `exit`  
+Format: `exit`
 
-## Saving the data 
+## Saving the data
 Address book data are saved in the hard disk automatically after any command that changes the data.<br>
 There is no need to save manually.
 
@@ -113,5 +155,5 @@ You can change the location by specifying the file path as a program argument.<b
 
 > The file name must end in `.txt` for it to be acceptable to the program.
 >
-> When running the program inside Eclipse, you can 
+> When running the program inside Eclipse, you can
   [set command line parameters before running the program](http://stackoverflow.com/questions/7574543/how-to-pass-console-arguments-to-application-in-eclipse).

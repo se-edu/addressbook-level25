@@ -15,6 +15,7 @@ import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 public class Parser {
 
     public static final Pattern PERSON_INDEX_ARGS_FORMAT = Pattern.compile("(?<targetIndex>.+)");
+    public static final Pattern PERSON_INDEX_ARGS_IGNORE_OTHERS = Pattern.compile("(?<targetIndex>.+?)\\s+");
 
     public static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
@@ -25,6 +26,13 @@ public class Parser {
                     + " (?<isEmailPrivate>p?)e/(?<email>[^/]+)"
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
+    
+    public static final Pattern PERSON_DATA_ARGS_NAME_FORMAT = Pattern.compile("(?<name>[^/]+)");
+    public static final Pattern PERSON_DATA_ARGS_PHONE_FORMAT = Pattern.compile("(?<isPhonePrivate>p?)p/(?<phone>[^/]+)");
+    public static final Pattern PERSON_DATA_ARGS_EMAIL_FORMAT = Pattern.compile("(?<isEmailPrivate>p?)e/(?<email>[^/]+)");
+    public static final Pattern PERSON_DATA_ARGS_ADDRESS_FORMAT = Pattern.compile("(?<isAddressPrivate>p?)a/(?<address>[^/]+)");
+    public static final Pattern PERSON_DATA_ARGS_TAGS_FORMAT = Pattern.compile("(?<tagArguments>(?: t/[^/]+)*)");
+    
 
 
     /**
@@ -62,12 +70,18 @@ public class Parser {
 
             case DeleteCommand.COMMAND_WORD:
                 return prepareDelete(arguments);
+                
+            case EditCommand.COMMAND_WORD:
+                return prepareEdit(arguments);
 
             case ClearCommand.COMMAND_WORD:
                 return new ClearCommand();
 
             case FindCommand.COMMAND_WORD:
                 return prepareFind(arguments);
+                
+            case FindSubSetCommand.COMMAND_WORD:
+                return prepareFindSubSet(arguments);
 
             case ListCommand.COMMAND_WORD:
                 return new ListCommand();
@@ -80,6 +94,9 @@ public class Parser {
 
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
+
+            case SortCommand.COMMAND_WORD:
+            	return new SortCommand();
 
             case HelpCommand.COMMAND_WORD: // Fallthrough
             default:
@@ -138,6 +155,44 @@ public class Parser {
         // replace first delimiter prefix, then split
         final Collection<String> tagStrings = Arrays.asList(tagArguments.replaceFirst(" t/", "").split(" t/"));
         return new HashSet<>(tagStrings);
+    }
+    
+    /**
+     * Parses arguments in the context of the edit person command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareEdit(String args) {
+        try {
+            final int targetIndex = findDisplayedIndexInArgs(args);
+            final String removeArgsIndex = args.replaceFirst(String.valueOf(targetIndex), ""); // remove the index
+            final Matcher nameMatcher = PERSON_DATA_ARGS_NAME_FORMAT.matcher(removeArgsIndex.trim());
+            final Matcher phoneMatcher = PERSON_DATA_ARGS_PHONE_FORMAT.matcher(removeArgsIndex.trim());
+            final Matcher emailMatcher = PERSON_DATA_ARGS_EMAIL_FORMAT.matcher(removeArgsIndex.trim());
+            final Matcher addressMatcher = PERSON_DATA_ARGS_ADDRESS_FORMAT.matcher(removeArgsIndex.trim());
+            final Matcher tagsMatcher = PERSON_DATA_ARGS_TAGS_FORMAT.matcher(" " + removeArgsIndex.trim());
+            return new EditCommand(
+                    targetIndex,
+                    
+                    nameMatcher.matches() ? nameMatcher.group("name") : "",
+
+                    phoneMatcher.matches() ? phoneMatcher.group("phone") : "",
+                    isPrivatePrefixPresent(phoneMatcher.matches() ? phoneMatcher.group("isPhonePrivate") : ""),
+
+                    emailMatcher.matches() ? emailMatcher.group("email") : "",
+                    isPrivatePrefixPresent(emailMatcher.matches() ? emailMatcher.group("isEmailPrivate") : ""),
+
+                    addressMatcher.matches() ? addressMatcher.group("address") : "",
+                    isPrivatePrefixPresent(addressMatcher.matches() ? addressMatcher.group("isAddressPrivate") : ""),
+
+                    getTagsFromArgs(tagsMatcher.matches() ? tagsMatcher.group("tagArguments") : "")
+            );
+        } catch (ParseException | NumberFormatException e) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        }
     }
 
 
@@ -205,6 +260,22 @@ public class Parser {
         }
         return Integer.parseInt(matcher.group("targetIndex"));
     }
+    
+    /**
+     * Find a single index number in Displayed args.
+     *
+     * @param args arguments string to find a index number
+     * @return the parsed index number
+     * @throws ParseException if no region of the args string could be found for the index
+     * @throws NumberFormatException the args string region is not a valid number
+     */
+    private int findDisplayedIndexInArgs(String args) throws ParseException, NumberFormatException {
+        final Matcher matcher = PERSON_INDEX_ARGS_IGNORE_OTHERS.matcher(args.trim());
+        if (!matcher.find()) {
+            throw new ParseException("Could not find index number to parse");
+        }
+        return Integer.parseInt(matcher.group("targetIndex"));
+    }
 
 
     /**
@@ -224,6 +295,26 @@ public class Parser {
         final String[] keywords = matcher.group("keywords").split("\\s+");
         final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
         return new FindCommand(keywordSet);
+    }
+
+
+    /**
+     * Parses arguments in the context of the find person command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareFindSubSet(String args) {
+        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    FindSubSetCommand.MESSAGE_USAGE));
+        }
+
+        // keywords delimited by whitespace
+        final String[] keywords = matcher.group("keywords").split("\\s+");
+        final Set<String> keywordSet = new HashSet<>(Arrays.asList(keywords));
+        return new FindSubSetCommand(keywordSet);
     }
 
 

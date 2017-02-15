@@ -107,6 +107,13 @@ public class UniquePersonList implements Iterable<Person> {
     }
 
     /**
+     * Sort the list
+     */
+	public void sort() {
+		Collections.sort(internalList, Person.PersonComparator);
+	}
+
+    /**
      * Clears all persons in list.
      */
     public void clear() {
@@ -130,5 +137,4 @@ public class UniquePersonList implements Iterable<Person> {
     public int hashCode() {
         return internalList.hashCode();
     }
-
 }

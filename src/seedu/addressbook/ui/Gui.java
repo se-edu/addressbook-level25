@@ -8,6 +8,8 @@ import seedu.addressbook.Main;
 
 import java.io.File;
 import java.io.IOException;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 
 /**
  * The GUI of the App
@@ -16,9 +18,14 @@ public class Gui {
 
     /** Offset required to convert between 1-indexing and 0-indexing.  */
     public static final int DISPLAYED_INDEX_OFFSET = 1;
+    public static final String COMMAND_WORD = "fullscreen";
 
-    public static final int INITIAL_WINDOW_WIDTH = 800;
-    public static final int INITIAL_WINDOW_HEIGHT = 600;
+    private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+    private double width = screenSize.getWidth();
+    private double height = screenSize.getHeight() * 0.923;
+    
+    public final int INITIAL_WINDOW_WIDTH = (int)width;
+    public final int INITIAL_WINDOW_HEIGHT = (int)height;
     private final Logic logic;
 
     private MainWindow mainWindow;
@@ -50,5 +57,4 @@ public class Gui {
         mainWindow.setMainApp(mainApp);
         return mainWindow;
     }
-
 }
