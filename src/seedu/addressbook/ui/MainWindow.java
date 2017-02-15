@@ -18,6 +18,11 @@ import static seedu.addressbook.common.Messages.*;
 /**
  * Main Window of the GUI.
  */
+
+/**
+ * Personal Comments: MainWindow of App should contain code to print out and reflect necessary to windows only. The GUI should decide what to show.
+ * Commands to be removed and placed in GUI: setLogic, setMainApp, onCommand, exitApp, onExitCommand etc. (Basically everything except private void display(String... messages))
+ */
 public class MainWindow {
 
     private Logic logic;

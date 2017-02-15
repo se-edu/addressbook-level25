@@ -5,6 +5,7 @@ import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.parser.Parser;
+import seedu.addressbook.storage.Storage;
 import seedu.addressbook.storage.StorageFile;
 
 import java.util.Collections;
@@ -16,16 +17,16 @@ import java.util.Optional;
  */
 public class Logic {
 
-
-    private StorageFile storage;
     private AddressBook addressBook;
+    private Storage storageInterface;
+    private StorageFile storage;
 
     /** The list of person shown to the user most recently.  */
     private List<? extends ReadOnlyPerson> lastShownList = Collections.emptyList();
 
     public Logic() throws Exception{
         setStorage(initializeStorage());
-        setAddressBook(storage.load());
+        setAddressBook(storageInterface.load());
     }
 
     Logic(StorageFile storageFile, AddressBook addressBook){
@@ -33,8 +34,11 @@ public class Logic {
         setAddressBook(addressBook);
     }
 
+    /**
+     * Links the Logic's dependency to Storage interface in accordance to dependency inversion principle
+     */
     void setStorage(StorageFile storage){
-        this.storage = storage;
+        this.storageInterface = storage; 
     }
 
     void setAddressBook(AddressBook addressBook){
@@ -46,11 +50,11 @@ public class Logic {
      * @throws StorageFile.InvalidStorageFilePathException if the target file path is incorrect.
      */
     private StorageFile initializeStorage() throws StorageFile.InvalidStorageFilePathException {
-        return new StorageFile();
+        return storage = new StorageFile();
     }
 
     public String getStorageFilePath() {
-        return storage.getPath();
+        return storageInterface.getPath();
     }
 
     /**
@@ -85,7 +89,7 @@ public class Logic {
     private CommandResult execute(Command command) throws Exception {
         command.setData(addressBook, lastShownList);
         CommandResult result = command.execute();
-        storage.save(addressBook);
+        storageInterface.save(addressBook);
         return result;
     }
 
@@ -96,4 +100,6 @@ public class Logic {
             lastShownList = personList.get();
         }
     }
+
+
 }
