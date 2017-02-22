@@ -45,6 +45,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a new person |
 `* * *` | user | delete a person | remove entries that I no longer need
 `* * *` | user | find a person by name | locate details of persons without having to go through the entire list
+`* * *` | user | update a contact's particulars if he changed his phone number, email or address | prevent myself from going through the trouble of deleting and reading that person as a new contact|
+`* * *` | user | be able to group contacts of similar type such as same class, same office | disseminate information to that specific group of people without finding them one by one
 `* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
 `*` | user with many persons in the address book | sort persons by name | locate a person easily
 
@@ -73,6 +75,18 @@ Use case ends.
 
 > 3a1. AddressBook shows an error message <br>
   Use case resumes at step 2
+  
+#### Use case: Rename existing tag
+
+**MSS**
+
+1. User requests to rename an existing tag
+2a. AddressBook confirms the existence of the tag to be renamed
+2b. AddressBook shows an error message <br> if the tag does not exist in the first place
+3. AddressBook confirms with user to rename the existing tag
+4. User confirms to rename the existing tag
+5. AddressBook renames the selected existing tag <br>
+Use case ends. 
 
 ## Appendix C : Non Functional Requirements
 
@@ -80,7 +94,8 @@ Use case ends.
 2. Should be able to hold up to 1000 persons.
 3. Should come with automated unit tests and open source code.
 4. Should favor DOS style commands over Unix-style commands.
-
+5. Should be user friendly with a specific set of instruction manual
+6. Should be clean coded for further developers
 ## Appendix D : Glossary
 
 ##### Mainstream OS
