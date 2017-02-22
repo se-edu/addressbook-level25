@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.SepiaTone?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox stylesheets="@/seedu/addressbook/ui/DarkTheme.css" alignment="center" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="seedu.addressbook.ui.MainWindow">
+<VBox alignment="center" stylesheets="@/seedu/addressbook/ui/DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="seedu.addressbook.ui.MainWindow">
 
     <children>
 
@@ -14,6 +18,33 @@
 
         <TextArea fx:id="outputConsole" editable="false" wrapText="true" VBox.vgrow="ALWAYS">
         </TextArea>
+      <GridPane prefHeight="37.0" prefWidth="524.0">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="helpButtonClick" mnemonicParsing="false" onAction="#onHelpButtonClick" prefHeight="26.0" prefWidth="168.0" text="Help">
+               <effect>
+                  <SepiaTone />
+               </effect>
+            </Button>
+            <Button fx:id="listButtonClick" mnemonicParsing="false" onAction="#onListButtonClick" prefHeight="26.0" prefWidth="165.0" text="List" GridPane.columnIndex="1">
+               <effect>
+                  <SepiaTone />
+               </effect>
+            </Button>
+            <Button fx:id="exitButtonClick" mnemonicParsing="false" onAction="#onExitButtonClick" prefHeight="26.0" prefWidth="167.0" text="Exit" GridPane.columnIndex="2">
+               <effect>
+                  <SepiaTone level="0.16" />
+               </effect>
+            </Button>
+         </children>
+      </GridPane>
 
     </children>
 
