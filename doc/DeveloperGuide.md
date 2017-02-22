@@ -47,6 +47,8 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | find a person by name | locate details of persons without having to go through the entire list
 `* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
 `*` | user with many persons in the address book | sort persons by name | locate a person easily
+`* * *` | user | update existing contact member's details | update a person's particulars without having to add a new contact for existing person every time. 
+`*` | user | categorize my contacts as personal, official ect | Easily access the person's details
 
 
 ## Appendix B : Use Cases
@@ -61,6 +63,7 @@ Priority | As a ... | I want to ... | So that I can...
 2. AddressBook shows a list of persons
 3. User requests to delete a specific person in the list
 4. AddressBook deletes the person <br>
+5. User updates an existing tag name with a new tag name
 Use case ends.
 
 **Extensions**
@@ -80,6 +83,8 @@ Use case ends.
 2. Should be able to hold up to 1000 persons.
 3. Should come with automated unit tests and open source code.
 4. Should favor DOS style commands over Unix-style commands.
+5. Storage file must be backed up.
+6. Program should allow software engineers to develop extensions
 
 ## Appendix D : Glossary
 
