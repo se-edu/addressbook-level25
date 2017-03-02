@@ -48,7 +48,7 @@ public class StorageFile extends Storage {
             throw new RuntimeException("jaxb initialisation error");
         }
 
-        path = Paths.get(filePath);
+        setPath(Paths.get(filePath));
         if (!isValidPath(path)) {
             throw new InvalidStorageFilePathException("Storage file should end with '.txt'");
         }
