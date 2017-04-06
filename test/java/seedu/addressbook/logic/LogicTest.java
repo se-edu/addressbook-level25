@@ -33,7 +33,7 @@ public class LogicTest {
     private Logic logic;
 
     @Before
-    public void setup() throws Exception {
+    public void setUp() throws Exception {
         saveFile = new StorageFile(saveFolder.newFile("testSaveFile.txt").getPath());
         addressBook = new AddressBook();
         saveFile.save(addressBook);
