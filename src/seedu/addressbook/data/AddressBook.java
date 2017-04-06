@@ -109,8 +109,14 @@ public class AddressBook {
     /**
      * Defensively copied UniquePersonList of all persons in the address book at the time of the call.
      */
-    public UniquePersonList getAllPersons() {
+    public UniquePersonList getAllPersonsCopy() {
         return new UniquePersonList(allPersons);
+    }
+    /**
+     * Return list of all person
+     */
+    public UniquePersonList getAllPersons() {
+        return allPersons;
     }
 
     /**
