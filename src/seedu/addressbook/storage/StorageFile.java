@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 /**
  * Represents the file used to store address book data.
  */
-public class StorageFile {
+public class StorageFile extends Storage {
 
     /** Default file path used if the user doesn't provide the file name. */
     public static final String DEFAULT_STORAGE_FILEPATH = "addressbook.txt";
@@ -24,24 +24,6 @@ public class StorageFile {
      * More info https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html
      */
 
-    /**
-     * Signals that the given file path does not fulfill the storage filepath constraints.
-     */
-    public static class InvalidStorageFilePathException extends IllegalValueException {
-        public InvalidStorageFilePathException(String message) {
-            super(message);
-        }
-    }
-
-    /**
-     * Signals that some error has occured while trying to convert and read/write data between the application
-     * and the storage file.
-     */
-    public static class StorageOperationException extends Exception {
-        public StorageOperationException(String message) {
-            super(message);
-        }
-    }
 
     private final JAXBContext jaxbContext;
 
