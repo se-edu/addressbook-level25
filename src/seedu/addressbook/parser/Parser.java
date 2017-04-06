@@ -26,16 +26,6 @@ public class Parser {
                     + " (?<isAddressPrivate>p?)a/(?<address>[^/]+)"
                     + "(?<tagArguments>(?: t/[^/]+)*)"); // variable number of tags
 
-
-    /**
-     * Signals that the user input could not be parsed.
-     */
-    public static class ParseException extends Exception {
-        ParseException(String message) {
-            super(message);
-        }
-    }
-
     /**
      * Used for initial separation of command word and args.
      */
@@ -226,5 +216,12 @@ public class Parser {
         return new FindCommand(keywordSet);
     }
 
-
+    /**
+     * Signals that the user input could not be parsed.
+     */
+    public static class ParseException extends Exception {
+        ParseException(String message) {
+            super(message);
+        }
+    }
 }
