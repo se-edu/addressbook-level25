@@ -15,10 +15,9 @@ import java.nio.file.Paths;
 /**
  * Represents the file used to store address book data.
  */
-public class StorageFile {
+public class StorageFile implements Storage {
 
-    /** Default file path used if the user doesn't provide the file name. */
-    public static final String DEFAULT_STORAGE_FILEPATH = "addressbook.txt";
+    
 
     /* Note: Note the use of nested classes below.
      * More info https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html
@@ -78,12 +77,11 @@ public class StorageFile {
         return filePath.toString().endsWith(".txt");
     }
 
-    /**
-     * Saves all data to this storage file.
-     *
-     * @throws StorageOperationException if there were errors converting and/or storing data to file.
-     */
-    public void save(AddressBook addressBook) throws StorageOperationException {
+    /* (non-Javadoc)
+	 * @see seedu.addressbook.storage.Storage#save(seedu.addressbook.data.AddressBook)
+	 */
+    @Override
+	public void save(AddressBook addressBook) throws StorageOperationException {
 
         /* Note: Note the 'try with resource' statement below.
          * More info: https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html
@@ -103,12 +101,11 @@ public class StorageFile {
         }
     }
 
-    /**
-     * Loads data from this storage file.
-     *
-     * @throws StorageOperationException if there were errors reading and/or converting data from file.
-     */
-    public AddressBook load() throws StorageOperationException {
+    /* (non-Javadoc)
+	 * @see seedu.addressbook.storage.Storage#load()
+	 */
+    @Override
+	public AddressBook load() throws StorageOperationException {
         try (final Reader fileReader =
                      new BufferedReader(new FileReader(path.toFile()))) {
 
@@ -141,7 +138,11 @@ public class StorageFile {
         }
     }
 
-    public String getPath() {
+    /* (non-Javadoc)
+	 * @see seedu.addressbook.storage.Storage#getPath()
+	 */
+    @Override
+	public String getPath() {
         return path.toString();
     }
 
