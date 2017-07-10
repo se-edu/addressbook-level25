@@ -44,7 +44,7 @@ public class StorageFileTest {
     @Test
     public void load_invalidFormat_exceptionThrown() throws Exception {
         // The file contains valid xml data, but does not match the AddressBook class
-        StorageFile storage = getStorage("InvalidData.txt");
+        Storage storage = getStorage("InvalidData.txt");
         thrown.expect(StorageOperationException.class);
         storage.load();
     }
@@ -61,7 +61,7 @@ public class StorageFileTest {
 
     @Test
     public void save_nullAddressBook_exceptionThrown() throws Exception {
-        StorageFile storage = getTempStorage();
+        Storage storage = getTempStorage();
         thrown.expect(NullPointerException.class);
         storage.save(null);
     }
@@ -69,7 +69,7 @@ public class StorageFileTest {
     @Test
     public void save_validAddressBook() throws Exception {
         AddressBook ab = getTestAddressBook();
-        StorageFile storage = getTempStorage();
+        Storage storage = getTempStorage();
         storage.save(ab);
 
         assertStorageFilesEqual(storage, getStorage("ValidData.txt"));
@@ -80,15 +80,15 @@ public class StorageFileTest {
     /**
      * Asserts that the contents of two storage files are the same.
      */
-    private void assertStorageFilesEqual(StorageFile sf1, StorageFile sf2) throws Exception {
+    private void assertStorageFilesEqual(Storage sf1, Storage sf2) throws Exception {
         assertTextFilesEqual(Paths.get(sf1.getPath()), Paths.get(sf2.getPath()));
     }
 
-    private StorageFile getStorage(String fileName) throws Exception {
+    private Storage getStorage(String fileName) throws Exception {
         return new StorageFile(TEST_DATA_FOLDER + "/" + fileName);
     }
 
-    private StorageFile getTempStorage() throws Exception {
+    private Storage getTempStorage() throws Exception {
         return new StorageFile(testFolder.getRoot().getPath() + "/" + "temp.txt");
     }
 
