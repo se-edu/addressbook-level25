@@ -44,7 +44,7 @@
 
 ## Testing
 
-* In Eclipse, right-click on the `test/java` folder and choose `Run as` > `JUnit Test`
+* In IntelliJ, right-click on the `test` folder and choose `Run 'All Tests'`
 
 ## Appendix A : User Stories
 
