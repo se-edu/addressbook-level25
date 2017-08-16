@@ -33,11 +33,11 @@
    2. Press <kbd>ALT</kbd>+<kbd>ENTER</kbd> and select `Add 'JUnit4' to classpath`
    3. Select `Use 'JUnit4' from IntelliJ IDEA distribution` and click `OK`
 10. Set the working directory of tests to the project directory
-   1. Ensure that you have run all the tests cases (if not, right-click the `test` folder, and click `Run 'All Tests'`)
-   2. Go to `Run` -> `Edit Configurations...`
-   3. On the list at the left, ensure that `All in test` is selected
-   4. Under `Configuration`, change the `Working directory` to the `addressbook-level3` folder
-   5. Click `OK`
+    1. Ensure that you have run all the tests cases (if not, right-click the `test` folder, and click `Run 'All Tests'`)
+    2. Go to `Run` -> `Edit Configurations...`
+    3. On the list at the left, ensure that `All in test` is selected
+    4. Under `Configuration`, change the `Working directory` to the `addressbook-level3` folder
+    5. Click `OK`
 
 ## Design
 <img src="images/mainClassDiagram.png"/>
