@@ -12,27 +12,39 @@
 
 #### Prerequisites
 
-1. **JDK 8** or later
-2. **Eclipse** IDE
-3. **e(fx)clipse** plugin for Eclipse (Do the steps 2 onwards given in
-   [this page](http://www.eclipse.org/efxclipse/install.html#for-the-ambitious))
+* JDK 8 or later
+* IntelliJ IDE
 
+#### Importing the project into IntelliJ
 
-#### Importing the project into Eclipse
-
-0. Fork this repo, and clone the fork to your computer
-1. Open Eclipse (Note: Ensure you have installed the **e(fx)clipse plugin** as given in the prerequisites above)
-2. Click `File` > `Import`
-3. Click `General` > `Existing Projects into Workspace` > `Next`
-4. Click `Browse`, then locate the project's directory
-5. Click `Finish`
+1. Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
+2. Set up the correct JDK version
+   1. Click `Configure` > `Project Defaults` > `Project Structure`
+   2. If JDK 8 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 8.
+   3. Click `OK`.
+3. Click `Import Project`
+4. Locate the project directory and click `OK`
+5. Select `Create project from existing sources` and click `Next`
+6. Rename the project if you want. Click `Next`
+7. Ensure that your `\src` and `\test\java` folder is checked. Keep clicking `Next`
+8. Click `Finish`
+9. Add JUnit 4 to classpath
+   1. Open any test file in `\test\java` and place your cursor over any `@Test` highlighted in red
+   2. Press <kbd>ALT</kbd>+<kbd>ENTER</kbd> and select `Add 'JUnit4' to classpath`
+   3. Select `Use 'JUnit4' from IntelliJ IDEA distribution` and click `OK`
+10. Set the working directory of tests to the project directory
+    1. Ensure that you have run all the tests cases (if not, right-click the `test` folder, and click `Run 'All Tests'`)
+    2. Go to `Run` -> `Edit Configurations...`
+    3. On the list at the left, ensure that `All in test` is selected
+    4. Under `Configuration`, change the `Working directory` to the `addressbook-level3` folder
+    5. Click `OK`
 
 ## Design
 <img src="images/mainClassDiagram.png"/>
 
 ## Testing
 
-* In Eclipse, right-click on the `test/java` folder and choose `Run as` > `JUnit Test`
+* In IntelliJ, right-click on the `test` folder and choose `Run 'All Tests'`
 
 ## Appendix A : User Stories
 
