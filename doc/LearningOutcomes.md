@@ -84,7 +84,7 @@ Covered by `[LO-Polymorphism]`
 
 **Resources**
 
-* [JavaFX 8 Tutorial](https://se-edu.github.io/se-book/javaTools/javaFXBasic/) adapted with permission from Marco Jakob
+* [JavaFX 8 Tutorial](https://se-edu.github.io/se-book/javaTools/javaFXBasic/)
 
 #### Exercise: Add class-level members
 
