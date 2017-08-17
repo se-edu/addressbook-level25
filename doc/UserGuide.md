@@ -106,13 +106,4 @@ Format: `exit`
 
 ## Saving the data 
 Address book data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
-
-## Changing the save location
-Address book data are saved in a file called `addressbook.txt` in the project root folder.
-You can change the location by specifying the file path as a program argument.<br>
-
-> The file name must end in `.txt` for it to be acceptable to the program.
->
-> When running the program inside IntelliJ, you can
-  [set command line parameters before running the program](https://stackoverflow.com/a/2066465).
+There is no need to save manually. Address book data are saved in a file called `addressbook.txt` in the project root folder.
