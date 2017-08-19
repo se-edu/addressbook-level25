@@ -5,10 +5,11 @@ Please refer to the [Setting up](DeveloperGuide.md#setting-up) section to learn 
 
 ## Starting the program
 
-1. Find the project in the `Project Explorer` or `Package Explorer` (usually located at the left side)
-2. Right click on the project
-3. Click `Run As` > `Java Application` and choose the `Main` class.
-4. The GUI should appear in a few seconds.
+1. Find the project pane (usually located at the left side)
+2. Open up `src/seedu.addressbook` folder
+3. Right click on `Main`
+4. Click `Run Main.main()`
+5. The GUI should appear in a few seconds
 
 <img src="images/Ui.png">
 
@@ -105,13 +106,4 @@ Format: `exit`
 
 ## Saving the data 
 Address book data are saved in the hard disk automatically after any command that changes the data.<br>
-There is no need to save manually.
-
-## Changing the save location
-Address book data are saved in a file called `addressbook.txt` in the project root folder.
-You can change the location by specifying the file path as a program argument.<br>
-
-> The file name must end in `.txt` for it to be acceptable to the program.
->
-> When running the program inside Eclipse, you can 
-  [set command line parameters before running the program](http://stackoverflow.com/questions/7574543/how-to-pass-console-arguments-to-application-in-eclipse).
+There is no need to save manually. Address book data are saved in a file called `addressbook.txt` in the project root folder.

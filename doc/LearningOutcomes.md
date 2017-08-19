@@ -84,11 +84,11 @@ Covered by `[LO-Polymorphism]`
 
 **Resources**
 
-* [JavaFX 8 Tutorial](http://code.makery.ch/library/javafx-8-tutorial/) by Marco Jakob
+* [JavaFX 8 Tutorial](https://se-edu.github.io/se-book/javaTools/javaFXBasic/)
 
 #### Exercise: Add class-level members
 
-* If you are new to JavaFX, follow Marco's tutorial given above.
+* If you are new to JavaFX, follow our tutorial given above.
 * Do some enhancements to the AddressBook GUI. e.g. add an application icon, change size/style 
   
 ------------------------------------------------------------------------------------------------------
