@@ -6,6 +6,7 @@ After studying this code and completing the corresponding exercises, you should 
 1. [Use Non Functional Requirements `[LO-NFR]`](#use-non-functional-requirements-lo-nfr)
 1. [Use Polymorphism `[LO-Polymorphism]`](#use-polymorphism-lo-polymorphism)
 1. [Use abstract classes/methods `[LO-Abstract]`](#use-abstract-classesmethods-lo-abstract)
+1. [Use interfaces `[LO-Interfaces]`](#use-interfaces-lo-interfaces)
 1. [Follow Liskov Substitution Principle `[LO-LSP]`](#follow-liskov-substitution-principle-lo-lsp)
 1. [Use Java-FX for GUI programming `[LO-JavaFx]`](#use-java-fx-for-gui-programming-lo-javafx)
 1. [Analyze Coupling and Cohesion of designs `[LO-CouplingCohesion]`](#analyze-coupling-and-cohesion-of-designs-lo-couplingcohesion)
@@ -85,6 +86,39 @@ Note: There may be better ways to limit file saving to commands that mutate data
 #### Exercise: Make `Command#execute()` method abstract
 
 * Make the `Command#execute()` method abstract (hint: refer to the comment given below the method)
+
+------------------------------------------------------------------------------------------------------
+
+## Use interfaces `[LO-Interfaces]`
+
+Note how the `Person` class implements the `ReadOnlyPerson` interface so that clients who don't need write access to `Person` objects can access `Person` objects through the `ReadOnlyPerson` interface instead.
+<img src="images/ReadOnlyPersonUsage.png" width='500' />
+
+#### References
+
+* [se-edu/se-book: Implementation: OOP: Abstract Interfaces](https://se-edu.github.io/se-book/oopImplementation/interfaces/) 
+
+##### Exercise: Add a `Printable` interface 
+
+* Add a `Printable` interface as follows.<br>
+  <img src="images/PrintableInterface.png" width='400' />
+* `Override` the `getPrintableString` in classes `Name`, `Phone`, `Email`, and `Address` so that each produces a printable string representation of the object. e.g. `Name: John Smith`, `Phone: 12349862`
+* Add the following method in a suitable place of some other class. Note how the method depends on the Interface.
+  
+  ```java
+  /**
+    * Returns a concatenated version of the printable strings of each object.
+    */
+  String getPrintableString(Printable... printables){
+  ```
+  
+  The above method can be used to get a printable string representing a bunch of person details. 
+  For example, you should be able to call that method like this:
+  
+  ```java
+  //p is a Person object
+  return getPrintableString(p.getPhone(), p.getEmail(), p.getAddress()); 
+  ```
 
 ------------------------------------------------------------------------------------------------------
 
