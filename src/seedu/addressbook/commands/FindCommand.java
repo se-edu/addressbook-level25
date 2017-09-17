@@ -23,6 +23,11 @@ public class FindCommand extends Command {
         this.keywords = keywords;
     }
 
+    @Override
+    public boolean isMutating() {
+        return false;
+    }
+
     /**
      * Returns copy of keywords in this command.
      */
