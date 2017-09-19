@@ -78,6 +78,20 @@ public class UniqueTagList implements Iterable<Tag> {
     }
 
     /**
+     * Returns the size of the tags in list.
+     */
+     public int size() {
+         return internalList.size();
+     }
+
+    /**
+     * Returns the name of the tags in the list as a list of strings.
+     * */
+    public List<String> UniqueTagName(int index) {
+        return internalList.get(index).getWordsInTag();
+    }
+
+    /**
      * Checks if the list contains an equivalent Tag as the given argument.
      */
     public boolean contains(Tag toCheck) {
