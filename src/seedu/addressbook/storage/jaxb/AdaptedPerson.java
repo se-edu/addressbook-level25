@@ -31,6 +31,8 @@ public class AdaptedPerson {
     @XmlElement(required = true)
     private AdaptedContactDetail email;
     @XmlElement(required = true)
+    private AdaptedContactDetail group;
+    @XmlElement(required = true)
     private AdaptedContactDetail address;
 
     @XmlElement
@@ -58,6 +60,10 @@ public class AdaptedPerson {
         email.isPrivate = source.getEmail().isPrivate();
         email.value = source.getEmail().value;
 
+        group = new AdaptedContactDetail();
+        group.isPrivate = source.getGroup().isPrivate();
+        group.value = source.getGroup().value;
+
         address = new AdaptedContactDetail();
         address.isPrivate = source.getAddress().isPrivate();
         address.value = source.getAddress().value;
@@ -83,8 +89,8 @@ public class AdaptedPerson {
             }
         }
         // second call only happens if phone/email/address are all not null
-        return Utils.isAnyNull(name, phone, email, address)
-                || Utils.isAnyNull(phone.value, email.value, address.value);
+        return Utils.isAnyNull(name, phone, email, group, address)
+                || Utils.isAnyNull(phone.value, email.value, group.value, address.value);
     }
 
     /**
@@ -100,8 +106,9 @@ public class AdaptedPerson {
         final Name name = new Name(this.name);
         final Phone phone = new Phone(this.phone.value, this.phone.isPrivate);
         final Email email = new Email(this.email.value, this.email.isPrivate);
+        final Group group = new Group(this.group.value, this.group.isPrivate);
         final Address address = new Address(this.address.value, this.address.isPrivate);
         final UniqueTagList tags = new UniqueTagList(personTags);
-        return new Person(name, phone, email, address, tags);
+        return new Person(name, phone, email, group, address, tags);
     }
 }

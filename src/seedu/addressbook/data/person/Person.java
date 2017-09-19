@@ -13,16 +13,18 @@ public class Person implements ReadOnlyPerson {
     private Name name;
     private Phone phone;
     private Email email;
+    private Group group;
     private Address address;
 
     private final UniqueTagList tags;
     /**
      * Assumption: Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, UniqueTagList tags) {
+    public Person(Name name, Phone phone, Email email, Group group, Address address, UniqueTagList tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.group = group;
         this.address = address;
         this.tags = new UniqueTagList(tags); // protect internal tags from changes in the arg list
     }
@@ -31,7 +33,7 @@ public class Person implements ReadOnlyPerson {
      * Copy constructor.
      */
     public Person(ReadOnlyPerson source) {
-        this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
+        this(source.getName(), source.getPhone(), source.getEmail(), source.getGroup(), source.getAddress(), source.getTags());
     }
 
     @Override
@@ -48,6 +50,9 @@ public class Person implements ReadOnlyPerson {
     public Email getEmail() {
         return email;
     }
+
+    @Override
+    public Group getGroup() { return group; }
 
     @Override
     public Address getAddress() {
