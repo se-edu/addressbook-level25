@@ -1,41 +1,38 @@
-apply plugin: 'java'
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'checkstyle'
 
-repositories {
-    mavenCentral()
-}
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
 
-sourceSets {
-    main {
-        java {
-            srcDirs = ['src']
+    project.ext {
+        checkstyleVersion = '7.1.2'
+    }
+
+    checkstyle {
+        toolVersion = "$checkstyleVersion"
+    }
+
+    sourceSets {
+        main {
+            java {
+                srcDirs = ['src']
+            }
+        }
+        test {
+            java {
+                srcDirs = ['test/java']
+            }
         }
     }
-    test {
-        java {
-            srcDirs = ['test/java']
-        }
+
+    dependencies {
+        testCompile 'junit:junit:4.12'
     }
 }
 
-dependencies {
-    testCompile 'junit:junit:4.12'
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.12'
 }
-
-test {
-    /*
-     * Prints the currently running test's name in the CI's build log, 
-     * so that we can check if tests are being silently skipped or stalling the build.
-     */
-    if (System.env.'CI') {
-       beforeTest { descriptor ->
-           logger.lifecycle('Running test: ' + descriptor)
-       }
-    }
-}
-
-compileJava {
-    sourceCompatibility = 1.8
-    targetCompatibility = 1.8
-}
-
-defaultTasks 'clean', 'test'
