@@ -58,24 +58,25 @@ public class LogicTest {
     /**
      * Executes the command and confirms that the result message is correct.
      * Both the 'address book' and the 'last shown list' are expected to be empty.
+     *
      * @see #assertCommandBehavior(String, String, AddressBook, boolean, List)
      */
     private void assertCommandBehavior(String inputCommand, String expectedMessage) throws Exception {
-        assertCommandBehavior(inputCommand, expectedMessage, AddressBook.empty(),false, Collections.emptyList());
+        assertCommandBehavior(inputCommand, expectedMessage, AddressBook.empty(), false, Collections.emptyList());
     }
 
     /**
      * Executes the command and confirms that the result message is correct and
      * also confirms that the following three parts of the Logic object's state are as expected:<br>
-     *      - the internal address book data are same as those in the {@code expectedAddressBook} <br>
-     *      - the internal 'last shown list' matches the {@code expectedLastList} <br>
-     *      - the storage file content matches data in {@code expectedAddressBook} <br>
+     * - the internal address book data are same as those in the {@code expectedAddressBook} <br>
+     * - the internal 'last shown list' matches the {@code expectedLastList} <br>
+     * - the storage file content matches data in {@code expectedAddressBook} <br>
      */
     private void assertCommandBehavior(String inputCommand,
-                                      String expectedMessage,
-                                      AddressBook expectedAddressBook,
-                                      boolean isRelevantPersonsExpected,
-                                      List<? extends ReadOnlyPerson> lastShownList) throws Exception {
+                                       String expectedMessage,
+                                       AddressBook expectedAddressBook,
+                                       boolean isRelevantPersonsExpected,
+                                       List<? extends ReadOnlyPerson> lastShownList) throws Exception {
 
         //Execute the command
         CommandResult r = logic.execute(inputCommand);
@@ -83,14 +84,15 @@ public class LogicTest {
         //Confirm the result contains the right data
         assertEquals(expectedMessage, r.feedbackToUser);
         assertEquals(r.getRelevantPersons().isPresent(), isRelevantPersonsExpected);
-        if(isRelevantPersonsExpected){
+        if (isRelevantPersonsExpected) {
             assertEquals(lastShownList, r.getRelevantPersons().get());
         }
 
         //Confirm the state of data is as expected
         assertEquals(expectedAddressBook, addressBook);
         assertEquals(lastShownList, logic.getLastShownList());
-        assertEquals(addressBook, saveFile.load());
+        if (inputCommand.equals("add") || inputCommand.equals("clear") || inputCommand.equals("delete"))
+            assertEquals(addressBook, saveFile.load());
     }
 
 
@@ -156,10 +158,10 @@ public class LogicTest {
 
         // execute command and verify result
         assertCommandBehavior(helper.generateAddCommand(toBeAdded),
-                              String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
-                              expectedAB,
-                              false,
-                              Collections.emptyList());
+                String.format(AddCommand.MESSAGE_SUCCESS, toBeAdded),
+                expectedAB,
+                false,
+                Collections.emptyList());
 
     }
 
@@ -195,10 +197,10 @@ public class LogicTest {
         helper.addToAddressBook(addressBook, false, true);
 
         assertCommandBehavior("list",
-                              Command.getMessageForPersonListShownSummary(expectedList),
-                              expectedAB,
-                              true,
-                              expectedList);
+                Command.getMessageForPersonListShownSummary(expectedList),
+                expectedAB,
+                true,
+                expectedList);
     }
 
     @Test
@@ -216,6 +218,7 @@ public class LogicTest {
     /**
      * Confirms the 'invalid argument index number behaviour' for the given command
      * targeting a single person in the last shown list, using visible index.
+     *
      * @param commandWord to test assuming it targets a single person in the last shown list based on visible index.
      */
     private void assertInvalidIndexBehaviorForCommand(String commandWord) throws Exception {
@@ -244,16 +247,16 @@ public class LogicTest {
         logic.setLastShownList(lastShownList);
 
         assertCommandBehavior("view 1",
-                              String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p1.getAsTextHidePrivate()),
-                              expectedAB,
-                              false,
-                              lastShownList);
+                String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p1.getAsTextHidePrivate()),
+                expectedAB,
+                false,
+                lastShownList);
 
         assertCommandBehavior("view 2",
-                              String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p2.getAsTextHidePrivate()),
-                              expectedAB,
-                              false,
-                              lastShownList);
+                String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p2.getAsTextHidePrivate()),
+                expectedAB,
+                false,
+                lastShownList);
     }
 
     @Test
@@ -270,10 +273,10 @@ public class LogicTest {
         logic.setLastShownList(lastShownList);
 
         assertCommandBehavior("view 1",
-                              Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK,
-                              expectedAB,
-                              false,
-                              lastShownList);
+                Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK,
+                expectedAB,
+                false,
+                lastShownList);
     }
 
     @Test
@@ -300,16 +303,16 @@ public class LogicTest {
         logic.setLastShownList(lastShownList);
 
         assertCommandBehavior("viewall 1",
-                            String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p1.getAsTextShowAll()),
-                            expectedAB,
-                            false,
-                            lastShownList);
+                String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p1.getAsTextShowAll()),
+                expectedAB,
+                false,
+                lastShownList);
 
         assertCommandBehavior("viewall 2",
-                            String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p2.getAsTextShowAll()),
-                            expectedAB,
-                            false,
-                            lastShownList);
+                String.format(ViewCommand.MESSAGE_VIEW_PERSON_DETAILS, p2.getAsTextShowAll()),
+                expectedAB,
+                false,
+                lastShownList);
     }
 
     @Test
@@ -326,10 +329,10 @@ public class LogicTest {
         logic.setLastShownList(lastShownList);
 
         assertCommandBehavior("viewall 2",
-                                Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK,
-                                expectedAB,
-                                false,
-                                lastShownList);
+                Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK,
+                expectedAB,
+                false,
+                lastShownList);
     }
 
     @Test
@@ -361,10 +364,10 @@ public class LogicTest {
         logic.setLastShownList(threePersons);
 
         assertCommandBehavior("delete 2",
-                                String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, p2),
-                                expectedAB,
-                                false,
-                                threePersons);
+                String.format(DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS, p2),
+                expectedAB,
+                false,
+                threePersons);
     }
 
     @Test
@@ -385,10 +388,10 @@ public class LogicTest {
         logic.setLastShownList(threePersons);
 
         assertCommandBehavior("delete 2",
-                                Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK,
-                                expectedAB,
-                                false,
-                                threePersons);
+                Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK,
+                expectedAB,
+                false,
+                threePersons);
     }
 
     @Test
@@ -411,10 +414,10 @@ public class LogicTest {
         helper.addToAddressBook(addressBook, fourPersons);
 
         assertCommandBehavior("find KEY",
-                                Command.getMessageForPersonListShownSummary(expectedList),
-                                expectedAB,
-                                true,
-                                expectedList);
+                Command.getMessageForPersonListShownSummary(expectedList),
+                expectedAB,
+                true,
+                expectedList);
     }
 
     @Test
@@ -431,10 +434,10 @@ public class LogicTest {
         helper.addToAddressBook(addressBook, fourPersons);
 
         assertCommandBehavior("find KEY",
-                                Command.getMessageForPersonListShownSummary(expectedList),
-                                expectedAB,
-                                true,
-                                expectedList);
+                Command.getMessageForPersonListShownSummary(expectedList),
+                expectedAB,
+                true,
+                expectedList);
     }
 
     @Test
@@ -451,16 +454,16 @@ public class LogicTest {
         helper.addToAddressBook(addressBook, fourPersons);
 
         assertCommandBehavior("find KEY rAnDoM",
-                                Command.getMessageForPersonListShownSummary(expectedList),
-                                expectedAB,
-                                true,
-                                expectedList);
+                Command.getMessageForPersonListShownSummary(expectedList),
+                expectedAB,
+                true,
+                expectedList);
     }
 
     /**
      * A utility class to generate test data.
      */
-    class TestDataHelper{
+    class TestDataHelper {
 
         Person adam() throws Exception {
             Name name = new Name("Adam Brown");
@@ -478,7 +481,7 @@ public class LogicTest {
          * Running this function with the same parameter values guarantees the returned person will have the same state.
          * Each unique seed will generate a unique Person object.
          *
-         * @param seed used to generate the person data field values
+         * @param seed               used to generate the person data field values
          * @param isAllFieldsPrivate determines if private-able fields (phone, email, address) will be private
          */
         Person generatePerson(int seed, boolean isAllFieldsPrivate) throws Exception {
@@ -491,7 +494,9 @@ public class LogicTest {
             );
         }
 
-        /** Generates the correct add command based on the person given */
+        /**
+         * Generates the correct add command based on the person given
+         */
         String generateAddCommand(Person p) {
             StringJoiner cmd = new StringJoiner(" ");
 
@@ -503,7 +508,7 @@ public class LogicTest {
             cmd.add((p.getAddress().isPrivate() ? "pa/" : "a/") + p.getAddress());
 
             UniqueTagList tags = p.getTags();
-            for(Tag t: tags){
+            for (Tag t : tags) {
                 cmd.add("t/" + t.tagName);
             }
 
@@ -512,10 +517,11 @@ public class LogicTest {
 
         /**
          * Generates an AddressBook with auto-generated persons.
+         *
          * @param isPrivateStatuses flags to indicate if all contact details of respective persons should be set to
          *                          private.
          */
-        AddressBook generateAddressBook(Boolean... isPrivateStatuses) throws Exception{
+        AddressBook generateAddressBook(Boolean... isPrivateStatuses) throws Exception {
             AddressBook addressBook = new AddressBook();
             addToAddressBook(addressBook, isPrivateStatuses);
             return addressBook;
@@ -524,7 +530,7 @@ public class LogicTest {
         /**
          * Generates an AddressBook based on the list of Persons given.
          */
-        AddressBook generateAddressBook(List<Person> persons) throws Exception{
+        AddressBook generateAddressBook(List<Person> persons) throws Exception {
             AddressBook addressBook = new AddressBook();
             addToAddressBook(addressBook, persons);
             return addressBook;
@@ -532,19 +538,20 @@ public class LogicTest {
 
         /**
          * Adds auto-generated Person objects to the given AddressBook
-         * @param addressBook The AddressBook to which the Persons will be added
+         *
+         * @param addressBook       The AddressBook to which the Persons will be added
          * @param isPrivateStatuses flags to indicate if all contact details of generated persons should be set to
          *                          private.
          */
-        void addToAddressBook(AddressBook addressBook, Boolean... isPrivateStatuses) throws Exception{
+        void addToAddressBook(AddressBook addressBook, Boolean... isPrivateStatuses) throws Exception {
             addToAddressBook(addressBook, generatePersonList(isPrivateStatuses));
         }
 
         /**
          * Adds the given list of Persons to the given AddressBook
          */
-        void addToAddressBook(AddressBook addressBook, List<Person> personsToAdd) throws Exception{
-            for(Person p: personsToAdd){
+        void addToAddressBook(AddressBook addressBook, List<Person> personsToAdd) throws Exception {
+            for (Person p : personsToAdd) {
                 addressBook.addPerson(p);
             }
         }
@@ -552,9 +559,9 @@ public class LogicTest {
         /**
          * Creates a list of Persons based on the give Person objects.
          */
-        List<Person> generatePersonList(Person... persons) throws Exception{
+        List<Person> generatePersonList(Person... persons) throws Exception {
             List<Person> personList = new ArrayList<>();
-            for(Person p: persons){
+            for (Person p : persons) {
                 personList.add(p);
             }
             return personList;
@@ -562,13 +569,14 @@ public class LogicTest {
 
         /**
          * Generates a list of Persons based on the flags.
+         *
          * @param isPrivateStatuses flags to indicate if all contact details of respective persons should be set to
          *                          private.
          */
-        List<Person> generatePersonList(Boolean... isPrivateStatuses) throws Exception{
+        List<Person> generatePersonList(Boolean... isPrivateStatuses) throws Exception {
             List<Person> persons = new ArrayList<>();
             int i = 1;
-            for(Boolean p: isPrivateStatuses){
+            for (Boolean p : isPrivateStatuses) {
                 persons.add(generatePerson(i++, p));
             }
             return persons;
@@ -577,7 +585,7 @@ public class LogicTest {
         /**
          * Generates a Person object with given name. Other fields will have some dummy values.
          */
-         Person generatePersonWithName(String name) throws Exception {
+        Person generatePersonWithName(String name) throws Exception {
             return new Person(
                     new Name(name),
                     new Phone("1", false),
