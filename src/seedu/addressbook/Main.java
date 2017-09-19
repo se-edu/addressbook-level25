@@ -22,7 +22,7 @@ public class Main extends Application implements Stoppable{
     public void start(Stage primaryStage) throws Exception{
         gui = new Gui(new Logic(), VERSION);
         gui.start(primaryStage, this);
-        primaryStage.getIcons().add(new Image("file:AddressBookLevel3.png"));
+        primaryStage.getIcons().add(new Image("/images/AddressBookLevel3.png"));
     }
 
     @Override
