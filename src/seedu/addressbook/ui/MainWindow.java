@@ -5,7 +5,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import seedu.addressbook.commands.ExitCommand;
+import seedu.addressbook.commands.ThemeCommand;
 import seedu.addressbook.logic.Logic;
 import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.data.person.ReadOnlyPerson;
@@ -22,6 +24,7 @@ public class MainWindow {
 
     private Logic logic;
     private Stoppable mainApp;
+    private int theme = 0;
 
     public MainWindow(){
     }
@@ -50,6 +53,9 @@ public class MainWindow {
                 exitApp();
                 return;
             }
+            else if(isThemeCommand(result)) {
+                theme = changeTheme(theme);
+            }
             displayResult(result);
             clearCommandInput();
         } catch (Exception e) {
@@ -62,7 +68,31 @@ public class MainWindow {
         mainApp.stop();
     }
 
-    /** Returns true of the result given is the result of an exit command */
+    /** Changes theme of GUI */
+    private int changeTheme(int theme) {
+        if(theme==0) {
+            commandInput.getStylesheets().remove("seedu/addressbook/ui/DarkTheme.css");
+            outputConsole.getStylesheets().remove("seedu/addressbook/ui/DarkTheme.css");
+            commandInput.getStylesheets().add("seedu/addressbook/ui/DayTheme.css");
+            outputConsole.getStylesheets().add("seedu/addressbook/ui/DayTheme.css");
+            theme = 1;
+        }
+        else {
+            commandInput.getStylesheets().remove("seedu/addressbook/ui/DayTheme.css");
+            outputConsole.getStylesheets().remove("seedu/addressbook/ui/DayTheme.css");
+            commandInput.getStylesheets().add("seedu/addressbook/ui/DarkTheme.css");
+            outputConsole.getStylesheets().add("seedu/addressbook/ui/DarkTheme.css");
+            theme = 0;
+        }
+        return theme;
+    }
+
+    /** Returns true if the result given is the result of a change theme command */
+    private boolean isThemeCommand(CommandResult result) {
+        return result.feedbackToUser.equals(ThemeCommand.MESSAGE_SUCCESS);
+    }
+
+    /** Returns true if the result given is the result of an exit command */
     private boolean isExitCommand(CommandResult result) {
         return result.feedbackToUser.equals(ExitCommand.MESSAGE_EXIT_ACKNOWEDGEMENT);
     }
