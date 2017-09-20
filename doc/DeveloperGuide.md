@@ -74,8 +74,12 @@ Priority | As a ... | I want to ... | So that I can...
 1. User requests to list persons
 2. AddressBook shows a list of persons
 3. User requests to delete a specific person in the list
-4. AddressBook deletes the person <br>
-Use case ends.
+4. AddressBook deletes the person 
+5. User request to add a specific person into the list
+6. AddressBook add the person
+7. User request to clear the list
+8. AddressBook clear the list
+<br>Use case ends.
 
 **Extensions**
 
@@ -88,6 +92,11 @@ Use case ends.
 > 3a1. AddressBook shows an error message <br>
   Use case resumes at step 2
 
+5a. The given format is invalid
+
+> 5a1. AddressBook shows an error message <br>
+  Use case resumes at step 4
+  
 ## Appendix C : Non Functional Requirements
 
 1. Should work on any [mainstream OS](#mainstream-os) as long as it has Java 8 or higher installed.
