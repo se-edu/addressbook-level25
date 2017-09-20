@@ -15,3 +15,8 @@
     -fx-text-fill: #f9f9f9;
     -fx-font-size: 10pt;
 }
+
+.separator .line {
+    -fx-border-color: linear-gradient(to left, #c2e59c, #64b3f4);
+    -fx-border-width: 3;
+}
