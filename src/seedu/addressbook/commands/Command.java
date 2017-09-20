@@ -75,5 +75,8 @@ public abstract class Command {
         return targetIndex;
     }
 
+    public void setTargetIndex(int targetIndex){
+        this.targetIndex = targetIndex();
+    }
 
 }
