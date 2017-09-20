@@ -461,6 +461,72 @@ public class LogicTest {
                                 expectedList);
     }
 
+     @Test
+    public void execute_findgroup_invalidArgsFormat() throws Exception {
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindGroupCommand.MESSAGE_USAGE);
+        assertCommandBehavior("findgroup ", expectedMessage);
+    }
+
+    @Test
+    public void execute_findgroup_onlyMatchesFullWordsInGroupNames() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Person pTarget1 = helper.generatePersonWithGroupName("a", "bla bla KEY bla");
+        Person pTarget2 = helper.generatePersonWithGroupName("b", "bla KEY bla bceofeia");
+        Person p1 = helper.generatePersonWithGroupName("c", "KE Y");
+        Person p2 = helper.generatePersonWithGroupName("d", "KEy sduauo");
+
+        List<Person> fourPersons = helper.generatePersonList(p1, pTarget1, p2, pTarget2);
+        AddressBook expectedAB = helper.generateAddressBook(fourPersons);
+        List<Person> expectedList = helper.generatePersonList(pTarget1, pTarget2);
+        helper.addToAddressBook(addressBook, fourPersons);
+
+        assertCommandBehavior("findgroup KEY",
+                                Command.getMessageForPersonListShownSummary(expectedList),
+                                expectedAB,
+                                true,
+                                expectedList);
+    }
+
+    @Test
+    public void execute_findgroup_isCaseSensitive() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Person pTarget1 = helper.generatePersonWithGroupName("a", "bla bla KEY bla");
+        Person pTarget2 = helper.generatePersonWithGroupName("b", "bla KEY bla bceofeia");
+        Person p1 = helper.generatePersonWithGroupName("c", "key key");
+        Person p2 = helper.generatePersonWithGroupName("d", "KEy sduauo");
+
+        List<Person> fourPersons = helper.generatePersonList(p1, pTarget1, p2, pTarget2);
+        AddressBook expectedAB = helper.generateAddressBook(fourPersons);
+        List<Person> expectedList = helper.generatePersonList(pTarget1, pTarget2);
+        helper.addToAddressBook(addressBook, fourPersons);
+
+        assertCommandBehavior("findgroup KEY",
+                                Command.getMessageForPersonListShownSummary(expectedList),
+                                expectedAB,
+                                true,
+                                expectedList);
+    }
+
+    @Test
+    public void execute_findgroup_matchesIfAnyKeywordPresent() throws Exception {
+        TestDataHelper helper = new TestDataHelper();
+        Person pTarget1 = helper.generatePersonWithGroupName("a", "bla bla KEY bla");
+        Person pTarget2 = helper.generatePersonWithGroupName("b", "bla rAnDoM bla bceofeia");
+        Person p1 = helper.generatePersonWithGroupName("c", "key key");
+        Person p2 = helper.generatePersonWithGroupName("d", "KEy sduauo");
+
+        List<Person> fourPersons = helper.generatePersonList(p1, pTarget1, p2, pTarget2);
+        AddressBook expectedAB = helper.generateAddressBook(fourPersons);
+        List<Person> expectedList = helper.generatePersonList(pTarget1, pTarget2);
+        helper.addToAddressBook(addressBook, fourPersons);
+
+        assertCommandBehavior("findgroup KEY rAnDoM",
+                                Command.getMessageForPersonListShownSummary(expectedList),
+                                expectedAB,
+                                true,
+                                expectedList);
+    }
+
     /**
      * A utility class to generate test data.
      */
@@ -590,6 +656,20 @@ public class LogicTest {
                     new Phone("1", false),
                     new Email("1@email", false),
                     new Group("group1", false),
+                    new Address("House of 1", false),
+                    new UniqueTagList(new Tag("tag"))
+            );
+        }
+
+        /**
+         * Generates a Person object with given name & group name. Other fields will have dummy values.
+         */
+        Person generatePersonWithGroupName(String name, String group_name) throws Exception {
+            return new Person(
+                    new Name(name),
+                    new Phone("1", false),
+                    new Email("1@email", false),
+                    new Group(group_name, false),
                     new Address("House of 1", false),
                     new UniqueTagList(new Tag("tag"))
             );

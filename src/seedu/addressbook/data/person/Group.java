@@ -8,8 +8,8 @@ import java.util.List;
 public class Group {
 
     public static final String EXAMPLE = "Family";
-    public static final String MESSAGE_GROUP_CONSTRAINTS = "Group name should be a combination of alphabetic characters and digits";
-    public static final String GROUP_VALIDATION_REGEX = "\\w+";
+    public static final String MESSAGE_GROUP_CONSTRAINTS = "Group name should be spaces or alphanumeric characters";
+    public static final String GROUP_VALIDATION_REGEX = "[\\p{Alnum} ]+";
 
     public String value;
     private boolean isPrivate;
@@ -29,6 +29,13 @@ public class Group {
     }
 
     private Boolean isValidGroup (String test) { return test.matches(GROUP_VALIDATION_REGEX); }
+
+    /**
+     * Retrieves a listing of every word in the name, in order.
+     */
+    public List<String> getWordsInGroupName() {
+        return Arrays.asList(value.split("\\s+"));
+    }
 
     @Override
     public String toString () { return value; }

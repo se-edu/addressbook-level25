@@ -51,6 +51,19 @@ Examples:
 * `find Betsy Tim John`<br>
   Returns Any person having names `Betsy`, `Tim`, or `John`
 
+## Finding all persons with in a specific group: `findgroup`
+Finds persons who are in groups represented by any of the given keywords.<br>
+Format: `findgroup KEYWORD [MORE_KEYWORDS]`
+
+> The search is case sensitive, the order of the keywords does not matter, only the group name is searched,
+and persons matching at least one keyword will be returned (i.e. `OR` search).
+
+Examples:
+* `findgroup abc`<br>
+  Returns persons from group 'abc' but not group 'ABc'
+* `findgroup a bc`<br>
+  Returns persons from groups 'a' and 'bc'
+
 ## Deleting a person : `delete`
 Deletes the specified person from the address book. Irreversible.<br>
 Format: `delete INDEX`

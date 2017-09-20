@@ -176,6 +176,41 @@ public class ParserTest {
     }
 
     /**
+     * Test find group command
+     */
+    @Test
+    public void findGroupCommand_InvalidArgs() {
+        //no keywords
+        final String[] inputs = {"findgroup", "findgroup "};
+        final String resultMessage =
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindGroupCommand.MESSAGE_USAGE);
+        parseAndAssertIncorrectWithMessage(resultMessage, inputs);
+    }
+
+    @Test
+    public void findGroupCommand_validArgs_parsedCorrectly() {
+        final String[] keywords = { "key1", "key2", "key3" };
+        final Set<String> keySet = new HashSet<>(Arrays.asList(keywords));
+
+        final String input = "findgroup " + String.join(" ", keySet);
+        final FindGroupCommand result =
+                parseAndAssertCommandType(input, FindGroupCommand.class);
+        assertEquals(keySet, result.getKeywords());
+    }
+
+    @Test
+    public void findGroupCommand_duplicateKeys_parsedCorrectly() {
+        final String[] keywords = { "key1", "key2", "key3" };
+        final Set<String> keySet = new HashSet<>(Arrays.asList(keywords));
+
+        // duplicate every keyword
+        final String input = "findgroup " + String.join(" ", keySet) + " " + String.join(" ", keySet);
+        final FindGroupCommand result =
+                parseAndAssertCommandType(input, FindGroupCommand.class);
+        assertEquals(keySet, result.getKeywords());
+    }
+
+    /**
      * Test add person command
      */
     
