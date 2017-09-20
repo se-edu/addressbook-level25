@@ -68,10 +68,9 @@ public class MainWindow {
         mainApp.stop();
     }
 
+    /** Changes theme of GUI */
     private int changeTheme(int theme) {
         if(theme==0) {
-            //commandInput.getStylesheets().removeAll();
-            //outputConsole.getStylesheets().removeAll();
             commandInput.getStylesheets().remove("seedu/addressbook/ui/DarkTheme.css");
             outputConsole.getStylesheets().remove("seedu/addressbook/ui/DarkTheme.css");
             commandInput.getStylesheets().add("seedu/addressbook/ui/DayTheme.css");
@@ -79,8 +78,6 @@ public class MainWindow {
             theme = 1;
         }
         else {
-            //commandInput.getStylesheets().removeAll();
-            //outputConsole.getStylesheets().removeAll();
             commandInput.getStylesheets().remove("seedu/addressbook/ui/DayTheme.css");
             outputConsole.getStylesheets().remove("seedu/addressbook/ui/DayTheme.css");
             commandInput.getStylesheets().add("seedu/addressbook/ui/DarkTheme.css");
