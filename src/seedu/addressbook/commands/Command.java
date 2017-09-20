@@ -20,7 +20,7 @@ public abstract class Command {
      * @param targetIndex last visible listing index of the target person
      */
     public Command(int targetIndex) {
-        this.targetIndex =  targetIndex;
+        this.setTargetIndex(targetIndex);
     }
 
     protected Command() {
@@ -74,4 +74,6 @@ public abstract class Command {
     public int getTargetIndex() {
         return targetIndex;
     }
+
+
 }
