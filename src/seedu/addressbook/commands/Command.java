@@ -39,7 +39,7 @@ public abstract class Command {
     /**
      * Executes the command and returns the result.
      */
-    public CommandResult execute(){
+    public CommandResult execute() {
         throw new UnsupportedOperationException("This method should be implement in child classes");
     }
 
@@ -63,11 +63,20 @@ public abstract class Command {
         return relevantPersons.get(getTargetIndex() - DISPLAYED_INDEX_OFFSET);
     }
 
+    // returns false, by default for commands that are mutating
+
+    public boolean isMutating() {
+        return false;
+    }
+
+    // returns target index
+
     public int getTargetIndex() {
         return targetIndex;
     }
 
-    public void setTargetIndex(int targetIndex) {
+    public void setTargetIndex(int targetIndex){
         this.targetIndex = targetIndex;
     }
+
 }
