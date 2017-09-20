@@ -20,7 +20,7 @@ public abstract class Command {
      * @param targetIndex last visible listing index of the target person
      */
     public Command(int targetIndex) {
-        this.setTargetIndex(targetIndex);
+        this.targetIndex =  targetIndex;
     }
 
     protected Command() {
@@ -39,7 +39,7 @@ public abstract class Command {
     /**
      * Executes the command and returns the result.
      */
-    public CommandResult execute(){
+    public CommandResult execute() {
         throw new UnsupportedOperationException("This method should be implement in child classes");
     }
 
@@ -63,11 +63,15 @@ public abstract class Command {
         return relevantPersons.get(getTargetIndex() - DISPLAYED_INDEX_OFFSET);
     }
 
-    public int getTargetIndex() {
-        return targetIndex;
+    // returns false, by default for commands that are mutating
+
+    public boolean isMutating() {
+        return false;
     }
 
-    public void setTargetIndex(int targetIndex) {
-        this.targetIndex = targetIndex;
+    // returns target index
+
+    public int getTargetIndex() {
+        return targetIndex;
     }
 }
