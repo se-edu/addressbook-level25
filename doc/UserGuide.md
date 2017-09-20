@@ -98,7 +98,11 @@ Examples:
 
 ## Clearing all entries : `clear`
 Clears all entries from the address book.<br>
-Format: `clear`  
+Format: `clear`
+
+## Changing the theme: 'changetheme'
+Changes the theme between Dark and Day themes.<br>
+Format: 'changetheme'
 
 ## Exiting the program : `exit`
 Exits the program.<br>
