@@ -4,14 +4,19 @@
     -fx-font-size: 12pt;
     -fx-font-family: "Consolas";
     -fx-font-weight: bold;
-    -fx-text-fill: yellow;
-    -fx-control-inner-background: derive(#1d1d1d,20%);
+    -fx-text-fill: #64b3f4;
+    -fx-control-inner-background: derive(#383838, 20%);
 }
 
 .text-area {
-    -fx-background-color: black;
-    -fx-control-inner-background: black;
+    -fx-background-color: #383838;
+    -fx-control-inner-background: #383838;
     -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #f9f9f9;
     -fx-font-size: 10pt;
-    -fx-padding: 5 5 5 5;
+}
+
+.separator .line {
+    -fx-border-color: linear-gradient(to left, #c2e59c, #64b3f4);
+    -fx-border-width: 3;
 }
