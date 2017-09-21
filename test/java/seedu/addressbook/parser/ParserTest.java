@@ -176,6 +176,41 @@ public class ParserTest {
     }
 
     /**
+     * Test find group command
+     */
+    @Test
+    public void findGroupCommand_InvalidArgs() {
+        //no keywords
+        final String[] inputs = {"findgroup", "findgroup "};
+        final String resultMessage =
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindGroupCommand.MESSAGE_USAGE);
+        parseAndAssertIncorrectWithMessage(resultMessage, inputs);
+    }
+
+    @Test
+    public void findGroupCommand_validArgs_parsedCorrectly() {
+        final String[] keywords = { "key1", "key2", "key3" };
+        final Set<String> keySet = new HashSet<>(Arrays.asList(keywords));
+
+        final String input = "findgroup " + String.join(" ", keySet);
+        final FindGroupCommand result =
+                parseAndAssertCommandType(input, FindGroupCommand.class);
+        assertEquals(keySet, result.getKeywords());
+    }
+
+    @Test
+    public void findGroupCommand_duplicateKeys_parsedCorrectly() {
+        final String[] keywords = { "key1", "key2", "key3" };
+        final Set<String> keySet = new HashSet<>(Arrays.asList(keywords));
+
+        // duplicate every keyword
+        final String input = "findgroup " + String.join(" ", keySet) + " " + String.join(" ", keySet);
+        final FindGroupCommand result =
+                parseAndAssertCommandType(input, FindGroupCommand.class);
+        assertEquals(keySet, result.getKeywords());
+    }
+
+    /**
      * Test add person command
      */
     
@@ -186,11 +221,13 @@ public class ParserTest {
                 "add ",
                 "add wrong args format",
                 // no phone prefix
-                String.format("add $s $s e/$s a/$s", Name.EXAMPLE, Phone.EXAMPLE, Email.EXAMPLE, Address.EXAMPLE),
+                String.format("add $s $s e/$s g/$s a/$s", Name.EXAMPLE, Phone.EXAMPLE, Email.EXAMPLE, Group.EXAMPLE, Address.EXAMPLE),
                 // no email prefix
-                String.format("add $s p/$s $s a/$s", Name.EXAMPLE, Phone.EXAMPLE, Email.EXAMPLE, Address.EXAMPLE),
+                String.format("add $s p/$s $s g/$s a/$s", Name.EXAMPLE, Phone.EXAMPLE, Email.EXAMPLE, Group.EXAMPLE, Address.EXAMPLE),
+                //no group prefix
+                String.format("add $s p/$s e/$s $s a/$s", Name.EXAMPLE, Phone.EXAMPLE, Email.EXAMPLE, Group.EXAMPLE, Address.EXAMPLE),
                 // no address prefix
-                String.format("add $s p/$s e/$s $s", Name.EXAMPLE, Phone.EXAMPLE, Email.EXAMPLE, Address.EXAMPLE)
+                String.format("add $s p/$s e/$s g/$s $s", Name.EXAMPLE, Phone.EXAMPLE, Email.EXAMPLE, Group.EXAMPLE, Address.EXAMPLE)
         };
         final String resultMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
         parseAndAssertIncorrectWithMessage(resultMessage, inputs);
@@ -205,6 +242,8 @@ public class ParserTest {
         final String invalidEmailArg = "e/notAnEmail123";
         final String validEmailArg = "e/" + Email.EXAMPLE;
         final String invalidTagArg = "t/invalid_-[.tag";
+        final String validGroupArg = "g/" + Group.EXAMPLE;
+        final String invalidGroupArg = "g/!@#$%^";
 
         // address can be any string, so no invalid address
         final String addCommandFormatString = "add $s $s $s a/" + Address.EXAMPLE;
@@ -212,13 +251,15 @@ public class ParserTest {
         // test each incorrect person data field argument individually
         final String[] inputs = {
                 // invalid name
-                String.format(addCommandFormatString, invalidName, validPhoneArg, validEmailArg),
+                String.format(addCommandFormatString, invalidName, validPhoneArg, validEmailArg, validGroupArg),
                 // invalid phone
-                String.format(addCommandFormatString, validName, invalidPhoneArg, validEmailArg),
+                String.format(addCommandFormatString, validName, invalidPhoneArg, validEmailArg, validGroupArg),
                 // invalid email
-                String.format(addCommandFormatString, validName, validPhoneArg, invalidEmailArg),
+                String.format(addCommandFormatString, validName, validPhoneArg, invalidEmailArg, validGroupArg),
                 // invalid tag
-                String.format(addCommandFormatString, validName, validPhoneArg, validEmailArg) + " " + invalidTagArg
+                String.format(addCommandFormatString, validName, validPhoneArg, validEmailArg, validGroupArg) + " " + invalidTagArg,
+                // invalid group
+                String.format(addCommandFormatString, validName, validPhoneArg, validEmailArg, invalidGroupArg)
         };
         for (String input : inputs) {
             parseAndAssertCommandType(input, IncorrectCommand.class);
@@ -252,6 +293,7 @@ public class ParserTest {
                 new Name(Name.EXAMPLE),
                 new Phone(Phone.EXAMPLE, true),
                 new Email(Email.EXAMPLE, false),
+                new Group(Group.EXAMPLE, false),
                 new Address(Address.EXAMPLE, true),
                 new UniqueTagList(new Tag("tag1"), new Tag("tag2"), new Tag("tag3"))
             );
@@ -265,6 +307,7 @@ public class ParserTest {
                 + person.getName().fullName
                 + (person.getPhone().isPrivate() ? " pp/" : " p/") + person.getPhone().value
                 + (person.getEmail().isPrivate() ? " pe/" : " e/") + person.getEmail().value
+                + (person.getGroup().isPrivate() ? " pg?" : " g/") + person.getGroup().value
                 + (person.getAddress().isPrivate() ? " pa/" : " a/") + person.getAddress().value;
         for (Tag tag : person.getTags()) {
             addCommand += " t/" + tag.tagName;
