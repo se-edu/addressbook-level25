@@ -70,4 +70,12 @@ public abstract class Command {
     public void setTargetIndex(int targetIndex) {
         this.targetIndex = targetIndex;
     }
+
+    public boolean isMutating() {
+        if (this instanceof (AddCommand || ClearCommand || DeleteCommand)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
