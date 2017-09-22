@@ -38,6 +38,10 @@ Examples:
 Shows a list of all persons in the address book.<br>
 Format: `list`
 
+## Listing all persons : `listsorted`
+Shows a list of all persons in the address book, sorted by name in alphabetical order.<br>
+Format: `listsorted`
+
 ## Finding all persons containing any keyword in their name: `find`
 Finds persons whose names contain any of the given keywords.<br>
 Format: `find KEYWORD [MORE_KEYWORDS]`
@@ -59,9 +63,9 @@ Format: `delete INDEX`
   The index refers to the index number shown in the most recent listing.
 
 Examples: 
-* `list`<br>
+* `list` or `listsorted`<br>
   `delete 2`<br>
-  Deletes the 2nd person in the address book.
+  Deletes the 2nd person in the list displayed.
 * `find Betsy`<br> 
   `delete 1`<br>
   Deletes the 1st person in the results of the `find` command.
@@ -74,9 +78,9 @@ Format: `view INDEX`
   The index refers to the index number shown in the most recent listing.
 
 Examples: 
-* `list`<br>
+* `list` or `listsorted`<br>
   `view 2`<br>
-  Views the 2nd person in the address book.
+  Views the 2nd person in the list displayed.
 * `find Betsy` <br> 
   `view 1`<br>
   Views the 1st person in the results of the `find` command.
@@ -89,9 +93,9 @@ Format: `viewall INDEX`
   The index refers to the index number shown in the most recent listing.
 
 Examples: 
-* `list`<br>
+* `list` or `listsorted`<br>
   `viewall 2`<br>
-  Views all details of the 2nd person in the address book.
+  Views all details of the 2nd person in the list displayed.
 * `find Betsy`<br> 
   `viewall 1`<br>
   Views all details of the 1st person in the results of the `find` command.
