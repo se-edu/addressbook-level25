@@ -74,6 +74,9 @@ public class UniquePersonList implements Iterable<Person> {
         return Collections.unmodifiableList(internalList);
     }
 
+    public List<Person> getInternalList() {
+        return internalList;
+    }
 
     /**
      * Checks if the list contains an equivalent person as the given argument.
@@ -112,6 +115,21 @@ public class UniquePersonList implements Iterable<Person> {
     public void clear() {
         internalList.clear();
     }
+
+    /**
+     * Sorts all persons in list.
+     */
+    public void sort(){
+        Collections.sort(internalList,compare);
+    }
+
+    public Comparator<Person> compare = new Comparator<Person>(){
+        public int compare(Person First, Person Second){
+            String firstName= First.getName().fullName;
+            String secondName= Second.getName().fullName;
+            return firstName.compareTo(secondName);
+        }
+    };
 
     @Override
     public Iterator<Person> iterator() {

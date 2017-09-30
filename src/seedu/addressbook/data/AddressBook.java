@@ -120,6 +120,9 @@ public class AddressBook {
         return new UniqueTagList(allTags);
     }
 
+    public void sort(){
+        allPersons.sort();
+    }
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object

@@ -60,6 +60,11 @@ public class ParserTest {
     }
 
     @Test
+    public void sortCommand_parsedCorrectly(){
+        final String input="sort";
+        parseAndAssertCommandType(input,SortCommand.class);
+    }
+    @Test
     public void exitCommand_parsedCorrectly() {
         final String input = "exit";
         parseAndAssertCommandType(input, ExitCommand.class);
