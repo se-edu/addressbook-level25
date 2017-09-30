@@ -16,6 +16,7 @@ public class Person implements ReadOnlyPerson {
     private Address address;
 
     private final UniqueTagList tags;
+
     /**
      * Assumption: Every field must be present and not null.
      */
@@ -34,6 +35,9 @@ public class Person implements ReadOnlyPerson {
         this(source.getName(), source.getPhone(), source.getEmail(), source.getAddress(), source.getTags());
     }
 
+    /*
+     * Getter Methods.
+     */
     @Override
     public Name getName() {
         return name;
@@ -57,6 +61,29 @@ public class Person implements ReadOnlyPerson {
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
+    }
+
+    /*
+     * Setter Methods.
+     */
+    @Override
+    public void setName(Name name) {
+        this.name = name;
+    }
+
+    @Override
+    public void setPhone(Phone phone) {
+        this.phone = phone;
+    }
+
+    @Override
+    public void setEmail(Email email) {
+        this.email = email;
+    }
+
+    @Override
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     /**
