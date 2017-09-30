@@ -116,6 +116,21 @@ public class UniquePersonList implements Iterable<Person> {
         internalList.clear();
     }
 
+    /**
+     * Sorts all persons in list.
+     */
+    public void sort(){
+        Collections.sort(internalList,compare);
+    }
+
+    public Comparator<Person> compare = new Comparator<Person>(){
+        public int compare(Person First, Person Second){
+            String firstName= First.getName().fullName;
+            String secondName= Second.getName().fullName;
+            return firstName.compareTo(secondName);
+        }
+    };
+
     @Override
     public Iterator<Person> iterator() {
         return internalList.iterator();

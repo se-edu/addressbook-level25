@@ -457,6 +457,24 @@ public class LogicTest {
                                 expectedList);
     }
 
+    @Test
+    public void execute_sort() throws Exception{
+        TestDataHelper helper= new TestDataHelper();
+
+        Person first=helper.generatePersonWithName("Peng");
+        Person second= helper.generatePersonWithName("Zhao");
+        List<Person> Persons=helper.generatePersonList(first,second);
+        AddressBook unsorted=helper.generateAddressBook(Persons);
+        helper.addToAddressBook(addressBook, Persons);
+
+        unsorted.sort();
+        List<? extends ReadOnlyPerson> sorted= unsorted.getAllPersons().immutableListView();
+        assertCommandBehavior("sort",
+                String.format(SortCommand.MESSAGE_SUCCESS),
+                unsorted,
+                true,
+                sorted);
+    }
     /**
      * A utility class to generate test data.
      */
