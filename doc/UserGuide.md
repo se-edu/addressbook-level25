@@ -66,6 +66,24 @@ Examples:
   `delete 1`<br>
   Deletes the 1st person in the results of the `find` command.
 
+## Updating a person : `update`
+Updates the specified person in the address book.<br>
+Format: `update INDEX FIELD_TO_UPDATE NEW_VALUE`
+
+> Updates the person at the specified `INDEX`, for the field specified in `FIELD_TO_UPDATE` to the new value in `NEW_VALUE`.
+
+> The `INDEX` refers to the index number shown in the most recent listing.
+
+> The `FIELD_TO_UPDATE` accepts only `name` / `phone` / `email` / `address`.
+
+Examples:
+* `list`<br>
+`update 2 address 38 Oxley Road`<br>
+Updates the 2nd person in the address book and change his address to the new value specified.
+* `find Rob`<br>
+`update 1 name Rob Cross`<br>
+Updates the 1st person in the results of the `find` command, and change his name to the new value specified.
+
 ## View non-private details of a person : `view`
 Displays the non-private details of the specified person.<br>
 Format: `view INDEX`

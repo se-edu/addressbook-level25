@@ -1,10 +1,10 @@
 package seedu.addressbook.data;
 
+import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.*;
 import seedu.addressbook.data.person.UniquePersonList.*;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.data.tag.UniqueTagList;
-import seedu.addressbook.data.tag.UniqueTagList.*;
 
 import java.util.*;
 
@@ -96,6 +96,15 @@ public class AddressBook {
      */
     public void removePerson(ReadOnlyPerson toRemove) throws PersonNotFoundException {
         allPersons.remove(toRemove);
+    }
+
+    /**
+     * Updates the equivalent person in the address book.
+     *
+     * @throws IllegalValueException if any user input value is invalid
+     */
+    public void updatePerson(ReadOnlyPerson toUpdate, String field, String value) throws IllegalValueException {
+        allPersons.update(toUpdate, field, value);
     }
 
     /**

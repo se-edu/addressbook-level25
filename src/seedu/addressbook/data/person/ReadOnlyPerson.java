@@ -14,6 +14,11 @@ public interface ReadOnlyPerson {
     Email getEmail();
     Address getAddress();
 
+    void setName(Name name);
+    void setPhone(Phone phone);
+    void setEmail(Email email);
+    void setAddress(Address address);
+
     /**
      * The returned TagList is a deep copy of the internal TagList,
      * changes on the returned list will not affect the person's internal tags.
