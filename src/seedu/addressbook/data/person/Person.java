@@ -2,7 +2,10 @@ package seedu.addressbook.data.person;
 
 import seedu.addressbook.data.tag.UniqueTagList;
 
+import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Set;
+import java.util.StringJoiner;
 
 /**
  * Represents a Person in the address book.
@@ -16,6 +19,7 @@ public class Person implements ReadOnlyPerson {
     private Address address;
 
     private final UniqueTagList tags;
+
     /**
      * Assumption: Every field must be present and not null.
      */
@@ -81,7 +85,15 @@ public class Person implements ReadOnlyPerson {
 
     @Override
     public String toString() {
-        return getAsTextShowAll();
+        return getPrintableString(this.getName(), this.getPhone(), this.getEmail(), this.getAddress());
     }
 
+
+    public String getPrintableString(Printable... printables) {
+        Set<String> joiner = new LinkedHashSet<>();
+        for(Printable p : printables) {
+            joiner.add(p.getPrintableString());
+        }
+        return String.join(" ", joiner);
+    }
 }
