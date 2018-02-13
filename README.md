@@ -37,3 +37,7 @@ Some parts of this sample application was inspired by the excellent
 * **Bug reports, Suggestions** : Post in our [issue tracker](https://github.com/se-edu/addressbook-level3/issues)
   if you noticed bugs or have suggestions on how to improve.
 * **Contributing** : We welcome pull requests. Follow the process described [here](https://github.com/oss-generic/process)
+
+# User Stories
+* As a businessman I can sort my addressbook by the date a contact is added so that quickly access my latest clients.
+* As a teacher I am sort my addressbook by tag so that I can access students from a particular class easily.
