@@ -39,5 +39,5 @@ Some parts of this sample application was inspired by the excellent
 * **Contributing** : We welcome pull requests. Follow the process described [here](https://github.com/oss-generic/process)
 
 #Non-Functional Requirements
-* The code for this project is open source and available on https://github.com/nus-cs2103-AY1718S2/addressbook-level3.git
-* Tests can be run on this project and should pass.
+* Must-have: User should be able to add contact, and search for the contact afterwards.
+* Nice-to-have: This program is able to sort sort persons in alphabetical order.
