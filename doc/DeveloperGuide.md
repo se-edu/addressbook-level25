@@ -59,9 +59,13 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a new person |
 `* * *` | user | delete a person | remove entries that I no longer need
 `* * *` | user | find a person by name | locate details of persons without having to go through the entire list
+`* * *` | user | edit address book  entries | update my address book when a person changes his contact information
+`* *` | user | undo delete of a person | recover person that was deleted by accident
 `* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`*` | user with many persons in the address book | sort persons by name | locate a person easily
-
+`* *` | user with many persons in the address book | sort persons by name | locate a person easily
+`* *` | user | group people | view them in groups like family, friends , work
+`*` | user with many persons in the address book | find persons by tags | locate a group of persons easily without having to go through the entire list
+`*` | paranoid user | add a passcode to the address book | prevent others from accessing my address book
 
 ## Appendix B : Use Cases
 
@@ -94,12 +98,7 @@ Use case ends.
 2. Should be able to hold up to 1000 persons.
 3. Should come with automated unit tests and open source code.
 4. Should favor DOS style commands over Unix-style commands.
-5. The system should be able to run in 32-bit and 64-bit systems.
-6. The system should be intuitive and user-friendly.
-7. The system should be stable with minimal crashes.
-8. The system should log crash reports.
-9. The system should respond within 1 seconds.
-10. Should work even without internet access.
+
 ## Appendix D : Glossary
 
 ##### Mainstream OS
