@@ -61,6 +61,10 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | find a person by name | locate details of persons without having to go through the entire list
 `* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
 `*` | user with many persons in the address book | sort persons by name | locate a person easily
+'*' | user who types slowly | be able to click on buttons when possible | minimize typing time
+'* *' | user | modify an already existing entry | update information without having to delete and re-enter a contact.
+'* *' | user | search without case-sensitivity | find someone quicker.
+'* *' | user | add extra information about a contact | have a more precise description of that contact.
 
 
 ## Appendix B : Use Cases
