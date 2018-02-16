@@ -59,17 +59,33 @@ Priority | As a ... | I want to ... | So that I can...
 `* * *` | user | add a new person |
 `* * *` | user | delete a person | remove entries that I no longer need
 `* * *` | user | find a person by name | locate details of persons without having to go through the entire list
-`* * *` | user | edit address book  entries | update my address book when a person changes his contact information
-`* *` | user | undo delete of a person | recover person that was deleted by accident
 `* *` | user | hide [private contact details](#private-contact-detail) by default | minimize chance of someone else seeing them by accident
-`* *` | user with many persons in the address book | sort persons by name | locate a person easily
-`* *` | user | group people | view them in groups like family, friends , work
-`*` | user with many persons in the address book | find persons by tags | locate a group of persons easily without having to go through the entire list
-`*` | paranoid user | add a passcode to the address book | prevent others from accessing my address book
+`*` | user with many persons in the address book | sort persons by name | locate a person easily
+
 
 ## Appendix B : Use Cases
 
 (For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+
+#### Use case: Rename person tag
+
+**MSS**
+
+1. User requests to rename tag
+2. AddressBook shows a list of persons with the specified tag
+3. User requests to rename a specified tag in the list for all person with the tag
+4. AddressBook rename all tags the person <br>
+Use case ends.
+
+**Extensions**
+
+2a. The list is empty
+
+> Use case ends
+
+3a. The tag is invalid, nobody has that tag
+
+> Use case ends
 
 #### Use case: Delete person
 
