@@ -99,7 +99,7 @@ Use case ends.
 7. The system should be stable with minimal crashes.
 8. The system should log crash reports.
 9. The system should respond within 1 seconds.
-10. 
+10. Should work even without internet access.
 ## Appendix D : Glossary
 
 ##### Mainstream OS
