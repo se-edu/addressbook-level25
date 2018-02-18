@@ -94,6 +94,8 @@ Use case ends.
 2. Should be able to hold up to 1000 persons.
 3. Should come with automated unit tests and open source code.
 4. Should favor DOS style commands over Unix-style commands.
+5. Should guarantee the privacy of user's information.
+6. Should be accessible to use by a person without prior knowledge in computing.
 
 ## Appendix D : Glossary
 
