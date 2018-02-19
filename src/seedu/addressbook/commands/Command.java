@@ -36,14 +36,6 @@ public abstract class Command {
         return String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, personsDisplayed.size());
     }
 
-    /**
-     *
-     * @return true if command types mutate data
-     */
-
-    public static boolean isMutating(){
-        return true;
-    }
 
 
     /**
