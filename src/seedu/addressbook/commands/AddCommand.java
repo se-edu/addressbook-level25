@@ -58,7 +58,7 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public CommandResult execute() throws UnsupportedOperationException {
+    public CommandResult execute() {
         try {
             addressBook.addPerson(toAdd);
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
