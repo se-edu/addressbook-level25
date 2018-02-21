@@ -20,29 +20,32 @@ public class Logic {
     private StorageFile storage;
     private AddressBook addressBook;
 
-    /** The list of person shown to the user most recently.  */
+    /**
+     * The list of person shown to the user most recently.
+     */
     private List<? extends ReadOnlyPerson> lastShownList = Collections.emptyList();
 
-    public Logic() throws Exception{
+    public Logic() throws Exception {
         setStorage(initializeStorage());
         setAddressBook(storage.load());
     }
 
-    Logic(StorageFile storageFile, AddressBook addressBook){
+    Logic(StorageFile storageFile, AddressBook addressBook) {
         setStorage(storageFile);
         setAddressBook(addressBook);
     }
 
-    void setStorage(StorageFile storage){
+    void setStorage(StorageFile storage) {
         this.storage = storage;
     }
 
-    void setAddressBook(AddressBook addressBook){
+    void setAddressBook(AddressBook addressBook) {
         this.addressBook = addressBook;
     }
 
     /**
      * Creates the StorageFile object based on the user specified path (if any) or the default storage path.
+     *
      * @throws StorageFile.InvalidStorageFilePathException if the target file path is incorrect.
      */
     private StorageFile initializeStorage() throws StorageFile.InvalidStorageFilePathException {
@@ -66,6 +69,7 @@ public class Logic {
 
     /**
      * Parses the user command, executes it, and returns the result.
+     *
      * @throws Exception if there was any problem during command execution.
      */
     public CommandResult execute(String userCommandText) throws Exception {
@@ -76,7 +80,7 @@ public class Logic {
     }
 
     /**
-     * Executes the command, updates storage, and returns the result.
+     * Executes the command, updates storage, and returns the result ONLY IF is mutated.
      *
      * @param command user command
      * @return result of the command
@@ -85,11 +89,15 @@ public class Logic {
     private CommandResult execute(Command command) throws Exception {
         command.setData(addressBook, lastShownList);
         CommandResult result = command.execute();
-        storage.save(addressBook);
+        if (command.isMutating()) {
+            storage.save(addressBook);
+        }
         return result;
     }
 
-    /** Updates the {@link #lastShownList} if the result contains a list of Persons. */
+    /**
+     * Updates the {@link #lastShownList} if the result contains a list of Persons.
+     */
     private void recordResult(CommandResult result) {
         final Optional<List<? extends ReadOnlyPerson>> personList = result.getRelevantPersons();
         if (personList.isPresent()) {
