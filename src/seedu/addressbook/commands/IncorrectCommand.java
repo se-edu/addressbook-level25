@@ -16,5 +16,14 @@ public class IncorrectCommand extends Command{
     public CommandResult execute() {
         return new CommandResult(feedbackToUser);
     }
+    /**
+     * return true for command types that mutate the data
+     *
+     *
+     */
+    @Override
+    public boolean isMutating() {
+        return false;
+    }
 
 }

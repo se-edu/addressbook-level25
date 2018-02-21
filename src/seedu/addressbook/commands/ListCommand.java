@@ -22,4 +22,13 @@ public class ListCommand extends Command {
         List<ReadOnlyPerson> allPersons = addressBook.getAllPersons().immutableListView();
         return new CommandResult(getMessageForPersonListShownSummary(allPersons), allPersons);
     }
+    /**
+     * return true for command types that mutate the data
+     *
+     *
+     */
+    @Override
+    public boolean isMutating() {
+        return false;
+    }
 }

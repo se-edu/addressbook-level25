@@ -53,4 +53,11 @@ public class FindCommand extends Command {
         return matchedPersons;
     }
 
+    /**
+     * return true for command types that mutate the data
+     */
+    @Override
+    public boolean isMutating() {
+        return false;
+    }
 }

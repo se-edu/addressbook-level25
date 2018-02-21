@@ -12,7 +12,7 @@ public class DeleteCommand extends Command {
 
     public static final String COMMAND_WORD = "delete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n" 
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ":\n"
             + "Deletes the person identified by the index number used in the last person listing.\n\t"
             + "Parameters: INDEX\n\t"
             + "Example: " + COMMAND_WORD + " 1";
@@ -37,6 +37,14 @@ public class DeleteCommand extends Command {
         } catch (PersonNotFoundException pnfe) {
             return new CommandResult(Messages.MESSAGE_PERSON_NOT_IN_ADDRESSBOOK);
         }
+    }
+
+    /**
+     * return true for command types that mutate the data
+     */
+    @Override
+    public boolean isMutating() {
+        return true;
     }
 
 }
