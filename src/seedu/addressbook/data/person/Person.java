@@ -54,6 +54,7 @@ public class Person implements ReadOnlyPerson {
         return address;
     }
 
+
     @Override
     public UniqueTagList getTags() {
         return new UniqueTagList(tags);
@@ -83,5 +84,22 @@ public class Person implements ReadOnlyPerson {
     public String toString() {
         return getAsTextShowAll();
     }
+
+    /**
+     * Returns a concatenated version of the printable strings of each object.
+     */
+
+    String getPrintableString(Printable... printables) {
+        String summary= "";
+        for(Printable p: printables){
+            summary+=p.getPrintableString();
+            summary+=" ";
+        }
+        return summary;
+    }
+
+
+
+
 
 }
