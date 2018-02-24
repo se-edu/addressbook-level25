@@ -70,4 +70,14 @@ public abstract class Command {
     public void setTargetIndex(int targetIndex) {
         this.targetIndex = targetIndex;
     }
+
+    /**
+     * Checks if command mutates data in the address book.
+     *
+     * @return true is command mutates data
+     */
+    public boolean isMutating() {
+        //check is done in subclasses
+        throw new UnsupportedOperationException("This method should be implement in child classes");
+    }
 }
