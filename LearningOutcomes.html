@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Asciidoctor 1.5.6.1">
+<title>Learning Outcomes</title>
+<link rel="stylesheet" href="stylesheets/gh-pages.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" href="stylesheets/coderay-asciidoctor.css">
+</head>
+<body class="article">
+<div id="header">
+<h1>Learning Outcomes</h1>
+</div>
+<div id="content">
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>After studying this code and completing the corresponding exercises, you should be able to,</p>
+</div>
+<div id="toc" class="toc">
+<div id="toctitle" class="title"></div>
+<ul class="sectlevel1">
+<li><a href="#utilize-user-stories-code-lo-userstories-code">Utilize User Stories <code>[LO-UserStories]</code></a></li>
+<li><a href="#utilize-use-cases-code-lo-usecases-code">Utilize use cases <code>[LO-UseCases]</code></a></li>
+<li><a href="#use-non-functional-requirements-code-lo-nfr-code">Use Non Functional Requirements <code>[LO-NFR]</code></a></li>
+<li><a href="#use-polymorphism-code-lo-polymorphism-code">Use Polymorphism <code>[LO-Polymorphism]</code></a></li>
+<li><a href="#use-abstract-classes-methods-code-lo-abstract-code">Use abstract classes/methods <code>[LO-Abstract]</code></a></li>
+<li><a href="#use-interfaces-code-lo-interfaces-code">Use interfaces <code>[LO-Interfaces]</code></a></li>
+<li><a href="#follow-liskov-substitution-principle-code-lo-lsp-code">Follow Liskov Substitution Principle <code>[LO-LSP]</code></a></li>
+<li><a href="#use-java-fx-for-gui-programming-code-lo-javafx-code">Use Java-FX for GUI programming <code>[LO-JavaFx]</code></a></li>
+<li><a href="#analyze-coupling-and-cohesion-of-designs-code-lo-couplingcohesion-code">Analyze Coupling and Cohesion of designs <code>[LO-CouplingCohesion]</code></a></li>
+<li><a href="#apply-dependency-inversion-principle-lo-dip">Apply Dependency Inversion Principle <code>[LO-DIP]</code></a></li>
+<li><a href="#use-dependency-injection-code-lo-di-code">Use Dependency Injection <code>[LO-DI]</code></a></li>
+<li><a href="#apply-open-closed-principle-code-lo-ocp-code">Apply Open-Closed Principle <code>[LO-OCP]</code></a></li>
+<li><a href="#work-in-a-3kloc-code-base-code-lo-3kloc-code">Work in a 3KLoC code base <code>[LO-3KLoC]</code></a></li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="utilize-user-stories-code-lo-userstories-code"><a class="link" href="#utilize-user-stories-code-lo-userstories-code">Utilize User Stories <code>[LO-UserStories]</code></a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="references"><a class="link" href="#references">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/specifyingRequirements/userStories/">se-edu/se-book: Requirements: Specifying Requirements: User Stories</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-add-more-user-stories"><a class="link" href="#exercise-add-more-user-stories">Exercise: Add more user stories</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Assume you are planing to expand the functionality of the AddressBook (but keep it as a CLI application).
+What other user stories do you think AddressBook should support? Add those user stories to the <code>DeveloperGuide.adoc</code>.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="utilize-use-cases-code-lo-usecases-code"><a class="link" href="#utilize-use-cases-code-lo-usecases-code">Utilize use cases <code>[LO-UseCases]</code></a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="references-2"><a class="link" href="#references-2">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/specifyingRequirements/useCases/">se-edu/se-book: Requirements: Specifying Requirements: Use Cases</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-add-a-rename-tag-use-case"><a class="link" href="#exercise-add-a-rename-tag-use-case">Exercise: Add a 'Rename tag' use case</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Add a use case to the <code>DeveloperGuide.adoc</code> to cover the case of <em>renaming of an existing tag</em>.
+e.g. rename the tag <code>friends</code> to <code>buddies</code> (i.e. all persons who had the <code>friends</code> tag will now have
+a <code>buddies</code> tag instead)
+Assume that AddressBook confirms the change with the user before carrying out the operation.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-non-functional-requirements-code-lo-nfr-code"><a class="link" href="#use-non-functional-requirements-code-lo-nfr-code">Use Non Functional Requirements <code>[LO-NFR]</code></a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="references-3"><a class="link" href="#references-3">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/requirements/nonFunctionalRequirements/">se-edu/se-book: Requirements: Non-Functional Requirements</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-add-more-nfrs"><a class="link" href="#exercise-add-more-nfrs">Exercise: Add more NFRs</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Add some more NFRs to the <code>DeveloperGuide.adoc</code></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-polymorphism-code-lo-polymorphism-code"><a class="link" href="#use-polymorphism-code-lo-polymorphism-code">Use Polymorphism <code>[LO-Polymorphism]</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Note how the <code>Command::execute()</code> method shows polymorphic behavior.</p>
+</div>
+<div class="sect2">
+<h3 id="references-4"><a class="link" href="#references-4">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/oopImplementation/polymorphism/">se-edu/se-book: Implementation: OOP: Polymorphism</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-add-a-polymorphic-code-ismutating-code-method"><a class="link" href="#exercise-add-a-polymorphic-code-ismutating-code-method">Exercise: Add a polymorphic <code>isMutating</code> method</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Add a method <code>boolean isMutating()</code> to the <code>Command</code> class. This method will return <code>true</code> for
+command types that mutate the data. e.g. <code>AddCommand</code></p>
+</li>
+<li>
+<p>Currently, AddressBook data are saved to the file after every command.
+Take advantage of the the new method you added to limit file saving to only for command types that mutate data.
+i.e. <code>add</code> command should always save the data while <code>list</code> command should never save data to the file.</p>
+</li>
+</ul>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>There may be better ways to limit file saving to commands that mutate data. The above approach, while not
+optimal, will give you chance to implement a polymorphic behavior.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-abstract-classes-methods-code-lo-abstract-code"><a class="link" href="#use-abstract-classes-methods-code-lo-abstract-code">Use abstract classes/methods <code>[LO-Abstract]</code></a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="references-5"><a class="link" href="#references-5">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/oopImplementation/abstractClasses/">se-edu/se-book: Implementation: OOP: Abstract Classes</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-make-code-command-execute-code-method-abstract"><a class="link" href="#exercise-make-code-command-execute-code-method-abstract">Exercise: Make <code>Command#execute()</code> method abstract</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Make the <code>Command#execute()</code> method abstract (hint: refer to the comment given below the method)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-interfaces-code-lo-interfaces-code"><a class="link" href="#use-interfaces-code-lo-interfaces-code">Use interfaces <code>[LO-Interfaces]</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Note how the <code>Person</code> class implements the <code>ReadOnlyPerson</code> interface so that clients who don&#8217;t need write access to <code>Person</code> objects can access <code>Person</code> objects through the <code>ReadOnlyPerson</code> interface instead.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="images/ReadOnlyPersonUsage.png" alt="ReadOnlyPersonUsage" width="500">
+</div>
+</div>
+<div class="sect2">
+<h3 id="references-6"><a class="link" href="#references-6">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/oopImplementation/interfaces/">se-edu/se-book: Implementation: OOP: Abstract Interfaces</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-add-a-code-printable-code-interface"><a class="link" href="#exercise-add-a-code-printable-code-interface">Exercise: Add a <code>Printable</code> interface</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Add a <code>Printable</code> interface as follows.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/PrintableInterface.png" alt="PrintableInterface" width="400">
+</div>
+</div>
+</li>
+<li>
+<p><code>Override</code> the <code>getPrintableString</code> in classes <code>Name</code>, <code>Phone</code>, <code>Email</code>, and <code>Address</code> so that each produces a printable string representation of the object. e.g. <code>Name: John Smith</code>, <code>Phone: 12349862</code></p>
+</li>
+<li>
+<p>Add the following method in a suitable place of some other class. Note how the method depends on the Interface.</p>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/**
+ * Returns a concatenated version of the printable strings of each object.
+ */</span>
+<span class="predefined-type">String</span> getPrintableString(<span class="predefined-type">Printable</span>... printables) {</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The above method can be used to get a printable string representing a bunch of person details.
+For example, you should be able to call that method like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">// p is a Person object</span>
+<span class="keyword">return</span> getPrintableString(p.getPhone(), p.getEmail(), p.getAddress());</code></pre>
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="follow-liskov-substitution-principle-code-lo-lsp-code"><a class="link" href="#follow-liskov-substitution-principle-code-lo-lsp-code">Follow Liskov Substitution Principle <code>[LO-LSP]</code></a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="references-7"><a class="link" href="#references-7">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/principles/liskovSubstitutionPrinciple/">se-edu/se-book: Principles: Liskov Substitution Principle</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-add-an-exception-to-an-overridden-method"><a class="link" href="#exercise-add-an-exception-to-an-overridden-method">Exercise: Add an exception to an overridden method</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Add a <code>throws Exception</code> clause to the <code>AddCommand::execute</code> method. Notice how Java compiler will not allow it,
+unless you add the same <code>throws</code> clause to the parent class method. This is because if a child class throws
+an exception that is not specified by the Parent&#8217;s contract, the child class is no longer substitutable in place of
+the parent class.</p>
+</li>
+<li>
+<p>Also note that while in the above example the compiler enforces LSP, there are other situations where it is up to
+the programmer to enforce it. For example, if the method in the parent class works for <code>null</code> input, the overridden
+method in the child class should not reject <code>null</code> inputs. This will not be enforced by the compiler.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-java-fx-for-gui-programming-code-lo-javafx-code"><a class="link" href="#use-java-fx-for-gui-programming-code-lo-javafx-code">Use Java-FX for GUI programming <code>[LO-JavaFx]</code></a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="references-8"><a class="link" href="#references-8">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/javaTools/javaFXBasic/">se-edu/se-book: Tools: Java: JavaFX: Basic</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-enhance-gui"><a class="link" href="#exercise-enhance-gui">Exercise: Enhance GUI</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Do some enhancements to the AddressBook GUI. e.g. add an application icon, change font size/style</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="analyze-coupling-and-cohesion-of-designs-code-lo-couplingcohesion-code"><a class="link" href="#analyze-coupling-and-cohesion-of-designs-code-lo-couplingcohesion-code">Analyze Coupling and Cohesion of designs <code>[LO-CouplingCohesion]</code></a></h2>
+<div class="sectionbody">
+<div class="ulist">
+<ul>
+<li>
+<p>Notice how having a separate <code>Formattter</code> class (an application of the Single Responsibility Principle) improves the <em>cohesion</em> of the <code>MainWindow</code> class as well as the <code>Formatter</code> class.</p>
+</li>
+</ul>
+</div>
+<div class="sect2">
+<h3 id="references-9"><a class="link" href="#references-9">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/designPrinciples/coupling/">se-edu/se-book: Design: Design Principles: Coupling</a></p>
+</li>
+<li>
+<p><a href="https://se-edu.github.io/se-book/designPrinciples/cohesion/">se-edu/se-book: Design: Design Principles: Cohesion</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-identify-places-to-reduce-coupling-and-increase-cohesion"><a class="link" href="#exercise-identify-places-to-reduce-coupling-and-increase-cohesion">Exercise: Identify places to reduce coupling and increase cohesion</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Where else in the design coupling can be reduced further, or cohesion can be increased further?</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="apply-dependency-inversion-principle-lo-dip"><a class="link" href="#apply-dependency-inversion-principle-lo-dip">Apply Dependency Inversion Principle <code>[LO-DIP]</code></a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="references-10"><a class="link" href="#references-10">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/principles/dependencyInversionPrinciple/">se-edu/se-book: Principles: Dependency Inversion Principle</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-invert-dependency-from-logic-to-storage"><a class="link" href="#exercise-invert-dependency-from-logic-to-storage">Exercise: Invert dependency from Logic to Storage</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Note how <code>Logic</code> class depends on the <code>StorageFile</code> class. This is a violation of DIP.</p>
+</li>
+<li>
+<p>Modify the implementation as follows so that both <code>Logic</code> and <code>StorageFile</code> now depend on the
+<code>abstract</code> class <code>Storage</code>.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/LogicStroageFileDIP.png" alt="LogicStroageFileDIP" width="300">
+</div>
+</div>
+</li>
+<li>
+<p>Where else in the code do you notice the application of DIP?</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="use-dependency-injection-code-lo-di-code"><a class="link" href="#use-dependency-injection-code-lo-di-code">Use Dependency Injection <code>[LO-DI]</code></a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Note how <code>Logic</code> class depends on the <code>StorageFile</code> class. This means when testing the <code>Logic</code> class,
+our test cases execute the <code>StorageFile</code> class as well. What if we want to test the <code>Logic</code> class without
+getting the <code>StorageFile</code> class involved? That is a situation where we can use <em>Dependency Injection</em>.</p>
+</div>
+<div class="sect2">
+<h3 id="references-11"><a class="link" href="#references-11">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/testing/dependencyInjection/">se-edu/se-book: Quality Assurance: Testing: Dependency Injection</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-facilitate-injecting-a-storagestub"><a class="link" href="#exercise-facilitate-injecting-a-storagestub">Exercise: Facilitate injecting a StorageStub</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Change the implementation as follows so that we can inject a <code>StorageStub</code> when testing the <code>Logic</code>
+class.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/DependencyInjection.png" alt="DependencyInjection" width="600">
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>If you did the exercise in <a href="#apply-dependency-inversion-principle-lo-dip"><code>LO-DIP</code></a>
+already but those changes are in a different branch, you may be able to reuse some of those commits
+by cherry picking them from that branch to the branch you created for this exercise.</p>
+</div>
+<div class="paragraph">
+<p>Note: <em>cherry picking</em> is simply copy-pasting a commit from one branch to another. In SourceTree, you can
+right-click on the commit your want to copy to the current branch, and choose 'Cherry pick'.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Implement the <code>StorageStub</code> such that calls to the <code>save</code> method do nothing (i.e. empty method body).<br></p>
+</li>
+<li>
+<p>Update the <code>LogicTest</code> to work with the <code>StorageStub</code> instead of the actual <code>StorageFile</code> object.
+i.e. <code>Logic</code> injects a <code>StorageStub</code> object to replace the dependency of <code>Logic</code> on <code>StorageFile</code> before
+testing <code>Logic</code>.</p>
+</li>
+<li>
+<p>The example above uses <a href="#apply-dependency-inversion-principle-lo-dip">DIP</a> as a means to achieve DI.
+Note that there is another way to inject a <code>StorageStub</code> object, as shown below.
+In this case we do not apply the DIP but we still achieve DI.</p>
+<div class="imageblock">
+<div class="content">
+<img src="images/DependencyInjectionWithoutDIP.png" alt="DependencyInjectionWithoutDIP" width="250">
+</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="apply-open-closed-principle-code-lo-ocp-code"><a class="link" href="#apply-open-closed-principle-code-lo-ocp-code">Apply Open-Closed Principle <code>[LO-OCP]</code></a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="references-12"><a class="link" href="#references-12">References</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://se-edu.github.io/se-book/designPrinciples/openClosedPrinciple/">se-edu/se-book: Design: Desing Principles: Open-Closed Principle</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="exercise-analyze-ocp-compliance-of-the-code-logic-code-class"><a class="link" href="#exercise-analyze-ocp-compliance-of-the-code-logic-code-class">Exercise: Analyze OCP-compliance of the <code>Logic</code> class</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Consider adding a new command to the Address Book. e.g. an <code>edit</code> command. Notice how little you need to change in the <code>Logic</code> class to extend its behavior so that it can execute the new command.
+That is because <code>Logic</code> follows the OCP i.e. <code>Logic</code> is <em>open to be extended</em> with more commands but <em>closed for modifications</em>.</p>
+</li>
+<li>
+<p>Is it possible to make the <code>Parser</code> class more OCP-compliant in terms of extending it to handle more
+command types?</p>
+</li>
+<li>
+<p>In terms of how it saves data, does <code>Logic</code> become more OCP-compliant
+after applying DIP as given in <a href="#apply-dependency-inversion-principle-lo-dip"><code>LO-DIP</code></a>?
+How can you improve `Logic&#8217;s OCP-compliance further so that it can not only work with different types
+of storages, but different number of storages (e.g. save to both a text file and a database).</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="work-in-a-3kloc-code-base-code-lo-3kloc-code"><a class="link" href="#work-in-a-3kloc-code-base-code-lo-3kloc-code">Work in a 3KLoC code base <code>[LO-3KLoC]</code></a></h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="exercise-enhance-addressbook"><a class="link" href="#exercise-enhance-addressbook">Exercise: Enhance AddressBook</a></h3>
+<div class="ulist">
+<ul>
+<li>
+<p>Enhance AddressBook in some way. e.g. add a new command</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-07-04 09:45:27 UTC
+</div>
+</div>
+</body>
+</html>
