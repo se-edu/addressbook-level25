@@ -1,4 +1,6 @@
 = Developer Guide
+:imagesDir: images
+:stylesDir: stylesheets
 
 * link:#setting-up[Setting Up]
 * link:#design[Design]
