@@ -56,7 +56,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |`* * *` |user |add a new person |
 |`* * *` |user |delete a person |remove entries that I no longer need
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
-|`* *` |user |hide link:#private-contact-detail[private contact details] by default |minimize chance of someone else seeing them by accident
+|`* *` |user |hide <<private-contact-detail, private contact details>> by default |minimize chance of someone else seeing them by accident
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
 |===========================================================================================================================================
 
@@ -88,19 +88,21 @@ Use case resumes at step 2.
 
 == Appendix C : Non Functional Requirements
 
-. Should work on any link:#mainstream-os[mainstream OS] as long as it has Java 8 or higher installed.
+. Should work on any <<mainstream-os, mainstream OS>> as long as it has Java 8 or higher installed.
 . Should be able to hold up to 1000 persons.
 . Should come with automated unit tests and open source code.
 . Should favor DOS style commands over Unix-style commands.
 
 == Appendix D : Glossary
 
+[[mainstream-os]]
 === Mainstream OS
 
 __________________________
 Windows, Linux, Unix, OS-X
 __________________________
 
+[[private-contact-detail]]
 === Private contact detail
 
 ___________________________________________________________

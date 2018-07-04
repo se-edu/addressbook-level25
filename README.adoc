@@ -17,17 +17,17 @@ usually write in data structure modules.
 
 * A simple GUI added to replace the Text UI.
 * A `Logic` class added together with a `LogicTest` class.
-* Appendices added to link:doc/DeveloperGuide.md[Developer Guide].
+* Appendices added to <<DeveloperGuide#, Developer Guide>>
 
 *Useful Links*
 
-* link:doc/UserGuide.md[User Guide]
-* link:doc/DeveloperGuide.md[Developer Guide]
-* link:doc/LearningOutcomes.md[Learning Outcomes]
+* <<UserGuide#, User Guide>>
+* <<DeveloperGuide#, Developer Guide>>
+* <<LearningOutcomes#, Learning Outcomes>>
 
 == Contributors
 
-The full list of contributors for se-edu can be found https://se-edu.github.io/docs/Team.html[here].
+The full list of contributors for se-edu can be found https://se-edu.github.io/Team.html[here].
 
 == Acknowledgements
 

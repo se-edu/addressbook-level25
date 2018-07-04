@@ -166,6 +166,7 @@ method in the child class should not reject `null` inputs. This will not be enfo
 
 '''''
 
+[[apply-dependency-inversion-principle-lo-dip]]
 == Apply Dependency Inversion Principle `[LO-DIP]`
 
 === References
@@ -201,7 +202,7 @@ class.
 image::DependencyInjection.png[width=600]
 +
 _________________________________________________________________________________________________________
-If you did the exercise in link:#apply-dependency-inversion-principle-lo-dip[`LO-DIP`]
+If you did the exercise in <<apply-dependency-inversion-principle-lo-dip, `LO-DIP`>>
 already but those changes are in a different branch, you may be able to reuse some of those commits
 by cherry picking them from that branch to the branch you created for this exercise.
 Note: _cherry picking_ is simply copy-pasting a commit from one branch to another. In SourceTree, you can
@@ -211,7 +212,7 @@ ________________________________________________________________________________
 * Update the `LogicTest` to work with the `StorageStub` instead of the actual `StorageFile` object.
 i.e. `Logic` injects a `StorageStub` object to replace the dependency of `Logic` on `StorageFile` before
 testing `Logic`.
-* The example above uses link:#apply-dependency-inversion-principle-lo-dip[DIP] as a means to achieve DI.
+* The example above uses <<apply-dependency-inversion-principle-lo-dip, DIP>> as a means to achieve DI.
 Note that there is another way to inject a `StorageStub` object, as shown below.
 In this case we do not apply the DIP but we still achieve DI.
 +
@@ -232,7 +233,7 @@ That is because `Logic` follows the OCP i.e. `Logic` is _open to be extended_ wi
 * Is it possible to make the `Parser` class more OCP-compliant in terms of extending it to handle more
 command types?
 * In terms of how it saves data, does `Logic` become more OCP-compliant
-after applying DIP as given in link:#apply-dependency-inversion-principle-lo-dip[`LO-DIP`]?
+after applying DIP as given in <<apply-dependency-inversion-principle-lo-dip, `LO-DIP`>>?
 How can you improve `Logic`'s OCP-compliance further so that it can not only work with different types
 of storages, but different number of storages (e.g. save to both a text file and a database).
 
