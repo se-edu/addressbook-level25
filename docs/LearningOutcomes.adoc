@@ -22,11 +22,11 @@ After studying this code and completing the corresponding exercises, you should 
 
 == Utilize User Stories `[LO-UserStories]`
 
-==== References
+=== References
 
 * https://se-edu.github.io/se-book/specifyingRequirements/userStories/[se-edu/se-book: Requirements: Specifying Requirements: User Stories]
 
-==== Exercise: Add more user stories
+=== Exercise: Add more user stories
 
 * Assume you are planing to expand the functionality of the AddressBook (but keep it as a CLI application).
 What other user stories do you think AddressBook should support? Add those user stories to the `DeveloperGuide.md`.
@@ -35,11 +35,11 @@ What other user stories do you think AddressBook should support? Add those user 
 
 == Utilize use cases `[LO-UseCases]`
 
-==== References
+=== References
 
 * https://se-edu.github.io/se-book/specifyingRequirements/useCases/[se-edu/se-book: Requirements: Specifying Requirements: Use Cases]
 
-==== Exercise: Add a 'Rename tag' use case
+=== Exercise: Add a 'Rename tag' use case
 
 * Add a use case to the `DeveloperGuide.md` to cover the case of _renaming of an existing tag_.
 e.g. rename the tag `friends` to `buddies` (i.e. all persons who had the `friends` tag will now have
@@ -50,11 +50,11 @@ Assume that AddressBook confirms the change with the user before carrying out th
 
 == Use Non Functional Requirements `[LO-NFR]`
 
-==== References
+=== References
 
 * https://se-edu.github.io/se-book/requirements/nonFunctionalRequirements/[se-edu/se-book: Requirements: Non-Functional Requirements]
 
-==== Exercise: Add more NFRs
+=== Exercise: Add more NFRs
 
 * Add some more NFRs to the `DeveloperGuide.md`
 
@@ -64,11 +64,11 @@ Assume that AddressBook confirms the change with the user before carrying out th
 
 Note how the `Command::execute()` method shows polymorphic behavior.
 
-==== References
+=== References
 
 * https://se-edu.github.io/se-book/oopImplementation/polymorphism/[se-edu/se-book: Implementation: OOP: Polymorphism]
 
-==== Exercise: Add a polymorphic `isMutating` method
+=== Exercise: Add a polymorphic `isMutating` method
 
 * Add a method `boolean isMutating()` to the `Command` class. This method will return `true` for
 command types that mutate the data. e.g. `AddCommand`
@@ -83,11 +83,11 @@ optimal, will give you chance to implement a polymorphic behavior.
 
 == Use abstract classes/methods `[LO-Abstract]`
 
-==== References
+=== References
 
 * https://se-edu.github.io/se-book/oopImplementation/abstractClasses/[se-edu/se-book: Implementation: OOP: Abstract Classes]
 
-==== Exercise: Make `Command#execute()` method abstract
+=== Exercise: Make `Command#execute()` method abstract
 
 * Make the `Command#execute()` method abstract (hint: refer to the comment given below the method)
 
@@ -97,11 +97,11 @@ optimal, will give you chance to implement a polymorphic behavior.
 
 Note how the `Person` class implements the `ReadOnlyPerson` interface so that clients who don't need write access to `Person` objects can access `Person` objects through the `ReadOnlyPerson` interface instead.
 
-==== References
+=== References
 
 * https://se-edu.github.io/se-book/oopImplementation/interfaces/[se-edu/se-book: Implementation: OOP: Abstract Interfaces]
 
-===== Exercise: Add a `Printable` interface
+=== Exercise: Add a `Printable` interface
 
 * Add a `Printable` interface as follows.
 * `Override` the `getPrintableString` in classes `Name`, `Phone`, `Email`, and `Address` so that each produces a printable string representation of the object. e.g. `Name: John Smith`, `Phone: 12349862`
@@ -128,11 +128,11 @@ return getPrintableString(p.getPhone(), p.getEmail(), p.getAddress());
 
 == Follow Liskov Substitution Principle `[LO-LSP]`
 
-==== References
+=== References
 
 * https://se-edu.github.io/se-book/principles/liskovSubstitutionPrinciple/[se-edu/se-book: Principles: Liskov Substitution Principle]
 
-==== Exercise: Add an exception to an overridden method
+=== Exercise: Add an exception to an overridden method
 
 * Add a `throws Exception` clause to the `AddCommand::execute` method. Notice how Java compiler will not allow it,
 unless you add the same `throws` clause to the parent class method. This is because if a child class throws
@@ -146,11 +146,11 @@ method in the child class should not reject `null` inputs. This will not be enfo
 
 == Use Java-FX for GUI programming `[LO-JavaFx]`
 
-==== References
+=== References
 
 * https://se-edu.github.io/se-book/javaTools/javaFXBasic/[se-edu/se-book: Tools: Java: JavaFX: Basic]
 
-==== Exercise: Enhance GUI
+=== Exercise: Enhance GUI
 
 * Do some enhancements to the AddressBook GUI. e.g. add an application icon, change font size/style
 
@@ -160,12 +160,12 @@ method in the child class should not reject `null` inputs. This will not be enfo
 
 * Notice how having a separate `Formattter` class (an application of the Single Responsibility Principle) improves the _cohesion_ of the `MainWindow` class as well as the `Formatter` class.
 
-==== References
+=== References
 
 * https://se-edu.github.io/se-book/designPrinciples/coupling/[se-edu/se-book: Design: Design Principles: Coupling]
 * https://se-edu.github.io/se-book/designPrinciples/cohesion/[se-edu/se-book: Design: Design Principles: Cohesion]
 
-==== Exercise: Identify places to reduce coupling and increase cohesion
+=== Exercise: Identify places to reduce coupling and increase cohesion
 
 * Where else in the design coupling can be reduced further, or cohesion can be increased further?
 
@@ -173,11 +173,11 @@ method in the child class should not reject `null` inputs. This will not be enfo
 
 == Apply Dependency Inversion Principle `[LO-DIP]`
 
-==== References
+=== References
 
 * https://se-edu.github.io/se-book/principles/dependencyInversionPrinciple/[se-edu/se-book: Principles: Dependency Inversion Principle]
 
-==== Exercise: Invert dependency from Logic to Storage
+=== Exercise: Invert dependency from Logic to Storage
 
 * Note how `Logic` class depends on the `StorageFile` class. This is a violation of DIP.
 * Modify the implementation as follows so that both `Logic` and `StorageFile` now depend on the
@@ -192,11 +192,11 @@ Note how `Logic` class depends on the `StorageFile` class. This means when testi
 our test cases execute the `StorageFile` class as well. What if we want to test the `Logic` class without
 getting the `StorageFile` class involved? That is a situation where we can use _Dependency Injection_.
 
-==== References
+=== References
 
 * https://se-edu.github.io/se-book/testing/dependencyInjection/[se-edu/se-book: Quality Assurance: Testing: Dependency Injection]
 
-==== Exercise: Facilitate injecting a StorageStub
+=== Exercise: Facilitate injecting a StorageStub
 
 * Change the implementation as follows so that we can inject a `StorageStub` when testing the `Logic`
 class.
@@ -220,11 +220,11 @@ In this case we do not apply the DIP but we still achieve DI.
 
 == Apply Open-Closed Principle `[LO-OCP]`
 
-==== References
+=== References
 
 * https://se-edu.github.io/se-book/designPrinciples/openClosedPrinciple/[se-edu/se-book: Design: Desing Principles: Open-Closed Principle]
 
-==== Exercise: Analyze OCP-compliance of the `Logic` class
+=== Exercise: Analyze OCP-compliance of the `Logic` class
 
 * Consider adding a new command to the Address Book. e.g. an `edit` command. Notice how little you need to change in the `Logic` class to extend its behavior so that it can execute the new command.
 That is because `Logic` follows the OCP i.e. `Logic` is _open to be extended_ with more commands but _closed for modifications_.
@@ -239,7 +239,7 @@ of storages, but different number of storages (e.g. save to both a text file and
 
 == Work in a 3KLoC code base `[LO-3KLoC]`
 
-==== Exercise: Enhance AddressBook
+=== Exercise: Enhance AddressBook
 
 * Enhance AddressBook in some way. e.g. add a new command
 

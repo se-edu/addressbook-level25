@@ -12,12 +12,12 @@
 
 == Setting up
 
-==== Prerequisites
+=== Prerequisites
 
 * JDK 8 or later
 * IntelliJ IDE
 
-==== Importing the project into IntelliJ
+=== Importing the project into IntelliJ
 
 1.  Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
 2.  Set up the correct JDK version
@@ -68,7 +68,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
 
-==== Use case: Delete person
+=== Use case: Delete person
 
 *MSS*
 
@@ -102,13 +102,13 @@ _______________________________________
 
 == Appendix D : Glossary
 
-===== Mainstream OS
+=== Mainstream OS
 
 __________________________
 Windows, Linux, Unix, OS-X
 __________________________
 
-===== Private contact detail
+=== Private contact detail
 
 ___________________________________________________________
 A contact detail that is not meant to be shared with others
