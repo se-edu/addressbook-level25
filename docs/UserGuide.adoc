@@ -12,6 +12,8 @@ Please refer to the link:DeveloperGuide.md#setting-up[Setting up] section to lea
 . Right click on `Main`
 . Click `Run Main.main()`
 . The GUI should appear in a few seconds
++
+image::Ui.png[]
 
 == Viewing help : `help`
 

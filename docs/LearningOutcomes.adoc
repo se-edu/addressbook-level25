@@ -88,6 +88,8 @@ optimal, will give you chance to implement a polymorphic behavior.
 
 Note how the `Person` class implements the `ReadOnlyPerson` interface so that clients who don't need write access to `Person` objects can access `Person` objects through the `ReadOnlyPerson` interface instead.
 
+image::ReadOnlyPersonUsage.png[width=500]
+
 === References
 
 * https://se-edu.github.io/se-book/oopImplementation/interfaces/[se-edu/se-book: Implementation: OOP: Abstract Interfaces]
@@ -95,6 +97,8 @@ Note how the `Person` class implements the `ReadOnlyPerson` interface so that cl
 === Exercise: Add a `Printable` interface
 
 * Add a `Printable` interface as follows.
++
+image::PrintableInterface.png[width=400]
 * `Override` the `getPrintableString` in classes `Name`, `Phone`, `Email`, and `Address` so that each produces a printable string representation of the object. e.g. `Name: John Smith`, `Phone: 12349862`
 * Add the following method in a suitable place of some other class. Note how the method depends on the Interface.
 +
@@ -173,6 +177,8 @@ method in the child class should not reject `null` inputs. This will not be enfo
 * Note how `Logic` class depends on the `StorageFile` class. This is a violation of DIP.
 * Modify the implementation as follows so that both `Logic` and `StorageFile` now depend on the
 `abstract` class `Storage`.
++
+image::LogicStroageFileDIP.png[width=300]
 * Where else in the code do you notice the application of DIP?
 
 '''''
@@ -192,6 +198,8 @@ getting the `StorageFile` class involved? That is a situation where we can use _
 * Change the implementation as follows so that we can inject a `StorageStub` when testing the `Logic`
 class.
 +
+image::DependencyInjection.png[width=600]
++
 _________________________________________________________________________________________________________
 If you did the exercise in link:#apply-dependency-inversion-principle-lo-dip[`LO-DIP`]
 already but those changes are in a different branch, you may be able to reuse some of those commits
@@ -206,6 +214,8 @@ testing `Logic`.
 * The example above uses link:#apply-dependency-inversion-principle-lo-dip[DIP] as a means to achieve DI.
 Note that there is another way to inject a `StorageStub` object, as shown below.
 In this case we do not apply the DIP but we still achieve DI.
++
+image::DependencyInjectionWithoutDIP.png[width=250]
 
 '''''
 

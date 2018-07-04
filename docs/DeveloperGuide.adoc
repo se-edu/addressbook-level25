@@ -39,6 +39,8 @@
 
 == Design
 
+image::mainClassDiagram.png[]
+
 == Testing
 
 * In IntelliJ, right-click on the `test` folder and choose `Run 'All Tests'`
