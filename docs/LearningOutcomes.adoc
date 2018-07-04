@@ -1,24 +1,15 @@
 = Learning Outcomes
+:toc: macro
+:toc-title:
+:toclevels: 1
 :imagesDir: images
 :stylesDir: stylesheets
 
 After studying this code and completing the corresponding exercises, you should be able to,
 
-1.  link:#utilize-user-stories-lo-userstories[Utilize User Stories `[LO-UserStories]`]
-2.  link:#utilize-use-cases-lo-usecases[Utilize use cases `[LO-UseCases]`]
-3.  link:#use-non-functional-requirements-lo-nfr[Use Non Functional Requirements `[LO-NFR]`]
-4.  link:#use-polymorphism-lo-polymorphism[Use Polymorphism `[LO-Polymorphism]`]
-5.  link:#use-abstract-classesmethods-lo-abstract[Use abstract classes/methods `[LO-Abstract]`]
-6.  link:#use-interfaces-lo-interfaces[Use interfaces `[LO-Interfaces]`]
-7.  link:#follow-liskov-substitution-principle-lo-lsp[Follow Liskov Substitution Principle `[LO-LSP]`]
-8.  link:#use-java-fx-for-gui-programming-lo-javafx[Use Java-FX for GUI programming `[LO-JavaFx]`]
-9.  link:#analyze-coupling-and-cohesion-of-designs-lo-couplingcohesion[Analyze Coupling and Cohesion of designs `[LO-CouplingCohesion]`]
-10. link:#apply-dependency-inversion-principle-lo-dip[Apply Dependency Inversion Principle `[LO-DIP]`]
-11. link:#use-dependency-injection-lo-di[Use Dependency Injection `[LO-DI]`]
-12. link:#apply-open-closed-principle-lo-ocp[Apply Open-Closed Principle `[LO-OCP]`]
-13. link:#work-in-a-3kloc-code-base-lo-3kloc[Work in a 3KLoC code base `[LO-3KLoC]`]
+toc::[]
 
-'''''
+'''
 
 == Utilize User Stories `[LO-UserStories]`
 

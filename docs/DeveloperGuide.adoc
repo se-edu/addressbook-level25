@@ -1,14 +1,8 @@
 = Developer Guide
+:toc:
+:toc-title:
 :imagesDir: images
 :stylesDir: stylesheets
-
-* link:#setting-up[Setting Up]
-* link:#design[Design]
-* link:#testing[Testing]
-* link:#appendix-a--user-stories[Appendix A: User Stories]
-* link:#appendix-b--use-cases[Appendix B: Use Cases]
-* link:#appendix-c--non-functional-requirements[Appendix C: Non Functional Requirements]
-* link:#appendix-d--glossary[Appendix D: Gloassary]
 
 == Setting up
 
