@@ -45,7 +45,8 @@ image::mainClassDiagram.png[]
 
 * In IntelliJ, right-click on the `test` folder and choose `Run 'All Tests'`
 
-== Appendix A : User Stories
+[appendix]
+== User Stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -60,7 +61,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
 |===========================================================================================================================================
 
-== Appendix B : Use Cases
+[appendix]
+== Use Cases
 
 (For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
 
@@ -86,14 +88,16 @@ Use case ends.
 +
 Use case resumes at step 2.
 
-== Appendix C : Non Functional Requirements
+[appendix]
+== Non Functional Requirements
 
 . Should work on any <<mainstream-os, mainstream OS>> as long as it has Java 8 or higher installed.
 . Should be able to hold up to 1000 persons.
 . Should come with automated unit tests and open source code.
 . Should favor DOS style commands over Unix-style commands.
 
-== Appendix D : Glossary
+[appendix]
+== Glossary
 
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
