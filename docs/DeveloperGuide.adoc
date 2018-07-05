@@ -1,4 +1,5 @@
 = Developer Guide
+:site-section: DeveloperGuide
 :toc:
 :toc-title:
 :imagesDir: images
