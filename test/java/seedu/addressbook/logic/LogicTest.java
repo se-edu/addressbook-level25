@@ -11,7 +11,6 @@ import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.person.*;
 import seedu.addressbook.data.tag.Tag;
-import seedu.addressbook.data.tag.UniqueTagList;
 import seedu.addressbook.storage.StorageFile;
 
 import java.util.*;
@@ -469,7 +468,7 @@ public class LogicTest {
             Address privateAddress = new Address("111, alpha street", true);
             Tag tag1 = new Tag("tag1");
             Tag tag2 = new Tag("tag2");
-            UniqueTagList tags = new UniqueTagList(tag1, tag2);
+            Set<Tag> tags = new HashSet<>(Arrays.asList(tag1, tag2));
             return new Person(name, privatePhone, email, privateAddress, tags);
         }
 
@@ -487,7 +486,7 @@ public class LogicTest {
                     new Phone("" + Math.abs(seed), isAllFieldsPrivate),
                     new Email(seed + "@email", isAllFieldsPrivate),
                     new Address("House of " + seed, isAllFieldsPrivate),
-                    new UniqueTagList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1)))
+                    new HashSet<>(Arrays.asList(new Tag("tag" + Math.abs(seed)), new Tag("tag" + Math.abs(seed + 1))))
             );
         }
 
@@ -502,7 +501,7 @@ public class LogicTest {
             cmd.add((p.getEmail().isPrivate() ? "pe/" : "e/") + p.getEmail());
             cmd.add((p.getAddress().isPrivate() ? "pa/" : "a/") + p.getAddress());
 
-            UniqueTagList tags = p.getTags();
+            Set<Tag> tags = p.getTags();
             for(Tag t: tags){
                 cmd.add("t/" + t.tagName);
             }
@@ -583,7 +582,7 @@ public class LogicTest {
                     new Phone("1", false),
                     new Email("1@email", false),
                     new Address("House of 1", false),
-                    new UniqueTagList(new Tag("tag"))
+                    Collections.singleton(new Tag("tag"))
             );
         }
     }
