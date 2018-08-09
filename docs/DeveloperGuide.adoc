@@ -23,7 +23,7 @@
 . Locate the `build.gradle` file and select it. Click `OK`
 . Click `Open as Project`
 . Click `OK` to accept the default settings
-. Run the `seedu.addressbook.Main` (right-click the `Main` class and click `Run Main.main()`) and try a few commands
+. Run the `seedu.addressbook.Main` class (right-click the `Main` class and click `Run Main.main()`) and try a few commands
 . Run all the tests (right-click the `test` folder, and click `Run 'All Tests'`) and ensure that they pass
 
 == Design
