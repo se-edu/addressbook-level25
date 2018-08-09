@@ -3,7 +3,6 @@ package seedu.addressbook.storage.jaxb;
 import seedu.addressbook.data.AddressBook;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.Person;
-import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.data.person.UniquePersonList;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -32,9 +31,7 @@ public class AdaptedAddressBook {
      */
     public AdaptedAddressBook(AddressBook source) {
         persons = new ArrayList<>();
-        for (ReadOnlyPerson person : source.getAllPersons()) {
-            persons.add(new AdaptedPerson(person));
-        }
+        source.getAllPersons().forEach(person -> persons.add(new AdaptedPerson(person)));
     }
 
 
@@ -47,12 +44,7 @@ public class AdaptedAddressBook {
      * so we check for that.
      */
     public boolean isAnyRequiredFieldMissing() {
-        for (AdaptedPerson person : persons) {
-            if (person.isAnyRequiredFieldMissing()) {
-                return true;
-            }
-        }
-        return false;
+        return persons.stream().anyMatch(AdaptedPerson::isAnyRequiredFieldMissing);
     }
 
 

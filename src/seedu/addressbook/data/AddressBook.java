@@ -8,7 +8,6 @@ import seedu.addressbook.data.person.UniquePersonList.PersonNotFoundException;
 
 /**
  * Represents the entire address book. Contains the data of the address book.
- *
  */
 public class AddressBook {
 
@@ -82,7 +81,6 @@ public class AddressBook {
 
     @Override
     public int hashCode() {
-        // use this method for custom fields hashing instead of implementing your own
         return allPersons.hashCode();
     }
 }

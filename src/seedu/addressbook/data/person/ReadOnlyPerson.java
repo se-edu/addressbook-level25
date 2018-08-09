@@ -16,7 +16,7 @@ public interface ReadOnlyPerson {
     Address getAddress();
 
     /**
-     * The returned TagSet is a deep copy of the internal TagSet,
+     * The returned {@code Set} is a deep copy of the internal {@code Set},
      * changes on the returned list will not affect the person's internal tags.
      */
     Set<Tag> getTags();
