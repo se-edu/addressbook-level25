@@ -73,7 +73,7 @@ optimal, will give you chance to implement a polymorphic behavior.
 
 === References
 
-* https://se-edu.github.io/se-book/oop/abstractClasses/[se-edu/se-book: Implementation: OOP: Abstract Classes]
+* https://se-edu.github.io/se-book/oop/inheritance/abstractClasses/[se-edu/se-book: Implementation: OOP: Abstract Classes]
 
 === Exercise: Make `Command#execute()` method abstract
 
@@ -87,7 +87,7 @@ image::ReadOnlyPersonUsage.png[width=500]
 
 === References
 
-* https://se-edu.github.io/se-book/oop/interfaces/[se-edu/se-book: Implementation: OOP: Abstract Interfaces]
+* https://se-edu.github.io/se-book/oop/inheritance/interfaces/[se-edu/se-book: Implementation: OOP: Abstract Interfaces]
 
 === Exercise: Add a `Printable` interface
 
