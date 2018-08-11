@@ -53,7 +53,8 @@ Note how the `Command::execute()` method shows polymorphic behavior.
 
 === References
 
-* https://se-edu.github.io/se-book/oopImplementation/polymorphism/[se-edu/se-book: Implementation: OOP: Polymorphism]
+* https://se-edu.github.io/se-book/oop/polymorphism/[se-edu/se-book: Paradigms: OOP: Polymorphism]
+* https://se-edu.github.io/se-book/cppToJava/inheritance/polymorphism/[se-edu/se-book: C++ to Java: OOP: Polymorphism]
 
 === Exercise: Add a polymorphic `isMutating` method
 
@@ -73,7 +74,8 @@ optimal, will give you chance to implement a polymorphic behavior.
 
 === References
 
-* https://se-edu.github.io/se-book/oopImplementation/abstractClasses/[se-edu/se-book: Implementation: OOP: Abstract Classes]
+* https://se-edu.github.io/se-book/oop/inheritance/abstractClasses/[se-edu/se-book: Paradigms: OOP: Abstract Classes]
+* https://se-edu.github.io/se-book/cppToJava/inheritance/abstractClassesAndMethods/[se-edu/se-book: C++ to Java: OOP: Abstract Classes]
 
 === Exercise: Make `Command#execute()` method abstract
 
@@ -87,7 +89,8 @@ image::ReadOnlyPersonUsage.png[width=500]
 
 === References
 
-* https://se-edu.github.io/se-book/oopImplementation/interfaces/[se-edu/se-book: Implementation: OOP: Abstract Interfaces]
+* https://se-edu.github.io/se-book/oop/inheritance/interfaces/[se-edu/se-book: Paradigms: OOP: Abstract Interfaces]
+* https://se-edu.github.io/se-book/cppToJava/inheritance/interfaces/[se-edu/se-book: C++ to Java: OOP: Abstract Interfaces]
 
 === Exercise: Add a `Printable` interface
 
@@ -146,8 +149,8 @@ method in the child class should not reject `null` inputs. This will not be enfo
 
 === References
 
-* https://se-edu.github.io/se-book/designPrinciples/coupling/[se-edu/se-book: Design: Design Principles: Coupling]
-* https://se-edu.github.io/se-book/designPrinciples/cohesion/[se-edu/se-book: Design: Design Principles: Cohesion]
+* https://se-edu.github.io/se-book/designFundamentals/coupling/[se-edu/se-book: Design: Design Principles: Coupling]
+* https://se-edu.github.io/se-book/designFundamentals/cohesion/[se-edu/se-book: Design: Design Principles: Cohesion]
 
 === Exercise: Identify places to reduce coupling and increase cohesion
 
@@ -210,7 +213,7 @@ image::DependencyInjectionWithoutDIP.png[width=250]
 
 === References
 
-* https://se-edu.github.io/se-book/designPrinciples/openClosedPrinciple/[se-edu/se-book: Design: Desing Principles: Open-Closed Principle]
+* https://se-edu.github.io/se-book/principles/openClosedPrinciple/[se-edu/se-book: Principles: Open-Closed Principle]
 
 === Exercise: Analyze OCP-compliance of the `Logic` class
 
