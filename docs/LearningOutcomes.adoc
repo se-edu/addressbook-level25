@@ -53,7 +53,8 @@ Note how the `Command::execute()` method shows polymorphic behavior.
 
 === References
 
-* https://se-edu.github.io/se-book/oop/polymorphism/[se-edu/se-book: Implementation: OOP: Polymorphism]
+* https://se-edu.github.io/se-book/oop/polymorphism/[se-edu/se-book: Paradigms: OOP: Polymorphism]
+* https://se-edu.github.io/se-book/cppToJava/inheritance/polymorphism/[se-edu/se-book: C++ to Java: OOP: Polymorphism]
 
 === Exercise: Add a polymorphic `isMutating` method
 
@@ -73,7 +74,8 @@ optimal, will give you chance to implement a polymorphic behavior.
 
 === References
 
-* https://se-edu.github.io/se-book/oop/inheritance/abstractClasses/[se-edu/se-book: Implementation: OOP: Abstract Classes]
+* https://se-edu.github.io/se-book/oop/inheritance/abstractClasses/[se-edu/se-book: Paradigms: OOP: Abstract Classes]
+* https://se-edu.github.io/se-book/cppToJava/inheritance/abstractClassesAndMethods/[se-edu/se-book: C++ to Java: OOP: Abstract Classes]
 
 === Exercise: Make `Command#execute()` method abstract
 
@@ -87,7 +89,8 @@ image::ReadOnlyPersonUsage.png[width=500]
 
 === References
 
-* https://se-edu.github.io/se-book/oop/inheritance/interfaces/[se-edu/se-book: Implementation: OOP: Abstract Interfaces]
+* https://se-edu.github.io/se-book/oop/inheritance/interfaces/[se-edu/se-book: Paradigms: OOP: Abstract Interfaces]
+* https://se-edu.github.io/se-book/cppToJava/inheritance/interfaces/[se-edu/se-book: C++ to Java: OOP: Abstract Interfaces]
 
 === Exercise: Add a `Printable` interface
 
