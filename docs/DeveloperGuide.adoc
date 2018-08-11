@@ -27,7 +27,7 @@
 . Run all the tests (right-click the `test` folder, and click `Run 'All Tests'`) and ensure that they pass
 
 === Troubleshooting Setting up
-**Problem: IntelliJ is reporting code errors in `StorageFile`, but the project can be build and run successfully.**
+**Problem: IntelliJ is reporting code errors in `StorageFile`, but the project can be built and run successfully.**
 
 * Reason: This is an ongoing https://youtrack.jetbrains.com/oauth?state=%2Fissue%2FIDEA-189060[issue] with some of the newer versions of IntelliJ.
 * Solution: Place your cursor over any of the code section highlighted in red. Press ALT + ENTER, and select `Add '--add-modules java.xml.bind' to module compile options`. The code errors should no longer appear.
