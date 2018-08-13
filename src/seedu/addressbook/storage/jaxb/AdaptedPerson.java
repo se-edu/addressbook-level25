@@ -4,13 +4,14 @@ import seedu.addressbook.common.Utils;
 import seedu.addressbook.data.exception.IllegalValueException;
 import seedu.addressbook.data.person.*;
 import seedu.addressbook.data.tag.Tag;
-import seedu.addressbook.data.tag.UniqueTagList;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlValue;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * JAXB-friendly adapted person data holder class.
@@ -93,15 +94,14 @@ public class AdaptedPerson {
      * @throws IllegalValueException if there were any data constraints violated in the adapted person
      */
     public Person toModelType() throws IllegalValueException {
-        final List<Tag> personTags = new ArrayList<>();
+        final Set<Tag> tags = new HashSet<>();
         for (AdaptedTag tag : tagged) {
-            personTags.add(tag.toModelType());
+            tags.add(tag.toModelType());
         }
         final Name name = new Name(this.name);
         final Phone phone = new Phone(this.phone.value, this.phone.isPrivate);
         final Email email = new Email(this.email.value, this.email.isPrivate);
         final Address address = new Address(this.address.value, this.address.isPrivate);
-        final UniqueTagList tags = new UniqueTagList(personTags);
         return new Person(name, phone, email, address, tags);
     }
 }
