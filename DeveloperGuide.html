@@ -25,7 +25,7 @@
 <div class="ulist">
 <ul>
 <li>
-<p>JDK 8 or later</p>
+<p>JDK 9 or later</p>
 </li>
 <li>
 <p>IntelliJ IDE</p>
@@ -48,10 +48,10 @@
 <p>Click <code>Configure</code> &gt; <code>Project Defaults</code> &gt; <code>Project Structure</code></p>
 </li>
 <li>
-<p>If JDK 8 is listed in the drop down, select it. If it is not, click <code>New&#8230;&#8203;</code> and select the directory where you installed JDK 8.</p>
+<p>If JDK 9 is listed in the drop down, select it. If it is not, click <code>New&#8230;&#8203;</code> and select the directory where you installed JDK 9</p>
 </li>
 <li>
-<p>Click <code>OK</code>.</p>
+<p>Click <code>OK</code></p>
 </li>
 </ol>
 </div>
@@ -73,6 +73,19 @@
 </li>
 <li>
 <p>Run all the tests (right-click the <code>test</code> folder, and click <code>Run 'All Tests'</code>) and ensure that they pass</p>
+</li>
+<li>
+<p>Open the <code>StorageFile</code> file and check for any code errors</p>
+<div class="olist loweralpha">
+<ol class="loweralpha" type="a">
+<li>
+<p>Due to an ongoing <a href="https://youtrack.jetbrains.com/issue/IDEA-189060">issue</a> with some of the newer versions of IntelliJ, code errors may be detected even if the project can be built and run successfully</p>
+</li>
+<li>
+<p>To resolve this, place your cursor over any of the code section highlighted in red. Press <span class="keyseq"><kbd>ALT</kbd>+<kbd>ENTER</kbd></span>, and select <code>Add '--add-modules=java.xml.bind' to module compiler options</code></p>
+</li>
+</ol>
+</div>
 </li>
 </ol>
 </div>
@@ -228,7 +241,7 @@
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java 8 or higher installed.</p>
+<p>Should work on any <a href="#mainstream-os">mainstream OS</a> as long as it has Java 9 or higher installed.</p>
 </li>
 <li>
 <p>Should be able to hold up to 1000 persons.</p>
@@ -259,4 +272,4 @@
 </dl>
 </div>
 </div>
-</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-08-16 14:50:10 UTC</div></div></div></body></html>
+</div></div><div id="footer"><div class="container"><div id="footer-text">Last updated 2018-09-02 09:46:10 UTC</div></div></div></body></html>
