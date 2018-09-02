@@ -4,12 +4,13 @@
 :toc-title:
 :imagesDir: images
 :stylesDir: stylesheets
+:experimental:
 
 == Setting up
 
 === Prerequisites
 
-* JDK 8 or later
+* JDK 9 or later
 * IntelliJ IDE
 
 === Importing the project into IntelliJ
@@ -17,14 +18,17 @@
 . Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
 . Set up the correct JDK version
 .. Click `Configure` > `Project Defaults` > `Project Structure`
-.. If JDK 8 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 8.
-.. Click `OK`.
+.. If JDK 9 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 9
+.. Click `OK`
 . Click `Import Project`
 . Locate the `build.gradle` file and select it. Click `OK`
 . Click `Open as Project`
 . Click `OK` to accept the default settings
 . Run the `seedu.addressbook.Main` class (right-click the `Main` class and click `Run Main.main()`) and try executing a few commands
 . Run all the tests (right-click the `test` folder, and click `Run 'All Tests'`) and ensure that they pass
+. Open the `StorageFile` file and check for any code errors
+.. Due to an ongoing https://youtrack.jetbrains.com/issue/IDEA-189060[issue] with some of the newer versions of IntelliJ, code errors may be detected even if the project can be built and run successfully
+.. To resolve this, place your cursor over any of the code section highlighted in red. Press kbd:[ALT + ENTER], and select `Add '--add-modules=java.xml.bind' to module compiler options`
 
 == Design
 
@@ -80,7 +84,7 @@ Use case resumes at step 2.
 [appendix]
 == Non Functional Requirements
 
-. Should work on any <<mainstream-os, mainstream OS>> as long as it has Java 8 or higher installed.
+. Should work on any <<mainstream-os, mainstream OS>> as long as it has Java 9 or higher installed.
 . Should be able to hold up to 1000 persons.
 . Should come with automated unit tests and open source code.
 . Should favor DOS style commands over Unix-style commands.
