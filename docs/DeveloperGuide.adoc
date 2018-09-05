@@ -50,6 +50,8 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |user |add a new person |
 |`* * *` |user |delete a person |remove entries that I no longer need
 |`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |user |add multiple phone numbers to a person | keep track of people with multiple phone/work numbers
+|`* * *` |user | assign people to categories | keep track of my relationships with people (colleagues/friends)
 |`* *` |user |hide <<private-contact-detail, private contact details>> by default |minimize chance of someone else seeing them by accident
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
 |===========================================================================================================================================
