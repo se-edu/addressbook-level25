@@ -3,7 +3,7 @@ ifdef::env-github,env-browser[:relfileprefix: docs/]
 ifdef::env-github,env-browser[:imagesDir: docs/images]
 
 https://travis-ci.org/CS2113-AY1819S1-W12-1/main[image:https://travis-ci.org/se-edu/addressbook-level3.svg?branch=master[Build Status]]
-[![Coverage Status](https://coveralls.io/repos/github/CS2113-AY1819S1-W12-1/main/badge.svg?branch=master)](https://coveralls.io/github/CS2113-AY1819S1-W12-1/main?branch=master)
+https://coveralls.io/github/CS2113-AY1819S1-W12-1/main?branch=master[image:https://coveralls.io/repos/github/CS2113-AY1819S1-W12-1/main/badge.svg?branch=master[Coverage Status]]
 https://www.codacy.com/app/se-edu/addressbook-level3?utm_source=github.com&utm_medium=referral&utm_content=se-edu/addressbook-level3&utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/d4a0954383444a8db8cb26e5f5b7302c[Codacy Badge]]
 
 image::Ui.png[]
