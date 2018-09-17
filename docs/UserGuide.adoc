@@ -10,6 +10,17 @@ endif::[]
 This product is not meant for end-users and therefore there is no user-friendly installer.
 Please refer to the <<DeveloperGuide#setting-up, Setting up>> section to learn how to set up the project.
 
+== Introduction
+
+JitHub is for students who prefer to use a desktop app for managing student contacts, emails and calendar.
+More importantly, JitHub is optimized for those who prefer to work with a Command Line Interface (CLI)
+while still having the benefits of a Graphical User Interface (GUI).
+
+If you can type fast, JitHub can get
+your daily tasks such as checking schedule done faster than traditional GUI apps.
+
+Interested? Jump to the Section 2, “Quick Start” to get started. Enjoy!
+
 == Starting the program
 
 . Find the project pane (usually located at the left side)
@@ -154,14 +165,18 @@ Examples:
 * `export csv`
 * `export vbf`
 
-== Enter personal weekly schedule : `schedule`
+== Enter or delete personal weekly schedule : `schedule`
 
-Format: `addschedule d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
+Format:
+
+`addschedule d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
+`delschedule d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
 
 Examples:
 
 * `addschedule d/08112018 st/1000 et/1200 en/GER1000`
 * `addschedule d/01012019 st/1000 et/1800 en/FireworkParty`
+* `delschedule d/01012019 st/1000 et/1800 en/FireworkParty`
 
 == List Common Schedule : `commonschedule`
 
