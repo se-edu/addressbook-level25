@@ -25,7 +25,7 @@ image::linnnruoo.jpg[width="150", align="left"]
 {empty}[https://github.com/linnnruoo[github]] [<<baolinruo#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Integration +
+Responsibilities: Integration + Testing
 
 '''
 
