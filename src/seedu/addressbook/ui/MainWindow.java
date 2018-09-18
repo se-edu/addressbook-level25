@@ -14,6 +14,9 @@ import java.util.List;
 import java.util.Optional;
 
 import static seedu.addressbook.common.Messages.*;
+import static seedu.addressbook.storage.StorageFile.BACKUP_STORAGE_FILEPATH;
+import static seedu.addressbook.storage.StorageFile.DEFAULT_STORAGE_FILEPATH;
+import static seedu.addressbook.storage.StorageFile.copyFile;
 
 /**
  * Main Window of the GUI.
@@ -47,6 +50,7 @@ public class MainWindow {
             String userCommandText = commandInput.getText();
             CommandResult result = logic.execute(userCommandText);
             if(isExitCommand(result)){
+                copyFile(DEFAULT_STORAGE_FILEPATH, BACKUP_STORAGE_FILEPATH);
                 exitApp();
                 return;
             }

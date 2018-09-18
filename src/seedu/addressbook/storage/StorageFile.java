@@ -20,6 +20,12 @@ public class StorageFile {
     /** Default file path used if the user doesn't provide the file name. */
     public static final String DEFAULT_STORAGE_FILEPATH = "addressbook.txt";
 
+    /**
+     * Backup file path used as a backup storage that updates only before the
+     * program exits.
+     */
+    public static final String BACKUP_STORAGE_FILEPATH = "backupaddressbook.txt";
+
     /* Note: Note the use of nested classes below.
      * More info https://docs.oracle.com/javase/tutorial/java/javaOO/nested.html
      */
@@ -51,7 +57,7 @@ public class StorageFile {
      * @throws InvalidStorageFilePathException if the default path is invalid
      */
     public StorageFile() throws InvalidStorageFilePathException {
-        this(DEFAULT_STORAGE_FILEPATH);
+         this(DEFAULT_STORAGE_FILEPATH);
     }
 
     /**
@@ -140,6 +146,32 @@ public class StorageFile {
             throw new StorageOperationException("File contains illegal data values; data type constraints not met");
         }
     }
+
+    /**
+     * Copies data from source file to dest file.
+     *
+     * @throws IOException if there were errors reading and/or writing data fro/to file.
+     * @param source
+     * @param dest
+     */
+    //Reused from https://www.journaldev.com/861/java-copy-file
+    public static void copyFile(String source, String dest) throws IOException {
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+        try {
+            inputStream = new FileInputStream(source);
+            outputStream = new FileOutputStream(dest);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = inputStream.read(buffer)) > 0) {
+                outputStream.write(buffer, 0, length);
+            }
+        } finally {
+            inputStream.close();
+            outputStream.close();
+        }
+    }
+
 
     public String getPath() {
         return path.toString();
