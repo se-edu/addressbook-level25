@@ -10,6 +10,17 @@ endif::[]
 This product is not meant for end-users and therefore there is no user-friendly installer.
 Please refer to the <<DeveloperGuide#setting-up, Setting up>> section to learn how to set up the project.
 
+== Introduction
+
+JitHub is for students who prefer to use a desktop app for managing student contacts, emails and calendar.
+More importantly, JitHub is optimized for those who prefer to work with a Command Line Interface (CLI)
+while still having the benefits of a Graphical User Interface (GUI).
+
+If you can type fast, JitHub can get
+your daily tasks such as checking schedule done faster than traditional GUI apps.
+
+Interested? Jump to the Section 2, “Quick Start” to get started. Enjoy!
+
 == Starting the program
 
 . Find the project pane (usually located at the left side)
@@ -142,6 +153,82 @@ Format: `clear`
 
 Exits the program. +
 Format: `exit`
+
+== Exporting contacts : `export`
+
+Shows a list of all persons in the address book. +
+Export all persons in the address book to mobile phone. +
+Format: `export FILETYPE`
+
+Examples:
+
+* `export csv`
+* `export vbf`
+
+== Enter or delete personal weekly schedule : `schedule`
+
+Format:
+
+`addschedule d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
+`delschedule d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
+
+Examples:
+
+* `addschedule d/08112018 st/1000 et/1200 en/GER1000`
+* `addschedule d/01012019 st/1000 et/1800 en/FireworkParty`
+* `delschedule d/01012019 st/1000 et/1800 en/FireworkParty`
+
+== List Common Schedule : `commonschedule`
+
+Shows a list of common meeting time for a group of contacts and the user in that given that given period of time. +
+Format: `commonschedule p/PERSON...[PERSON] sd/START-DATE-DDMMYYYY ed/END-DATE-DDMMYYYY t/HOURS`
+
+Examples:
+
+* `commonschedule p/John Smith p/Jane Doe sd/08092018 ed/01102018 t/1.5`
+
+== List Unread / New Email / Auto-reply of email: `mail`
+
+Shows a list of unread or new emails of the user. Upen entering the index of the unread emails, the terminal will display the email’s title, body.
+The user can choose whether he wants to send an auto-reply to indicate that he has read it. +
+Format: `mail [i/INDEX]`
+
+[TIP]
+Keying the index is optional, without keying it, it will list all the mail items in the user’s current mailbox.
+
+Examples:
+
+* `mail`
+* `Expected output: 0/Latest Pomelo Fashion 1/Quora - will PHP die in 2018 2/How to communicate effectively`
+* `mail i/INDEX`
+* `mail i/1`
+* `Expected output: t/Quora - will PHP die in 2018 ct/PHP is terrible blablablablabla s/quora@quora.com E/would you like to send an auto-reply to the sender? (Y/n)`
+
+== FAQ
+
+Q: How do I transfer my data to another Computer? +
+A: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Jithub folder.
+
+Q: How do I export my contacts to my phone? +
+A: Use the export command to generate a csv/vbf file and transfer that file to your phone. Use your phone contacts app to import that file.
+
+== Command Summary
+
+* Add : `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS n/NICKNAME [t/TAG]…​`
+* Clear : `clear`
+* Delete : `delete INDEX`
+* Edit : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+* Find : `find KEYWORD [MORE_KEYWORDS]`
+* List : `list`
+* Help : `help`
+* Select : `select INDEX`
+* History : `history`
+* Undo : `undo`
+* Redo : `redo`
+* Mail: `mail [i/INDEX]`
+* List Schedule: `commonschedule p/PERSON…[PERSON] sd/START-DATE-DDMMYYYY`
+* Add Schedule: `addschedule d/DDMMYYYY st/START-TIME et/END-TIME en/EVENT-NAME`
+
 
 == Saving the data
 

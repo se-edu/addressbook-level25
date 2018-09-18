@@ -1,0 +1,57 @@
+= About Us
+:site-section: AboutUs
+:relfileprefix: team/
+:imagesDir: images
+:stylesDir: stylesheets
+
+JitHub was developed by the CS2113T-W12-1 team. +
+_{The dummy content given below serves as a placeholder to be used by future forks of the project.}_ +
+{empty} +
+We are a team based in the http://www.comp.nus.edu.sg[School of Computing, National University of Singapore].
+
+== Project Team
+
+=== Chun Hong Wei
+image::driedmelon.jpg[width="150", align="left"]
+{empty}[https://github.com/driedmelon[github]] [<<chunhongwei#, portfolio>>]
+
+Role: Team Lead +
+Responsibilities: Deliverables and deadlines +
+
+'''
+
+=== Bao Linruo
+image::linnnruoo.jpg[width="150", align="left"]
+{empty}[https://github.com/linnnruoo[github]] [<<baolinruo#, portfolio>>]
+
+Role: Developer +
+Responsibilities: Integration + Testing +
+
+'''
+
+=== Elston Aw Yu Xuan
+image::elstonayx.jpg[width="150", align="left"]
+{empty}[https://github.com/elstonayx[github]] [<<elston#, portfolio>>]
+
+Role: Developer +
+Responsibilities: Code quality +
+
+'''
+
+=== Lim Jit Wei
+image::jitwei98.jpg[width="150", align="left"]
+{empty}[http://github.com/jitwei98[github]] [<<limjitwei#, portfolio>>]
+
+Role: Developer +
+Responsibilities: Scheduling and tracking +
+
+'''
+
+=== Low Jun Wei
+image::junweiljw.jpg[width="150", align="left"]
+{empty}[https://github.com/junweiljw[github]] [<<lowjunwei#, portfolio>>]
+
+Role: Developer +
+Responsibilities: Documentation +
+
+'''
