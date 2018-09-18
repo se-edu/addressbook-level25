@@ -12,7 +12,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Chun Hong Wei
-image::damithc.jpg[width="150", align="left"]
+image::driedmelon.jpg[width="150", align="left"]
 {empty}[https://github.com/driedmelon[github]] [<<chunhongwei#, portfolio>>]
 
 Role: Team Lead
@@ -21,7 +21,7 @@ Responsibilities: Deliverables and deadlines
 '''
 
 === Bao Linruo
-image::lejolly.jpg[width="150", align="left"]
+image::linnnruoo.jpg[width="150", align="left"]
 {empty}[https://github.com/linnnruoo[github]] [<<baolinruo#, portfolio>>]
 
 Role: Developer +
@@ -30,7 +30,7 @@ Responsibilities: Integration +
 '''
 
 === Elston Aw Yu Xuan
-image::yijinl.jpg[width="150", align="left"]
+image::elstonayx.jpg[width="150", align="left"]
 {empty}[https://github.com/elstonayx[github]] [<<elston#, portfolio>>]
 
 Role: Developer +
@@ -39,7 +39,7 @@ Responsibilities: Code quality +
 '''
 
 === Lim Jit Wei
-image::m133225.jpg[width="150", align="left"]
+image::jitwei98.jpg[width="150", align="left"]
 {empty}[http://github.com/jitwei98[github]] [<<limjitwei#, portfolio>>]
 
 Role: Developer +
@@ -48,7 +48,7 @@ Responsibilities: Scheduling and tracking +
 '''
 
 === Low Jun Wei
-image::yl_coder.jpg[width="150", align="left"]
+image::junweiljw.jpg[width="150", align="left"]
 {empty}[https://github.com/junweiljw[github]] [<<lowjunwei#, portfolio>>]
 
 Role: Developer +
