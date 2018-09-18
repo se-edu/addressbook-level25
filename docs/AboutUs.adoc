@@ -15,8 +15,8 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 image::driedmelon.jpg[width="150", align="left"]
 {empty}[https://github.com/driedmelon[github]] [<<chunhongwei#, portfolio>>]
 
-Role: Team Lead
-Responsibilities: Deliverables and deadlines
+Role: Team Lead +
+Responsibilities: Deliverables and deadlines +
 
 '''
 
@@ -25,7 +25,7 @@ image::linnnruoo.jpg[width="150", align="left"]
 {empty}[https://github.com/linnnruoo[github]] [<<baolinruo#, portfolio>>]
 
 Role: Developer +
-Responsibilities: Integration + Testing
+Responsibilities: Integration + Testing +
 
 '''
 
