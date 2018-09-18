@@ -4,6 +4,9 @@
 # Default data file
 addressbook.txt
 
+# Backup data file
+backupaddressbook.txt
+
 # Package Files #
 *.jar
 *.war
