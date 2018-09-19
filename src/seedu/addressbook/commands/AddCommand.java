@@ -25,6 +25,8 @@ public class AddCommand extends Command {
 
     private final Person toAdd;
 
+    private boolean mutated;
+
     /**
      * Convenience constructor using raw values.
      *
@@ -46,6 +48,7 @@ public class AddCommand extends Command {
                 new Address(address, isAddressPrivate),
                 tagSet
         );
+        mutated = false;
     }
 
     public AddCommand(Person toAdd) {
@@ -60,10 +63,17 @@ public class AddCommand extends Command {
     public CommandResult execute() {
         try {
             addressBook.addPerson(toAdd);
+            mutated = true;
             return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
         } catch (UniquePersonList.DuplicatePersonException dpe) {
             return new CommandResult(MESSAGE_DUPLICATE_PERSON);
         }
     }
+
+
+    public boolean isMUtating(){
+        return mutated;
+    }
+
 
 }

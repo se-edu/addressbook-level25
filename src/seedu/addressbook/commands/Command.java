@@ -54,6 +54,7 @@ public abstract class Command {
         this.relevantPersons = relevantPersons;
     }
 
+
     /**
      * Extracts the the target person in the last shown list from the given arguments.
      *
@@ -69,5 +70,10 @@ public abstract class Command {
 
     public void setTargetIndex(int targetIndex) {
         this.targetIndex = targetIndex;
+    }
+
+
+    public boolean isMutating(){
+        return false;
     }
 }
