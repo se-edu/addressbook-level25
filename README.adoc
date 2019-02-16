@@ -1,41 +1,41 @@
-= AddressBook (Level 3)
+= PlanMySem
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 ifdef::env-github,env-browser[:imagesDir: docs/images]
 
-https://travis-ci.org/se-edu/addressbook-level3[image:https://travis-ci.org/se-edu/addressbook-level3.svg?branch=master[Build Status]]
-https://www.codacy.com/app/se-edu/addressbook-level3?utm_source=github.com&utm_medium=referral&utm_content=se-edu/addressbook-level3&utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/d4a0954383444a8db8cb26e5f5b7302c[Codacy Badge]]
+https://travis-ci.org/CS2113-AY1819S2-T08-3/main[image:https://travis-ci.org/CS2113-AY1819S2-T08-3/main.svg?branch=master[Build Status]]
+https://ci.appveyor.com/project/seanieyap/main-r8jp5[image:https://ci.appveyor.com/api/projects/status/nmi13f89dmx9yasg?svg=true[Build Status]]
+https://app.netlify.com/sites/planmysem/deploys[image:https://api.netlify.com/api/v1/badges/6c19b45b-dbdd-4eff-afe2-200356d6ebb4/deploy-status[Build Status]]
+https://coveralls.io/github/CS2113-AY1819S2-T08-3/main?branch=master[image:https://coveralls.io/repos/github/CS2113-AY1819S2-T08-3/main/badge.svg?branch=master[Coverage Status]]
+https://www.codacy.com/app/seanieyap/main_2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2113-AY1819S2-T08-3/main&amp;utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/2000e781292e43ee986c807589ceee27[Codacy Badge]]
 
 image::Ui.png[]
 
-* This is a CLI (Command Line Interface) Address Book application *written in OOP fashion*. It has a very basic GUI.
-* It is a Java sample application intended for students learning Software Engineering while using Java as
-the main programming language.
-* It provides a *reasonably well-written* code example that is *significantly bigger* than what students
-usually write in data structure modules.
-
-*What's different from level 2*
-
-* A simple GUI added to replace the Text UI.
-* A `Logic` class added together with a `LogicTest` class.
-* Appendices added to <<DeveloperGuide#, Developer Guide>>
+* PlanMySem is a CLI (Command Line Interface) scheduling/calendar application that targets NUS students and staff who prefer to use a desktop application for managing their schedule/calendar.
+* PlanMySem is optimized for those who prefer to work with a Command Line Interface (CLI) and/or are learning to work more efficiently with CLI tools.
+* Unlike traditional calendar/scheduling applications, PlanMySem utilizes minimal resources on the user’s machine while still allowing the user to view their schedules swiftly and efficiently.
 
 *Useful Links*
 
 * <<UserGuide#, User Guide>>
 * <<DeveloperGuide#, Developer Guide>>
-* <<LearningOutcomes#, Learning Outcomes>>
+* <<AboutUs#, About Us>>
+* <<ContactUs#, Contact Us>>
 
 == Contributors
 
-The full list of contributors for se-edu can be found https://se-edu.github.io/Team.html[here].
+* Marcus Phua
+* Julian Lim
+* Lim Ding Heng
+* Sean Yap
 
 == Acknowledgements
 
-Some parts of this sample application was inspired by the excellent
-http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by Marco Jakob
+* PlanMySem is built upon an https://github.com/se-edu/addressbook-level3[AddressBook-Level3] Application created by the https://github.com/se-edu/[SE-EDU] initiative.
+* Some parts of this sample application was inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by Marco Jakob
+* Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
 
 == Contact Us
 
-* *Bug reports, Suggestions* : Post in our https://github.com/se-edu/addressbook-level3/issues[issue tracker]
+* *Bug reports, Suggestions* : Post in our https://github.com/CS2113-AY1819S2-T08-3/main/issues[issue tracker]
 if you noticed bugs or have suggestions on how to improve.
 * *Contributing* : We welcome pull requests. Follow the process described https://github.com/oss-generic/process[here]

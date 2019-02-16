@@ -52,7 +52,7 @@ h6 > a.link {
 .literalblock > .title,
 .stemblock > .title,
 .openblock > .title,
-.paragraph >.title,
+.paragraph > .title,
 .quoteblock > .title,
 table.tableblock > .title,
 .verseblock > .title,
