@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" stylesheets="@/planmysem/ui/DarkTheme.css" alignment="center"
+      xmlns="http://javafx.com/javafx/8"
+      fx:controller="planmysem.ui.MainWindow">
+
+    <children>
+
+        <TextField fx:id="commandInput" onAction="#onCommand" VBox.vgrow="NEVER">
+        </TextField>
+
+        <TextArea fx:id="outputConsole" editable="false" wrapText="true" VBox.vgrow="ALWAYS">
+        </TextArea>
+
+    </children>
+
+</VBox>

@@ -13,7 +13,7 @@ Please refer to the <<DeveloperGuide#setting-up, Setting up>> section to learn h
 == Starting the program
 
 . Find the project pane (usually located at the left side)
-. Open up `src/seedu.addressbook` folder
+. Open up `src/seedu.planmysem` folder
 . Right click on `Main`
 . Click `Run Main.main()`
 . The GUI should appear in a few seconds
