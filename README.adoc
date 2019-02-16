@@ -2,11 +2,11 @@
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 ifdef::env-github,env-browser[:imagesDir: docs/images]
 
-[![Build Status](https://travis-ci.org/CS2113-AY1819S2-T08-3/main.svg?branch=master)](https://travis-ci.org/CS2113-AY1819S2-T08-3/main)
-[![Build status](https://ci.appveyor.com/api/projects/status/nmi13f89dmx9yasg?svg=true)](https://ci.appveyor.com/project/seanieyap/main-r8jp5)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/6c19b45b-dbdd-4eff-afe2-200356d6ebb4/deploy-status)](https://app.netlify.com/sites/planmysem/deploys)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/2000e781292e43ee986c807589ceee27)](https://www.codacy.com/app/seanieyap/main_2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2113-AY1819S2-T08-3/main&amp;utm_campaign=Badge_Grade)
-[![Coverage Status](https://coveralls.io/repos/github/CS2113-AY1819S2-T08-3/main/badge.svg?branch=master)](https://coveralls.io/github/CS2113-AY1819S2-T08-3/main?branch=master)
+https://travis-ci.org/CS2113-AY1819S2-T08-3/main[image:https://travis-ci.org/CS2113-AY1819S2-T08-3/main.svg?branch=master[Build Status]]
+https://ci.appveyor.com/project/seanieyap/main-r8jp5[image:https://ci.appveyor.com/api/projects/status/nmi13f89dmx9yasg?svg=true[Build Status]]
+https://app.netlify.com/sites/planmysem/deploys[image:https://api.netlify.com/api/v1/badges/6c19b45b-dbdd-4eff-afe2-200356d6ebb4/deploy-status[Build Status]]
+https://coveralls.io/github/CS2113-AY1819S2-T08-3/main?branch=master[image:https://coveralls.io/repos/github/CS2113-AY1819S2-T08-3/main/badge.svg?branch=master[Coverage Status]]
+https://www.codacy.com/app/seanieyap/main_2?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2113-AY1819S2-T08-3/main&amp;utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/2000e781292e43ee986c807589ceee27[Codacy Badge]]
 
 image::Ui.png[]
 
