@@ -10,7 +10,7 @@ PlanMySem - A CLI (Command Line Interface) scheduling/calendar application that 
 == Project Team
 
 === Marcus Phua
-image::lejolly.jpg[width="150", align="left"]
+image::marcusphua.jpg[width="150", align="left"]
 {empty}[https://github.com/marcus-pzj[Github]] [<<marcusphua#, Portfolio>>]
 
 Role: Team Lead +
@@ -19,7 +19,7 @@ Responsibilities: UI
 '''
 
 === Julian Lim
-image::yijinl.jpg[width="150", align="left"]
+image::julianlim.jpg[width="150", align="left"]
 {empty}[https://github.com/macchazuki[Github]] [<<julianlim#, Portfolio>>]
 
 Role: Developer +
@@ -28,7 +28,7 @@ Responsibilities: Data
 '''
 
 === Lim Ding Heng
-image::m133225.jpg[width="150", align="left"]
+image::limdingheng.jpg[width="150", align="left"]
 {empty}[https://github.com/dingheng4448[Github]] [<<limdingheng#, Portfolio>>]
 
 Role: Developer +
@@ -38,7 +38,7 @@ Responsibilities: Dev Ops + Threading
 
 === Sean Yap
 image::yl_coder.jpg[width="150", align="left"]
-{empty}[https://github.com/seanieyap[Github]] [<<seanyap#, portfolio>>]
+{empty}[https://github.com/seanieyap[Github]] [<<seanyap#, Portfolio>>] [https://seanieyap.com[Personal Website]]
 
 Role: Developer +
 Responsibilities: UI
