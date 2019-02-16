@@ -6,6 +6,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
     id 'java'
+    id 'checkstyle'
     id 'org.asciidoctor.convert' version '1.5.6'
 }
 
@@ -77,9 +78,9 @@ asciidoctor {
         idprefix: '',  // for compatibility with GitHub preview
         idseparator: '-',
         'site-root': "${sourceDir}",  // must be the same as sourceDir, do not modify
-        'site-name': 'AddressBook-Level3',
-        'site-githuburl': 'https://github.com/se-edu/addressbook-level3',
-        'site-seedu': true,  // delete this line if your project is not a fork (not a SE-EDU project)
+        'site-name': 'PlanMySem',
+        'site-githuburl': 'https://github.com/CS2113-AY1819S2-T08-3/main'
+        // 'site-seedu': true,   delete this line if your project is not a fork (not a SE-EDU project)
     ]
 
     options['template_dirs'].each {
