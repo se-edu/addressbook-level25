@@ -1,150 +1,396 @@
-= User Guide
+= PlanMySem - User Guide
 :site-section: UserGuide
+:toc:
+:toc-title:
+:toc-placement: preamble
+:sectnums:
 :imagesDir: images
 :stylesDir: stylesheets
+:xrefstyle: full
+:experimental:
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
+:repoURL: https://github.com/CS2113-AY1819S2-T08-3/main
 
-This product is not meant for end-users and therefore there is no user-friendly installer.
-Please refer to the <<DeveloperGuide#setting-up, Setting up>> section to learn how to set up the project.
+By: `Team T08-3`      Since: `Jan 2019`      Licence: `MIT`
 
-== Starting the program
+== Introduction
 
-. Find the project pane (usually located at the left side)
-. Open up `src/seedu.addressbook` folder
-. Right click on `Main`
-. Click `Run Main.main()`
-. The GUI should appear in a few seconds
+*PlanMySem* is a CLI (Command Line Interface) scheduling/calendar application that targets NUS students and staff who prefer to use a desktop application for managing their schedule/calendar.
+More importantly, *PlanMySem* is optimized for those who prefer to work with a Command Line Interface (CLI) and/or are learning to work more efficiently with CLI tools.
+Additionally, unlike traditional calendar/scheduling applications, *PlanMySem* utilizes minimal resources on the user’s machine while still allowing the user to view their schedules swiftly and efficiently.
+
+== Quick Start
+
+.  Ensure you have Java version `9` or later installed in your Computer.
+.  Download the latest `planmysem.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder for your planner.
+.  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-image::Ui.png[]
+image::Ui.png[width="790"]
++
+.  Type the command in the command box and press kbd:[Enter] to execute it. +
+e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
+.  Some example commands you can try:
 
-== Viewing help : `help`
+* *`list`* : lists all contacts
+* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
+* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* *`exit`* : exits the app
+
+.  Refer to <<Features>> for details of each command.
+
+[[Features]]
+== Features
+
+====
+*Command Format*
+
+* Words in UPPER_CASE are the parameters to be supplied by the user e.g. in `add act NAME`, `NAME` is a parameter which can be used as the name of the activity.
+* Items in square brackets are optional e.g add act NAME `[c/NAME]` can be used as add act frisbee c/sports or as add act frisbee.
+* Items with `…` after them can be used multiple times including zero times e.g. `[t/TAG]…` can be used as   (i.e. 0 times), `t/lab`, `t/important`, `t/tough` etc.
+* Parameters can be in any order e.g. if the command specifies `c/NAME`, `t/TAG`, `t/TAG`, `c/NAME` is also acceptable.
+====
+====
+*Option Format*
+
+* `n/`: Name specific to the object at hand.
+** e.g. Add _Category_: `add cat n/NAME [n/MORE_NAMES]...`
+** The `n/` here refers to the _category_ name.
+* `a/`: _Activity’s_ name.
+** e.g. Add _Slot_: `add slot a/ACTIVITY_NAME d/DAY t/TIME [r/norecess] [r/noreading] [r/nonormal] [r/recess] [r/reading] [r/normal] [tag/TAG]...`
+** The `a/` here refers to the _activity_ in which to add the _slot_ to.
+* `c/`: _Category_ name
+** e.g. `List Slots: list slot [c/CATEGORY_NAME]... [a/ACTIVITY_NAME]...`
+** The `c/` here refers to the _category_ in which the _slots_ are listed from.
+* `d/`: Day.
+** Format: `Monday | Tuesday | Wednesday | Thursday | Friday`
+** e.g. Add _slot_: `add slot a/ACTIVITY_NAME d/DAY t/TIME [r/norecess] [r/noreading] [r/nonormal] [r/recess] [r/reading] [r/normal] [tag/TAG]...`
+** The `d/` here refers to the day in which to add the _slot_ to.
+* `t/`: Time.
+** Format: 24-Hour in the form of “hhmm-hhmm” or 12-Hour format in the form of `HOUR+AM|PM-Hour+AM|PM`
+** e.g. Add _slot_: `add slot a/ACTIVITY_NAME d/DAY t/TIME [r/norecess] [r/noreading] [r/nonormal] [r/recess] [r/reading] [r/normal] [tag/TAG]...`
+** The `t/` here refers to the time in which to add the _slot_ to.
+* `tag/`: Tag.
+** e.g. Add _slot_: `add slot a/ACTIVITY_NAME d/DAY t/TIME [r/norecess] [r/noreading] [r/nonormal] [r/recess] [r/reading] [r/normal] [tag/TAG]...`
+** The `tag/` here refers the _tags_ to attach to the _slot_.
+* `r/`: recurrence
+** Format: `norecess | noreading | nonormal | recess | reading | normal`
+** e.g. Add _slot_: `add slot a/ACTIVITY_NAME d/DAY t/TIME [r/norecess] [r/noreading] [r/nonormal] [r/recess] [r/reading] [r/normal] [tag/TAG]...`
+** The `r/` here refers to the recurrence of the _slot_.
+* `nn/`: New name of the object at hand.
+** e.g. Edit _category_: `edit cat n/NAME nn/NEW_NAME`
+** The `nn/` here refers to the new name for the _category_ specified.
+* `nc/`: New _category_ name.
+** e.g. Edit _Activity_: `edit act n/NAME [nn/NEW_NAME] [nc/NEW_CATEGORY]`
+** The `nc/` here refers to the new _category_ name of which the _activity_ should belong to.
+
+====
+
+=== Viewing help : `help`
 
 Format: `help`
 
-[TIP]
-====
-Help is also shown if you enter an incorrect command e.g. `abcd`
-====
+=== Adding a Category : `add cat`
 
-== Adding a person: `add`
+Add a _category_ to the planner. +
+Format: `add cat n/NAME [n/MORE_NAMES]...`
 
-Adds a person to the address book. +
-Format: `add NAME [p]p/PHONE_NUMBER [p]e/EMAIL [p]a/ADDRESS [t/TAG]...`
+Examples:
+
+* `add cat n/Sports` +
+Add a _category_ called "Sports".
+* `add cat n/Sports n/Interest Groups` +
+Add two _categories_ called "Sports" and "Interest Groups".
+
+=== Editing a Category : `edit cat`
+
+Edit a Category. +
+Format: `edit cat n/NAME nn/NEW_NAME`
+
+Examples:
+
+* `edit cat n/Sports nn/Frisbee`
+Rename the _category_ "Sports" to "Frisbee".
+* `edit cat n/Interest Groups nn/CCA`
+Rename the _category_ "Interest Groups" to "CCA".
+
+=== Deleting a Category : `del cat`
+
+Delete a category +
+Format: `del cat n/NAME [n/MORE_NAMES]...`
 
 ****
-Words in `UPPER_CASE` are the parameters, items in `SQUARE_BRACKETS` are optional,
-items with `...` after them can have multiple instances. Order of parameters are fixed.
-
-Put a `p` before the phone / email / address prefixes to mark it as `private`. `private` details can only
-be seen using the `viewall` command.
-
-Persons can have any number of tags (including 0)
+* Deleting a _category_ will delete all associated _activities_ as well as _slots_.
+* When multiple _categories_ are selected, a prompt will appear to confirm the action.
 ****
 
 Examples:
 
-* `add John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01`
-* `add Betsy Crowe pp/1234567 e/betsycrowe@gmail.com pa/Newgate Prison t/criminal t/friend`
+* `del cat n/Sports n/Frisbee` +
+Delete both the _categories_ 'Sports' and 'Frisbee' and all _activities_ and _slots_ associated with them.
+* `del cat n/Interest Groups` +
+Delete the _category_ 'Sports' and all _activities_ and _slots_ associated with it.
 
-== Listing all persons : `list`
+=== Adding an Activity : add act
 
-Shows a list of all persons in the address book. +
-Format: `list`
-
-== Finding all persons containing any keyword in their name: `find`
-
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Add an _activity_ to the planner. +
+Format: `add act n/NAME c/CATEGORY`
 
 [NOTE]
 ====
-The search is case sensitive, the order of the keywords does not matter, only the name is searched,
-and persons matching at least one keyword will be returned (i.e. `OR` search).
+An _activity_ must belong to a _category_.
 ====
 
 Examples:
 
-* `find John` +
-Returns `John Doe` but not `john`.
+* `add act n/Frisbee c/Sports` +
+Add an _activity_ named "Frisbee" to the _category_ "Sports".
 
-* `find Betsy Tim John` +
-Returns Any person having names `Betsy`, `Tim`, or `John`.
+=== Listing all Activities : `list act`
 
-== Deleting a person : `delete`
+List all _activities_ in the planner. +
+Format: `list act`
 
-Deletes the specified person from the address book. Irreversible. +
-Format: `delete INDEX`
+=== Editing an Activity : `edit act`
+
+Edit an Activity. +
+Format: `edit act n/NAME [nn/NEW_NAME] [nc/NEW_CATEGORY]`
 
 ****
-Deletes the person at the specified `INDEX`.
-The index refers to the index number shown in the most recent listing.
+* Editing an _activity_ allows the renaming of it's name and or changing the _category_ it belongs to; hence, either and or `nn/` and `nc/` can be specified in one command.
+* Minimum of one option have to be specified.
 ****
+
+[NOTE]
+====
+When editing an _activity_ such that a new _category_ is replacing the current _category_, the new _category_ have to been already created.
+====
 
 Examples:
 
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
+* `edit act n/Frisbee nn/Barefoots nc/Sports` +
+The existing _activity_ `Frisbee` is renamed to `Barefoots` and is moved from some _category_ to the _category_ `Sports`.
 
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
+=== Deleting an Activity : `del act`
 
-== View non-private details of a person : `view`
-
-Displays the non-private details of the specified person. +
-Format: `view INDEX`
-
-****
-Views the person at the specified `INDEX`.
-The index refers to the index number shown in the most recent listing.
-****
+Delete an _activity_ from the planner. +
+Format: `del act n/NAME [n/MORE_NAMES]...`
 
 Examples:
 
-* `list` +
-`view 2` +
-Views the 2nd person in the address book.
+* `del act n/Frisbee` +
+Delete the _activity_ "Frisbee".
+* `del act n/Frisbee n/Basketball` +
+Delete the _activities_ "Frisbee" and "Basketball".
 
-* `find Betsy` +
-`view 1` +
-Views the 1st person in the results of the `find` command.
+=== Adding a Slot : `add slot`
 
-== View all details of a person : `viewall`
-
-Displays all details (including private details) of the specified person. +
-Format: `viewall INDEX`
-
-****
-Views all details of the person at the specified `INDEX`.
-The index refers to the index number shown in the most recent listing.
-****
+Add a _slot_ to the planner. +
+Format: `add slot a/ACTIVITY_NAME d/DAY t/TIME [r/norecess] [r/noreading] [r/nonormal] [r/recess] [r/reading] [r/normal] [tag/TAG]...`
 
 Examples:
 
-* `list` +
-`viewall 2` +
-Views all details of the 2nd person in the address book.
+* `add slot a/Sport d/monday t/0800-0900 tag/Frisbee tag/Tembusu College` +
+Add a _slot_ to the _activity_ "Sport" on monday, from 0800hrs to 0900hrs with the tags "Frisbee" and "Tembusu College".
+* `add slot a/Interest Group d/monday t/0800-0900 r/recess r/reading tag/Tembusu College tag/Barefoots` +
+Do the same but additionally, recurse the slot on recess and reading week.
 
-* `find Betsy` +
-`viewall 1` +
-Views all details of the 1st person in the results of the `find` command.
+[NOTE]
+====
+1. The `a/ACTIVITY_NAME` option is mandatory as a _slot_ must belong to an _activity_. +
+2. The default for recurrence is no recess week and no reading week.
+If the recurrence options are not defined, then there the _slot_ will recurse every week except recess week and reading week.
+====
 
-== Clearing all entries : `clear`
+=== Listing Slots: `list slot`
 
-Clears all entries from the address book. +
-Format: `clear`
+List all _slots_ in the planner belonging to a _category_/_activity_. +
+Format: `list slot [c/CATEGORY_NAME]... [a/ACTIVITY_NAME]...`
 
-== Exiting the program : `exit`
+[NOTE]
+====
+If no _categories_ or _activities_ are specified, then all _slots_ will be listed.
+====
+
+Examples:
+
+* `list slot` +
+List all _slots_ in the planner.
+* `list slot c/Modules` +
+List all slots in the _category_ "Modules".
+* `list slot c/Sport c/Interest Group` +
+List all slots in either the _category_ "Sport" or the _category_ "Interest Group".
+
+=== Editing a Slot: `edit slot`
+
+Edit a _slot_. +
+Format: `edit slot n/ACTIVITY_NAME d/DAY t/TIME [nd/NEW_DAY] [nt/NEW_TIME] [r/norecess] [r/noreading] [r/nonormal] [r/recess] [r/reading] [r/normal]`
+
+Examples:
+
+* `edit slot n/Sport d/monday t/0800-0900 nd/tuesday nt/0900-1000` +
+Select the _slot_ on 0800-0900hrs Monday and change it's day from Monday to Tuesday and it's time from "0800-0900" to "0900-1000".
+* `edit slot n/Sport d/monday t/0800-0900 r/recess r/reading` +
+Select the _slot_ on 0800-0900hrs Monday and set it to recurse on recess and reading week.
+* `edit slot n/Sport d/monday t/0800-0900 nd/tuesday nt/0900-1000 r/recess r/reading` +
+Select the _slot_ on 0800-0900hrs Monday and change it's day from Monday to Tuesday, it's time from "0800-0900" to "0900-1000" and set it to recurse on recess and reading week.
+
+=== Delete slots: `del slot`
+
+Deleting _slots_. +
+Format: `del slot a/ACTIVITY_NAME d/DAY t/TIME`
+
+Example:
+
+*
+
+=== Locating Categories/Activities/tags: `find`
+
+Find all _categories_/_activities_/_tag_ whose name contains any of the given keywords. +
+Format: `find k/KEYWORD [k/MORE_KEYWORDS]... [c/CATEGORY_NAME] [a/ACTIVITY_NAME] [tag/TAG_NAME]`
+
+[NOTE]
+====
+If the option to find by _category_ or _activity_ or _tag_ is given, then the result will filter by those only.
+====
+
+Example:
+
+*
+
+=== Deleting a Categories/Activities/tags (shorthand) : `del`
+
+Delete a _category_/_activity_/_slot_/_tag_. +
+Format: `del [c/CATEGORY]... [a/ACTIVITY]... [tag/TAG]...`
+
+[NOTE]
+====
+Deleting a _category_ or _activity_ will delete all _slots_ under them as well. Deleting a _tag_ will not delete the _slots_ associated with them.
+====
+
+Example:
+
+*
+
+=== View the Planner : `view`
+
+View the planner according to day/week/month.  +
+Format: `view day DATE | view week WEEK | view month MONTH | view all`
+
+[NOTE]
+====
+. If no date is given, the current date is assumed.
+. If the `all` option is specified, the planner will not be displayed, instead all the details in the planner will be displayed.====
+====
+
+Example:
+
+*
+
+=== Listing previous inputted commands : `history`
+
+View the history of commands previously inputted. +
+Format: history
+
+=== Undoing previous command : `undo`
+
+Restories the planner to the state before the previous command was executed. +
+Format: `undo`
+
+[NOTE]
+====
+Some commands are undoable. e.g. `wipe PlanMySem`.
+====
+
+=== Redoing the previously undone command : `redo`
+
+Reverses the most recent `undo` command. +
+Format: `redo`
+
+=== Wipe all data : wipe
+
+Wipe all data stored on the planner. +
+Format: `wipe PlanMySem`
+
+[NOTE]
+====
+* This can be used to restart the planner.
+* The user will be prompted for a confirmation.
+====
+
+=== Exiting the program : `exit`
 
 Exits the program. +
 Format: `exit`
 
-== Saving the data
+=== Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data.
+Planner data are saved in the hard disk automatically after any command that changes the data is executed. + There is no need to save manually.
 
-There is no need to save manually. Address book data are saved in a file called `addressbook.txt` in the project root folder.
+// tag::dataencryption[]
+=== Encrypting data files `[coming in v2.0]`
+
+_{explain how the user can enable/disable data encryption}_
+// end::dataencryption[]
+
+// tag::importICS[]
+=== Importing .ics formated files `[coming in v2.0]`
+
+
+_{explain how the user can enable/disable data encryption}_
+// end::importICS[]
+
+// tag::exportICS[]
+=== Exporting .ics formated files `[coming in v2.0]`
+
+
+_{explain how the user can enable/disable data encryption}_
+// end::exportICS[]
+
+== FAQ
+
+*Q*: How do I transfer my data to another Computer? +
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous PlanMySem folder.
+
+
+== Command Summary
+
+* *View help* `help` +
+* *Add category* : `add cat n/NAME [n/MORE_NAMES]...` +
+e.g. `add cat n/Sports n/Study Groups n/Interest Groups` +
+* *List category* : `list cat`
+* *Edit category* : `edit cat n/NAME nn/NEW_NAME` +
+e.g. `edit n/Sports nn/Frisbee`
+* *Delete category* : `del cat n/NAME [n/MORE_NAMES]...` +
+e.g. `del cat n/Sports n/Interest Groups`
+* *Add activity* : `add act n/NAME c/CATEGORY`
+e.g. `add act n/CS2101 c/modules`
+* *List activities* : `list act`
+* *Edit activity* : `edit act n/NAME [nn/NEW_NAME] [nc/NEW_CATEGORY]` +
+e.g.`edit act n/CS2103 nn/CS2113T nc/hard module`
+* *Delete activity* : `del act n/NAME [n/MORE_NAMES]...` +
+e.g.`del act n/CS2101 n/CS2100`
+* *Add slot* : `add slot a/ACTIVITY_NAME d/DAY t/TIME [r/norecess] [r/noreading] [r/nonormal] [r/recess] [r/reading] [r/normal] [tag/TAG]...` +
+e.g.`add slot a/CS2101 d/monday t/0800-0900 r/norecess r/noreading r/normal tag/hard module`
+* *List slots* : `list slot [c/CATEGORY_NAME]... [a/ACTIVITY_NAME]...` +
+e.g.`list slot c/modules c/sports a/running group`
+* *Edit slot* : `edit slot a/ACTIVITY_NAME d/DAY t/TIME [a/NEW_ACTIVITY_NAME] [nd/NEW_DAY] [nt/NEW_TIME] [r/norecess] [r/noreading] [r/nonormal] [r/recess] [r/reading] [r/normal]` +
+e.g.`edit slot n/CS2103T d/monday t/0800-0900 nn/CS2113T nd/tuesday r/noreading`
+* *Delete slot* : `del slot a/ACTIVITY_NAME d/DAY t/TIME` +
+e.g.`del slot a/CS2113T d/monday t/0800-0900`
+* *Find categories/activities/tag* : `find k/KEYWORD [k/MORE_KEYWORDS]... [c/CATEGORY_NAME]... [a/ACTIVITY_NAME]... [tag/TAG_NAME]...` +
+e.g.`find frisbee c/sports`
+* *Delete category/activity/tag* : `del [c/CATEGORY]... [a/ACTIVITY]... [tag/TAG]...` +
+e.g.`del c/CS2113T a/frisbee t/hard module`
+* *View planner* : `view day [DATE] | view week [WEEK] | view month [MONTH]` +
+e.g.`view day 01/04/2019`
+* *View all details* : `view all` +
+e.g.`view day 01/04/2019`
+* *View history* : `history`
+* *Undo previous command* : `undo`
+* *Redo previously undone co* : `redo`
+* *Wipe all data* : `wipe PlanMySem`
+* *Exit the program* : `exit`
