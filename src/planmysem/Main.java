@@ -15,7 +15,7 @@ public class Main extends Application implements Stoppable {
     /**
      * Version info of the program.
      */
-    public static final String VERSION = "AddressBook Level 3 - Version 1.0";
+    public static final String VERSION = "PlanMySem - Version 1.0";
 
     private Gui gui;
 
