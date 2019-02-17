@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= PlanMySem - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -14,8 +14,6 @@ ifdef::env-github[]
 :experimental:
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4/tree/master
-
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
 
 By: `T08-3`
 
@@ -815,19 +813,6 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing over mouse input
-* is reasonably comfortable using CLI apps
-
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
-
-[appendix]
-== Product Scope
-
-*Target user profile*:
-
 * has a need to manage a significant number of categories, activites, timeslots, tags in a calendar
 * prefer desktop apps over other types
 * prefers having an offline calendar
@@ -877,6 +862,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`*` |user |view public holidays |be aware of upcoming public holidays
 |`*` |user |compare my timetable with someone else's |find a common time slot for a meeting
 |`*` |user |generate insightful reports |view how much time I spent attending training / tutorials
+|=======================================================================
 
 [appendix]
 == Use Cases
