@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= PlanMySem - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -15,7 +15,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/se-edu/addressbook-level4/tree/master
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `T08-3`
 
 == Setting up
 
@@ -33,7 +33,6 @@ Windows developers are highly recommended to use JDK `9`.
 IntelliJ by default has Gradle and JavaFx plugins installed. +
 Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plugins` to re-enable them.
 
-
 === Setting up the project in your computer
 
 . Fork this repo, and clone the fork to your computer
@@ -45,6 +44,9 @@ Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plu
 . Locate the `build.gradle` file and select it. Click `OK`
 . Click `Open as Project`
 . Click `OK` to accept the default settings
+. Run the `planmysem.Main` class (right-click the `Main` class and click `Run Main.main()`) and try executing a few commands
+. Run all the tests (right-click the `test` folder, and click `Run 'All Tests'`) and ensure that they pass
+. Open the `StorageFile` file and check for any code errors
 . Open a console and run the command `gradlew processResources` (Mac/Linux: `./gradlew processResources`). It should finish with the `BUILD SUCCESSFUL` message. +
 This will generate all resources required by the application and tests.
 . Open link:{repoURL}/src/main/java/seedu/address/ui/MainWindow.java[`MainWindow.java`] and check for any code errors
@@ -811,13 +813,15 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
+* has a need to manage a significant number of categories, activites, timeslots, tags in a calendar
 * prefer desktop apps over other types
+* prefers having an offline calendar
 * can type fast
 * prefers typing over mouse input
 * is reasonably comfortable using CLI apps
+* NUS students and staff
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*: manage personal planner faster than a typical mouse/GUI driven app and caters to users who prefer an offline solution due to the current technology climate where information privacy/data privacy/data protection has become an uncertainty
 
 [appendix]
 == User Stories
@@ -828,37 +832,92 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
 |`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
-
-|`* * *` |user |add a new person |
-
-|`* * *` |user |delete a person |remove entries that I no longer need
-
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
-
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
-
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |new user |initialize the calendar by year and semester |align the planner with the school's academic calendar
+|`* * *` |user |add a module |store all my modules in the calendar*
+|`* * *` |user |delete a module |remove all modules from my calendar that have been cancelled*
+|`* * *` |user |edit a module |edit modules from my calendar that have been postponed/ brought forward/ changed*
+|`* * *` |user |list all modules |view all modules that I am currently enrolled in*
+|`* * *` |user |recurse a module |easily create all the relevant time slots for a module to recur every week*
+|`* * *` |user |add a category |sort the different types of activities
+|`* * *` |user |delete a category |remove categories that I do not use/ do not need
+|`* * *` |user |edit a category |rename it to something more comprehensible
+|`* * *` |user |list all categories |view all the existing categories
+|`* * *` |user |view all activities on a certain day |conveniently view my planner for the day
+|`* * *` |user |view all activities on a certain week |conveniently view my planner for the week
+|`* * *` |user |view all activities on a certain month |conveniently view my planner for the month
+|`* * *` |user |add details to an activity |record information related to the activity
+|`* *` |user |search by activity |find the details of a specific activity I am looking for
+|`* *` |user |filter by category |see what activities are there for a certain category
+|`* *` |user |add tags on time slots |categorise slots within an activity
+|`* *` |user |remove tags on a time slot |remove unused/ unnecessary tags from an activity*
+|`* *` |user |edit tags |rename tags
+|`* *` |user |list all tags |view all existing tags
+|`* *` |user |search by tag |search all activities by a keyword
+|`* *` |user |view color coded categories |easily view the different types of categories
+|`*` |user |import semester timetable (.ics files) |transfer my existing activities into the new timetable
+|`*` |user |export semester timetable (.ics files) |view my timetable on another platform
+|`*` |user |receive notifications of upcoming activities |be reminded of important upcoming activities
+|`*` |user |view recess week and exam week |view specifically the weeks to rest
+|`*` |user |favourite an activity |prioritise important activities
+|`*` |user |view public holidays |be aware of upcoming public holidays
+|`*` |user |compare my timetable with someone else's |find a common time slot for a meeting
+|`*` |user |generate insightful reports |view how much time I spent attending training / tutorials
 |=======================================================================
-
-_{More to be added}_
 
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is `PlanMySem` and the *Actor* is the `user`, unless specified otherwise)
 
-[discrete]
-=== Use case: Delete person
-
-*MSS*
-
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+=== Use case: Initialize Calendar
+. User inputs the first day of school as well as which semester, 1 or 2, that the planner is meant for.
+. System generates a new timetable which is aligned with the academic semester. Weeks 1 to 13 as well as the Recess and Reading Weeks are labelled.
 +
 Use case ends.
 
+=== Use Case: Add a Module
+. User selects the category “Module” and inputs the details related to the new module.
+. System reflects the addition made to the list of Modules.
++
+User case ends.
+
+=== Use Case: List and Delete a Module
+. User inputs the command to list all modules he/she is enrolled in.
+. System lists all the modules.
+. User selects the intended module from the list and inputs the delete command along with the module name for deletion. 
++
+Use case ends.
+
+=== Use Case: Edit a Module
+. User inputs command to edit a module along with the module name.
+. System returns module name and it’s color attribute.
+. User renames the module or changes the color attribute.
+. System reflects the renamed module and/or the changed color for the module.
++
+Use case ends.
+
+=== Use Case: View all Activities in a Day
+. User inputs the command to view all activities along with the date.
+. System displays all the activities for that specified date.
++
+Use case ends.
+
+=== Use Case: Add a Category
+. User inputs command to add a new category along with the name of the new category.
+. System reflects the addition made to the list of Categories.
++
+Use case ends.
+
+=== Use Case: Filter by category
+. User inputs the command to list all categories (so he knows what categories exist).
+. User inputs the command to list all activities.
+. User inputs command to filter all the activities by an existing category.
+. System displays filtered activities.
++
+Use case ends.
+
+////
+Include this if given feedback that this is necessary.
 *Extensions*
 
 [none]
@@ -872,17 +931,20 @@ Use case ends.
 ** 3a1. AddressBook shows an error message.
 +
 Use case resumes at step 2.
+////
 
 _{More to be added}_
 
 [appendix]
 == Non Functional Requirements
 
-.  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
+. Should work on any <<mainstream-os,mainstream OS>> as long as it has Java 9 or higher installed.
+. Should be able to hold up a fully packed schedule, three times over, without a noticeable sluggishness in performance for typical usage.
+. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+. The system should respond relatively quickly to user commands so as to not make the user wait around; this is an advantage of using PlanMySem.
+. The system should take up relatively little space on the local machine so as to cater to all students and OS.
+. The system should be easy to use, intuitive and simple, such that any student regardless of past experience with calendar/scheduling softwares is able to use it.
+. The system should be flexible to allow all kinds of schedules that all users, within the user target, might have. 
 
 [appendix]
 == Glossary
@@ -890,8 +952,11 @@ _{More to be added}_
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
+////
+Should only include this if we actually make any mention to private planner detail.
+[[private-planner-detail]] Private planner detail::
+Any data stored on to the planner is not meant to be shared with others, unless the data is willingly exported.
+////
 
 [appendix]
 == Product Survey
