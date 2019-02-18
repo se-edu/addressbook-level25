@@ -132,6 +132,24 @@ test {
     }
 }
 
+
+task headless {
+    doLast {
+        println 'Setting headless mode properties.'
+        test {
+            systemProperties = [
+                    'testfx.robot': 'glass',
+                    'testfx.headless': 'true',
+                    'prism.order': 'sw',
+                    'prism.text': 't2k',
+            ]
+        }
+    }
+}
+
+// Makes sure that headless properties are set before running tests
+test.mustRunAfter headless
+
 asciidoctor {
     backends 'html5'
     sourceDir 'docs'
@@ -169,4 +187,4 @@ task copyStylesheets(type: Copy) {
 }
 asciidoctor.dependsOn copyStylesheets
 
-defaultTasks 'clean', 'test', 'asciidoctor', 'checkstyleMain', 'checkstyleTest'
+defaultTasks 'clean', 'headless', 'test', 'asciidoctor', 'checkstyleMain', 'checkstyleTest'
