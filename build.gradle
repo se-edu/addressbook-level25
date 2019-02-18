@@ -14,21 +14,7 @@ plugins {
     id 'application'
 }
 
-if (JavaVersion.current() == JavaVersion.VERSION_1_10
-        && System.getProperty('os.name').startsWith('Windows')) {
-    logger.warn('''\
-        ==============================================================================
-        *********************************** WARNING **********************************
-        ==============================================================================
-        You seem to be running Gradle with JDK 10 on Windows.
-        JDK 10 on Windows will fail to run tests in headless mode due to a JavaFX bug.
-        You are highly recommended to use JDK 9!
-        ==============================================================================
-        '''.stripIndent())
-}
-
-// Specifies the entry point of the application
-mainClassName = 'planmysem.MainApp'
+mainClassName = 'planmysem.Main'
 
 sourceCompatibility = JavaVersion.VERSION_1_9
 targetCompatibility = JavaVersion.VERSION_1_9
@@ -36,6 +22,22 @@ targetCompatibility = JavaVersion.VERSION_1_9
 repositories {
     mavenCentral()
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+        resources {
+            srcDirs = ['src']
+        }
+    }
+    test {
+        java {
+            srcDirs = ['test/java']
+        }
+    }
 }
 
 checkstyle {
@@ -58,9 +60,14 @@ dependencies {
     String testFxVersion = '4.0.12-alpha'
     String jUnitVersion = '5.1.0'
 
+    implementation group: 'org.controlsfx', name: 'controlsfx', version: '8.40.11'
     implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'
     implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
     implementation group: 'com.google.guava', name: 'guava', version: '19.0'
+    implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.8'
+    implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.0'
+    implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0'
+    implementation group: 'javax.activation', name: 'activation', version: '1.1.1'
 
     testImplementation group: 'junit', name: 'junit', version: '4.12'
     testImplementation group: 'org.testfx', name: 'testfx-core', version: testFxVersion, {
@@ -77,7 +84,7 @@ dependencies {
 }
 
 shadowJar {
-    archiveName = 'planmysem.jar'
+    archiveName = 'PlanMySem.jar'
 
     destinationDir = file("${buildDir}/jar/")
 }
@@ -111,22 +118,7 @@ tasks.coveralls {
     onlyIf { System.env.'CI' }
 }
 
-task(guiTests)
-task(nonGuiTests)
-
-// Run `test` task if `guiTests` or `nonGuiTests` is specified
-guiTests.dependsOn test
-nonGuiTests.dependsOn test
-
-task(allTests)
-
-// `allTests` implies both `guiTests` and `nonGuiTests`
-allTests.dependsOn guiTests
-allTests.dependsOn nonGuiTests
-
 test {
-    systemProperty 'testfx.setup.timeout', '60000'
-
     testLogging {
         events TestLogEvent.FAILED, TestLogEvent.SKIPPED
 
@@ -137,51 +129,7 @@ test {
             events << TestLogEvent.STARTED
         }
     }
-
-    jacoco {
-        destinationFile = new File("${buildDir}/jacoco/test.exec")
-    }
-
-    doFirst {
-        boolean runGuiTests = gradle.taskGraph.hasTask(guiTests)
-        boolean runNonGuiTests = gradle.taskGraph.hasTask(nonGuiTests)
-
-        if (!runGuiTests && !runNonGuiTests) {
-            runGuiTests = true
-            runNonGuiTests = true
-        }
-
-        if (runNonGuiTests) {
-            test.include 'planmysem/**'
-        }
-
-        if (runGuiTests) {
-            test.include 'systemtests/**'
-            test.include 'planmysem/ui/**'
-        }
-
-        if (!runGuiTests) {
-            test.exclude 'planmysem/ui/**'
-        }
-    }
 }
-
-task headless {
-    doLast {
-        println 'Setting headless mode properties.'
-        test {
-            systemProperties = [
-                    'testfx.robot': 'glass',
-                    'testfx.headless': 'true',
-                    'prism.order': 'sw',
-                    'prism.text': 't2k',
-            ]
-        }
-    }
-}
-
-// Makes sure that headless properties are set before running tests
-test.mustRunAfter headless
 
 asciidoctor {
     backends 'html5'
@@ -204,7 +152,6 @@ asciidoctor {
             'site-root': "${sourceDir}",  // must be the same as sourceDir, do not modify
             'site-name'         : 'PlanMySem',
             'site-githuburl'    : 'https://github.com/CS2113-AY1819S2-T08-3/main',
-            'site-seedu': true,  // delete this line if your project is not a fork (not a SE-EDU project)
     ]
 
     options['template_dirs'].each {
@@ -221,17 +168,4 @@ task copyStylesheets(type: Copy) {
 }
 asciidoctor.dependsOn copyStylesheets
 
-task deployOfflineDocs(type: Copy) {
-    into('src/main/resources/docs')
-
-    from ("${asciidoctor.outputDir}/html5") {
-        include 'stylesheets/*'
-        include 'images/*'
-        include 'HelpWindow.html'
-    }
-}
-
-deployOfflineDocs.dependsOn asciidoctor
-processResources.dependsOn deployOfflineDocs
-
-defaultTasks 'clean', 'headless', 'allTests', 'coverage', 'asciidoctor'
+defaultTasks 'clean', 'test', 'asciidoctor', 'checkstyleMain', 'checkstyleTest'
