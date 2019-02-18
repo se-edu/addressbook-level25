@@ -3,7 +3,7 @@ package seedu.addressbook.logic;
 
 import org.junit.Before;
 import org.junit.Rule;
-import org.junit.Test;
+import org.testng.annotations.Test;
 import org.junit.rules.TemporaryFolder;
 import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.commands.*;
@@ -16,6 +16,7 @@ import seedu.addressbook.storage.StorageFile;
 import java.util.*;
 
 import static junit.framework.TestCase.assertEquals;
+import static org.testng.TestNGAntTask.Mode.junit;
 import static seedu.addressbook.common.Messages.*;
 
 
