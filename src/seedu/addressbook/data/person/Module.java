@@ -30,6 +30,18 @@ import seedu.addressbook.data.exception.IllegalValueException;
             return test.matches(MODULE_VALIDATION_REGEX);
         }
 
+        public String getDate(){
+            return this.date;
+        }
+
+        public String getPeriod(){
+            return this.period;
+        }
+
+        public String getLength(){
+            return this.length;
+        }
+
     }
 
 
