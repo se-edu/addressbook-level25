@@ -8,7 +8,9 @@ import seedu.addressbook.data.exception.IllegalValueException;
         public static final String MESSAGE_MODULE_CONSTRAINTS =
                 "MODULE NAME SHOULD START AS 'MODULEC PREFIX' + 'MODULE CODE'";
         public static final String MODULE_VALIDATION_REGEX = "[\\w\\.]+@[\\w\\.]+";
-
+        private String date;
+        private String period;
+        private String length;
         public final String value;
         private boolean isPrivate;
 
