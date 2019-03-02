@@ -10,4 +10,12 @@ public class TimeSlot {
            this.module = module;
            this.slotperiod = slotperiod;
     }
+
+    public Module getSlotModule(){
+        return this.module;
+    }
+
+    public String getSlotPeriod(){
+        return this.slotperiod;
+    }
 }

@@ -3,8 +3,10 @@ package seedu.addressbook.data.person;
 public class TimeTable {
 
     private TimeSlot[][] timeslot;
-
-
+    private boolean isPrivate;
+    private boolean isPublic;
+    private boolean isFinal;
+    private boolean isNotFinal;
 
     public TimeTable(){
 
