@@ -3,6 +3,7 @@ package seedu.addressbook.logic;
 import seedu.addressbook.commands.Command;
 import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.data.AddressBook;
+import seedu.addressbook.data.DailyList;
 import seedu.addressbook.data.person.ReadOnlyPerson;
 import seedu.addressbook.parser.Parser;
 import seedu.addressbook.storage.StorageFile;
@@ -19,6 +20,7 @@ public class Logic {
 
     private StorageFile storage;
     private AddressBook addressBook;
+    private DailyList dailyList;
 
     /** The list of person shown to the user most recently.  */
     private List<? extends ReadOnlyPerson> lastShownList = Collections.emptyList();
@@ -26,12 +28,21 @@ public class Logic {
     public Logic() throws Exception{
         setStorage(initializeStorage());
         setAddressBook(storage.load());
+        setDailyList(new DailyList());
     }
 
-    Logic(StorageFile storageFile, AddressBook addressBook){
+    Logic(StorageFile storageFile, AddressBook addressBook, DailyList dailyList){
         setStorage(storageFile);
         setAddressBook(addressBook);
+        setDailyList(dailyList);
     }
+
+//    Logic(StorageFile storageFile, AddressBook addressBook){
+//        setStorage(storageFile);
+//        setAddressBook(addressBook);
+//    }
+
+    void setDailyList(DailyList dailyList){ this.dailyList = dailyList; }
 
     void setStorage(StorageFile storage){
         this.storage = storage;
@@ -83,7 +94,7 @@ public class Logic {
      * @throws Exception if there was any problem during command execution.
      */
     private CommandResult execute(Command command) throws Exception {
-        command.setData(addressBook, lastShownList);
+        command.setData(addressBook, lastShownList, dailyList);
         CommandResult result = command.execute();
         storage.save(addressBook);
         return result;

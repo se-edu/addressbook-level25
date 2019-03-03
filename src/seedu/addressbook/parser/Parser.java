@@ -81,11 +81,41 @@ public class Parser {
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
 
+            case AddDailyListCommand.COMMAND_WORD:
+                return new AddDailyListCommand(arguments);
+
+            case ClearDailyList.COMMAND_WORD:
+                return new ClearDailyList();
+
+//            case DeleteDailyListCommand.COMMAND_WORD:
+//                return  prepareDelete(arguments); // to be rectified
+//
+//            case TickDailyListCommand.COMMAND_WORD:
+//                return new prepareDelete(arguments); //to be rectified
+
+            case ViewDailyListCommand.COMMAND_WORD:
+                return new ViewDailyListCommand(); // to be rectified
+
+
             case HelpCommand.COMMAND_WORD: // Fallthrough
             default:
                 return new HelpCommand();
         }
     }
+
+
+
+//
+//    private Command prepareDeleteDailyList(String args){
+//        return CommandResult("Random String");
+//    }
+
+
+
+
+
+
+
 
     /**
      * Parses arguments in the context of the add person command.

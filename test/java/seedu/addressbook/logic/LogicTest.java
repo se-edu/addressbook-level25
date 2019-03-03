@@ -9,6 +9,7 @@ import seedu.addressbook.commands.CommandResult;
 import seedu.addressbook.commands.*;
 import seedu.addressbook.common.Messages;
 import seedu.addressbook.data.AddressBook;
+import seedu.addressbook.data.DailyList;
 import seedu.addressbook.data.person.*;
 import seedu.addressbook.data.tag.Tag;
 import seedu.addressbook.storage.StorageFile;
@@ -29,14 +30,16 @@ public class LogicTest {
 
     private StorageFile saveFile;
     private AddressBook addressBook;
+    private DailyList dailyList;
     private Logic logic;
 
     @Before
     public void setup() throws Exception {
         saveFile = new StorageFile(saveFolder.newFile("testSaveFile.txt").getPath());
         addressBook = new AddressBook();
+        dailyList = new DailyList();
         saveFile.save(addressBook);
-        logic = new Logic(saveFile, addressBook);
+        logic = new Logic(saveFile, addressBook, dailyList);
     }
 
     @Test
@@ -364,6 +367,22 @@ public class LogicTest {
                                 expectedAB,
                                 false,
                                 threePersons);
+    }
+    @Test
+    public void execute_addDailyList_successful() throws Exception{
+        DailyList testDailyList = new DailyList();
+        assertCommandBehavior("AddDailyList Gym for 30 minutes", "Item added to the daily list");
+    }
+
+    public void execute_viewDailyList_successful() throws Exception{
+        DailyList testDailyList = new DailyList();
+        testDailyList.addDailyList("Gym for 30 minutes");
+        assertCommandBehavior("ViewDailyList", "Remaining Tasks:\n" + " 1.  Gym for 30 minutes");
+    }
+
+    public void execute_viewDailyList_emptyList() throws Exception{
+        DailyList testDailyList = new DailyList();
+        assertCommandBehavior("ViewDailyList", " Remaining Tasks:\n" + " There are no more daily tasks to do!");
     }
 
     @Test
