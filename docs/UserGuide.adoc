@@ -54,6 +54,11 @@ Examples:
 Shows a list of all persons in the address book. +
 Format: `list`
 
+== Sorting all persons : `sort`
+
+Sorts and shows a list of all persons in the address book. +
+Format: `sort`
+
 == Finding all persons containing any keyword in their name: `find`
 
 Finds persons whose names contain any of the given keywords. +
