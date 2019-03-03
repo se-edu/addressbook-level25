@@ -56,6 +56,5 @@ public class Email {
 
 
     public boolean isPrivate() {
-        return isPrivate;
-    }
+        return isPrivate; }
 }
