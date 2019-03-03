@@ -37,6 +37,16 @@ public abstract class Command {
     }
 
     /**
+     * Constructs a sorted message to summarise an operation that displayed a listing of persons.
+     *
+     * @param personsDisplayed used to generate summary
+     * @return summary message for persons displayed
+     */
+    public static String getMessageForPersonSortedShownSummary(List<? extends ReadOnlyPerson> personsDisplayed) {
+        return String.format(Messages.MESSAGE_PERSON_SORTED_OVERVIEW, personsDisplayed.size());
+    }
+
+    /**
      * Executes the command and returns the result.
      */
     public CommandResult execute(){

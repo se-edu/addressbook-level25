@@ -43,6 +43,11 @@ public class AddressBook {
     }
 
     /**
+     * sorts person in the address book.
+     */
+    public void sortPersons() { allPersons.sort(); }
+
+    /**
      * Checks if an equivalent person exists in the address book.
      */
     public boolean containsPerson(ReadOnlyPerson key) {
