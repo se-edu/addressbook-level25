@@ -1,13 +1,28 @@
 package seedu.addressbook.parser;
 
-import seedu.addressbook.commands.*;
-import seedu.addressbook.data.exception.IllegalValueException;
+import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static seedu.addressbook.common.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import seedu.addressbook.commands.AddCommand;
+import seedu.addressbook.commands.ClearCommand;
+import seedu.addressbook.commands.Command;
+import seedu.addressbook.commands.DeleteCommand;
+import seedu.addressbook.commands.ExitCommand;
+import seedu.addressbook.commands.FindCommand;
+import seedu.addressbook.commands.HelpCommand;
+import seedu.addressbook.commands.IncorrectCommand;
+import seedu.addressbook.commands.ListAddCommand;
+import seedu.addressbook.commands.ListCommand;
+import seedu.addressbook.commands.ViewAllCommand;
+import seedu.addressbook.commands.ViewCommand;
+import seedu.addressbook.data.exception.IllegalValueException;
 
 /**
  * Parses user input.
@@ -60,6 +75,9 @@ public class Parser {
             case AddCommand.COMMAND_WORD:
                 return prepareAdd(arguments);
 
+            case ListAddCommand.COMMAND_WORD:
+                return prepareListAdd(arguments);
+
             case DeleteCommand.COMMAND_WORD:
                 return prepareDelete(arguments);
 
@@ -101,6 +119,32 @@ public class Parser {
         }
         try {
             return new AddCommand(
+                    matcher.group("name"),
+
+                    matcher.group("phone"),
+                    isPrivatePrefixPresent(matcher.group("isPhonePrivate")),
+
+                    matcher.group("email"),
+                    isPrivatePrefixPresent(matcher.group("isEmailPrivate")),
+
+                    matcher.group("address"),
+                    isPrivatePrefixPresent(matcher.group("isAddressPrivate")),
+
+                    getTagsFromArgs(matcher.group("tagArguments"))
+            );
+        } catch (IllegalValueException ive) {
+            return new IncorrectCommand(ive.getMessage());
+        }
+    }
+
+    private Command prepareListAdd(String args){
+        final Matcher matcher = PERSON_DATA_ARGS_FORMAT.matcher(args.trim());
+        // Validate arg string format
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListAddCommand.MESSAGE_USAGE));
+        }
+        try {
+            return new ListAddCommand(
                     matcher.group("name"),
 
                     matcher.group("phone"),
