@@ -5,7 +5,7 @@ ifdef::env-github,env-browser[:imagesDir: docs/images]
 https://travis-ci.org/se-edu/addressbook-level3[image:https://travis-ci.org/se-edu/addressbook-level3.svg?branch=master[Build Status]]
 https://www.codacy.com/app/se-edu/addressbook-level3?utm_source=github.com&utm_medium=referral&utm_content=se-edu/addressbook-level3&utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/d4a0954383444a8db8cb26e5f5b7302c[Codacy Badge]]
 
-image::docs/images/Ui.png[width="600"]
+image::Ui.png[width="600"]
 
 * This is a handbook for Students to improve their daily lives.
 * At this version, the interactions happen with a CLI (Command Line Interface)
