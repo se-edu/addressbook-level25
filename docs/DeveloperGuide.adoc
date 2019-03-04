@@ -10,7 +10,7 @@
 
 === Prerequisites
 
-* JDK 9 or later
+* JDK 8
 * IntelliJ IDE
 
 === Importing the project into IntelliJ
@@ -18,7 +18,7 @@
 . Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
 . Set up the correct JDK version
 .. Click `Configure` > `Project Defaults` > `Project Structure`
-.. If JDK 9 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 9
+.. If JDK 8 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 8
 .. Click `OK`
 . Click `Import Project`
 . Locate the `build.gradle` file and select it. Click `OK`
@@ -32,7 +32,7 @@
 
 == Design
 
-image::mainClassDiagram.png[]
+image::[]
 
 == Testing
 
@@ -46,45 +46,229 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="100%",cols="22%,<23%,<25%,<30%",options="header",]
 |===========================================================================================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
-|`* * *` |user |add a new person |
-|`* * *` |user |delete a person |remove entries that I no longer need
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
-|`* *` |user |hide <<private-contact-detail, private contact details>> by default |minimize chance of someone else seeing them by accident
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |user |create a list of daily tasks |form a habit
+|`* * *` |user |tick off entries from the list of daily tasks |remove entries that I have accomplished
+|`* * *` |user |view the list of daily tasks |remember what else I should accomplish
+|`* * *` |user |clear the list of daily tasks |remove the all the tasks if I had accomplished them all
+|`* * *` |user |add a new purchase I had spent on |keep a record of my expenditure
+|`* * *` |user |delete a purchase made |remove items I had keyed n wrongly
+|`* * *` |user |view list of expenses made |check on what i have spent on
+|`* * *` |user |clear list of expenses made |have a new record of my expenditure
+|`* * *` |user |find a purchase made |check back on the amount I had spent on a particular purchase
+|`* * *` |user |view my previous workout logs |keep track of my workout history
+|`* * *` |user |record a completed workout |refer back to it
+|`* * *` |user |have a timer |keep track of the duration at which i spend doing certain activities
 |===========================================================================================================================================
 
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `StudentHandBook` and the *Actor* is the `user`, unless specified otherwise)
 
-=== Use case: Delete person
+=== Use case: Add a daily task
 
 *MSS*
 
-. User requests to list persons
-. AddressBook shows a list of persons
-. User requests to delete a specific person in the list
-. AddressBook deletes the person.
+. User requests to add a new task to the Daily List +
+example: `viewdailylist` +
+. StudentHandBook lists out the remaining daily tasks +
+Use case ends.
+
+*Extensions*
+
+* 1a. Daily List is empty. +
+Use case ends.
+
+=== Use case: Delete a daily task
+
+*MSS*
+
+. User requests to list daily tasks
+. StudentHandBook shows a list of daily tasks
+. User requests to delete a specific task in the list
+. StudentHandBook deletes the task
 +
 Use case ends.
 
 *Extensions*
 
-* 2a. The list is empty.
+* 2a. Daily List is empty.
 +
 Use case ends.
 
-* 3a. The given index is invalid.
-** 3a1. AddressBook shows an error message.
+* 3a. Index not in Daily List.
+** 3a1. StudentHandBook shows an error message.
 +
-Use case resumes at step 2.
+Use case ends.
+
+== Use Case: Tick off a Daily Task
+
+*MSS*
+
+. User requests to list daily tasks
+. StudentHandBook displays the Daily List
+. User requests to temporarily tick an item off the Daily List
+. StudentHandBook removes the task
++
+Use case ends.
+
+*Extensions*
+
+* 1. Daily List is empty.
++
+Use case ends.
+* 3a. Index not in Daily List.
+** 3a1. StudentHandBook shows an error message.
++
+Use case ends.
+
+== Use Case: Clearing the Daily List
+
+*MSS*
+
+. User requests to temporarily clear the Daily List
+. StudentHandBook clears the Daily List.
++
+Use case ends.
+
+*Extensions*
+
+* 2a. Daily List is empty.
++
+Use case ends.
+
+== Use Case: Add a new purchase
+
+*MSS*
+
+. User requests to add a new purchase into the Expenditure List
+. StudentHandBook adds the purchase into the Expenditure List with name of purchase and its price
++
+Use case ends.
+
+== Use Case: View Expenditure List
+
+*MSS*
+
+. User requests to list expenditure
+. StudentHandBook shows the Expenditure List
++
+Use case ends.
+
+*Extensions*
+
+* 1a. Expenditure List is empty.
++
+Use case ends.
+
+== Use Case: Delete a purchase
+
+*MSS*
+
+. User requests to view Expenditure List
+. StudentHandBook shows the Expenditure List
+. User requests to delete a specific purchase on the list
+. StudentHandBook deletes the purchase
++
+Use case ends.
+
+*Extensions*
+
+* 2a. Daily List is empty.
++
+Use case ends.
+
+* 3a. Index not in Daily List.
+** 3a1. StudentHandBook shows an error message.
++
+Use case ends.
+
+
+== Use Case: Clear Expenditure List
+
+*MSS*
+
+. User requests to view Expenditure List
+. StudentHandBook shows the Expenditure List
+. User requests to clear the Expenditure List
++
+Use case ends.
+
+== Use Case: Find a specific purchase
+
+*MSS*
+
+. User requests to see log of a specific purchase
+. StudentHandBook shows this particular purchase with its price
++
+Use case ends.
+
+*Extensions*
+
+* 1a. Expenditure List is empty.
++
+Use case ends.
+
+* 2a. Index not in Daily List.
+** 2a1. StudentHandBook shows an error message.
++
+Use case ends.
+
+== Use Case: Start Stopwatch
+
+*MSS*
+
+. User requests to start a stopwatch
+. StudentHandBook records the time
++
+Use case ends.
+
+== Use Case: Stop Stopwatch
+
+*MSS*
+
+. User requests to stop the running stopwatch
+. StudentHandBook retrieves the start time and shows the total time elapsed
++
+Use case ends.
+
+*Extensions*
+
+* 1a. User did not start the stopwatch.
+** 1a1. StudentHandBook shows an error message.
++
+Use case ends.
+
+== Use Case: Record Completed Workout
+
+*MSS*
+
+. User requests to add an entry of completed workout
+. StudentHandBook records the workout log
++
+Use case ends.
+
+== Use Case: View Workout Log
+
+*MSS*
+
+. User requests to view Workout Log
+. StudentHandBook shows the Workout Log
++
+Use case ends.
+
+*Extensions*
+
+* 1a. Workout Log is empty.
++
+Use case ends.
+
 
 [appendix]
 == Non Functional Requirements
 
-. Should work on any <<mainstream-os, mainstream OS>> as long as it has Java 9 or higher installed.
+. Should work on any <<mainstream-os, mainstream OS>> as long as it has Java 8 installed.
 . Should be able to hold up to 1000 persons.
 . Should come with automated unit tests and open source code.
 . Should favor DOS style commands over Unix-style commands.
@@ -95,5 +279,3 @@ Use case resumes at step 2.
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others.
