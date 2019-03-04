@@ -11,7 +11,7 @@ public class Messages {
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
     public static final String MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE = "Launch command format: " +
             "java seedu.StudentHandBook.Main [STORAGE_FILE_PATH]";
-    public static final String MESSAGE_WELCOME = "Welcome to your Address Book!";
+    public static final String MESSAGE_WELCOME = "Welcome to your Student Hand Book!";
     public static final String MESSAGE_USING_STORAGE_FILE = "Using storage file : %1$s";
 
     public static final String MESSAGE_INVALID_DAILYITEM_DISPLAYED_INDEX = "The daily item index provided is invalid";

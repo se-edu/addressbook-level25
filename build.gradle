@@ -151,7 +151,7 @@ asciidoctor {
         idseparator: '-',
         'site-root': "${sourceDir}",  // must be the same as sourceDir, do not modify
         'site-name': 'AB3',
-        'site-githuburl': 'https://github.com/???',
+        'site-githuburl': 'https://github.com/cs2113-ay1819s2-t08-2/main',
     ]
 
     options['template_dirs'].each {
