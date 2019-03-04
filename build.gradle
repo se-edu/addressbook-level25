@@ -6,14 +6,22 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 
 plugins {
     id 'java'
+    id 'jacoco'
+    id 'checkstyle'
+    id 'com.github.kt3k.coveralls' version '2.4.0'
+    id 'com.github.johnrengelman.shadow' version '2.0.3'
     id 'org.asciidoctor.convert' version '1.5.6'
+    id 'application'
 }
+
+mainClassName = 'AB.Main'
 
 sourceCompatibility = JavaVersion.VERSION_1_9
 targetCompatibility = JavaVersion.VERSION_1_9
 
 repositories {
     mavenCentral()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
 }
 
 sourceSets {
@@ -32,17 +40,82 @@ sourceSets {
     }
 }
 
+checkstyle {
+    toolVersion = '8.1'
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+}
+
+test {
+    useJUnitPlatform()
+}
+
 dependencies {
+    String testFxVersion = '4.0.12-alpha'
+    String jUnitVersion = '5.1.0'
+
+    implementation group: 'org.controlsfx', name: 'controlsfx', version: '8.40.11'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.7.0'
+    implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-jsr310', version: '2.7.4'
+    implementation group: 'com.google.guava', name: 'guava', version: '19.0'
     implementation group: 'javax.xml.bind', name: 'jaxb-api', version: '2.2.8'
     implementation group: 'com.sun.xml.bind', name: 'jaxb-impl', version: '2.3.0'
     implementation group: 'com.sun.xml.bind', name: 'jaxb-core', version: '2.3.0'
     implementation group: 'javax.activation', name: 'activation', version: '1.1.1'
 
     testImplementation group: 'junit', name: 'junit', version: '4.12'
+    testImplementation group: 'org.testfx', name: 'testfx-core', version: testFxVersion, {
+        exclude group: 'org.testfx', module: 'testfx-internal-java8'
+    }
+    testImplementation group: 'org.testfx', name: 'testfx-junit', version: testFxVersion
+
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: jUnitVersion
+
+    testRuntimeOnly group: 'org.testfx', name: 'testfx-internal-java9', version: testFxVersion
+    testRuntimeOnly group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-9+181'
+    testRuntimeOnly group:'org.junit.vintage', name:'junit-vintage-engine', version: jUnitVersion
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: jUnitVersion
+}
+
+shadowJar {
+    archiveName = 'AB.jar'
+
+    destinationDir = file("${buildDir}/jar/")
 }
 
 task wrapper(type: Wrapper) {
     gradleVersion = '4.8.1'
+}
+
+task coverage(type: JacocoReport) {
+    sourceDirectories = files(sourceSets.main.allSource.srcDirs)
+    classDirectories =  files(sourceSets.main.output)
+    executionData = files(jacocoTestReport.executionData)
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: ['**/*.jar'])
+        })
+    }
+    reports {
+        html.enabled = true
+        xml.enabled = true
+    }
+}
+
+coveralls {
+    sourceDirs = sourceSets.main.allSource.srcDirs.absolutePath
+    jacocoReportPath = "${buildDir}/reports/jacoco/coverage/coverage.xml"
+}
+
+tasks.coveralls {
+    dependsOn coverage
+    onlyIf { System.env.'CI' }
 }
 
 test {
@@ -77,9 +150,8 @@ asciidoctor {
         idprefix: '',  // for compatibility with GitHub preview
         idseparator: '-',
         'site-root': "${sourceDir}",  // must be the same as sourceDir, do not modify
-        'site-name': 'AddressBook-Level3',
-        'site-githuburl': 'https://github.com/se-edu/StudentHandBook-level3',
-        'site-seedu': true,  // delete this line if your project is not a fork (not a SE-EDU project)
+        'site-name': 'AB3',
+        'site-githuburl': 'https://github.com/???',
     ]
 
     options['template_dirs'].each {
@@ -96,4 +168,4 @@ task copyStylesheets(type: Copy) {
 }
 asciidoctor.dependsOn copyStylesheets
 
-defaultTasks 'clean', 'test', 'asciidoctor'
+defaultTasks 'clean', 'test', 'asciidoctor', 'checkstyleMain', 'checkstyleTest'
